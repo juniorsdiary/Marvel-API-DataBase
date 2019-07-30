@@ -24,7 +24,7 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '[name].[hash:4].[ext]',
+              name: '[name].[hash].[ext]',
               outputPath: 'imgs',
             },
           },
@@ -44,7 +44,7 @@ module.exports = {
         use: {
           loader: 'file-loader',
           options: {
-            name: '[name].[hash:4].[ext]',
+            name: '[name].[hash].[ext]',
             outputPath: 'fonts/',
           },
         },

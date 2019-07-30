@@ -1,2 +1,2 @@
-export const SOME_ACTION = 'INCREMENT';
+export const FETCH_CHARACTERS = 'FETCH_CHARACTERS';
 export const SECOND_ACTION = 'SECOND_ACTION';

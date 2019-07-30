@@ -1,11 +1,14 @@
-import { SOME_ACTION } from './types';
+import { FETCH_CHARACTERS } from './types';
 
-const initialState = {};
+const initialState = {
+  charactersList: [],
+};
 
 export default function(state = initialState, action) {
-  if (action.type === SOME_ACTION) {
+  if (action.type === FETCH_CHARACTERS) {
     return {
       ...state,
+      charactersList: action.payload,
     };
   }
   return state;

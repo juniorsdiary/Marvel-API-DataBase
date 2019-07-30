@@ -12,14 +12,14 @@ module.exports = merge(common, {
   mode: 'production',
   output: {
     path: path.join(__dirname, '/build'),
-    filename: 'js/[name].[hash:4].js',
+    filename: 'js/[name].[hash].js',
   },
   optimization: {
     minimizer: [new OptimizeCssAssetsPlugin(), new TerserPlugin()],
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new MiniCssPlugin({ filename: '[name].[hash:4].css' }),
+    new MiniCssPlugin({ filename: '[name].[hash].css' }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       minify: {
