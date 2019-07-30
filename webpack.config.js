@@ -1,6 +1,11 @@
+const path = require('path');
 module.exports = {
   entry: ['@babel/polyfill', './src/index.js'],
-  alias: { 'react-dom': '@hot-loader/react-dom' },
+  resolve: {
+    alias: {
+      'react-dom': '@hot-loader/react-dom',
+    },
+  },
   module: {
     rules: [
       {
