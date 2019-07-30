@@ -2,7 +2,7 @@ import React from 'react';
 
 import { hot } from 'react-hot-loader/root';
 
-import Counter from 'Counter';
+import Counter from './components/Counter';
 
 const App = () => <Counter />;
 

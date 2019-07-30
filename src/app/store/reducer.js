@@ -1,14 +1,11 @@
-import { INCREMENT } from './types';
+import { SOME_ACTION } from './types';
 
-const initialState = {
-  counter: 1666,
-};
+const initialState = {};
 
 export default function(state = initialState, action) {
-  if (action.type === INCREMENT) {
+  if (action.type === SOME_ACTION) {
     return {
       ...state,
-      counter: state.counter + 1,
     };
   }
   return state;
