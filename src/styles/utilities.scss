@@ -1,0 +1,29 @@
+@include reset();
+:root {
+  font-size: calc(0.5em + 0.8vw);
+}
+::before,
+::after {
+  box-sizing: inherit;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@font-face {
+  font-family: "44v2";
+  src: url('../assets/fonts/44v2.ttf');
+}
+@font-face {
+  font-family: "10CESRG";
+  src: url('../assets/fonts/10CESRG_.ttf');
+}
+@font-face {
+  font-family: "kidkosmic";
+  src: url('../assets/fonts/kidkosmic.ttf');
+}
+@font-face {
+  font-family: "Robotocondensed";
+  src: url('../assets/fonts/Robotocondensed.woff2');
+}

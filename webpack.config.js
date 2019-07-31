@@ -1,3 +1,5 @@
+const CopyPlugin = require('copy-webpack-plugin');
+
 module.exports = {
   entry: ['@babel/polyfill', './src/index.js'],
   resolve: {
@@ -5,6 +7,7 @@ module.exports = {
       'react-dom': '@hot-loader/react-dom',
     },
   },
+  plugins: [new CopyPlugin([{ from: 'src/assets/images', to: 'images' }])],
   module: {
     rules: [
       {
@@ -12,7 +15,7 @@ module.exports = {
         use: ['html-loader'],
       },
       {
-        test: /\.js$/,
+        test: /\.js|jsx$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -40,7 +43,7 @@ module.exports = {
         ],
       },
       {
-        test: /\.(otf|woff|woff2)$/,
+        test: /\.(otf|woff|woff2|ttf)$/,
         use: {
           loader: 'file-loader',
           options: {
