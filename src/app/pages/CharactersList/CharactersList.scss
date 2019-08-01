@@ -1,0 +1,22 @@
+.characters_wrapper {
+  background: red;
+  display: flex;
+  justify-content: center;
+}
+
+.characters_cards_wrapper {
+  padding: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  border: 1px solid black;
+  flex: 1;
+}
+
+.character_card_block {
+  @include size(75px);
+  margin: 0.2em;
+  img {
+    @include size(100%);
+  }
+}

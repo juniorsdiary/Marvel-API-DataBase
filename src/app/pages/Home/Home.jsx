@@ -1,5 +1,4 @@
 import React from 'react';
-import './home.scss';
 const Home = () => (
   <div className='page_content home_page_block'>
     <h1 className='home_page_block_title'>Hello, MCU and Marvel Fan!</h1>
@@ -10,3 +9,6 @@ const Home = () => (
 );
 
 export default Home;
+
+// TODO: Показать сколько всего персонажей комиксов серий и ивентов
+// TODO:

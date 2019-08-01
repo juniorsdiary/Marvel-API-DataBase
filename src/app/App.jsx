@@ -8,7 +8,6 @@ import CharactersList from './pages/CharactersList/CharactersList.jsx';
 import CharacterPage from './pages/CharacterPage/CharacterPage.jsx';
 import ComicsList from './pages/ComicsList/ComicsList.jsx';
 import Home from './pages/Home/Home.jsx';
-import './App.scss';
 
 const App = () => (
   <>

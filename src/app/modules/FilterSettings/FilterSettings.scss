@@ -1,0 +1,28 @@
+.filter_parametrs_block {
+  background: rgb(255,255,255);
+  color: rgb(0,0,0);
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.simple_parametrs_block {
+}
+.advanced_parametrs_block {
+}
+
+.simple_parametrs__title {
+  background: rgb(0,0,0);
+  color: rgb(255, 255, 255);
+  padding: 1em;
+  border-top: 2px solid rgb(255,0,0);
+  cursor: pointer;
+}
+.advanced_parametrs__title {
+  background: rgb(0,0,0);
+  color: rgb(255, 255, 255);
+  padding: 1em;
+  border-top: 2px solid rgb(255,0,0);
+  border-bottom: 2px solid rgb(255,0,0);
+  cursor: pointer;
+}

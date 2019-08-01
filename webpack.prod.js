@@ -1,6 +1,5 @@
 const path = require('path');
 const merge = require('webpack-merge');
-const autoprefixer = require('autoprefixer');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssPlugin = require('mini-css-extract-plugin');
@@ -35,20 +34,9 @@ module.exports = merge(common, {
         test: /\.scss$/,
         use: [
           MiniCssPlugin.loader,
-          'css-loader',
-          'group-css-media-queries-loader',
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: [
-                autoprefixer({
-                  browsers: ['ie >= 8', 'last 4 version'],
-                }),
-              ],
-              sourceMap: true,
-            },
-          },
-          'sass-loader',
+          { loader: 'css-loader', options: { sourceMap: true } },
+          { loader: 'postcss-loader', options: { sourceMap: true, config: { path: './postcss.config.js' } } },
+          { loader: 'sass-loader', options: { sourceMap: true } },
         ],
       },
     ],

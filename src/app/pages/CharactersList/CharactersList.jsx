@@ -1,30 +1,17 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchCharacters } from '../../store/actions';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import useFetchCharacters from '../../customHooks.js';
 import CharacterCard from '../../modules/CharacterCard.jsx';
-import FilterSettings from '../../modules/FilterSettings.jsx';
-
-import './style.scss';
+import FilterSettings from '../../modules/FilterSettings/FilterSettings.jsx';
 
 const App = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    let params = {
-      orderBy: 'name',
-      limit: '20',
-      toString: function() {
-        return `orderBy=${this.orderBy}&limit=${this.limit}`;
-      },
-    };
-    dispatch(fetchCharacters(params));
-  }, [dispatch]);
+  useFetchCharacters();
   const charactersList = useSelector(state => state.charactersList);
   const renderCharacters = charactersList.map(character => <CharacterCard key={character.id} {...character} />);
   return (
-    <div className='page_content caracters_wrapper'>
-      <h1>Characters</h1>
+    <div className='page_content characters_wrapper'>
       <FilterSettings />
-      {renderCharacters}
+      <div className='characters_cards_wrapper'>{renderCharacters}</div>
     </div>
   );
 };

@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 
 const CharacterCard = ({ id, name, thumbnail }) => {
   return (
-    <div>
-      <img src={`${thumbnail.path}.${thumbnail.extension}`} width='150' height='150' alt='' />
-      <p>{name}</p>
-      <Link to={`/character/${id}`}>Show More</Link>
+    <div className='character_card_block'>
+      <Link to={`/character/${id}`}>
+        <img src={`${thumbnail.path}.${thumbnail.extension}`} alt='' />
+      </Link>
     </div>
   );
 };

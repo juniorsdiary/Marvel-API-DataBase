@@ -12,10 +12,16 @@ module.exports = merge(common, {
     publicPath: '/',
   },
   devServer: {
+    port: 1302,
+    clientLogLevel: 'silent',
+    compress: true,
     overlay: true,
-    contentBase: './src/index.html',
+    hotOnly: true,
     watchContentBase: true,
+    contentBase: './src/index.html',
     historyApiFallback: true,
+    noInfo: true,
+    open: true,
   },
   devtool: 'eval-sourcemap',
   module: {

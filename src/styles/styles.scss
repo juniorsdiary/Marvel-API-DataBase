@@ -1,8 +1,8 @@
 @import "smart-grid";
 @import 'utilities';
-
+@import '../app/main';
 html, body {
-  font-family: "Robotocondensed";
+  font-family: "Robotocondensed", sans-serif;
   font-weight: bold;
   height: 100%;
   background-color: red;
