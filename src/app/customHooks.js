@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { fetchCharacters } from './store/actions';
+import { useClickAway } from 'react-use';
 
-const useFetchCharacters = () => {
+export const useFetchCharacters = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     let params = {
@@ -15,4 +16,27 @@ const useFetchCharacters = () => {
     dispatch(fetchCharacters(params));
   }, [dispatch]);
 };
-export default useFetchCharacters;
+
+export const useToogleSearch = ref => {
+  const [hiddenState, toogleHiddenState] = useState(true);
+  const constructedClass = hiddenState ? 'filter_parametrs_block hidden_block' : 'filter_parametrs_block';
+  useClickAway(ref, () => {
+    !hiddenState && toogleHiddenState(true);
+  });
+  return [
+    constructedClass,
+    () => {
+      toogleHiddenState(!hiddenState);
+    },
+  ];
+};
+
+export const useFormSearch = initValues => {
+  const [values, setValues] = useState(initValues);
+  return [
+    values,
+    e => {
+      setValues(e.target.value);
+    },
+  ];
+};

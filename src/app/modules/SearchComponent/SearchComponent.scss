@@ -1,0 +1,33 @@
+.search__title {
+  position: relative;
+  background: rgb(0,0,0);
+  color: rgb(255, 255, 255);
+  border-top: 2px solid rgb(255,0,0);
+  width: 100%;
+  height: 25px;
+  cursor: pointer;
+  order: 2;
+  p {
+    width: 100%;
+    text-align: center;
+  }
+}
+.filter_parametrs_block {
+  position: absolute;
+  background: rgb(255,255,255);
+  color: rgb(0,0,0);
+  flex: 0;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  z-index: 11;
+  transition: top 0.2s linear;
+}
+
+.hidden_block {
+  top: -35px;
+  transition: top 0.2s linear;
+}

@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
+import { useToogleSearch } from '../../customHooks';
 
-const SearchComponent = ({ titleText, classNames, toogleAppearence, active, children }) => {
-  const constructedClass = active ? `flex-1 ${classNames.wrapper}` : `flex-0 ${classNames.wrapper}`;
+const SearchComponent = ({ children }) => {
+  const ref = useRef(null);
+  const [constructedClass, changeClass] = useToogleSearch(ref);
   return (
-    <div className={constructedClass} onClick={toogleAppearence}>
-      <p className={classNames.title}>{titleText}</p>
+    <div className={constructedClass} ref={ref}>
+      <div className='search__title' onClick={() => changeClass()}>
+        <p>Search Parametrs</p>
+      </div>
       {children}
     </div>
   );
 };
 
 SearchComponent.propTypes = {
-  titleText: PropTypes.string,
-  classNames: PropTypes.object,
-  toogleAppearence: PropTypes.func,
   children: PropTypes.node,
-  active: PropTypes.bool,
 };
 
 export default SearchComponent;

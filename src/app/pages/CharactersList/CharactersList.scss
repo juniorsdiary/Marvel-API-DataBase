@@ -1,20 +1,22 @@
 .characters_wrapper {
   background: red;
   display: flex;
-  justify-content: center;
+  height: 100%;
+  overflow: auto;
 }
 
 .characters_cards_wrapper {
-  padding: 1em;
+  position: relative;
+  padding: 1.5em 1em;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  border: 1px solid black;
   flex: 1;
+  z-index: 10;
 }
 
 .character_card_block {
-  @include size(75px);
+  @include size(90px);
   margin: 0.2em;
   img {
     @include size(100%);

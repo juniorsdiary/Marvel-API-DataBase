@@ -1,14 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import InputElement from '../InputElement/InputElement.jsx';
+import { useFormSearch } from '../../customHooks';
 
-const ParametrsComponent = ({ active }) => {
+const ParametrsComponent = () => {
+  const [startsWith, setStateValue] = useFormSearch('');
   return (
-    <div className='height-0' hidden={active}>
-      Some Parametrs
-    </div>
+    <form className='parametrs_list'>
+      <InputElement
+        id='startsWith'
+        className='parametrs_list__startsWith_input'
+        type='text'
+        label='starts with'
+        onChange={setStateValue}
+        value={startsWith}
+      />
+    </form>
   );
-};
-ParametrsComponent.propTypes = {
-  active: PropTypes.bool,
 };
 export default ParametrsComponent;
