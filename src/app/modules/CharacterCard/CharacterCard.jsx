@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 const CharacterCard = ({ id, name, thumbnail }) => {
+  const [loadingIndicator, setLoading] = useState(false);
   return (
     <div className='character_card_block'>
-      <Link to={`/character/${id}`}>
-        <img src={`${thumbnail.path}.${thumbnail.extension}`} alt='' />
+      <Link to={`/character/${id}`} className={loadingIndicator ? '' : 'loading'}>
+        <img src={`${thumbnail.path}.${thumbnail.extension}`} alt='' onLoad={() => setLoading(true)} />
       </Link>
     </div>
   );
@@ -19,6 +20,7 @@ CharacterCard.propTypes = {
     path: PropTypes.string,
     extension: PropTypes.string,
   }),
+  imageLoaded: PropTypes.bool,
 };
 
 export default CharacterCard;

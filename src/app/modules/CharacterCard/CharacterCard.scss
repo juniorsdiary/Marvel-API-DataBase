@@ -1,0 +1,38 @@
+.loading {
+  overflow: hidden;
+  &:before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    @include size(200%);
+    background: url('../assets/images/loading_bg.jpg') no-repeat;
+    background-size: 75%;
+    background-position: center;
+    animation: rotation 1s linear infinite;
+    z-index: 11;
+  }
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.character_card_block {
+  @include size(90px);
+  margin: 0.4em;
+  a {
+    position: relative;
+    display: block;
+    @include size(100%);
+    z-index: 10;
+  }
+  img {
+    @include size(100%);
+  }
+}

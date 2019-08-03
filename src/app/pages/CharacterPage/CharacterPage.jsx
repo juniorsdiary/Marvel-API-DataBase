@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { fetchSingleCharacter } from '../../store/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+
 // id: The unique ID of the character resource.,
 // name: The name of the character.,
 // description: A short bio or description of the character.,

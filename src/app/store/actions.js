@@ -1,4 +1,4 @@
-import { FETCH_CHARACTERS, FETCH_SINGLE_CHARACTERS } from './types';
+import { FETCH_CHARACTERS, FETCH_SINGLE_CHARACTERS, IS_FETCHING, SET_LOAD_STATE } from './types';
 import CryptoJS from 'crypto-js';
 
 const apiBase = 'http://gateway.marvel.com:80/v1/public';
@@ -9,23 +9,36 @@ const publicKey = 'af48a55f0d13c38934f13e3f4df545d0';
  * @param  {[number]} ts [timestamp of the call]
  * @return {[string]}    [retrun string of converted hash of ts api publick and private keys]
  */
+function contructParametrsQuery(startsWith) {
+  let params = {
+    startsWith,
+    orderBy: 'name',
+    limit: '36',
+    toString: function() {
+      let startsWith = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
+      return `${startsWith}&orderBy=${this.orderBy}&limit=${this.limit}`;
+    },
+  };
+  return params;
+}
 function getHash(ts) {
   return CryptoJS.MD5(ts + privateKey + publicKey).toString();
 }
 /**
- * [fetchCharacters fetches list of charachters with paramets set from filter Component]
- * @param  {[object]} params [object of parametrs]
+ * [fetchCharacters fetches list of characters with paramets set from filter Component]
  * @return {[dispatch function]}        [dispatches data to the reducer]
  */
-export const fetchCharacters = params => async dispatch => {
+export const fetchCharacters = parametrs => async dispatch => {
   const ts = new Date().getTime();
   const hash = getHash(ts);
+  let params = contructParametrsQuery(parametrs);
   let res = await fetch(`${apiBase}/characters?${params}&ts=${ts}&apikey=${publicKey}&hash=${hash}`);
   let data = await res.json();
   await dispatch({
     type: FETCH_CHARACTERS,
     payload: data.data,
   });
+  await dispatch({ type: IS_FETCHING, payload: false });
 };
 
 export const fetchSingleCharacter = id => async dispatch => {

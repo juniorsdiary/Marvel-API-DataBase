@@ -1,19 +1,37 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useFetchCharacters } from '../../customHooks.js';
-import CharacterCard from '../../modules/CharacterCard.jsx';
+import React, { useCallback, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import CharacterCard from '../../modules/CharacterCard/CharacterCard.jsx';
 import SearchComponent from '../../modules/SearchComponent/SearchComponent.jsx';
 import ParametrsComponent from '../../modules/ParametrsComponent/ParametrsComponent.jsx';
+import { fetchCharacters } from '../../store/actions';
+
 const App = () => {
-  useFetchCharacters();
+  const dispatch = useDispatch();
   const charactersList = useSelector(state => state.charactersList);
+  const isFetching = useSelector(state => state.isFetching);
+
+  useEffect(() => {
+    if (charactersList.length === 0) {
+      dispatch({ type: 'IS_FETCHING', payload: true });
+      dispatch(fetchCharacters());
+    }
+  }, [dispatch, charactersList]);
+
+  const submitValue = useCallback(
+    value => {
+      dispatch(fetchCharacters(value));
+    },
+    [dispatch]
+  );
+
   const renderCharacters = charactersList.map(character => <CharacterCard key={character.id} {...character} />);
+
   return (
     <div className='page_content characters_wrapper'>
       <SearchComponent>
-        <ParametrsComponent />
+        <ParametrsComponent submitValue={submitValue} />
       </SearchComponent>
-      <div className='characters_cards_wrapper'>{renderCharacters}</div>
+      {!isFetching && <div className='characters_cards_wrapper'>{renderCharacters}</div>}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import { useToogleSearch } from '../../customHooks';
 const SearchComponent = ({ children }) => {
   const ref = useRef(null);
   const [constructedClass, changeClass] = useToogleSearch(ref);
+  // changeClass();
   return (
     <div className={constructedClass} ref={ref}>
       <div className='search__title' onClick={() => changeClass()}>

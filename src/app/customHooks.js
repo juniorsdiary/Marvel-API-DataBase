@@ -1,21 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { fetchCharacters } from './store/actions';
+
 import { useClickAway } from 'react-use';
 
-export const useFetchCharacters = () => {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    let params = {
-      orderBy: 'name',
-      limit: '60',
-      toString: function() {
-        return `orderBy=${this.orderBy}&limit=${this.limit}`;
-      },
-    };
-    dispatch(fetchCharacters(params));
-  }, [dispatch]);
-};
+export const useFetchCharacters = () => {};
 
 export const useToogleSearch = ref => {
   const [hiddenState, toogleHiddenState] = useState(true);
@@ -35,8 +22,8 @@ export const useFormSearch = initValues => {
   const [values, setValues] = useState(initValues);
   return [
     values,
-    e => {
-      setValues(e.target.value);
+    value => {
+      setValues(value);
     },
   ];
 };

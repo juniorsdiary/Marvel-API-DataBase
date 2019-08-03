@@ -7,18 +7,10 @@
 
 .characters_cards_wrapper {
   position: relative;
-  padding: 1.5em 1em;
+  padding: 4em 1em;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   flex: 1;
   z-index: 10;
-}
-
-.character_card_block {
-  @include size(90px);
-  margin: 0.2em;
-  img {
-    @include size(100%);
-  }
 }

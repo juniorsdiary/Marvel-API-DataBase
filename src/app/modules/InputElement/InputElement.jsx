@@ -6,7 +6,7 @@ const InputElement = ({ id, label, error, className, ...attr }) => {
   const commonClass = classNames('input_default', className);
   return (
     <div className='inputFieldWrapper'>
-      <input name={id} id={id} className={commonClass} {...attr} />
+      <input name={id} id={id} className={commonClass} {...attr} autoComplete='off' />
       {label && (
         <label htmlFor={id} className='label_default'>
           {label}
