@@ -1,4 +1,4 @@
-import { FETCH_CHARACTERS, FETCH_SINGLE_CHARACTERS, IS_FETCHING } from './types';
+import { FETCH_CHARACTERS, FETCH_SINGLE_CHARACTERS, IS_FETCHING, TOTAL_RESULT } from './types';
 import CryptoJS from 'crypto-js';
 
 const apiBase = 'http://gateway.marvel.com:80/v1/public';
@@ -9,14 +9,18 @@ const publicKey = 'af48a55f0d13c38934f13e3f4df545d0';
  * @param  {[number]} ts [timestamp of the call]
  * @return {[string]}    [retrun string of converted hash of ts api publick and private keys]
  */
-function contructParametrsQuery(startsWith) {
+function contructParametrsQuery(startsWith, offset) {
   let params = {
     startsWith,
+    offset,
     orderBy: 'name',
-    limit: '20',
+    limit: '33',
     toString: function() {
       let startsWith = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
-      return `${startsWith}&orderBy=${this.orderBy}&limit=${this.limit}`;
+      let offset = this.offset ? `offset=${this.offset}` : '';
+      let order = `orderBy=${this.orderBy}`;
+      let limit = `limit=${this.limit}`;
+      return `${startsWith}&${order}&${limit}&${offset}`;
     },
   };
   return params;
@@ -28,15 +32,22 @@ function getHash(ts) {
  * [fetchCharacters fetches list of characters with paramets set from filter Component]
  * @return {[dispatch function]}        [dispatches data to the reducer]
  */
-export const fetchCharacters = parametrs => async dispatch => {
+export const fetchCharacters = (startsWith, offset) => async dispatch => {
   const ts = new Date().getTime();
   const hash = getHash(ts);
-  let params = contructParametrsQuery(parametrs);
+  let params = contructParametrsQuery(startsWith, offset);
   let res = await fetch(`${apiBase}/characters?${params}&ts=${ts}&apikey=${publicKey}&hash=${hash}`);
   let data = await res.json();
   await dispatch({
     type: FETCH_CHARACTERS,
     payload: data.data,
+  });
+  await dispatch({
+    type: TOTAL_RESULT,
+    payload: {
+      totalResult: data.data.total,
+      offset: data.data.offset,
+    },
   });
   await dispatch({ type: IS_FETCHING, payload: false });
 };

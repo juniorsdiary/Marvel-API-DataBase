@@ -3,7 +3,7 @@ import InputElement from '../InputElement/InputElement.jsx';
 import { useFormSearch } from '../../customHooks';
 import PropTypes from 'prop-types';
 
-const ParametrsComponent = ({ submitValue }) => {
+const ParametrsComponent = ({ requestData }) => {
   const [startsWith, setStateValue] = useFormSearch('');
   return (
     <form
@@ -11,7 +11,7 @@ const ParametrsComponent = ({ submitValue }) => {
       onSubmit={e => {
         e.preventDefault();
         setStateValue('');
-        submitValue(startsWith);
+        requestData(startsWith, 0);
       }}>
       <InputElement
         id='startsWith'
@@ -25,7 +25,7 @@ const ParametrsComponent = ({ submitValue }) => {
   );
 };
 ParametrsComponent.propTypes = {
-  submitValue: PropTypes.func,
+  requestData: PropTypes.func,
 };
 
 export default React.memo(ParametrsComponent);

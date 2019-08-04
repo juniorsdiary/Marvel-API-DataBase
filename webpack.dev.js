@@ -16,7 +16,7 @@ module.exports = merge(common, {
     clientLogLevel: 'silent',
     compress: true,
     overlay: true,
-    hotOnly: true,
+    hot: true,
     watchContentBase: true,
     contentBase: './src/index.html',
     historyApiFallback: true,
