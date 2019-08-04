@@ -1,16 +1,19 @@
 .characters_wrapper {
   background: red;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   height: 100%;
   overflow: auto;
 }
 
 .characters_cards_wrapper {
-  position: relative;
-  padding: 4em 1em;
+  height: 100%;
+  margin: 65px 0 0;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  flex: 1;
-  z-index: 10;
+  align-content: flex-start;
+  overflow-y: auto;
+  overflow-x: hidden;
 }

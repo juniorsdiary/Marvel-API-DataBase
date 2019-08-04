@@ -1,4 +1,4 @@
-import { FETCH_CHARACTERS, FETCH_SINGLE_CHARACTERS, IS_FETCHING, SET_LOAD_STATE } from './types';
+import { FETCH_CHARACTERS, FETCH_SINGLE_CHARACTERS, IS_FETCHING } from './types';
 import CryptoJS from 'crypto-js';
 
 const apiBase = 'http://gateway.marvel.com:80/v1/public';
@@ -13,7 +13,7 @@ function contructParametrsQuery(startsWith) {
   let params = {
     startsWith,
     orderBy: 'name',
-    limit: '36',
+    limit: '20',
     toString: function() {
       let startsWith = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
       return `${startsWith}&orderBy=${this.orderBy}&limit=${this.limit}`;

@@ -6,6 +6,8 @@
 @import './modules/ParametrsComponent/ParametrsComponent';
 @import './modules/InputElement/InputElement';
 @import './modules/CharacterCard/CharacterCard';
+@import './modules/Loader/Loader';
+
 #app {
   display: flex;
   flex-direction: column;
@@ -15,4 +17,23 @@
   position: relative;
   color: rgb(255,255,255);
   flex: 1 1 500px;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+  box-shadow: inset 0 0 5px black;
+}
+
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 10px;
+  box-shadow: inset 0 0 5px black;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

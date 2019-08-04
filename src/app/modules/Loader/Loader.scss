@@ -1,0 +1,54 @@
+@mixin center_absolute_pos($size) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include size(#{$size}px);
+  margin-top: -#{$size/2}px;
+  margin-left: -#{$size/2}px;
+}
+@mixin spinner_settings($width, $color) {
+  border: #{$width}px solid transparent;
+  border-radius: 50%;
+  border-top-color: $color;
+}
+
+.first_circle {
+  @include center_absolute_pos(90);
+  @include spinner_settings(5, white);
+  animation: spinner_1 2s linear infinite;
+}
+.second_circle {
+  @include center_absolute_pos(80);
+  @include spinner_settings(5, black);
+  animation: spinner_2 2s linear infinite;
+}
+
+.third_circle {
+  @include center_absolute_pos(70);
+  @include spinner_settings(5, white);
+  animation: spinner_2 1s linear infinite;
+}
+
+.fourth_circle {
+  @include center_absolute_pos(60);
+  @include spinner_settings(5, black);
+  animation: spinner_1 1s linear infinite;
+}
+
+@keyframes spinner_1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spinner_2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(-360deg);
+  }
+}
