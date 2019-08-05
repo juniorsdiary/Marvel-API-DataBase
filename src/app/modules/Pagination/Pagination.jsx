@@ -5,9 +5,7 @@ import { PER_PAGE_RESULTS } from '../../constants';
 import { definePagesIndex } from '../../lib';
 import PageButton from '../PageButton/PageButton.jsx';
 
-const Pagination = ({ requestData, searchValue, paginationData }) => {
-  const { totalResult, offset } = paginationData;
-
+const Pagination = ({ requestData, searchValue, totalResult, offset, changePage }) => {
   let pages = Math.ceil(totalResult / PER_PAGE_RESULTS);
 
   let pageNum = offset / PER_PAGE_RESULTS + 1;
@@ -20,6 +18,7 @@ const Pagination = ({ requestData, searchValue, paginationData }) => {
       className={pageInd === pageNum ? 'active_page_item' : ''}
       searchValue={searchValue}
       pageInd={pageInd}
+      changePage={changePage}
       requestData={requestData}
       baseOffset={PER_PAGE_RESULTS}
     />
@@ -31,6 +30,7 @@ const Pagination = ({ requestData, searchValue, paginationData }) => {
       className={pageInd === pageNum ? 'active_page_item' : ''}
       searchValue={searchValue}
       pageInd={pageInd}
+      changePage={changePage}
       requestData={requestData}
       baseOffset={PER_PAGE_RESULTS}
     />
@@ -42,11 +42,12 @@ const Pagination = ({ requestData, searchValue, paginationData }) => {
       className={pageInd === pageNum ? 'active_page_item' : ''}
       searchValue={searchValue}
       pageInd={pageInd}
+      changePage={changePage}
       requestData={requestData}
       baseOffset={PER_PAGE_RESULTS}
     />
   ));
-
+  console.log(pageNum);
   return (
     <div className='pagination'>
       <p className='total_results'>Total results: {totalResult}</p>
@@ -55,6 +56,7 @@ const Pagination = ({ requestData, searchValue, paginationData }) => {
           <PageButton
             className={pageNum === 1 ? 'inactive_page_item' : ''}
             pageInd={pageNum - 1}
+            changePage={pageNum > 1 ? changePage : () => {}}
             requestData={pageNum > 1 ? requestData : () => {}}
             baseOffset={PER_PAGE_RESULTS}
             searchValue={searchValue}
@@ -62,14 +64,17 @@ const Pagination = ({ requestData, searchValue, paginationData }) => {
           />
         )}
         {renderFirstPages}
-        {pageNum >= 7 ? <PageButton className='inactive_page_item' requestData={null} textContent='...' /> : null}
+        {pageNum >= 7 ? <PageButton className='inactive_page_item' textContent='...' /> : null}
         {renderMiddlePages}
-        {pageNum <= pages - 6 && pages > 8 ? <PageButton className='inactive_page_item' requestData={null} textContent='...' /> : null}
+        {pageNum <= pages - 6 && pages > 8 ? (
+          <PageButton className='inactive_page_item' changePage={() => {}} requestData={() => {}} textContent='...' />
+        ) : null}
         {pages > 4 ? renderLastPages : null}
         {pages > 1 && (
           <PageButton
             className={pageNum === pages ? 'inactive_page_item' : ''}
             pageInd={pageNum + 1}
+            changePage={pageNum < pages ? changePage : () => {}}
             requestData={pageNum < pages ? requestData : () => {}}
             baseOffset={PER_PAGE_RESULTS}
             searchValue={searchValue}
@@ -84,12 +89,29 @@ const Pagination = ({ requestData, searchValue, paginationData }) => {
 Pagination.propTypes = {
   requestData: PropTypes.func,
   searchValue: PropTypes.string,
-  paginationData: PropTypes.object,
+  totalResult: PropTypes.number,
+  offset: PropTypes.number,
+  changePage: PropTypes.func,
 };
 
 const mapStateToProps = state => ({
   searchValue: state.searchValue,
-  paginationData: state.paginationData,
+  offset: state.currentOffset,
+  totalResult: state.totalResult,
 });
 
-export default React.memo(connect(mapStateToProps)(Pagination));
+const mapDispatchToProps = dispatch => {
+  return {
+    changePage: offset => {
+      console.log(offset);
+      dispatch({ type: 'CHANGE_OFFSET', payload: offset });
+    },
+  };
+};
+
+export default React.memo(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Pagination)
+);

@@ -1,12 +1,13 @@
-import { FETCH_CHARACTERS, FETCH_SINGLE_CHARACTERS, SET_LOAD_STATE, IS_FETCHING, TOTAL_RESULT, SET_SEARCH_VALUE } from './types';
+import { FETCH_CHARACTERS, FETCH_SINGLE_CHARACTERS, SET_LOAD_STATE, IS_FETCHING, TOTAL_RESULT, SET_SEARCH_VALUE, CHANGE_OFFSET } from './types';
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
 
-const pagination = {
-  totalResult: 0,
-  offset: 0,
-};
-
+function currentOffset(state = 0, action) {
+  if (action.type === CHANGE_OFFSET) {
+    return action.payload;
+  }
+  return state;
+}
 function searchValue(state = '', action) {
   if (action.type === SET_SEARCH_VALUE) {
     return action.payload;
@@ -19,7 +20,7 @@ function singleCharacter(state = {}, action) {
   }
   return state;
 }
-function paginationData(state = pagination, action) {
+function totalResult(state = 0, action) {
   if (action.type === TOTAL_RESULT) {
     return action.payload;
   }
@@ -47,8 +48,9 @@ const rootReducer = history =>
     charactersList,
     singleCharacter,
     isFetching,
-    paginationData,
+    totalResult,
     searchValue,
+    currentOffset,
     router: connectRouter(history),
   });
 

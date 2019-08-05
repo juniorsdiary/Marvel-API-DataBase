@@ -14,10 +14,7 @@ export const fetchCharacters = (startsWith, offset) => async dispatch => {
   });
   await dispatch({
     type: TOTAL_RESULT,
-    payload: {
-      totalResult: data.data.total,
-      offset: data.data.offset,
-    },
+    payload: data.data.total,
   });
   await dispatch({ type: IS_FETCHING, payload: false });
 };
