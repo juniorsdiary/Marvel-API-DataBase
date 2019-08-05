@@ -9,7 +9,6 @@ export const history = createBrowserHistory();
 
 const md = [routerMiddleware(history), thunk];
 
-export default function configureStore(preloadedState) {
-  const store = createStore(rootReducer(history), preloadedState, composeWithDevTools(applyMiddleware(...md)));
-  return store;
-}
+const store = createStore(rootReducer(history), composeWithDevTools(applyMiddleware(...md)));
+
+export default store;

@@ -12,6 +12,14 @@
   border-top-color: $color;
 }
 
+.loader_center {
+  @include center_absolute_pos(45);
+  border-radius: 50%;
+  background: url('../assets/images/shield_loader.jpg') no-repeat;
+  background-size: 147%;
+  background-position: -11px -1px;
+}
+
 .first_circle {
   @include center_absolute_pos(90);
   @include spinner_settings(5, white);

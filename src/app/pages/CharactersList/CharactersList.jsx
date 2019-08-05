@@ -15,6 +15,7 @@ const App = () => {
   const charactersList = useSelector(state => state.charactersList);
 
   const isFetching = useSelector(state => state.isFetching);
+  // const isFetching = true;
 
   useEffect(() => {
     if (charactersList.length === 0) {
@@ -25,7 +26,6 @@ const App = () => {
 
   const requestData = useCallback(
     (value, offset) => {
-      // console.log(value, offset);
       dispatch({ type: 'SET_SEARCH_VALUE', payload: value });
       dispatch({ type: 'IS_FETCHING', payload: true });
       dispatch(fetchCharacters(value, offset));
@@ -34,6 +34,7 @@ const App = () => {
   );
 
   const renderCharacters = charactersList.map(character => <CharacterCard key={character.id} {...character} />);
+
   return (
     <div className='page_content characters_wrapper'>
       <SearchComponent>

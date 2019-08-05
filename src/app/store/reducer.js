@@ -1,10 +1,12 @@
 import { FETCH_CHARACTERS, FETCH_SINGLE_CHARACTERS, SET_LOAD_STATE, IS_FETCHING, TOTAL_RESULT, SET_SEARCH_VALUE } from './types';
 import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
+
 const pagination = {
   totalResult: 0,
   offset: 0,
 };
+
 function searchValue(state = '', action) {
   if (action.type === SET_SEARCH_VALUE) {
     return action.payload;

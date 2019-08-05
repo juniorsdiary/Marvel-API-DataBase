@@ -1,12 +1,23 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
-const PageButton = ({ searchValue, pageInd, pageNum, requestData, baseOffset }) => (
-  <span
-    className={pageInd === pageNum ? 'pagination_block__page_item active_page_item' : 'pagination_block__page_item'}
-    role='button'
-    onClick={() => requestData(searchValue, pageInd * baseOffset)}>
-    {pageInd}
-  </span>
-);
+const PageButton = ({ className, searchValue, pageInd, requestData, baseOffset, textContent }) => {
+  const commonClass = classNames('pagination_block__page_item', className);
+  return (
+    <span className={commonClass} role='button' onClick={() => requestData(searchValue, (pageInd - 1) * baseOffset)}>
+      {textContent ? textContent : pageInd}
+    </span>
+  );
+};
+
+PageButton.propTypes = {
+  className: PropTypes.string,
+  pageInd: PropTypes.number,
+  requestData: PropTypes.func,
+  baseOffset: PropTypes.number,
+  searchValue: PropTypes.string,
+  textContent: PropTypes.any,
+};
 
 export default PageButton;

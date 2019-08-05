@@ -1,9 +1,18 @@
 .pagination {
-
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.5em;
+  background: rgba(0,0,0, 0.5);
+  width: 50%;
+  border-radius: 50%  50% 0% 0%;
+  z-index: 15;
 }
 .total_results {
-
+  margin: 0 0 0.7em 0;
 }
 .toogle_pages_block {
-
+  display: flex;
 }

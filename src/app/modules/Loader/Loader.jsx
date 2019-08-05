@@ -6,6 +6,7 @@ const Loader = () => (
     <span className='second_circle'></span>
     <span className='third_circle'></span>
     <span className='fourth_circle'></span>
+    <span className='loader_center'></span>
   </div>
 );
 
