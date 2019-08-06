@@ -9,7 +9,6 @@ const PageButton = ({ className, searchValue, pageInd, requestData, baseOffset, 
       className={commonClass}
       role='button'
       onClick={() => {
-        console.log(changePage);
         changePage((pageInd - 1) * baseOffset);
         requestData(searchValue, (pageInd - 1) * baseOffset);
       }}>

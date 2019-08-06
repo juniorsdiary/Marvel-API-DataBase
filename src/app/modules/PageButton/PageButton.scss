@@ -1,17 +1,19 @@
 .pagination_block__page_item {
-  padding: 5px;
+  padding: 0.7em;
   background: white;
   color: black;
+  font-size: 0.7em;
 }
 .pagination_block__page_item:not(.inactive_page_item) {
   cursor: pointer;
 }
 .pagination_block__page_item:not(.inactive_page_item):hover  {
-  background: red;
+  background: black;
   color: white;
+  transition: all 0.2s linear;
 }
 .active_page_item {
-  background: red;
+  background: black;
   color: white;
 }
 .inactive_page_item {

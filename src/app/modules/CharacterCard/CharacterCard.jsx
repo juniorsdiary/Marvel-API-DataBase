@@ -6,9 +6,11 @@ const CharacterCard = ({ id, name, thumbnail }) => {
   const [loadingIndicator, setLoading] = useState(false);
   return (
     <div className='character_card_block'>
-      <Link to={`/character/${id}`} className={loadingIndicator ? '' : 'loading'}>
-        <img src={`${thumbnail.path}.${thumbnail.extension}`} alt='' onLoad={() => setLoading(true)} />
+      <Link to={`/character/${id}`} className='character_link'>
+        {name}
       </Link>
+      <span className={loadingIndicator ? '' : 'loading'}></span>
+      <img className='character_image' src={`${thumbnail.path}.${thumbnail.extension}`} alt='' onLoad={() => setLoading(true)} />
     </div>
   );
 };

@@ -2,27 +2,6 @@ $mainFontSize: 18px;
 
 @include reset();
 
-:root {
-  font-size: calc(0.5em + 0.8vw);
-}
-::before,
-::after {
-  box-sizing: inherit
-}
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-ul {
-  list-style: none;
-}
-
-li > a {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
 @font-face {
   font-family: "44v2";
   src: url('../assets/fonts/44v2.ttf');
@@ -67,4 +46,10 @@ li > a {
   height: 100%;
   background: url($src) no-repeat;
   background-size: contain;
+}
+
+@mixin border_hover($type1, $type2, $width, $color, $axis) {
+  border-#{$type1}: $width solid $color;
+  border-#{$type2}: $width solid $color;
+  transform: #{$axis};
 }

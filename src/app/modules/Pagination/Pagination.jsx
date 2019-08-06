@@ -47,7 +47,6 @@ const Pagination = ({ requestData, searchValue, totalResult, offset, changePage 
       baseOffset={PER_PAGE_RESULTS}
     />
   ));
-  console.log(pageNum);
   return (
     <div className='pagination'>
       <p className='total_results'>Total results: {totalResult}</p>
@@ -103,7 +102,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => {
   return {
     changePage: offset => {
-      console.log(offset);
       dispatch({ type: 'CHANGE_OFFSET', payload: offset });
     },
   };

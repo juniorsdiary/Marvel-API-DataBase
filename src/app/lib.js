@@ -1,5 +1,5 @@
 import CryptoJS from 'crypto-js';
-import { PRIVATE_KEY, PUBLIC_KEY, API_BASE } from './constants';
+import * as constants from './constants';
 /**
  * [getHash get a timestamp of the current api call]
  * @param  {[number]} ts [timestamp of the call]
@@ -10,13 +10,11 @@ export function contructParametrsQuery(startsWith, offset, id) {
     startsWith,
     offset,
     id,
-    orderBy: 'name',
-    limit: '33',
     toString: function() {
       let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
       let offsetQuery = this.offset ? `offset=${this.offset}` : '';
-      let orderQuery = `orderBy=${this.orderBy}`;
-      let limitQuery = `limit=${this.limit}`;
+      let orderQuery = `orderBy=${constants.ORDER}`;
+      let limitQuery = `limit=${constants.LIMIT_RESULTS}`;
       let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
       return `?${concatedQuery}&`;
     },
@@ -28,7 +26,7 @@ export function contructParametrsQuery(startsWith, offset, id) {
  * @return {[dispatch function]}        [dispatches data to the reducer]
  */
 export function getHash(ts) {
-  return CryptoJS.MD5(ts + PRIVATE_KEY + PUBLIC_KEY).toString();
+  return CryptoJS.MD5(ts + constants.PRIVATE_KEY + constants.PUBLIC_KEY).toString();
 }
 /**
  * [createApiString - construct api string for fetch function based on the given parametrs and options]
@@ -38,8 +36,8 @@ export function getHash(ts) {
  * @return {[string]}        [cinstructed api request for the fetch function]
  */
 export function createApiString(params, hash, ts) {
-  let authentication = `ts=${ts}&apikey=${PUBLIC_KEY}&hash=${hash}`;
-  return `${API_BASE}${params}${authentication}`;
+  let authentication = `ts=${ts}&apikey=${constants.PUBLIC_KEY}&hash=${hash}`;
+  return `${constants.API_BASE}${params}${authentication}`;
 }
 /**
  * [definePagesIndex defines page indexex dependes on the current page number]
