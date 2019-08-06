@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { PER_PAGE_RESULTS } from '../../constants';
-import { definePagesIndex } from '../../lib';
+import { PER_PAGE_RESULTS } from '../../utilities/constants';
+import { definePagesIndex } from '../../utilities/lib';
 import PageButton from '../PageButton/PageButton.jsx';
 
 const Pagination = ({ requestData, searchValue, totalResult, offset, changePage }) => {
@@ -11,7 +11,6 @@ const Pagination = ({ requestData, searchValue, totalResult, offset, changePage 
   let pageNum = offset / PER_PAGE_RESULTS + 1;
 
   const [firstPages, lastPages, middlePages] = definePagesIndex(pageNum, pages);
-
   const renderFirstPages = firstPages.map(pageInd => (
     <PageButton
       key={pageInd}

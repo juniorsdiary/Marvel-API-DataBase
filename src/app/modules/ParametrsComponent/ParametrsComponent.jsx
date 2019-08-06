@@ -1,6 +1,6 @@
 import React from 'react';
 import InputElement from '../InputElement/InputElement.jsx';
-import { useFormSearch } from '../../customHooks';
+import { useFormSearch } from '../../utilities/customHooks';
 import PropTypes from 'prop-types';
 
 const ParametrsComponent = ({ requestData }) => {
@@ -24,6 +24,7 @@ const ParametrsComponent = ({ requestData }) => {
     </form>
   );
 };
+
 ParametrsComponent.propTypes = {
   requestData: PropTypes.func,
 };

@@ -1,43 +1,43 @@
-import { FETCH_CHARACTERS, FETCH_SINGLE_CHARACTERS, SET_LOAD_STATE, IS_FETCHING, TOTAL_RESULT, SET_SEARCH_VALUE, CHANGE_OFFSET } from './types';
 import { combineReducers } from 'redux';
+import * as types from './types';
 import { connectRouter } from 'connected-react-router';
 
 function currentOffset(state = 0, action) {
-  if (action.type === CHANGE_OFFSET) {
+  if (action.type === types.CHANGE_OFFSET) {
     return action.payload;
   }
   return state;
 }
 function searchValue(state = '', action) {
-  if (action.type === SET_SEARCH_VALUE) {
+  if (action.type === types.SET_SEARCH_VALUE) {
     return action.payload;
   }
   return state;
 }
 function singleCharacter(state = {}, action) {
-  if (action.type === FETCH_SINGLE_CHARACTERS) {
+  if (action.type === types.FETCH_SINGLE_CHARACTERS) {
     return action.payload.results[0];
   }
   return state;
 }
 function totalResult(state = 0, action) {
-  if (action.type === TOTAL_RESULT) {
+  if (action.type === types.TOTAL_RESULT) {
     return action.payload;
   }
   return state;
 }
 
 function charactersList(state = [], action) {
-  if (action.type === FETCH_CHARACTERS) {
+  if (action.type === types.FETCH_CHARACTERS) {
     return action.payload.results;
-  } else if (action.type === SET_LOAD_STATE) {
+  } else if (action.type === types.SET_LOAD_STATE) {
     return state.map(character => (character.id === action.payload ? { ...character, imageLoaded: true } : { ...character }));
   }
   return state;
 }
 
 function isFetching(state = true, action) {
-  if (action.type === IS_FETCHING) {
+  if (action.type === types.IS_FETCHING) {
     return action.payload;
   }
   return state;

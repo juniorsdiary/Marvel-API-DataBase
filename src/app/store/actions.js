@@ -1,5 +1,5 @@
-import { FETCH_CHARACTERS, FETCH_SINGLE_CHARACTERS, IS_FETCHING, TOTAL_RESULT } from './types';
-import { getHash, contructParametrsQuery, createApiString } from '../lib';
+import * as types from './types';
+import { getHash, contructParametrsQuery, createApiString } from '../utilities/lib';
 
 export const fetchCharacters = (startsWith, offset) => async dispatch => {
   const controller = new AbortController();
@@ -16,14 +16,14 @@ export const fetchCharacters = (startsWith, offset) => async dispatch => {
   // controller.abort();
   let data = await res.json();
   await dispatch({
-    type: FETCH_CHARACTERS,
+    type: types.FETCH_CHARACTERS,
     payload: data.data,
   });
   await dispatch({
-    type: TOTAL_RESULT,
+    type: types.TOTAL_RESULT,
     payload: data.data.total,
   });
-  await dispatch({ type: IS_FETCHING, payload: false });
+  await dispatch({ type: types.IS_FETCHING, payload: false });
 };
 
 export const fetchSingleCharacter = id => async dispatch => {
@@ -33,7 +33,7 @@ export const fetchSingleCharacter = id => async dispatch => {
   let res = await fetch(apiString);
   let data = await res.json();
   await dispatch({
-    type: FETCH_SINGLE_CHARACTERS,
+    type: types.FETCH_SINGLE_CHARACTERS,
     payload: data.data,
   });
 };

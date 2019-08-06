@@ -1,8 +1,5 @@
-import { useEffect, useState } from 'react';
-
+import { useState } from 'react';
 import { useClickAway } from 'react-use';
-
-export const useFetchCharacters = () => {};
 
 export const useToogleSearch = ref => {
   const [hiddenState, toogleHiddenState] = useState(true);
@@ -14,16 +11,6 @@ export const useToogleSearch = ref => {
     constructedClass,
     () => {
       toogleHiddenState(!hiddenState);
-    },
-  ];
-};
-
-export const useFormSearch = initValues => {
-  const [values, setValues] = useState(initValues);
-  return [
-    values,
-    value => {
-      setValues(value);
     },
   ];
 };
