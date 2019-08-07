@@ -20,9 +20,12 @@ function singleCharacter(state = {}, action) {
   }
   return state;
 }
-function totalResult(state = 0, action) {
+function paginationData(state = {}, action) {
   if (action.type === types.TOTAL_RESULT) {
-    return action.payload;
+    return {
+      totalResult: action.payload.totalResult,
+      offset: action.payload.offset,
+    };
   }
   return state;
 }
@@ -48,7 +51,7 @@ const rootReducer = history =>
     charactersList,
     singleCharacter,
     isFetching,
-    totalResult,
+    paginationData,
     searchValue,
     currentOffset,
     router: connectRouter(history),

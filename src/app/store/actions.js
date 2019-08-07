@@ -2,18 +2,11 @@ import * as types from './types';
 import { getHash, contructParametrsQuery, createApiString } from '../utilities/lib';
 
 export const fetchCharacters = (startsWith, offset) => async dispatch => {
-  const controller = new AbortController();
-  const signal = controller.signal;
-  signal.addEventListener('abort', () => {
-    console.log('aborted!');
-  });
   const ts = new Date().getTime();
   const hash = getHash(ts);
   const query = contructParametrsQuery(startsWith, offset);
   const apiString = createApiString(`/characters${query}`, hash, ts);
-  let res = await fetch(apiString, { signal });
-  // console.log('start aborting');
-  // controller.abort();
+  let res = await fetch(apiString);
   let data = await res.json();
   await dispatch({
     type: types.FETCH_CHARACTERS,
@@ -21,7 +14,10 @@ export const fetchCharacters = (startsWith, offset) => async dispatch => {
   });
   await dispatch({
     type: types.TOTAL_RESULT,
-    payload: data.data.total,
+    payload: {
+      totalResult: data.data.total,
+      offset: data.data.offset,
+    },
   });
   await dispatch({ type: types.IS_FETCHING, payload: false });
 };

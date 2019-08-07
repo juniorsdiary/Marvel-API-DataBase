@@ -29,12 +29,12 @@ class CharachtersList extends Component {
     this.setState({ startsWith });
   };
 
-  requestData = offset => {
+  requestData = (offset, signal) => {
     const { fetchHeroes, setSearchValue, setFetchingState } = this.props;
     const { startsWith } = this.state;
     setSearchValue(startsWith);
+    fetchHeroes(startsWith, offset, signal);
     setFetchingState(true);
-    fetchHeroes(startsWith, offset);
     this.setState({ startsWith: '' });
   };
 
@@ -57,7 +57,7 @@ class CharachtersList extends Component {
           </FormGroup>
         </SearchComponent>
         {!isFetching ? <div className='characters_cards_wrapper'>{renderCharacters}</div> : <Loader />}
-        <Pagination requestData={this.requestData} />
+        {!isFetching && <Pagination requestData={this.requestData} />}
       </div>
     );
   }
@@ -71,10 +71,6 @@ CharachtersList.propTypes = {
   setFetchingState: PropTypes.func,
 };
 
-// CharachtersList.defaultProps = {
-//   charactersList: [],
-// };
-
 const mapStateToProps = state => {
   return {
     charactersList: state.charactersList,
@@ -84,8 +80,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchHeroes: (startsWith, offset) => {
-      dispatch(fetchCharacters(startsWith, offset));
+    fetchHeroes: (startsWith, offset, signal) => {
+      dispatch(fetchCharacters(startsWith, offset, signal));
     },
     setSearchValue: value => {
       dispatch({ type: types.SET_SEARCH_VALUE, payload: value });

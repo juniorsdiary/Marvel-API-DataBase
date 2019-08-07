@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { connect } from 'react-redux';
 
-const PageButton = ({ className, searchValue, pageInd, requestData, baseOffset, textContent, changePage }) => {
+const PageButton = ({ className, searchValue, pageInd, requestData, baseOffset, textContent, isFetching }) => {
   const commonClass = classNames('pagination_block__page_item', className);
   return (
     <span
       className={commonClass}
       role='button'
       onClick={() => {
-        changePage((pageInd - 1) * baseOffset);
-        requestData(searchValue, (pageInd - 1) * baseOffset);
+        requestData((pageInd - 1) * baseOffset);
       }}>
       {textContent ? textContent : pageInd}
     </span>
@@ -24,7 +24,11 @@ PageButton.propTypes = {
   baseOffset: PropTypes.number,
   searchValue: PropTypes.string,
   textContent: PropTypes.any,
-  changePage: PropTypes.func,
+  isFetching: PropTypes.bool,
 };
-
-export default PageButton;
+const mapStateToProps = state => {
+  return {
+    isFetching: state.isFetching,
+  };
+};
+export default connect(mapStateToProps)(PageButton);
