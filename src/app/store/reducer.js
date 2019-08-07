@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux';
 import * as types from './types';
 import { connectRouter } from 'connected-react-router';
+const singleCharacterData = {
+  thumbnail: {
+    path: '',
+    extension: '',
+  },
+};
 
 function currentOffset(state = 0, action) {
   if (action.type === types.CHANGE_OFFSET) {
@@ -14,7 +20,7 @@ function searchValue(state = '', action) {
   }
   return state;
 }
-function singleCharacter(state = {}, action) {
+function singleCharacter(state = singleCharacterData, action) {
   if (action.type === types.FETCH_SINGLE_CHARACTERS) {
     return action.payload.results[0];
   }

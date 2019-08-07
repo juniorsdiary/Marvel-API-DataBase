@@ -20,7 +20,6 @@ CharacterCard.propTypes = {
     path: PropTypes.string,
     extension: PropTypes.string,
   }),
-  imageLoaded: PropTypes.bool,
 };
 
 export default CharacterCard;

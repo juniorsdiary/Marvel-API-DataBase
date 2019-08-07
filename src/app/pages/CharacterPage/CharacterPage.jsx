@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchSingleCharacter } from '../../store/actions';
 import PropTypes from 'prop-types';
@@ -18,32 +18,35 @@ import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
 // stories: A resource list of stories in which this character appears.,
 // events: A resource list of events in which this character appears.,
 // series: A resource list of series in which this character appears.
-
-const CharacterPage = ({ match, fetchData, characterData, setFetchingState, isFetching }) => {
-  const { thumbnail, name, description } = characterData;
-  useEffect(() => {
+class CharacterPage extends Component {
+  componentDidMount() {
+    const { fetchData, setFetchingState, match } = this.props;
+    const id = match.params.id;
     setFetchingState(true);
-    fetchData(match.params.id);
-  }, [fetchData, match.params.id, setFetchingState]);
+    fetchData(id);
+  }
+  render() {
+    const { characterData, isFetching } = this.props;
+    const { name, description } = characterData;
+    return (
+      <div className='character_page_block'>
+        {!isFetching ? (
+          <div className='character_data_wrapper'>
+            <ImageAvatar className='character_image_wrapper' src={`${characterData.thumbnail.path}.${characterData.thumbnail.extension}`} />
+            <div className='character_data_details'>
+              <h1 className='character_data_title'>{name}</h1>
+              <p className='character_data_description'>{description ? description : `We are sorry! :( We couldn't find any description`}</p>
+            </div>
 
-  return (
-    <div className='character_page_block'>
-      {!isFetching ? (
-        <div className='character_data_wrapper'>
-          <ImageAvatar className='character_image_wrapper' src={`${thumbnail.path}.${thumbnail.extension}`} />
-          <div className='character_data_details'>
-            <h1 className='character_data_title'>{name}</h1>
-            <p className='character_data_description'>{description}</p>
+            <Slider className='character_comics_slider'></Slider>
           </div>
-
-          <Slider className='character_comics_slider'></Slider>
-        </div>
-      ) : (
-        <Loader />
-      )}
-    </div>
-  );
-};
+        ) : (
+          <Loader />
+        )}
+      </div>
+    );
+  }
+}
 CharacterPage.propTypes = {
   match: PropTypes.object,
   fetchData: PropTypes.func,
