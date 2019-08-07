@@ -1,11 +1,8 @@
 import * as types from './types';
-import { getHash, contructParametrsQuery, createApiString } from '../utilities/lib';
+import { createApiString } from '../utilities/lib';
 
 export const fetchCharacters = (startsWith, offset) => async dispatch => {
-  const ts = new Date().getTime();
-  const hash = getHash(ts);
-  const query = contructParametrsQuery(startsWith, offset);
-  const apiString = createApiString(`/characters${query}`, hash, ts);
+  const apiString = createApiString(`/characters`, startsWith, offset);
   let res = await fetch(apiString);
   let data = await res.json();
   await dispatch({
@@ -23,9 +20,7 @@ export const fetchCharacters = (startsWith, offset) => async dispatch => {
 };
 
 export const fetchSingleCharacter = id => async dispatch => {
-  const ts = new Date().getTime();
-  const hash = getHash(ts);
-  const apiString = createApiString(`/characters/${id}?`, hash, ts);
+  const apiString = createApiString(`/characters/${id}?`);
   let res = await fetch(apiString);
   let data = await res.json();
   await dispatch({

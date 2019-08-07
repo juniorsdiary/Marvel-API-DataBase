@@ -1,9 +1,11 @@
 import CryptoJS from 'crypto-js';
 import * as constants from './constants';
 /**
- * [getHash get a timestamp of the current api call]
- * @param  {[number]} ts [timestamp of the call]
- * @return {[string]}    [retrun string of converted hash of ts api publick and private keys]
+ * [contructParametrsQuery creates search query based on the given parametrs]
+ * @param  {[string]} startsWith [search value]
+ * @param  {[number]} offset     [number of skipped data results]
+ * @param  {[number]} id         [id of the item for single search]
+ * @return {[string]}            [full query based of the given parametrs]
  */
 export function contructParametrsQuery(startsWith, offset, id) {
   let params = {
@@ -22,22 +24,26 @@ export function contructParametrsQuery(startsWith, offset, id) {
   return params;
 }
 /**
- * [fetchCharacters fetches list of characters with paramets set from filter Component]
- * @return {[dispatch function]}        [dispatches data to the reducer]
+ * [getHash get a timestamp of the current api call]
+ * @param  {[number]} ts [timestamp of the call]
+ * @return {[string]}    [retrun string of converted hash of ts api publick and private keys]
  */
 export function getHash(ts) {
   return CryptoJS.MD5(ts + constants.PRIVATE_KEY + constants.PUBLIC_KEY).toString();
 }
 /**
  * [createApiString - construct api string for fetch function based on the given parametrs and options]
- * @param  {[string]} params [search parametrs based on the type of search]
- * @param  {[string]} hash   [hash string of the current request]
- * @param  {[number]} ts     [timestamp of the request]
+ * @param  {[string]} fetchSubject [choosed search from [characters, comics, events, stories]]
+ * @param  {[string]} startsWith   [value of the current search]
+ * @param  {[number]} offset     [number of items skiped through the results data]
  * @return {[string]}        [cinstructed api request for the fetch function]
  */
-export function createApiString(params, hash, ts) {
+export function createApiString(fetchSubject, startsWith, offset) {
+  const ts = new Date().getTime();
+  const hash = getHash(ts);
+  const params = contructParametrsQuery(startsWith, offset);
   let authentication = `ts=${ts}&apikey=${constants.PUBLIC_KEY}&hash=${hash}`;
-  return `${constants.API_BASE}${params}${authentication}`;
+  return `${constants.API_BASE}${fetchSubject}${params}${authentication}`;
 }
 /**
  * [definePagesIndex defines page indexex dependes on the current page number]
