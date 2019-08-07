@@ -1,7 +1,11 @@
 import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { fetchSingleCharacter } from '../../store/actions';
-import { useDispatch, useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
+import * as types from '../../store/types';
+import Loader from '../../modules/Loader/Loader.jsx';
+import Slider from '../../modules/Slider/Slider.jsx';
+import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
 
 // id: The unique ID of the character resource.,
 // name: The name of the character.,
@@ -15,21 +19,58 @@ import PropTypes from 'prop-types';
 // events: A resource list of events in which this character appears.,
 // series: A resource list of series in which this character appears.
 
-const CharacterPage = ({ match }) => {
-  let id = match.params.id;
-  const dispatch = useDispatch();
+const CharacterPage = ({ match, fetchData, characterData, setFetchingState, isFetching }) => {
+  const { thumbnail, name, description } = characterData;
   useEffect(() => {
-    dispatch(fetchSingleCharacter(id));
-  }, [dispatch, id]);
-  const characterData = useSelector(state => state.singleCharacter);
+    setFetchingState(true);
+    fetchData(match.params.id);
+  }, [fetchData, match.params.id, setFetchingState]);
+
   return (
-    <div>
-      <h1>{characterData.name}</h1>
+    <div className='character_page_block'>
+      {!isFetching ? (
+        <div className='character_data_wrapper'>
+          <ImageAvatar className='character_image_wrapper' src={`${thumbnail.path}.${thumbnail.extension}`} />
+          <div className='character_data_details'>
+            <h1 className='character_data_title'>{name}</h1>
+            <p className='character_data_description'>{description}</p>
+          </div>
+
+          <Slider className='character_comics_slider'></Slider>
+        </div>
+      ) : (
+        <Loader />
+      )}
     </div>
   );
 };
 CharacterPage.propTypes = {
   match: PropTypes.object,
+  fetchData: PropTypes.func,
+  characterData: PropTypes.object,
+  setFetchingState: PropTypes.func,
+  isFetching: PropTypes.bool,
 };
 
-export default CharacterPage;
+const mapStateToProps = state => {
+  return {
+    characterData: state.singleCharacter,
+    isFetching: state.isFetching,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchData: id => {
+      dispatch(fetchSingleCharacter(id));
+    },
+    setFetchingState: boolean => {
+      dispatch({ type: types.IS_FETCHING, payload: boolean });
+    },
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CharacterPage);

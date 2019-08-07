@@ -27,4 +27,5 @@ export const fetchSingleCharacter = id => async dispatch => {
     type: types.FETCH_SINGLE_CHARACTERS,
     payload: data.data,
   });
+  await dispatch({ type: types.IS_FETCHING, payload: false });
 };

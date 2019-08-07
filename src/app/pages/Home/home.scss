@@ -15,7 +15,7 @@
   }
 }
 .home_page_block:after {
-  @include size(100%);
+  @include simple-size(100%);
   content: "";
   position: absolute;
   top: 0;

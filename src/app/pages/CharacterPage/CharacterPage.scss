@@ -1,0 +1,33 @@
+.character_page_block {
+  background: red;
+  flex: 1;
+}
+.character_data_wrapper {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+.character_image_wrapper {
+  position: relative;
+  @include simple-size(200px);
+}
+.character_data_details {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+}
+.character_data_title {
+  display: block;
+}
+.character_data_description {
+  display: block;
+  word-wrap: break-word;
+}
+.character_comics_slider {
+
+}

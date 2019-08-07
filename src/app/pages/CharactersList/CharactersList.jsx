@@ -80,8 +80,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchHeroes: (startsWith, offset, signal) => {
-      dispatch(fetchCharacters(startsWith, offset, signal));
+    fetchHeroes: (startsWith, offset) => {
+      dispatch(fetchCharacters(startsWith, offset));
     },
     setSearchValue: value => {
       dispatch({ type: types.SET_SEARCH_VALUE, payload: value });

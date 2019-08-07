@@ -36,7 +36,7 @@ $mainFontSize: 18px;
   &:-ms-input-placeholder      { @content; }
 }
 
-@mixin size($width,$height: $width) {
+@mixin simple-size($width,$height: $width) {
   width: $width;
   height: $height;
 }
@@ -52,4 +52,19 @@ $mainFontSize: 18px;
   border-#{$type1}: $width solid $color;
   border-#{$type2}: $width solid $color;
   transform: #{$axis};
+}
+
+@mixin center_absolute_pos($size) {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  @include simple-size(#{$size}px);
+  margin-top: -#{$size/2}px;
+  margin-left: -#{$size/2}px;
+}
+
+@mixin spinner_settings($width, $color) {
+  border: #{$width}px solid transparent;
+  border-radius: 50%;
+  border-top-color: $color;
 }
