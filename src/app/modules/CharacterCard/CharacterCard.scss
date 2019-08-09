@@ -44,25 +44,6 @@
   }
 }
 
-.loading {
-  position: absolute;
-  display: block;
-  @include simple-size(100%);
-  overflow: hidden;
-  &:before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    @include simple-size(200%);
-    background: url('../assets/images/loading_bg.jpg') no-repeat;
-    background-size: 75%;
-    background-position: center;
-    animation: rotation_clock_wise 1s linear infinite;
-    z-index: 11;
-  }
-}
-
 .character_card_block:hover {
   transform: scale(1.1);
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);

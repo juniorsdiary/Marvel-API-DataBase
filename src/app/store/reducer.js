@@ -8,6 +8,13 @@ const singleCharacterData = {
   },
 };
 
+function comicBookData(state = {}, action) {
+  if (action.type === types.COMIC_BOOK_DATA) {
+    return action.payload;
+  }
+  return state;
+}
+
 function currentOffset(state = 0, action) {
   if (action.type === types.CHANGE_OFFSET) {
     return action.payload;
@@ -54,6 +61,7 @@ function isFetching(state = true, action) {
 
 const rootReducer = history =>
   combineReducers({
+    comicBookData,
     charactersList,
     singleCharacter,
     isFetching,

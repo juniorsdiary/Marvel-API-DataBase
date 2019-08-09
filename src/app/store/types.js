@@ -5,3 +5,4 @@ export const SET_LOAD_STATE = 'SET_LOAD_STATE';
 export const TOTAL_RESULT = 'TOTAL_RESULT';
 export const SET_SEARCH_VALUE = 'SET_SEARCH_VALUE';
 export const CHANGE_OFFSET = 'CHANGE_OFFSET';
+export const COMIC_BOOK_DATA = 'COMIC_BOOK_DATA';

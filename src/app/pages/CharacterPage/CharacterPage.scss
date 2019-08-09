@@ -1,33 +1,72 @@
 .character_page_block {
   background: red;
-  flex: 1;
 }
 .character_data_wrapper {
-  width: 60%;
-  margin: auto;
+  @include size(8);
+  @include size-md(10);
+  @include size-sm(11);
+  margin: 2em auto;
   display: flex;
-  // flex-direction: column;
-  // justify-content: center;
   flex-wrap: wrap;
+  padding: 2em 0;
+  background: white;
+  color: black;
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
 }
-
 
 .character_image_wrapper {
   position: relative;
-  @include simple-size(200px);
+  @include size(4);
+  @include col-offsets(margin);
+  padding-top: 30%;
+  @include lg-block {
+    @include size-lg(5);
+    padding-top: 40%;
+  }
+  @include md-block {
+    @include size-md(6);
+    padding-top: 50%;
+  }
+  @include xs-block {
+    @include size-xs(7);
+    padding-top: 60%;
+  }
 }
+
 .character_data_details {
   display: flex;
+  text-align: center;
   flex-direction: column;
-  max-width: 600px;
+  @include col-offsets(margin);
+  @include size(8);
+  @include size-lg(7);
+  @include size-md(6);
+  @include size-xs(5);
 }
+
 .character_data_title {
+  font-family: 'kidkosmic';
+  font-size: 1.5em;
   display: block;
 }
+
 .character_data_description {
+  font-family: '44v2';
+  font-size: 1em;
+  margin: 1em 0;
   display: block;
   word-wrap: break-word;
 }
-.character_comics_slider {
 
+.character_data_last_modified {
+  text-align: right;
+  align-self: flex-end;
+}
+
+.character_data_details_link {
+  margin: 0 0 auto 0;
+}
+
+.character_comics_slider {
+  margin: 1em 2em;
 }

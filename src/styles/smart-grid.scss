@@ -6,7 +6,7 @@ $break_md: 960px;
 $break_sm: 780px;
 $break_xs: 560px;
 
-$offset: 30px;
+$offset: 2em;
 $offset_lg: $offset;
 $offset_md: $offset;
 $offset_sm: $offset;
@@ -404,15 +404,15 @@ $fields_sm: 15px;
     height: 100vh;
     position: fixed;
     width: 100%;
-    
+
     > div{
         height: inherit;
         @include wrapper();
-        
+
         > div{
             height: inherit;
             @include row-flex();
-            
+
             > div{
                 @include col();
                 @include size(1);

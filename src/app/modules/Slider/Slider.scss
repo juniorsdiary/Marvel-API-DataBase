@@ -1,3 +1,45 @@
 .default_slider_block {
-  
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  @include size(11);
+}
+.slider_title {
+  font-size: 2em;
+  font-weight: bold;
+  flex: 1 1 100%;
+}
+.slider_wrapper_overflow {
+  position: relative;
+  display: inline-flex;
+  height: 100%;
+  overflow: hidden;
+  flex: 1;
+  &:after {
+    position: absolute;
+    content: "";
+    right: 0;
+    height: 100%;
+    box-shadow: 0px 0px 104px 40px rgba(255,255,255,0.9);
+    z-index: 10;
+  }
+  &:before {
+    position: absolute;
+    content: "";
+    left: 0;
+    height: 100%;
+    box-shadow: 0px 0px 104px 40px rgba(255,255,255,0.9);
+    z-index: 10;
+  }
+}
+.slider_btn {
+  margin: 10px;
+}
+.slider_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1em 0;
+  transition: transform 0.5s linear;
 }

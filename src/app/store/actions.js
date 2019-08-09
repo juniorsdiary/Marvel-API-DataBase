@@ -2,6 +2,7 @@ import * as types from './types';
 import { createApiString } from '../utilities/lib';
 
 export const fetchCharacters = (startsWith, offset) => async dispatch => {
+  console.log('fetch');
   const apiString = createApiString(`/characters`, startsWith, offset);
   let res = await fetch(apiString);
   let data = await res.json();
@@ -20,6 +21,7 @@ export const fetchCharacters = (startsWith, offset) => async dispatch => {
 };
 
 export const fetchSingleCharacter = id => async dispatch => {
+  console.log('fetch');
   const apiString = createApiString(`/characters/${id}?`);
   let res = await fetch(apiString);
   let data = await res.json();
@@ -28,4 +30,15 @@ export const fetchSingleCharacter = id => async dispatch => {
     payload: data.data,
   });
   await dispatch({ type: types.IS_FETCHING, payload: false });
+};
+
+export const fetchSingleCommic = id => async dispatch => {
+  console.log('fetch');
+  const apiString = createApiString(`/comics/${id}?`);
+  let res = await fetch(apiString);
+  let data = await res.json();
+  dispatch({
+    type: types.COMIC_BOOK_DATA,
+    payload: data.data.results[0],
+  });
 };
