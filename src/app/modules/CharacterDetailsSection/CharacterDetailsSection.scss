@@ -1,0 +1,31 @@
+.character_data_last_modified {
+  text-align: right;
+  align-self: flex-end;
+}
+.character_data_details_link {
+  font-size: 0.8em;
+  text-align: right;
+  margin: 0 0 auto 0;
+}
+.character_data_description {
+  font-family: '44v2';
+  font-size: 1em;
+  margin: 1em 0;
+  display: block;
+  word-wrap: break-word;
+}
+.character_data_title {
+  font-family: 'kidkosmic';
+  font-size: 1.5em;
+  display: block;
+}
+.character_data_details {
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+  @include col-offsets(margin);
+  @include size(8);
+  @include size-lg(7);
+  @include size-md(6);
+  @include size-xs(5);
+}

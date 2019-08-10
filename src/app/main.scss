@@ -4,8 +4,12 @@
 @import './pages/CharacterPage/CharacterPage';
 @import './pages/ComicsList/ComicsList';
 // modules
+//
+@import './modules/Button/Button';
 @import './modules/CharacterCard/CharacterCard';
+@import './modules/CharacterDetailsSection/CharacterDetailsSection';
 @import './modules/ComicBookPreview/ComicBookPreview';
+@import './modules/ComicsSection/ComicsSection';
 @import './modules/Footer/Footer';
 @import './modules/FormGroup/FormGroup';
 @import './modules/Header/Header';
