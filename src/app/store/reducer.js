@@ -8,8 +8,8 @@ const singleCharacterData = {
   },
 };
 
-function comicBookData(state = {}, action) {
-  if (action.type === types.COMIC_BOOK_DATA) {
+function comicBooksData(state = [], action) {
+  if (action.type === types.FETCH_COMICS) {
     return action.payload;
   }
   return state;
@@ -45,9 +45,7 @@ function paginationData(state = {}, action) {
 
 function charactersList(state = [], action) {
   if (action.type === types.FETCH_CHARACTERS) {
-    return action.payload.results;
-  } else if (action.type === types.SET_LOAD_STATE) {
-    return state.map(character => (character.id === action.payload ? { ...character, imageLoaded: true } : { ...character }));
+    return action.payload;
   }
   return state;
 }
@@ -61,7 +59,7 @@ function isFetching(state = true, action) {
 
 const rootReducer = history =>
   combineReducers({
-    comicBookData,
+    comicBooksData,
     charactersList,
     singleCharacter,
     isFetching,

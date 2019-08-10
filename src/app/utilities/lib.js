@@ -28,8 +28,8 @@ export function contructParametrsQuery(startsWith, offset, id) {
  * @param  {[number]} ts [timestamp of the call]
  * @return {[string]}    [retrun string of converted hash of ts api publick and private keys]
  */
-export function getHash(ts) {
-  return CryptoJS.MD5(ts + constants.PRIVATE_KEY + constants.PUBLIC_KEY).toString();
+export function getHash(cipherValue) {
+  return CryptoJS.MD5(cipherValue).toString();
 }
 /**
  * [createApiString - construct api string for fetch function based on the given parametrs and options]
@@ -43,6 +43,7 @@ export function createApiString(fetchSubject, startsWith, offset) {
   const hash = getHash(ts);
   const params = contructParametrsQuery(startsWith, offset);
   let authentication = `ts=${ts}&apikey=${constants.PUBLIC_KEY}&hash=${hash}`;
+  console.log(`${fetchSubject}${params}`);
   return `${constants.API_BASE}${fetchSubject}${params}${authentication}`;
 }
 /**
@@ -63,3 +64,12 @@ export function definePagesIndex(pageNum, pages) {
   }
   return [firstPages, lastPages, middlePages];
 }
+
+export const convertToLocale = timeString => {
+  let options = {
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+  };
+  return new Date(timeString).toLocaleString('en-US', options);
+};

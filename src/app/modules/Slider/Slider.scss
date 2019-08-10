@@ -6,13 +6,16 @@
   @include size(11);
 }
 .slider_title {
-  font-size: 2em;
+  font-size: 1.5em;
   font-weight: bold;
+  font-family: 'kidkosmic-italic';
   flex: 1 1 100%;
+  margin: 1em;
 }
 .slider_wrapper_overflow {
   position: relative;
   display: inline-flex;
+  @include size(6);
   height: 100%;
   overflow: hidden;
   flex: 1;

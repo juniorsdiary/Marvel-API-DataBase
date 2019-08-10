@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchCharacters } from '../../store/actions';
 import * as types from '../../store/types';
+import ApiFactory from '../../utilities/apiFactory';
 
 import CharacterCard from '../../modules/CharacterCard/CharacterCard.jsx';
 import SearchComponent from '../../modules/SearchComponent/SearchComponent.jsx';
@@ -20,7 +21,9 @@ class CharachtersList extends Component {
     const { fetchHeroes, setFetchingState, charactersList } = this.props;
     if (charactersList.length === 0) {
       setFetchingState(true);
-      fetchHeroes(null, 0);
+      const apiHandler = ApiFactory.createApiHandler({ type: 'characters' });
+      const apiStr = apiHandler.createApiString();
+      fetchHeroes(apiStr);
     }
   }
 
@@ -32,9 +35,14 @@ class CharachtersList extends Component {
   requestData = (offset, signal) => {
     const { fetchHeroes, setSearchValue, setFetchingState } = this.props;
     const { startsWith } = this.state;
+
+    const apiHandler = ApiFactory.createApiHandler({ type: 'characters', startsWith, offset });
+    const apiStr = apiHandler.createApiString();
+
     setSearchValue(startsWith);
-    fetchHeroes(startsWith, offset, signal);
     setFetchingState(true);
+    fetchHeroes(apiStr);
+
     this.setState({ startsWith: '' });
   };
 

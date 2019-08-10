@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { hot } from 'react-hot-loader/root';
+import { IoIosArrowDroprightCircle, IoIosArrowDropleftCircle } from 'react-icons/io';
 
 const Slider = ({ children, className, number }) => {
   const commonClass = classNames('default_slider_block', className);
@@ -10,7 +10,7 @@ const Slider = ({ children, className, number }) => {
   return (
     <div className={commonClass}>
       <span className='slider_btn' onClick={() => setIndex(index => (index !== children.length ? index + 1 : index))}>
-        left
+        <IoIosArrowDropleftCircle className='icon-custom-class' />
       </span>
       <div className='slider_wrapper_overflow'>
         <div className='slider_content' style={{ transform: `translateX(-${transformValue}%)` }}>
@@ -18,7 +18,7 @@ const Slider = ({ children, className, number }) => {
         </div>
       </div>
       <span className='slider_btn' onClick={() => setIndex(index => (index !== 0 ? index - 1 : index))}>
-        right
+        <IoIosArrowDroprightCircle className='icon-custom-class' />
       </span>
     </div>
   );
@@ -30,4 +30,4 @@ Slider.propTypes = {
   number: PropTypes.number,
 };
 
-export default hot(Slider);
+export default Slider;
