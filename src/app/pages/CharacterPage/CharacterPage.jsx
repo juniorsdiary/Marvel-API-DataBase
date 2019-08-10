@@ -14,7 +14,6 @@ import CharacterDetailsSection from '../../modules/CharacterDetailsSection/Chara
 
 const CharacterPage = ({ fetchCharacterData, setFetchingState, isFetching, match, characterData }) => {
   const { name, description, modified, thumbnail, urls, comics } = characterData;
-  const { path, extension } = thumbnail;
 
   useEffect(() => {
     const id = match.params.id;
@@ -24,15 +23,19 @@ const CharacterPage = ({ fetchCharacterData, setFetchingState, isFetching, match
     fetchCharacterData(apiStr);
   }, [fetchCharacterData, match, setFetchingState]);
 
-  let lastModified = convertToLocale(modified);
-
+  const lastModified = convertToLocale(modified);
   return (
     <div className='page_content character_page_block'>
       {!isFetching ? (
         <div className='character_data_wrapper'>
-          <ImageAvatar className='character_image_wrapper' src={`${path}.${extension}`} />
+          <ImageAvatar
+            className='character_image_wrapper'
+            baseSrc={`${thumbnail.path}/portrait_small.${thumbnail.extension}`}
+            src={`${thumbnail.path}.${thumbnail.extension}`}
+          />
           <CharacterDetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
           <ComicsSection id={match.params.id} number={comics.available} />
+          {/* <SeriesSection id={match.params.id} number={series.available} /> */}
         </div>
       ) : (
         <Loader />

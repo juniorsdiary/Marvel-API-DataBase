@@ -1,28 +1,5 @@
 import CryptoJS from 'crypto-js';
-import * as constants from './constants';
-/**
- * [contructParametrsQuery creates search query based on the given parametrs]
- * @param  {[string]} startsWith [search value]
- * @param  {[number]} offset     [number of skipped data results]
- * @param  {[number]} id         [id of the item for single search]
- * @return {[string]}            [full query based of the given parametrs]
- */
-export function contructParametrsQuery(startsWith, offset, id) {
-  let params = {
-    startsWith,
-    offset,
-    id,
-    toString: function() {
-      let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
-      let offsetQuery = this.offset ? `offset=${this.offset}` : '';
-      let orderQuery = `orderBy=${constants.ORDER}`;
-      let limitQuery = `limit=${constants.LIMIT_RESULTS}`;
-      let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
-      return `?${concatedQuery}&`;
-    },
-  };
-  return params;
-}
+
 /**
  * [getHash get a timestamp of the current api call]
  * @param  {[number]} ts [timestamp of the call]
@@ -30,21 +7,6 @@ export function contructParametrsQuery(startsWith, offset, id) {
  */
 export function getHash(cipherValue) {
   return CryptoJS.MD5(cipherValue).toString();
-}
-/**
- * [createApiString - construct api string for fetch function based on the given parametrs and options]
- * @param  {[string]} fetchSubject [choosed search from [characters, comics, events, stories]]
- * @param  {[string]} startsWith   [value of the current search]
- * @param  {[number]} offset     [number of items skiped through the results data]
- * @return {[string]}        [cinstructed api request for the fetch function]
- */
-export function createApiString(fetchSubject, startsWith, offset) {
-  const ts = new Date().getTime();
-  const hash = getHash(ts);
-  const params = contructParametrsQuery(startsWith, offset);
-  let authentication = `ts=${ts}&apikey=${constants.PUBLIC_KEY}&hash=${hash}`;
-  console.log(`${fetchSubject}${params}`);
-  return `${constants.API_BASE}${fetchSubject}${params}${authentication}`;
 }
 /**
  * [definePagesIndex defines page indexex dependes on the current page number]

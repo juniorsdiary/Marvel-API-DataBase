@@ -1,12 +1,6 @@
 import { combineReducers } from 'redux';
 import * as types from './types';
 import { connectRouter } from 'connected-react-router';
-const singleCharacterData = {
-  thumbnail: {
-    path: '',
-    extension: '',
-  },
-};
 
 function comicBooksData(state = [], action) {
   if (action.type === types.FETCH_COMICS) {
@@ -27,7 +21,7 @@ function searchValue(state = '', action) {
   }
   return state;
 }
-function singleCharacter(state = singleCharacterData, action) {
+function singleCharacter(state = {}, action) {
   if (action.type === types.FETCH_SINGLE_CHARACTERS) {
     return action.payload.results[0];
   }
