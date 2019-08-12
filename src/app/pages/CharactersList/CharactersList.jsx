@@ -32,7 +32,7 @@ class CharachtersList extends Component {
     this.setState({ startsWith });
   };
 
-  requestData = (offset, signal) => {
+  requestData = offset => {
     const { fetchHeroes, setSearchValue, setFetchingState } = this.props;
     const { startsWith } = this.state;
 
@@ -58,7 +58,7 @@ class CharachtersList extends Component {
               id='startsWith'
               className='parametrs_list__startsWith_input'
               type='text'
-              label='starts with'
+              label='name starts with'
               onChange={this.setStateValue}
               value={startsWith}
             />

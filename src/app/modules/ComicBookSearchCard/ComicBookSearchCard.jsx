@@ -1,20 +1,20 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
 
-const CharacterCard = ({ id, name, thumbnail }) => {
+const ComicBookSearchCard = ({ id, title, thumbnail }) => {
   const { path, extension } = thumbnail;
   return (
-    <ImageAvatar className='character_card_block' baseSrc={`${path}/standard_small.${extension}`} src={`${path}.${extension}`}>
-      <Link to={`/character/${id}`} className='character_link'>
-        {name}
+    <ImageAvatar className='comic_book_card_block' baseSrc={`${path}/portrait_small.${extension}`} src={`${path}.${extension}`}>
+      <Link to={`/comics/${id}`} className='comic_book_link'>
+        {title}
       </Link>
     </ImageAvatar>
   );
 };
 
-CharacterCard.propTypes = {
+ComicBookSearchCard.propTypes = {
   id: PropTypes.number,
   name: PropTypes.string,
   thumbnail: PropTypes.shape({
@@ -23,4 +23,4 @@ CharacterCard.propTypes = {
   }),
 };
 
-export default CharacterCard;
+export default ComicBookSearchCard;

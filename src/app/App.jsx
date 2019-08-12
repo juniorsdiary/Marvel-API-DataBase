@@ -15,9 +15,9 @@ const App = () => (
       <Header />
       <Switch>
         <Route exact path='/' component={Home} />
-        <Route path='/characters' component={CharactersList} />
-        <Route path='/comics' component={ComicsList} />
-        <Route path='/character/:id' component={CharacterPage} />
+        <Route exact path='/characters' component={CharactersList} />
+        <Route exact path='/comics' component={ComicsList} />
+        <Route exact path='/character/:id' component={CharacterPage} />
       </Switch>
     </Router>
     <Footer />

@@ -2,8 +2,48 @@ import { combineReducers } from 'redux';
 import * as types from './types';
 import { connectRouter } from 'connected-react-router';
 
+const initialCharacterData = {
+  name: '',
+  description: '',
+  modified: '',
+  thumbnail: {
+    path: '',
+    extension: '',
+  },
+  comics: [],
+  series: [],
+  events: [],
+  stories: [],
+};
+
+function charactersList(state = [], action) {
+  if (action.type === types.FETCH_CHARACTERS) {
+    return action.payload;
+  }
+  return state;
+}
+
 function comicBooksData(state = [], action) {
   if (action.type === types.FETCH_COMICS) {
+    return action.payload;
+  }
+  return state;
+}
+
+function seriesData(state = [], action) {
+  if (action.type === types.FETCH_SERIES) {
+    return action.payload;
+  }
+  return state;
+}
+function eventsData(state = [], action) {
+  if (action.type === types.FETCH_EVENTS) {
+    return action.payload;
+  }
+  return state;
+}
+function storiesData(state = [], action) {
+  if (action.type === types.FETCH_STORIES) {
     return action.payload;
   }
   return state;
@@ -21,7 +61,7 @@ function searchValue(state = '', action) {
   }
   return state;
 }
-function singleCharacter(state = {}, action) {
+function singleCharacter(state = initialCharacterData, action) {
   if (action.type === types.FETCH_SINGLE_CHARACTERS) {
     return action.payload.results[0];
   }
@@ -37,13 +77,6 @@ function paginationData(state = {}, action) {
   return state;
 }
 
-function charactersList(state = [], action) {
-  if (action.type === types.FETCH_CHARACTERS) {
-    return action.payload;
-  }
-  return state;
-}
-
 function isFetching(state = true, action) {
   if (action.type === types.IS_FETCHING) {
     return action.payload;
@@ -53,6 +86,9 @@ function isFetching(state = true, action) {
 
 const rootReducer = history =>
   combineReducers({
+    storiesData,
+    eventsData,
+    seriesData,
     comicBooksData,
     charactersList,
     singleCharacter,

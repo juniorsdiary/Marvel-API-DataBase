@@ -1,13 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const ImageAvatar = ({ className, src, children, baseSrc }) => {
   const imageRef = useRef();
-  const fullImage = new Image();
-  fullImage.src = src;
-  fullImage.onload = function() {
-    imageRef.current.src = this.src;
-  };
+  useEffect(() => {
+    const fullImage = new Image();
+    fullImage.src = src;
+    const loadFunc = function() {
+      imageRef.current.src = this.src;
+    };
+    const bounded = loadFunc.bind(fullImage);
+    fullImage.addEventListener('load', bounded);
+    return () => {
+      fullImage.removeEventListener('load', bounded);
+    };
+  }, [src]);
   return (
     <div className={className}>
       {children}
@@ -20,6 +27,7 @@ ImageAvatar.propTypes = {
   className: PropTypes.string,
   src: PropTypes.string,
   children: PropTypes.node,
+  baseSrc: PropTypes.string,
 };
 
 export default ImageAvatar;

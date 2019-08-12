@@ -1,0 +1,57 @@
+.comic_book_card_block {
+  position: relative;
+  @include simple-size(100px, 200px);
+  margin: 0.35em;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  font-size: 0.7rem;
+  animation: opacity 0.5s linear;
+  transition: all 0.2s linear;
+  z-index: 10;
+}
+%pseudo_border_default {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  transition: transform 0.2s linear;
+  z-index: 13;
+}
+.comic_book_link {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  @include simple-size(100%);
+  background: transparent;
+  visibility: hidden;
+  z-index: 14;
+  &:after {
+    @extend %pseudo_border_default;
+    @include border_hover(top, bottom, 2px, white, scaleX(0));
+    z-index: 15;
+  }
+  &:before {
+    @extend %pseudo_border_default;
+    @include border_hover(left, right, 2px, white, scaleY(0));
+    z-index: 15;
+  }
+}
+
+.comic_book_card_block:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  transition: all 0.2s linear;
+  .comic_book_link {
+    background: rgba(0,0,0, 0.5);
+    visibility: visible;
+    transition: all 0.2s linear;
+    &:before, &:after {
+      transform: scale(1);
+    }
+  }
+}

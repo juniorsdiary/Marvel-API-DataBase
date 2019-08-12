@@ -1,3 +1,17 @@
+.comics_section {
+  position: relative;
+  @include size(12);
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  overflow: hidden;
+  transition: max-height 0.2s linear;
+}
+.character_comics_link {
+  text-decoration: none;
+  color: black;
+}
+
 .show_more_comics_btn {
   flex: 0 0 200px;
   margin: 1em auto;
@@ -8,7 +22,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 1em auto;
+  margin: auto;
   @include size(11);
 }
 
@@ -17,7 +31,11 @@
   font-weight: bold;
   font-family: 'kidkosmic-italic';
   flex: 1 1 100%;
-  margin: 1em;
+  margin: 1em auto;
+  padding: 1em;
+  background: black;
+  color: white;
+  cursor: pointer;
 }
 
 .default_slider_block {

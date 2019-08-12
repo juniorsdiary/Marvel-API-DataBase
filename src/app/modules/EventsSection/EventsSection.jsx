@@ -1,55 +1,50 @@
 import React, { useEffect, useLayoutEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import settings from '../../utilities/sliderSettings';
-import { fetchComics } from '../../store/actions';
+import { fetchEvents } from '../../store/actions';
 import ApiFactory from '../../utilities/apiFactory';
 import ComicBookPreview from '../ComicBookPreview/ComicBookPreview.jsx';
 import Button from '../Button/Button.jsx';
 
-const ComicsSection = ({ comicsData, fetchComicsData, id, number, state, changeState }) => {
+const EventsSection = ({ eventsData, fetchEventsData, id, number, state, changeState }) => {
   useEffect(() => {
     const charactersAPI = ApiFactory.createApiHandler({ type: 'characters', id });
     charactersAPI.createApiString();
-    const comicsAPI = ApiFactory.createApiHandler({ type: 'comics', limit: 15 });
-    let secondPart = comicsAPI.asSecondType();
+    const eventsAPI = ApiFactory.createApiHandler({ type: 'events', limit: 15 });
+    let secondPart = eventsAPI.asSecondType();
     const apiStr = `${charactersAPI.api}${charactersAPI.query}${secondPart}`;
-    fetchComicsData(apiStr);
-  }, [fetchComicsData, id]);
-  let renderComicsSlider = comicsData.map(comicBook => <ComicBookPreview key={comicBook.id} {...comicBook} />);
+    fetchEventsData(apiStr);
+  }, [fetchEventsData, id]);
 
+  let renderEventsSlider = eventsData.map(eventItem => <ComicBookPreview key={eventItem.id} {...eventItem} />);
   const elemRef = useRef();
   useLayoutEffect(() => {
     elemRef.current.style.maxHeight = `${state ? 0 : elemRef.current.scrollHeight}px`;
   }, [state]);
   return (
     <>
-      <h2 className='available_comics_title' onClick={changeState}>
-        Encountered in {number} comics
-      </h2>
-      <div className='comics_section' ref={elemRef}>
-        {comicsData.length >= 5 ? (
+      <h1 className='available_comics_title' onClick={changeState}>
+        Encountered in {number} events
+      </h1>
+      <div className='events_section' ref={elemRef}>
+        {eventsData.length >= 5 ? (
           <Slider {...settings} className='default_slider_block'>
-            {renderComicsSlider}
+            {renderEventsSlider}
           </Slider>
         ) : (
-          <div className='static_comics_block'>{renderComicsSlider}</div>
+          <div className='static_comics_block'>{renderEventsSlider}</div>
         )}
-        <Button className='show_more_comics_btn'>
-          <Link to={{ pathname: '/comics', search: `?characters=${id}` }} className='character_comics_link'>
-            Show More
-          </Link>
-        </Button>
+        <Button className='show_more_comics_btn'>Show more</Button>
       </div>
     </>
   );
 };
 
-ComicsSection.propTypes = {
-  comicsData: PropTypes.array,
-  fetchComicsData: PropTypes.func,
+EventsSection.propTypes = {
+  eventsData: PropTypes.array,
+  fetchEventsData: PropTypes.func,
   id: PropTypes.string,
   number: PropTypes.number,
   state: PropTypes.bool,
@@ -58,14 +53,14 @@ ComicsSection.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    comicsData: state.comicBooksData,
+    eventsData: state.eventsData,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchComicsData: id => {
-      dispatch(fetchComics(id));
+    fetchEventsData: id => {
+      dispatch(fetchEvents(id));
     },
   };
 };
@@ -73,4 +68,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ComicsSection);
+)(EventsSection);
