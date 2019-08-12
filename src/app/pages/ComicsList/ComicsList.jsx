@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchComics } from '../../store/actions';
+import { fetchComics } from '../../store/actions/comics';
 import * as types from '../../store/types';
 import ApiFactory from '../../utilities/apiFactory';
+
+import ComicBookSearchCard from '../../modules/ComicBookSearchCard/ComicBookSearchCard.jsx';
 import SearchComponent from '../../modules/SearchComponent/SearchComponent.jsx';
 import FormGroup from '../../modules/FormGroup/FormGroup.jsx';
-import InputElement from '../../modules/InputElement/InputElement.jsx';
-import ComicBookSearchCard from '../../modules/ComicBookSearchCard/ComicBookSearchCard.jsx';
-import Loader from '../../modules/Loader/Loader.jsx';
 import Pagination from '../../modules/Pagination/Pagination.jsx';
+import InputElement from '../../modules/InputElement/InputElement.jsx';
+import ContentComponent from '../../modules/ContentComponent/ContentComponent.jsx';
+import withLoader from '../../HOCfolder/withLoader.jsx';
 
 class ComicsList extends Component {
   state = {
-    startsWith: '',
+    inputValue: '',
   };
-  componentDidMount() {
+  loadData() {
     const { fetchComicsData, setFetchingState, comicBooksData } = this.props;
     if (comicBooksData.length === 0) {
       setFetchingState(true);
@@ -24,15 +26,20 @@ class ComicsList extends Component {
       fetchComicsData(apiStr);
     }
   }
+  componentDidMount() {
+    this.loadData();
+  }
 
   setStateValue = e => {
-    let startsWith = e.target.value;
-    this.setState({ startsWith });
+    let inputValue = e.target.value;
+    this.setState({ inputValue });
   };
 
   requestData = offset => {
-    const { fetchComicsData, setSearchValue, setFetchingState } = this.props;
-    const { startsWith } = this.state;
+    const { fetchComicsData, setSearchValue, setFetchingState, searchValue } = this.props;
+    const { inputValue } = this.state;
+
+    const startsWith = searchValue ? searchValue : inputValue;
 
     const apiHandler = ApiFactory.createApiHandler({ type: 'comics', startsWith, offset });
     const apiStr = apiHandler.createApiString();
@@ -41,12 +48,12 @@ class ComicsList extends Component {
     setFetchingState(true);
     fetchComicsData(apiStr);
 
-    this.setState({ startsWith: '' });
+    this.setState({ inputValue: '' });
   };
   render() {
-    const { startsWith } = this.state;
-    const { comicBooksData, isFetching } = this.props;
-    const renderComics = comicBooksData.map(comicBook => <ComicBookSearchCard key={comicBook.id} {...comicBook} />);
+    const { inputValue } = this.state;
+    const { comicBooksData, isFetching, totalResults, offset } = this.props;
+    const ContentComponentWithLoader = withLoader(isFetching)(ContentComponent);
     return (
       <div className='page_content comics_wrapper'>
         <SearchComponent>
@@ -57,12 +64,12 @@ class ComicsList extends Component {
               type='text'
               label='title starts with'
               onChange={this.setStateValue}
-              value={startsWith}
+              value={inputValue}
             />
           </FormGroup>
         </SearchComponent>
-        {!isFetching ? <div className='comics_cards_wrapper'>{renderComics}</div> : <Loader />}
-        {!isFetching && <Pagination requestData={this.requestData} />}
+        <ContentComponentWithLoader className='comics_cards_wrapper' renderData={comicBooksData} PartialComponent={ComicBookSearchCard} />
+        {!isFetching && <Pagination requestData={this.requestData} totalResults={totalResults} offset={offset} />}
       </div>
     );
   }
@@ -71,29 +78,35 @@ class ComicsList extends Component {
 ComicsList.propTypes = {
   fetchComicsData: PropTypes.func,
   setSearchValue: PropTypes.func,
+  setFetchingState: PropTypes.func,
   comicBooksData: PropTypes.array,
   isFetching: PropTypes.bool,
-  setFetchingState: PropTypes.func,
+  totalResults: PropTypes.number,
+  offset: PropTypes.number,
+  searchValue: PropTypes.string,
 };
 
 const mapStateToProps = state => {
   return {
-    comicBooksData: state.comicBooksData,
-    isFetching: state.isFetching,
+    comicBooksData: state.comicsData.comicsList,
+    totalResults: state.comicsData.totalResults,
+    offset: state.comicsData.offset,
+    isFetching: state.comicsData.isFetching,
+    searchValue: state.searchValue,
     router: state.router,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchComicsData: (startsWith, offset) => {
-      dispatch(fetchComics(startsWith, offset));
+    fetchComicsData: url => {
+      dispatch(fetchComics(url));
     },
     setSearchValue: value => {
       dispatch({ type: types.SET_SEARCH_VALUE, payload: value });
     },
     setFetchingState: boolean => {
-      dispatch({ type: types.IS_FETCHING, payload: boolean });
+      dispatch({ type: types.COMICS_FETCHING, payload: boolean });
     },
   };
 };

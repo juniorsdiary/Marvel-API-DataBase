@@ -16,7 +16,7 @@ const ComicBookSearchCard = ({ id, title, thumbnail }) => {
 
 ComicBookSearchCard.propTypes = {
   id: PropTypes.number,
-  name: PropTypes.string,
+  title: PropTypes.string,
   thumbnail: PropTypes.shape({
     path: PropTypes.string,
     extension: PropTypes.string,

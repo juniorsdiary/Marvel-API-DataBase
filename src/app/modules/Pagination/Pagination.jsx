@@ -1,21 +1,18 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { PER_PAGE_RESULTS } from '../../utilities/constants';
 import { definePagesIndex } from '../../utilities/lib';
 import PageButton from '../PageButton/PageButton.jsx';
 
-const Pagination = ({ requestData, searchValue, paginationData }) => {
-  let { totalResult, offset } = paginationData;
-  let pages = Math.ceil(totalResult / PER_PAGE_RESULTS);
-
+const Pagination = ({ requestData, totalResults, offset }) => {
+  let pages = Math.ceil(totalResults / PER_PAGE_RESULTS);
   let pageNum = offset / PER_PAGE_RESULTS + 1;
   const [firstPages, lastPages, middlePages] = definePagesIndex(pageNum, pages);
+
   const renderFirstPages = firstPages.map(pageInd => (
     <PageButton
       key={pageInd}
       className={pageInd === pageNum ? 'active_page_item' : ''}
-      searchValue={searchValue}
       pageInd={pageInd}
       requestData={requestData}
       baseOffset={PER_PAGE_RESULTS}
@@ -26,7 +23,6 @@ const Pagination = ({ requestData, searchValue, paginationData }) => {
     <PageButton
       key={pageInd}
       className={pageInd === pageNum ? 'active_page_item' : ''}
-      searchValue={searchValue}
       pageInd={pageInd}
       requestData={requestData}
       baseOffset={PER_PAGE_RESULTS}
@@ -37,7 +33,6 @@ const Pagination = ({ requestData, searchValue, paginationData }) => {
     <PageButton
       key={pageInd}
       className={pageInd === pageNum ? 'active_page_item' : ''}
-      searchValue={searchValue}
       pageInd={pageInd}
       requestData={requestData}
       baseOffset={PER_PAGE_RESULTS}
@@ -45,7 +40,7 @@ const Pagination = ({ requestData, searchValue, paginationData }) => {
   ));
   return (
     <div className='pagination'>
-      <p className='total_results'>Total results: {totalResult}</p>
+      <p className='total_results'>Total results: {totalResults}</p>
       <div className='toogle_pages_block'>
         {pages > 1 && (
           <PageButton
@@ -53,7 +48,6 @@ const Pagination = ({ requestData, searchValue, paginationData }) => {
             pageInd={pageNum - 1}
             requestData={pageNum > 1 ? requestData : () => {}}
             baseOffset={PER_PAGE_RESULTS}
-            searchValue={searchValue}
             textContent='Previous'
           />
         )}
@@ -68,7 +62,6 @@ const Pagination = ({ requestData, searchValue, paginationData }) => {
             pageInd={pageNum + 1}
             requestData={pageNum < pages ? requestData : () => {}}
             baseOffset={PER_PAGE_RESULTS}
-            searchValue={searchValue}
             textContent='Next'
           />
         )}
@@ -79,21 +72,16 @@ const Pagination = ({ requestData, searchValue, paginationData }) => {
 
 Pagination.propTypes = {
   requestData: PropTypes.func,
-  searchValue: PropTypes.string,
-  paginationData: PropTypes.object,
   changePage: PropTypes.func,
+  totalResults: PropTypes.number,
+  offset: PropTypes.number,
 };
 
 Pagination.defaultProps = {
   requestData: () => {},
-  searchValue: '',
-  paginationData: {},
+  totalResults: 0,
+  offset: 0,
   changePage: () => {},
 };
 
-const mapStateToProps = state => ({
-  searchValue: state.searchValue,
-  paginationData: state.paginationData,
-});
-
-export default React.memo(connect(mapStateToProps)(Pagination));
+export default React.memo(Pagination);

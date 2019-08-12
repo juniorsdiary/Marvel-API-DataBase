@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { fetchSingleCharacter } from '../../store/actions';
+import { fetchSingleCharacter } from '../../store/actions/characters';
 import * as types from '../../store/types';
 import { convertToLocale } from '../../utilities/lib';
 import ApiFactory from '../../utilities/apiFactory';

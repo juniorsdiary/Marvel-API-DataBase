@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { connect } from 'react-redux';
 
-const PageButton = ({ className, searchValue, pageInd, requestData, baseOffset, textContent, isFetching }) => {
+const PageButton = ({ className, pageInd, requestData, baseOffset, textContent, isFetching }) => {
   const commonClass = classNames('pagination_block__page_item', className);
   return (
     <span
@@ -22,7 +22,6 @@ PageButton.propTypes = {
   pageInd: PropTypes.number,
   requestData: PropTypes.func,
   baseOffset: PropTypes.number,
-  searchValue: PropTypes.string,
   textContent: PropTypes.any,
   isFetching: PropTypes.bool,
 };

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchCharacters } from '../../store/actions';
+import { fetchCharacters } from '../../store/actions/characters';
 import * as types from '../../store/types';
 import ApiFactory from '../../utilities/apiFactory';
 
@@ -9,15 +9,16 @@ import CharacterCard from '../../modules/CharacterCard/CharacterCard.jsx';
 import SearchComponent from '../../modules/SearchComponent/SearchComponent.jsx';
 import FormGroup from '../../modules/FormGroup/FormGroup.jsx';
 import Pagination from '../../modules/Pagination/Pagination.jsx';
-import Loader from '../../modules/Loader/Loader.jsx';
 import InputElement from '../../modules/InputElement/InputElement.jsx';
+import ContentComponent from '../../modules/ContentComponent/ContentComponent.jsx';
+import withLoader from '../../HOCfolder/withLoader.jsx';
 
 class CharachtersList extends Component {
   state = {
-    startsWith: '',
+    inputValue: '',
   };
 
-  componentDidMount() {
+  loadData() {
     const { fetchHeroes, setFetchingState, charactersList } = this.props;
     if (charactersList.length === 0) {
       setFetchingState(true);
@@ -27,14 +28,20 @@ class CharachtersList extends Component {
     }
   }
 
+  componentDidMount() {
+    this.loadData();
+  }
+
   setStateValue = e => {
-    let startsWith = e.target.value;
-    this.setState({ startsWith });
+    let inputValue = e.target.value;
+    this.setState({ inputValue });
   };
 
   requestData = offset => {
-    const { fetchHeroes, setSearchValue, setFetchingState } = this.props;
-    const { startsWith } = this.state;
+    const { fetchHeroes, setSearchValue, setFetchingState, searchValue } = this.props;
+    const { inputValue } = this.state;
+
+    const startsWith = searchValue ? searchValue : inputValue;
 
     const apiHandler = ApiFactory.createApiHandler({ type: 'characters', startsWith, offset });
     const apiStr = apiHandler.createApiString();
@@ -43,13 +50,13 @@ class CharachtersList extends Component {
     setFetchingState(true);
     fetchHeroes(apiStr);
 
-    this.setState({ startsWith: '' });
+    this.setState({ inputValue: '' });
   };
 
   render() {
-    const { startsWith } = this.state;
-    const { charactersList, isFetching } = this.props;
-    const renderCharacters = charactersList.map(character => <CharacterCard key={character.id} {...character} />);
+    const { inputValue } = this.state;
+    const { charactersList, isFetching, totalResults, offset } = this.props;
+    const ContentComponentWithLoader = withLoader(isFetching)(ContentComponent);
     return (
       <div className='page_content characters_wrapper'>
         <SearchComponent>
@@ -60,12 +67,12 @@ class CharachtersList extends Component {
               type='text'
               label='name starts with'
               onChange={this.setStateValue}
-              value={startsWith}
+              value={inputValue}
             />
           </FormGroup>
         </SearchComponent>
-        {!isFetching ? <div className='characters_cards_wrapper'>{renderCharacters}</div> : <Loader />}
-        {!isFetching && <Pagination requestData={this.requestData} />}
+        <ContentComponentWithLoader className='characters_cards_wrapper' renderData={charactersList} PartialComponent={CharacterCard} />
+        {!isFetching && <Pagination requestData={this.requestData} totalResults={totalResults} offset={offset} />}
       </div>
     );
   }
@@ -74,28 +81,35 @@ class CharachtersList extends Component {
 CharachtersList.propTypes = {
   fetchHeroes: PropTypes.func,
   setSearchValue: PropTypes.func,
+  setFetchingState: PropTypes.func,
   charactersList: PropTypes.array,
   isFetching: PropTypes.bool,
-  setFetchingState: PropTypes.func,
+  totalResults: PropTypes.number,
+  offset: PropTypes.number,
+  searchValue: PropTypes.string,
 };
 
 const mapStateToProps = state => {
   return {
-    charactersList: state.charactersList,
-    isFetching: state.isFetching,
+    charactersList: state.charactersData.charactersList,
+    totalResults: state.charactersData.totalResults,
+    offset: state.charactersData.offset,
+    isFetching: state.charactersData.isFetching,
+    searchValue: state.searchValue,
+    router: state.router,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchHeroes: (startsWith, offset) => {
-      dispatch(fetchCharacters(startsWith, offset));
+    fetchHeroes: url => {
+      dispatch(fetchCharacters(url));
     },
     setSearchValue: value => {
       dispatch({ type: types.SET_SEARCH_VALUE, payload: value });
     },
     setFetchingState: boolean => {
-      dispatch({ type: types.IS_FETCHING, payload: boolean });
+      dispatch({ type: types.CHARACTERS_FETCHING, payload: boolean });
     },
   };
 };

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import settings from '../../utilities/sliderSettings';
-import { fetchEvents } from '../../store/actions';
+import { fetchEvents } from '../../store/actions/events';
 import ApiFactory from '../../utilities/apiFactory';
 import ComicBookPreview from '../ComicBookPreview/ComicBookPreview.jsx';
 import Button from '../Button/Button.jsx';
