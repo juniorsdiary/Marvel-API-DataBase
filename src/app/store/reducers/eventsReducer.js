@@ -1,31 +1,31 @@
 import * as types from '../types';
 
 const initialState = {
-  comicsList: [],
+  eventsList: [],
   totalResults: 0,
   offset: 0,
-  comicBook: {},
+  eventItem: {},
   isFetching: false,
 };
 
-export default function comicsData(state = initialState, action) {
+export default function seriesData(state = initialState, action) {
   switch (action.type) {
-    case types.FETCH_COMICS:
+    case types.FETCH_EVENTS:
       return {
         ...state,
-        comicsList: action.payload.results,
+        eventsList: action.payload.results,
         totalResults: action.payload.total,
         offset: action.payload.offset,
       };
-    case types.COMICS_FETCHING:
+    case types.EVENTS_FETCHING:
       return {
         ...state,
         isFetching: action.payload,
       };
-    case types.FETCH_SINGLE_COMIC_BOOK:
+    case types.FETCH_SINGLE_EVENT:
       return {
         ...state,
-        comicBook: action.payload.results[0],
+        eventItem: action.payload.results[0],
       };
     default:
       return state;

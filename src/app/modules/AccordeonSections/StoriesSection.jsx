@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
@@ -20,16 +21,22 @@ const StoriesSection = ({ storiesData, fetchStoriesData, id, number }) => {
   }, [fetchStoriesData, id]);
   let renderStoriesSlider = storiesData.map(storyItem => <ComicBookPreview key={storyItem.id} {...storyItem} />);
   return (
-    <div className='stories_section'>
-      <h1 className='available_comics_title'>Encountered in {number} stories</h1>
+    <div className='accordeon_section'>
+      <h1 className='available_items_title'>Encountered in {number} stories</h1>
       {storiesData.length >= 5 ? (
         <Slider {...settings} className='default_slider_block'>
           {renderStoriesSlider}
         </Slider>
       ) : (
-        <div className='static_comics_block'>{renderStoriesSlider}</div>
+        <div className='static_items_block'>{renderStoriesSlider}</div>
       )}
-      <Button className='show_more_comics_btn'>Show more</Button>
+      {number > 15 && (
+        <Button className='show_more_items_btn'>
+          <Link to={{ pathname: '/stories', search: `?characters=${id}` }} className='show_more_link'>
+            Show More
+          </Link>
+        </Button>
+      )}
     </div>
   );
 };

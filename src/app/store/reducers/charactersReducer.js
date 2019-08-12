@@ -1,25 +1,23 @@
 import * as types from '../types';
 
-// const singleCharacter = {
-//   name: '',
-//   description: '',
-//   modified: '',
-//   thumbnail: {
-//     path: '',
-//     extension: '',
-//   },
-//   comics: [],
-//   series: [],
-//   events: [],
-//   stories: [],
-// };
-
 const initialState = {
   charactersList: [],
   totalResults: 0,
   offset: 0,
-  singleCharacter: {},
-  isFetching: false,
+  singleCharacter: {
+    name: '',
+    description: '',
+    modified: '',
+    thumbnail: {
+      path: '',
+      extension: '',
+    },
+    comics: [],
+    series: [],
+    events: [],
+    stories: [],
+  },
+  isFetching: true,
 };
 
 export default function charactersData(state = initialState, action) {
@@ -39,7 +37,7 @@ export default function charactersData(state = initialState, action) {
     case types.FETCH_SINGLE_CHARACTERS:
       return {
         ...state,
-        singleCharacter: action.payload,
+        singleCharacter: action.payload.results[0],
       };
     default:
       return state;

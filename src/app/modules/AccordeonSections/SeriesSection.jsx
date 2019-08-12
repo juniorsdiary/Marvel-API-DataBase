@@ -4,21 +4,22 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import settings from '../../utilities/sliderSettings';
-import { fetchComics } from '../../store/actions/comics';
+import { fetchSeries } from '../../store/actions/series';
 import ApiFactory from '../../utilities/apiFactory';
 import ComicBookPreview from '../ComicBookPreview/ComicBookPreview.jsx';
 import Button from '../Button/Button.jsx';
 
-const ComicsSection = ({ comicsData, fetchComicsData, id, number, state, changeState }) => {
+const SeriesSection = ({ seriesData, fetchSeriesData, id, number, state, changeState }) => {
   useEffect(() => {
     const charactersAPI = ApiFactory.createApiHandler({ type: 'characters', id });
     charactersAPI.createApiString();
-    const comicsAPI = ApiFactory.createApiHandler({ type: 'comics', limit: 15 });
-    let secondPart = comicsAPI.asSecondType();
+    const seriesAPI = ApiFactory.createApiHandler({ type: 'series', limit: 15 });
+    let secondPart = seriesAPI.asSecondType();
     const apiStr = `${charactersAPI.api}${charactersAPI.query}${secondPart}`;
-    fetchComicsData(apiStr);
-  }, [fetchComicsData, id]);
-  let renderComicsSlider = comicsData.map(comicBook => <ComicBookPreview key={comicBook.id} {...comicBook} />);
+    fetchSeriesData(apiStr);
+  }, [fetchSeriesData, id]);
+
+  let renderSeriesSlider = seriesData.map(seriesItem => <ComicBookPreview key={seriesItem.id} {...seriesItem} />);
 
   const elemRef = useRef();
   useLayoutEffect(() => {
@@ -26,30 +27,31 @@ const ComicsSection = ({ comicsData, fetchComicsData, id, number, state, changeS
   }, [state]);
   return (
     <>
-      <h2 className='available_comics_title' onClick={changeState}>
-        Encountered in {number} comics
-      </h2>
-      <div className='comics_section' ref={elemRef}>
-        {comicsData.length >= 5 ? (
+      <h1 className='available_items_title' onClick={changeState}>
+        Encountered in {number} series
+      </h1>
+      <div className='accordeon_section' ref={elemRef}>
+        {seriesData.length >= 5 ? (
           <Slider {...settings} className='default_slider_block'>
-            {renderComicsSlider}
+            {renderSeriesSlider}
           </Slider>
         ) : (
-          <div className='static_comics_block'>{renderComicsSlider}</div>
+          <div className='static_items_block'>{renderSeriesSlider}</div>
         )}
-        <Button className='show_more_comics_btn'>
-          <Link to={{ pathname: '/comics', search: `?characters=${id}` }} className='character_comics_link'>
-            Show More
-          </Link>
-        </Button>
+        {number > 15 && (
+          <Button className='show_more_items_btn'>
+            <Link to={{ pathname: '/series', search: `?characters=${id}` }} className='show_more_link'>
+              Show More
+            </Link>
+          </Button>
+        )}
       </div>
     </>
   );
 };
-
-ComicsSection.propTypes = {
-  comicsData: PropTypes.array,
-  fetchComicsData: PropTypes.func,
+SeriesSection.propTypes = {
+  seriesData: PropTypes.array,
+  fetchSeriesData: PropTypes.func,
   id: PropTypes.string,
   number: PropTypes.number,
   state: PropTypes.bool,
@@ -58,14 +60,14 @@ ComicsSection.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    comicsData: state.comicBooksData,
+    seriesData: state.seriesData.seriesList,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchComicsData: id => {
-      dispatch(fetchComics(id));
+    fetchSeriesData: id => {
+      dispatch(fetchSeries(id));
     },
   };
 };
@@ -73,4 +75,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ComicsSection);
+)(SeriesSection);

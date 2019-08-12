@@ -2,7 +2,14 @@
   padding: 1em;
   border: none;
   outline: none;
+  background: red;
+  color: white;
   cursor: pointer;
+}
+
+.default_btn:disabled {
+  background: rgb(162,162,162);
+  color: black;
 }
 
 .default_btn:active {

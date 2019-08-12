@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
@@ -17,7 +18,6 @@ const EventsSection = ({ eventsData, fetchEventsData, id, number, state, changeS
     const apiStr = `${charactersAPI.api}${charactersAPI.query}${secondPart}`;
     fetchEventsData(apiStr);
   }, [fetchEventsData, id]);
-
   let renderEventsSlider = eventsData.map(eventItem => <ComicBookPreview key={eventItem.id} {...eventItem} />);
   const elemRef = useRef();
   useLayoutEffect(() => {
@@ -25,18 +25,24 @@ const EventsSection = ({ eventsData, fetchEventsData, id, number, state, changeS
   }, [state]);
   return (
     <>
-      <h1 className='available_comics_title' onClick={changeState}>
+      <h1 className='available_items_title' onClick={changeState}>
         Encountered in {number} events
       </h1>
-      <div className='events_section' ref={elemRef}>
+      <div className='accordeon_section' ref={elemRef}>
         {eventsData.length >= 5 ? (
           <Slider {...settings} className='default_slider_block'>
             {renderEventsSlider}
           </Slider>
         ) : (
-          <div className='static_comics_block'>{renderEventsSlider}</div>
+          <div className='static_items_block'>{renderEventsSlider}</div>
         )}
-        <Button className='show_more_comics_btn'>Show more</Button>
+        {number > 15 && (
+          <Button className='show_more_items_btn'>
+            <Link to={{ pathname: '/events', search: `?characters=${id}` }} className='show_more_link'>
+              Show More
+            </Link>
+          </Button>
+        )}
       </div>
     </>
   );
@@ -53,7 +59,7 @@ EventsSection.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    eventsData: state.eventsData,
+    eventsData: state.eventsData.eventsList,
   };
 };
 

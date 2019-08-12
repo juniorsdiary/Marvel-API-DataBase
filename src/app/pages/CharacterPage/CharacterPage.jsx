@@ -9,15 +9,16 @@ import ApiFactory from '../../utilities/apiFactory';
 
 import Loader from '../../modules/Loader/Loader.jsx';
 import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
-import ComicsSection from '../../modules/ComicsSection/ComicsSection.jsx';
-import SeriesSection from '../../modules/SeriesSection/SeriesSection.jsx';
-import EventsSection from '../../modules/EventsSection/EventsSection.jsx';
-import StoriesSection from '../../modules/StoriesSection/StoriesSection.jsx';
+import ComicsSection from '../../modules/AccordeonSections/ComicsSection.jsx';
+import SeriesSection from '../../modules/AccordeonSections/SeriesSection.jsx';
+import EventsSection from '../../modules/AccordeonSections/EventsSection.jsx';
+// import StoriesSection from '../../modules/StoriesSection/StoriesSection.jsx';
 import CharacterDetailsSection from '../../modules/CharacterDetailsSection/CharacterDetailsSection.jsx';
 
 const CharacterPage = ({ fetchCharacterData, setFetchingState, isFetching, match, characterData }) => {
   const { name, description, modified, thumbnail, urls, comics, series, events, stories } = characterData;
-  const { path, extension } = thumbnail;
+  const baseSrc = thumbnail.path ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
+  const src = thumbnail ? `${thumbnail.path}.${thumbnail.extension}` : '';
   useEffect(() => {
     const id = match.params.id;
     const charactersAPI = ApiFactory.createApiHandler({ type: 'characters', id });
@@ -40,7 +41,7 @@ const CharacterPage = ({ fetchCharacterData, setFetchingState, isFetching, match
     <div className='page_content character_page_block'>
       {!isFetching ? (
         <div className='character_data_wrapper'>
-          <ImageAvatar className='character_image_wrapper' baseSrc={`${path}/portrait_small.${extension}`} src={`${path}.${extension}`} />
+          <ImageAvatar className='character_image_wrapper' baseSrc={baseSrc} src={src} />
           <CharacterDetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
 
           <ComicsSection
@@ -78,7 +79,6 @@ const CharacterPage = ({ fetchCharacterData, setFetchingState, isFetching, match
 CharacterPage.propTypes = {
   match: PropTypes.object,
   characterData: PropTypes.object,
-  comicsData: PropTypes.array,
   fetchCharacterData: PropTypes.func,
   setFetchingState: PropTypes.func,
   fetchComicsData: PropTypes.func,
@@ -87,8 +87,8 @@ CharacterPage.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    characterData: state.singleCharacter,
-    isFetching: state.isFetching,
+    characterData: state.charactersData.singleCharacter,
+    isFetching: state.charactersData.isFetching,
   };
 };
 
@@ -98,7 +98,7 @@ const mapDispatchToProps = dispatch => {
       dispatch(fetchSingleCharacter(id));
     },
     setFetchingState: boolean => {
-      dispatch({ type: types.IS_FETCHING, payload: boolean });
+      dispatch({ type: types.CHARACTERS_FETCHING, payload: boolean });
     },
   };
 };

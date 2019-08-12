@@ -1,9 +1,0 @@
-.series_section {
-  position: relative;
-  @include size(12);
-  display: flex;
-  flex-wrap: wrap;
-  margin: auto;
-  overflow: hidden;
-  transition: max-height 0.5s linear;
-}
