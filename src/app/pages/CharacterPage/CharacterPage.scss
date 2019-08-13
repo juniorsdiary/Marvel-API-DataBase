@@ -18,17 +18,7 @@
   position: relative;
   @include size(4);
   @include col-offsets(margin);
-  padding-top: 30%;
-  @include lg-block {
-    @include size-lg(5);
-    padding-top: 40%;
-  }
-  @include md-block {
-    @include size-md(6);
-    padding-top: 50%;
-  }
-  @include xs-block {
-    @include size-xs(7);
-    padding-top: 60%;
-  }
+  @include size-md(4);
+  @include size-sm(5);
+  @include size-xs(6);
 }

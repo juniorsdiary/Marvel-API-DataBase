@@ -19,10 +19,10 @@ class CharachtersList extends Component {
   };
 
   loadData() {
-    const { fetchHeroes, setFetchingState, charactersList } = this.props;
+    const { fetchHeroes, setFetchingState, charactersList, location } = this.props;
     if (charactersList.length === 0) {
       setFetchingState(true);
-      const apiHandler = ApiFactory.createApiHandler({ type: 'characters' });
+      const apiHandler = ApiFactory.createApiHandler({ pathname: location.pathname });
       const apiStr = apiHandler.createApiString();
       fetchHeroes(apiStr);
     }
@@ -87,6 +87,7 @@ CharachtersList.propTypes = {
   totalResults: PropTypes.number,
   offset: PropTypes.number,
   searchValue: PropTypes.string,
+  location: PropTypes.object,
 };
 
 const mapStateToProps = state => {

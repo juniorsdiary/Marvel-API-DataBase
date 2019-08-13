@@ -25,7 +25,7 @@
   flex-direction: column;
   @include col-offsets(margin);
   @include size(8);
-  @include size-lg(7);
-  @include size-md(6);
-  @include size-xs(5);
+  @include size-md(8);
+  @include size-sm(7);
+  @include size-xs(6);
 }

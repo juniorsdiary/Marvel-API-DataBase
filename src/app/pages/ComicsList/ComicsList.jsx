@@ -18,16 +18,15 @@ class ComicsList extends Component {
     inputValue: '',
   };
   loadData() {
-    const { fetchComicsData, setFetchingState, comicBooksData } = this.props;
-    if (comicBooksData.length === 0) {
-      setFetchingState(true);
-      const apiHandler = ApiFactory.createApiHandler({ type: 'comics' });
-      const apiStr = apiHandler.createApiString();
-      fetchComicsData(apiStr);
-    }
+    const { fetchComicsData, setFetchingState, location } = this.props;
+    setFetchingState(true);
+    const apiHandler = ApiFactory.createApiHandler({ type: 'comics', search: location.search });
+    const apiStr = apiHandler.createApiString();
+    fetchComicsData(apiStr);
   }
   componentDidMount() {
-    this.loadData();
+    const { comicBooksData, location } = this.props;
+    if (comicBooksData.length === 0 || location.search) this.loadData();
   }
 
   setStateValue = e => {
@@ -36,12 +35,12 @@ class ComicsList extends Component {
   };
 
   requestData = offset => {
-    const { fetchComicsData, setSearchValue, setFetchingState, searchValue } = this.props;
+    const { fetchComicsData, setSearchValue, setFetchingState, searchValue, location } = this.props;
     const { inputValue } = this.state;
 
     const startsWith = searchValue ? searchValue : inputValue;
 
-    const apiHandler = ApiFactory.createApiHandler({ type: 'comics', startsWith, offset });
+    const apiHandler = ApiFactory.createApiHandler({ type: location.path, startsWith, offset, search: location.search });
     const apiStr = apiHandler.createApiString();
 
     setSearchValue(startsWith);
@@ -54,6 +53,7 @@ class ComicsList extends Component {
     const { inputValue } = this.state;
     const { comicBooksData, isFetching, totalResults, offset } = this.props;
     const ContentComponentWithLoader = withLoader(isFetching)(ContentComponent);
+
     return (
       <div className='page_content comics_wrapper'>
         <SearchComponent>
@@ -84,6 +84,8 @@ ComicsList.propTypes = {
   totalResults: PropTypes.number,
   offset: PropTypes.number,
   searchValue: PropTypes.string,
+  match: PropTypes.object,
+  location: PropTypes.object,
 };
 
 const mapStateToProps = state => {

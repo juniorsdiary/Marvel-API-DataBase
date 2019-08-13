@@ -22,20 +22,23 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: auto;
+  margin: 1em auto;
   @include size(11);
 }
 
 .available_items_title {
-  font-size: 1.5em;
+  font-size: 1em;
   font-weight: bold;
   font-family: 'kidkosmic-italic';
   flex: 1 1 100%;
-  margin: 1em auto;
+  margin: 0 auto;
   padding: 1em;
   background: black;
   color: white;
   cursor: pointer;
+  &:first-of-type {
+    margin-top: 1em;
+  }
 }
 
 .default_slider_block {

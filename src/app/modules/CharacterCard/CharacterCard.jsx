@@ -7,7 +7,7 @@ const CharacterCard = ({ id, name, thumbnail }) => {
   const { path, extension } = thumbnail;
   return (
     <ImageAvatar className='character_card_block' baseSrc={`${path}/standard_small.${extension}`} src={`${path}.${extension}`}>
-      <Link to={`/character/${id}`} className='character_link'>
+      <Link to={`/characters/${id}`} className='character_link'>
         {name}
       </Link>
     </ImageAvatar>

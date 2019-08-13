@@ -1,30 +1,38 @@
 import * as constants from './constants';
 import { getHash } from './lib';
-// EVENTS_API
-// SERIES_API
-// STORIES_API
-class Authentication {
-  constructor(id) {
-    this.id = '';
+
+class CommonAPISettings {
+  constructor(options) {
+    this.pathname = options.pathname;
+    this.startsWith = options.startsWith;
+    this.limit = options.limit || constants.LIMIT_RESULTS;
+    this.baseApi = constants.API_BASE;
+    this.offset = options.offset;
+    this.search = options.search || '';
+    this.query = '';
+    this.authentication = '';
   }
   createAuthentication() {
     const ts = new Date().getTime();
     const hash = getHash(ts + constants.PRIVATE_KEY + constants.PUBLIC_KEY);
-    this.authentication = `${this.id ? '?' : '&'}ts=${ts}&apikey=${constants.PUBLIC_KEY}&hash=${hash}`;
+    this.authentication = `${/\/\d+\/?/.test(this.pathname) ? '?' : '&'}ts=${ts}&apikey=${constants.PUBLIC_KEY}&hash=${hash}`;
+  }
+  asSecondType() {
+    this.queryParametrs();
+    this.createAuthentication();
+    return `${this.pathname}${this.search}${this.query}${this.authentication}`;
+  }
+  createApiString() {
+    this.queryParametrs();
+    this.createAuthentication();
+    return `${this.baseApi}${this.pathname}${this.search}${this.query}${this.authentication}`;
   }
 }
-class Characters extends Authentication {
+class Characters extends CommonAPISettings {
   constructor(options) {
-    super(options.id);
-    this.type = options.type;
+    super(options);
     this.api = constants.CHARACTERS_API;
-    this.startsWith = options.startsWith;
-    this.limit = constants.LIMIT_RESULTS;
     this.order = constants.ORDER;
-    this.offset = options.offset;
-    this.id = options.id;
-    this.query = '';
-    this.authentication = '';
   }
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
@@ -32,31 +40,14 @@ class Characters extends Authentication {
     let orderQuery = `orderBy=${this.order}`;
     let limitQuery = `limit=${this.limit}`;
     let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
-    this.query = this.id ? `/${this.id}` : `?${concatedQuery}`;
-  }
-  asSecondType() {
-    this.queryParametrs();
-    this.createAuthentication();
-    return `/${this.type}${this.query}${this.authentication}`;
-  }
-  createApiString() {
-    this.queryParametrs();
-    this.createAuthentication();
-    return `${this.api}${this.query}${this.authentication}`;
+    this.query = /\/\d+\/?/.test(this.pathname) ? '' : `${this.search ? '&' : '?'}${concatedQuery}`;
   }
 }
-class Comics extends Authentication {
+class Comics extends CommonAPISettings {
   constructor(options) {
-    super(options.id);
-    this.type = options.type;
-    this.startsWith = options.startsWith;
+    super(options);
     this.api = constants.COMICS_API;
     this.order = constants.ORDER_TITLE;
-    this.limit = options.limit || constants.LIMIT_RESULTS;
-    this.offset = options.offset;
-    this.id = options.id;
-    this.query = '';
-    this.authentication = '';
   }
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `titleStartsWith=${this.startsWith}` : '';
@@ -64,31 +55,14 @@ class Comics extends Authentication {
     let orderQuery = `orderBy=${this.order}`;
     let limitQuery = `limit=${this.limit}`;
     let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
-    this.query = `?${concatedQuery}`;
-  }
-  asSecondType() {
-    this.queryParametrs();
-    this.createAuthentication();
-    return `/${this.type}${this.query}${this.authentication}`;
-  }
-  createApiString() {
-    this.queryParametrs();
-    this.createAuthentication();
-    return `${this.api}${this.query}${this.authentication}`;
+    this.query = `${this.search ? '&' : '?'}${concatedQuery}`;
   }
 }
-class Series extends Authentication {
+class Series extends CommonAPISettings {
   constructor(options) {
-    super(options.id);
-    this.type = options.type;
+    super(options);
     this.api = constants.SERIES_API;
-    this.startsWith = options.startsWith;
     this.order = constants.ORDER_TITLE;
-    this.limit = options.limit || constants.LIMIT_RESULTS;
-    this.offset = options.offset;
-    this.id = options.id;
-    this.query = '';
-    this.authentication = '';
   }
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `titleStartsWith=${this.startsWith}` : '';
@@ -96,31 +70,14 @@ class Series extends Authentication {
     let orderQuery = `orderBy=${this.order}`;
     let limitQuery = `limit=${this.limit}`;
     let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
-    this.query = `?${concatedQuery}`;
-  }
-  asSecondType() {
-    this.queryParametrs();
-    this.createAuthentication();
-    return `/${this.type}${this.query}${this.authentication}`;
-  }
-  createApiString() {
-    this.queryParametrs();
-    this.createAuthentication();
-    return `${this.api}${this.query}${this.authentication}`;
+    this.query = `${this.search ? '&' : '?'}${concatedQuery}`;
   }
 }
-class Events extends Authentication {
+class Events extends CommonAPISettings {
   constructor(options) {
-    super(options.id);
-    this.type = options.type;
+    super(options);
     this.api = constants.EVENTS_API;
-    this.startsWith = options.startsWith;
     this.order = constants.ORDER;
-    this.limit = options.limit || constants.LIMIT_RESULTS;
-    this.offset = options.offset;
-    this.id = options.id;
-    this.query = '';
-    this.authentication = '';
   }
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
@@ -128,30 +85,14 @@ class Events extends Authentication {
     let orderQuery = `orderBy=${this.order}`;
     let limitQuery = `limit=${this.limit}`;
     let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
-    this.query = this.id ? `/${this.id}` : `?${concatedQuery}`;
-  }
-  asSecondType() {
-    this.queryParametrs();
-    this.createAuthentication();
-    return `/${this.type}${this.query}${this.authentication}`;
-  }
-  createApiString() {
-    this.queryParametrs();
-    this.createAuthentication();
-    return `${this.api}${this.query}${this.authentication}`;
+    this.query = `${this.search ? '&' : '?'}${concatedQuery}`;
   }
 }
-class Stories extends Authentication {
+class Stories extends CommonAPISettings {
   constructor(options) {
-    super(options.id);
-    this.type = options.type;
+    super(options);
     this.api = constants.STORIES_API;
     this.order = constants.ORDER_ID;
-    this.limit = options.limit || constants.LIMIT_RESULTS;
-    this.offset = options.offset;
-    this.id = options.id;
-    this.query = '';
-    this.authentication = '';
   }
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
@@ -159,25 +100,14 @@ class Stories extends Authentication {
     let orderQuery = `orderBy=${this.order}`;
     let limitQuery = `limit=${this.limit}`;
     let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
-    this.query = this.id ? `/${this.id}` : `?${concatedQuery}`;
-  }
-  asSecondType() {
-    this.queryParametrs();
-    this.createAuthentication();
-    return `/${this.type}${this.query}${this.authentication}`;
-  }
-  createApiString() {
-    this.queryParametrs();
-    this.createAuthentication();
-    return `${this.api}${this.query}${this.authentication}`;
+    this.query = `${this.search ? '&' : '?'}${concatedQuery}`;
   }
 }
-
-class Creators {
+class Creators extends CommonAPISettings {
   constructor(options) {
+    super(options);
     this.type = options.type;
     this.api = constants.CREATORS_API;
-    this.secondDependencyArray = ['comics', 'events', 'series', 'stories'];
   }
 }
 
@@ -190,7 +120,8 @@ class ApiFactory {
     this.elementClass = itemClass;
   }
   createApiHandler(options) {
-    switch (options.type) {
+    let type = options.pathname.match(/\w+/)[0];
+    switch (type) {
       case 'characters':
         this.setPrototype(Characters);
         break;
