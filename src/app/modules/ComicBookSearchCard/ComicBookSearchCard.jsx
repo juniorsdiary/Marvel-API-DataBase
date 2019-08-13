@@ -6,7 +6,7 @@ import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
 const ComicBookSearchCard = ({ id, title, thumbnail }) => {
   const { path, extension } = thumbnail;
   return (
-    <ImageAvatar className='comic_book_card_block' baseSrc={`${path}/portrait_small.${extension}`} src={`${path}.${extension}`}>
+    <ImageAvatar className='comic_book_search_card_block' baseSrc={`${path}/portrait_small.${extension}`} src={`${path}.${extension}`}>
       <Link to={`/comics/${id}`} className='comic_book_link'>
         {title}
       </Link>

@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { fetchSingleCharacter } from '../../store/actions/characters';
-import * as types from '../../store/types';
-import { convertToLocale } from '../../utilities/lib';
-import ApiFactory from '../../utilities/apiFactory';
 import { fetchEvents } from '../../store/actions/events';
 import { fetchSeries } from '../../store/actions/series';
 import { fetchComics } from '../../store/actions/comics';
+import * as types from '../../store/types';
+import { convertToLocale } from '../../utilities/lib';
+import ApiFactory from '../../utilities/apiFactory';
+
 import Loader from '../../modules/Loader/Loader.jsx';
 import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
 import AccordeonSection from '../../modules/AccordeonSections/AccordeonSection.jsx';

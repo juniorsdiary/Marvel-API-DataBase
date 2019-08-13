@@ -55,7 +55,7 @@ class Comics extends CommonAPISettings {
     let orderQuery = `orderBy=${this.order}`;
     let limitQuery = `limit=${this.limit}`;
     let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
-    this.query = `${this.search ? '&' : '?'}${concatedQuery}`;
+    this.query = /\/\d+\/?/.test(this.pathname) ? '' : `${this.search ? '&' : '?'}${concatedQuery}`;
   }
 }
 class Series extends CommonAPISettings {

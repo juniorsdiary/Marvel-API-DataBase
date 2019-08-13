@@ -20,7 +20,7 @@ class ComicsList extends Component {
   loadData() {
     const { fetchComicsData, setFetchingState, location } = this.props;
     setFetchingState(true);
-    const apiHandler = ApiFactory.createApiHandler({ type: 'comics', search: location.search });
+    const apiHandler = ApiFactory.createApiHandler({ pathname: location.pathname, search: location.search });
     const apiStr = apiHandler.createApiString();
     fetchComicsData(apiStr);
   }
@@ -39,8 +39,7 @@ class ComicsList extends Component {
     const { inputValue } = this.state;
 
     const startsWith = searchValue ? searchValue : inputValue;
-
-    const apiHandler = ApiFactory.createApiHandler({ type: location.path, startsWith, offset, search: location.search });
+    const apiHandler = ApiFactory.createApiHandler({ pathname: location.pathname, startsWith, offset, search: location.search });
     const apiStr = apiHandler.createApiString();
 
     setSearchValue(startsWith);
