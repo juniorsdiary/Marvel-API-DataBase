@@ -26,7 +26,14 @@ class ComicsList extends Component {
   }
   componentDidMount() {
     const { comicBooksData, location } = this.props;
-    if (comicBooksData.length === 0 || location.search) this.loadData();
+    const apiCheck = ApiFactory.apiHash.filter(item => item.pathname === location.pathname).slice(-1)[0];
+    if (ApiFactory.apiHash.length) {
+      if (apiCheck.search) {
+        this.loadData();
+      }
+    } else {
+      this.loadData();
+    }
   }
 
   setStateValue = e => {

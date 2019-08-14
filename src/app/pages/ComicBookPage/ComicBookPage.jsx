@@ -5,13 +5,15 @@ import PropTypes from 'prop-types';
 import { fetchSingleComicBook } from '../../store/actions/comics';
 import { fetchCharacters } from '../../store/actions/characters';
 import * as types from '../../store/types';
+import { convertToLocale } from '../../utilities/lib';
 import ApiFactory from '../../utilities/apiFactory';
+
 import Loader from '../../modules/Loader/Loader.jsx';
 import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
 import AccordeonSection from '../../modules/AccordeonSections/AccordeonSection.jsx';
 import withDataFetching from '../../HOCfolder/withDataFetching.jsx';
 const AccordeonEventsWithDataFetching = withDataFetching('/characters')(AccordeonSection);
-
+import CharacterDetailsSection from '../../modules/CharacterDetailsSection/CharacterDetailsSection.jsx';
 class ComicBookPage extends Component {
   state = {
     firstContent: true,
@@ -22,20 +24,41 @@ class ComicBookPage extends Component {
     const { location, setFetchingState, fetchComicsData } = this.props;
     const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
     const apiStr = charactersAPI.createApiString();
-    console.log(apiStr);
     setFetchingState(true);
     fetchComicsData(apiStr);
   }
+  handleChange = name => {
+    this.setState(prevState => ({ [name]: !prevState[name] }));
+  };
   render() {
-    console.log(this.props.comicBookData);
-    return <div>COMICBOOK</div>;
+    const { isFetching, location } = this.props;
+    const { charactersData, comicBookData, seriesData, eventsData } = this.props;
+    const { fetchComicsData, fetchSeriesData, fetchEventsData } = this.props;
+    const { firstContent, secondContent, thirdContent } = this.state;
+    const { title, description, modified, thumbnail, urls } = comicBookData;
+    console.log(comicBookData);
+    const baseSrc = thumbnail ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
+    const src = thumbnail ? `${thumbnail.path}.${thumbnail.extension}` : '';
+    const lastModified = convertToLocale(modified);
+    return (
+      <div className='page_content comic_book_page_block'>
+        {!isFetching ? (
+          <div className='comic_book_data_wrapper'>
+            <ImageAvatar className='comic_book_image_wrapper' baseSrc={baseSrc} src={src} />
+            <CharacterDetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
+          </div>
+        ) : (
+          <Loader />
+        )}
+      </div>
+    );
   }
 }
 
 ComicBookPage.propTypes = {
-  charactersData: PropTypes.object,
+  charactersData: PropTypes.array,
   eventsData: PropTypes.array,
-  comicBookData: PropTypes.array,
+  comicBookData: PropTypes.object,
   seriesData: PropTypes.array,
   fetchCharacterData: PropTypes.func,
   fetchEventsData: PropTypes.func,
@@ -52,7 +75,7 @@ const mapStateToProps = state => {
     eventsData: state.eventsData.eventsList,
     comicBookData: state.comicsData.comicBook,
     seriesData: state.seriesData.seriesList,
-    isFetching: state.charactersData.isFetching,
+    isFetching: state.comicsData.isFetching,
   };
 };
 
@@ -71,7 +94,7 @@ const mapDispatchToProps = dispatch => {
       // dispatch(fetchSeries(url));
     },
     setFetchingState: boolean => {
-      // dispatch({ type: types.CHARACTERS_FETCHING, payload: boolean });
+      dispatch({ type: types.COMICS_FETCHING, payload: boolean });
     },
   };
 };

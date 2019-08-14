@@ -16,6 +16,7 @@
 
 .character_image_wrapper {
   position: relative;
+  padding-top: 30%;
   @include size(4);
   @include col-offsets(margin);
   @include size-md(4);

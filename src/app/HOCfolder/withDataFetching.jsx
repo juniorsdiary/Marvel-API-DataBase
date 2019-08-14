@@ -6,9 +6,13 @@ const withDataFetching = pathname => WrappedComponent => {
   return class FetchingHOC extends Component {
     componentDidMount() {
       const { callBack, location } = this.props;
-      const apiHandler = ApiFactory.createApiHandler({ pathname, limit: 15 });
+      const search = location.pathname
+        .split('/')
+        .join('=')
+        .replace(/=/, '?');
+      const apiHandler = ApiFactory.createApiHandler({ pathname, limit: 15, search });
       let secondPart = apiHandler.asSecondType();
-      const apiStr = `${constants.API_BASE}${location.pathname}${secondPart}`;
+      const apiStr = `${constants.API_BASE}${secondPart}`;
       callBack(apiStr);
     }
     render() {

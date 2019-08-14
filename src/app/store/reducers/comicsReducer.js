@@ -4,8 +4,18 @@ const initialState = {
   comicsList: [],
   totalResults: 0,
   offset: 0,
-  comicBook: {},
-  isFetching: false,
+  comicBook: {
+    title: '',
+    description: '',
+    modified: '',
+    thumbnail: {
+      path: '',
+      extension: '',
+    },
+    characters: [],
+    creators: [],
+  },
+  isFetching: true,
 };
 
 export default function comicsData(state = initialState, action) {
