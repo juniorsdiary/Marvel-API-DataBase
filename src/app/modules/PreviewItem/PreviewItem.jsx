@@ -1,17 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-const PreviewItem = props => {
-  // console.log(props);
+const PreviewItem = ({ id, fullName }) => {
   return (
-    <div>
-      <h1>Name</h1>
-    </div>
+    <Link to={`/creators/${id}`} className='creator_name'>
+      {fullName}
+    </Link>
   );
 };
 
 PreviewItem.propTypes = {
-  data: PropTypes.object,
+  id: PropTypes.number,
+  fullName: PropTypes.string,
 };
 
 export default PreviewItem;

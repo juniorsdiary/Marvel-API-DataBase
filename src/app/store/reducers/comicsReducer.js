@@ -14,6 +14,7 @@ const initialState = {
     },
     characters: [],
     creators: [],
+    events: [],
   },
   isFetching: true,
 };

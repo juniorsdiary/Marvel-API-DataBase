@@ -27,7 +27,7 @@ class ComicsList extends Component {
     fetchComicsData(apiStr);
   }
   componentDidMount() {
-    const { comicBooksData, location } = this.props;
+    const { location } = this.props;
     const apiCheck = ApiFactory.apiHash.filter(item => item.pathname === location.pathname).length;
     const lastApicall = ApiFactory.apiHash.filter(item => item.pathname === location.pathname).slice(-1)[0];
     if (!apiCheck) {

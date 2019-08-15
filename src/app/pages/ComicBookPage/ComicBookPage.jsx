@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { fetchSingleComicBook } from '../../store/actions/comics';
 import { fetchCharacters } from '../../store/actions/characters';
 import { fetchCreators } from '../../store/actions/creators';
+import { fetchEvents } from '../../store/actions/events';
 import * as types from '../../store/types';
 import { convertToLocale } from '../../utilities/lib';
 import ApiFactory from '../../utilities/apiFactory';
@@ -19,6 +20,7 @@ import withDataFetching from '../../HOCfolder/withDataFetching.jsx';
 
 const AccordeonCharactersWithDataFetching = withDataFetching('/characters')(AccordeonSection);
 const AccordeonCreatorsWithDataFetching = withDataFetching('/creators')(AccordeonSection);
+const AccordeonEventsWithDataFetching = withDataFetching('/events')(AccordeonSection);
 
 class ComicBookPage extends Component {
   state = {
@@ -38,18 +40,18 @@ class ComicBookPage extends Component {
   };
   render() {
     const { isFetching, location } = this.props;
-    const { charactersData, comicBookData, creatorsData, seriesData, eventsData } = this.props;
-    const { fetchCharacterData, fetchCreatorsData, fetchSeriesData, fetchEventsData } = this.props;
+    const { charactersData, comicBookData, creatorsData, eventsData } = this.props;
+    const { fetchCharacterData, fetchCreatorsData, fetchEventsData } = this.props;
     const { firstContent, secondContent, thirdContent } = this.state;
-    const { title, description, modified, thumbnail, urls, characters, creators } = comicBookData;
+    const { title, description, modified, thumbnail, urls, characters, creators, events } = comicBookData;
 
     const baseSrc = thumbnail ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
     const src = thumbnail ? `${thumbnail.path}.${thumbnail.extension}` : '';
     const lastModified = convertToLocale(modified);
 
-    let renderCharacters = charactersData.map(item => <ComicBookPreview key={item.id} {...item} />);
-    let renderCreators = creatorsData.map(item => <PreviewItem key={item.id} {...item} />);
-
+    const renderCharacters = charactersData.map(item => <ComicBookPreview key={item.id} {...item} />);
+    const renderCreators = creatorsData.map(item => <PreviewItem key={item.id} {...item} />);
+    const renderEvents = eventsData.map(item => <ComicBookPreview key={item.id} {...item} />);
     return (
       <div className='page_content comic_book_page_block'>
         {!isFetching ? (
@@ -81,6 +83,18 @@ class ComicBookPage extends Component {
                 {creators.available} creators
               </h1>
             </AccordeonCreatorsWithDataFetching>
+            <AccordeonEventsWithDataFetching
+              number={events.available}
+              state={thirdContent}
+              location={location}
+              slider={false}
+              content={renderEvents}
+              contentClassName='default_content_block'
+              callBack={url => fetchEventsData(url)}>
+              <h1 className='available_items_title' onClick={() => this.handleChange('thirdContent')}>
+                Part of {events.available} events
+              </h1>
+            </AccordeonEventsWithDataFetching>
           </div>
         ) : (
           <Loader />
@@ -112,7 +126,6 @@ const mapStateToProps = state => {
     creatorsData: state.creatorsData.creatorsList,
     eventsData: state.eventsData.eventsList,
     comicBookData: state.comicsData.comicBook,
-    seriesData: state.seriesData.seriesList,
     isFetching: state.comicsData.isFetching,
   };
 };
@@ -126,13 +139,10 @@ const mapDispatchToProps = dispatch => {
       dispatch(fetchCreators(url));
     },
     fetchEventsData: url => {
-      // dispatch(fetchEvents(url));
+      dispatch(fetchEvents(url));
     },
     fetchComicsData: url => {
       dispatch(fetchSingleComicBook(url));
-    },
-    fetchSeriesData: url => {
-      // dispatch(fetchSeries(url));
     },
     setFetchingState: boolean => {
       dispatch({ type: types.COMICS_FETCHING, payload: boolean });

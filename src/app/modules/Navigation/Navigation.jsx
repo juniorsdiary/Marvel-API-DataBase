@@ -12,6 +12,9 @@ const Navigation = () => (
     <NavLink to='/comics' className='navigation_block__link_item' activeClassName='active_nav_link'>
       Comics
     </NavLink>
+    <NavLink to='/events' className='navigation_block__link_item' activeClassName='active_nav_link'>
+      Events
+    </NavLink>
   </nav>
 );
 

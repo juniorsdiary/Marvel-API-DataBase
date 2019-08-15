@@ -8,7 +8,7 @@ const initialState = {
   isFetching: false,
 };
 
-export default function seriesData(state = initialState, action) {
+export default function eventsData(state = initialState, action) {
   switch (action.type) {
     case types.FETCH_EVENTS:
       return {

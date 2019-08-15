@@ -44,6 +44,9 @@
 
 .default_content_block {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
+  margin: 1em auto;
+  @include size(11);
 }
