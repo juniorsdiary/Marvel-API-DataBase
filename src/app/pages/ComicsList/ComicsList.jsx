@@ -13,6 +13,8 @@ import InputElement from '../../modules/InputElement/InputElement.jsx';
 import ContentComponent from '../../modules/ContentComponent/ContentComponent.jsx';
 import withLoader from '../../HOCfolder/withLoader.jsx';
 
+const ContentComponentWithLoader = withLoader()(ContentComponent);
+
 class ComicsList extends Component {
   state = {
     inputValue: '',
@@ -26,13 +28,14 @@ class ComicsList extends Component {
   }
   componentDidMount() {
     const { comicBooksData, location } = this.props;
-    const apiCheck = ApiFactory.apiHash.filter(item => item.pathname === location.pathname).slice(-1)[0];
-    if (ApiFactory.apiHash.length) {
-      if (apiCheck.search) {
+    const apiCheck = ApiFactory.apiHash.filter(item => item.pathname === location.pathname).length;
+    const lastApicall = ApiFactory.apiHash.filter(item => item.pathname === location.pathname).slice(-1)[0];
+    if (!apiCheck) {
+      this.loadData();
+    } else {
+      if (lastApicall.search) {
         this.loadData();
       }
-    } else {
-      this.loadData();
     }
   }
 
@@ -58,7 +61,6 @@ class ComicsList extends Component {
   render() {
     const { inputValue } = this.state;
     const { comicBooksData, isFetching, totalResults, offset } = this.props;
-    const ContentComponentWithLoader = withLoader(isFetching)(ContentComponent);
 
     return (
       <div className='page_content comics_wrapper'>
@@ -74,7 +76,12 @@ class ComicsList extends Component {
             />
           </FormGroup>
         </SearchComponent>
-        <ContentComponentWithLoader className='comics_cards_wrapper' renderData={comicBooksData} PartialComponent={ComicBookSearchCard} />
+        <ContentComponentWithLoader
+          loading={isFetching}
+          className='comics_cards_wrapper'
+          renderData={comicBooksData}
+          PartialComponent={ComicBookSearchCard}
+        />
         {!isFetching && <Pagination requestData={this.requestData} totalResults={totalResults} offset={offset} />}
       </div>
     );

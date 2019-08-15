@@ -12,6 +12,7 @@ export const PER_PAGE_RESULTS = 39;
 export const ORDER = 'name';
 export const ORDER_TITLE = 'title';
 export const ORDER_ID = 'id';
+export const ORDER_LAST_NAME = 'lastName';
 export const LIMIT_RESULTS = 39;
 
 // export const PRIVATE_KEY = '81599b6084196f5eae1b23c0dabd62ade6a0b5a6';

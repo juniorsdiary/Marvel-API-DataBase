@@ -13,7 +13,8 @@ import ApiFactory from '../../utilities/apiFactory';
 import Loader from '../../modules/Loader/Loader.jsx';
 import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
 import AccordeonSection from '../../modules/AccordeonSections/AccordeonSection.jsx';
-import CharacterDetailsSection from '../../modules/CharacterDetailsSection/CharacterDetailsSection.jsx';
+import DetailsSection from '../../modules/DetailsSection/DetailsSection.jsx';
+import ComicBookPreview from '../../modules/ComicBookPreview/ComicBookPreview.jsx';
 import withDataFetching from '../../HOCfolder/withDataFetching.jsx';
 
 const AccordeonEventsWithDataFetching = withDataFetching('/events')(AccordeonSection);
@@ -37,23 +38,31 @@ class CharacterPage extends Component {
     this.setState(prevState => ({ [name]: !prevState[name] }));
   };
   render() {
-    const { characterData, isFetching, comicsData, location, fetchComicsData, seriesData, fetchSeriesData, eventsData, fetchEventsData } = this.props;
+    const { isFetching, location, fetchComicsData, fetchSeriesData, fetchEventsData } = this.props;
+    const { characterData, comicsData, seriesData, eventsData } = this.props;
     const { firstContent, secondContent, thirdContent } = this.state;
     const { name, description, modified, thumbnail, urls, comics, series, events } = characterData;
+
     const baseSrc = thumbnail.path ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
     const src = thumbnail ? `${thumbnail.path}.${thumbnail.extension}` : '';
+
     const lastModified = convertToLocale(modified);
+    let renderComics = comicsData.map(item => <ComicBookPreview key={item.id} {...item} />);
+    let renderSeries = seriesData.map(item => <ComicBookPreview key={item.id} {...item} />);
+    let renderEvents = eventsData.map(item => <ComicBookPreview key={item.id} {...item} />);
     return (
       <div className='page_content character_page_block'>
         {!isFetching ? (
           <div className='character_data_wrapper'>
             <ImageAvatar className='character_image_wrapper' baseSrc={baseSrc} src={src} />
-            <CharacterDetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
+            <DetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
             <AccordeonComicsWithDataFetching
               number={comics.available}
               state={firstContent}
-              data={comicsData}
               location={location}
+              content={renderComics}
+              slider={true}
+              contentClassName='default_slider_block'
               callBack={url => fetchComicsData(url)}>
               <h1 className='available_items_title' onClick={() => this.handleChange('firstContent')}>
                 Encountered in {comics.available} comics
@@ -62,8 +71,10 @@ class CharacterPage extends Component {
             <AccordeonSeriesWithDataFetching
               number={series.available}
               state={secondContent}
-              data={seriesData}
               location={location}
+              content={renderSeries}
+              slider={true}
+              contentClassName='default_slider_block'
               callBack={fetchSeriesData}>
               <h1 className='available_items_title' onClick={() => this.handleChange('secondContent')}>
                 Encountered in {series.available} series
@@ -72,8 +83,10 @@ class CharacterPage extends Component {
             <AccordeonEventsWithDataFetching
               number={events.available}
               state={thirdContent}
-              data={eventsData}
               location={location}
+              content={renderEvents}
+              slider={true}
+              contentClassName='default_slider_block'
               callBack={fetchEventsData}>
               <h1 className='available_items_title' onClick={() => this.handleChange('thirdContent')}>
                 Encountered in {events.available} events

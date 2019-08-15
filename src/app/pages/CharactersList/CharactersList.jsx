@@ -12,6 +12,7 @@ import Pagination from '../../modules/Pagination/Pagination.jsx';
 import InputElement from '../../modules/InputElement/InputElement.jsx';
 import ContentComponent from '../../modules/ContentComponent/ContentComponent.jsx';
 import withLoader from '../../HOCfolder/withLoader.jsx';
+const ContentComponentWithLoader = withLoader()(ContentComponent);
 
 class CharachtersList extends Component {
   state = {
@@ -56,7 +57,7 @@ class CharachtersList extends Component {
   render() {
     const { inputValue } = this.state;
     const { charactersList, isFetching, totalResults, offset } = this.props;
-    const ContentComponentWithLoader = withLoader(isFetching)(ContentComponent);
+
     return (
       <div className='page_content characters_wrapper'>
         <SearchComponent>
@@ -71,7 +72,12 @@ class CharachtersList extends Component {
             />
           </FormGroup>
         </SearchComponent>
-        <ContentComponentWithLoader className='characters_cards_wrapper' renderData={charactersList} PartialComponent={CharacterCard} />
+        <ContentComponentWithLoader
+          loading={isFetching}
+          className='characters_cards_wrapper'
+          renderData={charactersList}
+          PartialComponent={CharacterCard}
+        />
         {!isFetching && <Pagination requestData={this.requestData} totalResults={totalResults} offset={offset} />}
       </div>
     );

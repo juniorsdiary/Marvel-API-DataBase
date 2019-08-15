@@ -106,8 +106,16 @@ class Stories extends CommonAPISettings {
 class Creators extends CommonAPISettings {
   constructor(options) {
     super(options);
-    this.type = options.type;
     this.api = constants.CREATORS_API;
+    this.order = constants.ORDER_LAST_NAME;
+  }
+  queryParametrs() {
+    let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
+    let offsetQuery = this.offset ? `offset=${this.offset}` : '';
+    let orderQuery = `orderBy=${this.order}`;
+    let limitQuery = `limit=${this.limit}`;
+    let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
+    this.query = `${this.search ? '&' : '?'}${concatedQuery}`;
   }
 }
 

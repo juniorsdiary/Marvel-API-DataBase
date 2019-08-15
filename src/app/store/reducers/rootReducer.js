@@ -6,6 +6,7 @@ import comicsData from './comicsReducer';
 import seriesData from './seriesReducer';
 import eventsData from './eventsReducer';
 import storiesData from './storiesReducer';
+import creatorsData from './creatorsReducer';
 
 function searchValue(state = '', action) {
   if (action.type === types.SET_SEARCH_VALUE) {
@@ -16,6 +17,7 @@ function searchValue(state = '', action) {
 
 const rootReducer = history =>
   combineReducers({
+    creatorsData,
     storiesData,
     eventsData,
     seriesData,

@@ -12,11 +12,10 @@ const withDataFetching = pathname => WrappedComponent => {
         .replace(/=/, '?');
       const apiHandler = ApiFactory.createApiHandler({ pathname, limit: 15, search });
       let secondPart = apiHandler.asSecondType();
-      const apiStr = `${constants.API_BASE}${secondPart}`;
-      callBack(apiStr);
+      callBack(`${constants.API_BASE}${secondPart}`);
     }
     render() {
-      return <WrappedComponent pathname={pathname} location={location} {...this.props} />;
+      return <WrappedComponent pathname={pathname} {...this.props} />;
     }
   };
 };
