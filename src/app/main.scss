@@ -5,8 +5,8 @@
 @import './pages/ComicsList/ComicsList';
 @import './pages/ComicBookPage/ComicBookPage';
 @import './pages/EventsList/EventsList';
+@import './pages/SeriesList/SeriesList';
 // modules
-//
 @import './modules/Button/Button';
 @import './modules/CharacterCard/CharacterCard';
 @import './modules/ComicBookPreview/ComicBookPreview';
@@ -35,6 +35,11 @@
   position: relative;
   color: rgb(255,255,255);
   flex: 1 1 500px;
+  background: red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: auto;
 }
 
 ::-webkit-scrollbar {

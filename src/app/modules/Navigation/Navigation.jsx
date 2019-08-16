@@ -15,6 +15,12 @@ const Navigation = () => (
     <NavLink to='/events' className='navigation_block__link_item' activeClassName='active_nav_link'>
       Events
     </NavLink>
+    <NavLink to='/series' className='navigation_block__link_item' activeClassName='active_nav_link'>
+      Series
+    </NavLink>
+    <NavLink to='/creators' className='navigation_block__link_item' activeClassName='active_nav_link'>
+      Creators
+    </NavLink>
   </nav>
 );
 

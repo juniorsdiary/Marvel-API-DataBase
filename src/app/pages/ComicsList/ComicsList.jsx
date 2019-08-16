@@ -44,8 +44,8 @@ class ComicsList extends Component {
     this.setState({ inputValue });
   };
 
-  requestData = offset => {
-    const { fetchComicsData, setSearchValue, setFetchingState, searchValue, location } = this.props;
+  requestData = (searchValue, offset) => {
+    const { fetchComicsData, setSearchValue, setFetchingState, location } = this.props;
     const { inputValue } = this.state;
 
     const startsWith = searchValue ? searchValue : inputValue;
@@ -55,15 +55,13 @@ class ComicsList extends Component {
     setSearchValue(startsWith);
     setFetchingState(true);
     fetchComicsData(apiStr);
-
-    this.setState({ inputValue: '' });
   };
   render() {
     const { inputValue } = this.state;
-    const { comicBooksData, isFetching, totalResults, offset } = this.props;
+    const { comicBooksData, isFetching, totalResults, searchValue, offset } = this.props;
 
     return (
-      <div className='page_content comics_wrapper'>
+      <div className='page_content'>
         <SearchComponent>
           <FormGroup requestData={this.requestData}>
             <InputElement
@@ -76,13 +74,8 @@ class ComicsList extends Component {
             />
           </FormGroup>
         </SearchComponent>
-        <ContentComponentWithLoader
-          loading={isFetching}
-          className='comics_cards_wrapper'
-          renderData={comicBooksData}
-          PartialComponent={ComicBookSearchCard}
-        />
-        {!isFetching && <Pagination requestData={this.requestData} totalResults={totalResults} offset={offset} />}
+        <ContentComponentWithLoader loading={isFetching} renderData={comicBooksData} PartialComponent={ComicBookSearchCard} />
+        {!isFetching && <Pagination searchValue={searchValue} requestData={this.requestData} totalResults={totalResults} offset={offset} />}
       </div>
     );
   }

@@ -4,7 +4,7 @@ import { PER_PAGE_RESULTS } from '../../utilities/constants';
 import { definePagesIndex } from '../../utilities/lib';
 import PageButton from '../PageButton/PageButton.jsx';
 
-const Pagination = ({ requestData, totalResults, offset }) => {
+const Pagination = ({ requestData, totalResults, offset, searchValue }) => {
   let pages = Math.ceil(totalResults / PER_PAGE_RESULTS);
   let pageNum = offset / PER_PAGE_RESULTS + 1;
   const [firstPages, lastPages, middlePages] = definePagesIndex(pageNum, pages);
@@ -12,6 +12,7 @@ const Pagination = ({ requestData, totalResults, offset }) => {
   const renderFirstPages = firstPages.map(pageInd => (
     <PageButton
       key={pageInd}
+      searchValue={searchValue}
       className={pageInd === pageNum ? 'active_page_item' : ''}
       pageInd={pageInd}
       requestData={requestData}
@@ -22,6 +23,7 @@ const Pagination = ({ requestData, totalResults, offset }) => {
   const renderLastPages = lastPages.map(pageInd => (
     <PageButton
       key={pageInd}
+      searchValue={searchValue}
       className={pageInd === pageNum ? 'active_page_item' : ''}
       pageInd={pageInd}
       requestData={requestData}
@@ -32,6 +34,7 @@ const Pagination = ({ requestData, totalResults, offset }) => {
   const renderMiddlePages = middlePages.map(pageInd => (
     <PageButton
       key={pageInd}
+      searchValue={searchValue}
       className={pageInd === pageNum ? 'active_page_item' : ''}
       pageInd={pageInd}
       requestData={requestData}
@@ -45,6 +48,7 @@ const Pagination = ({ requestData, totalResults, offset }) => {
         {pages > 1 && (
           <PageButton
             className={pageNum === 1 ? 'inactive_page_item' : ''}
+            searchValue={searchValue}
             pageInd={pageNum - 1}
             requestData={pageNum > 1 ? requestData : () => {}}
             baseOffset={PER_PAGE_RESULTS}
@@ -59,6 +63,7 @@ const Pagination = ({ requestData, totalResults, offset }) => {
         {pages > 1 && (
           <PageButton
             className={pageNum === pages ? 'inactive_page_item' : ''}
+            searchValue={searchValue}
             pageInd={pageNum + 1}
             requestData={pageNum < pages ? requestData : () => {}}
             baseOffset={PER_PAGE_RESULTS}
