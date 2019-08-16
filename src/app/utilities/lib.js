@@ -6,6 +6,7 @@ import CryptoJS from 'crypto-js';
  */
 export const fetchFunction = async url => {
   const res = await fetch(url);
+  // console.log(res);
   return await res.json();
 };
 

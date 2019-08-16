@@ -5,7 +5,7 @@ import { fetchEvents } from '../../store/actions/events';
 import * as types from '../../store/types';
 import ApiFactory from '../../utilities/apiFactory';
 
-import ComicBookSearchCard from '../../modules/ComicBookSearchCard/ComicBookSearchCard.jsx';
+import SearchCard from '../../modules/SearchCard/SearchCard.jsx';
 import SearchComponent from '../../modules/SearchComponent/SearchComponent.jsx';
 import FormGroup from '../../modules/FormGroup/FormGroup.jsx';
 import Pagination from '../../modules/Pagination/Pagination.jsx';
@@ -76,7 +76,7 @@ class EventsList extends Component {
             />
           </FormGroup>
         </SearchComponent>
-        <ContentComponentWithLoader loading={isFetching} renderData={eventsList} PartialComponent={ComicBookSearchCard} />
+        <ContentComponentWithLoader loading={isFetching} renderData={eventsList} PartialComponent={SearchCard} />
         {!isFetching && <Pagination searchValue={searchValue} requestData={this.requestData} totalResults={totalResults} offset={offset} />}
       </div>
     );

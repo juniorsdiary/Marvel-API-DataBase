@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
 
-const ComicBookSearchCard = ({ id, title, thumbnail }) => {
+const SearchCard = ({ id, title, thumbnail }) => {
   const { path, extension } = thumbnail;
   return (
     <ImageAvatar className='comic_book_search_card_block' baseSrc={`${path}/portrait_small.${extension}`} src={`${path}.${extension}`}>
@@ -14,7 +14,7 @@ const ComicBookSearchCard = ({ id, title, thumbnail }) => {
   );
 };
 
-ComicBookSearchCard.propTypes = {
+SearchCard.propTypes = {
   id: PropTypes.number,
   title: PropTypes.string,
   thumbnail: PropTypes.shape({
@@ -23,4 +23,4 @@ ComicBookSearchCard.propTypes = {
   }),
 };
 
-export default ComicBookSearchCard;
+export default SearchCard;
