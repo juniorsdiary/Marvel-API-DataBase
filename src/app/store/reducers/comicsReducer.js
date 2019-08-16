@@ -13,7 +13,9 @@ const initialState = {
       extension: '',
     },
     characters: [],
-    creators: [],
+    creators: {
+      items: [],
+    },
     events: [],
   },
   isFetching: true,

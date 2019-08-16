@@ -16,10 +16,10 @@ import AccordeonSection from '../../modules/AccordeonSections/AccordeonSection.j
 import DetailsSection from '../../modules/DetailsSection/DetailsSection.jsx';
 import ComicBookPreview from '../../modules/ComicBookPreview/ComicBookPreview.jsx';
 import PreviewItem from '../../modules/PreviewItem/PreviewItem.jsx';
+import CharacterCard from '../../modules/CharacterCard/CharacterCard.jsx';
 import withDataFetching from '../../HOCfolder/withDataFetching.jsx';
 
 const AccordeonCharactersWithDataFetching = withDataFetching('/characters')(AccordeonSection);
-const AccordeonCreatorsWithDataFetching = withDataFetching('/creators')(AccordeonSection);
 const AccordeonEventsWithDataFetching = withDataFetching('/events')(AccordeonSection);
 
 class ComicBookPage extends Component {
@@ -40,7 +40,7 @@ class ComicBookPage extends Component {
   };
   render() {
     const { isFetching, location } = this.props;
-    const { charactersData, comicBookData, creatorsData, eventsData } = this.props;
+    const { charactersData, comicBookData, eventsData } = this.props;
     const { fetchCharacterData, fetchCreatorsData, fetchEventsData } = this.props;
     const { firstContent, secondContent, thirdContent } = this.state;
     const { title, description, modified, thumbnail, urls, characters, creators, events } = comicBookData;
@@ -48,9 +48,8 @@ class ComicBookPage extends Component {
     const baseSrc = thumbnail ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
     const src = thumbnail ? `${thumbnail.path}.${thumbnail.extension}` : '';
     const lastModified = convertToLocale(modified);
-
-    const renderCharacters = charactersData.map(item => <ComicBookPreview key={item.id} {...item} />);
-    const renderCreators = creatorsData.map(item => <PreviewItem key={item.id} {...item} />);
+    const renderCharacters = charactersData.map(item => <CharacterCard key={item.id} {...item} />);
+    const renderCreators = creators.items.map((item, index) => <PreviewItem key={index} {...item} />);
     const renderEvents = eventsData.map(item => <ComicBookPreview key={item.id} {...item} />);
     return (
       <div className='page_content comic_book_page_block'>
@@ -70,19 +69,19 @@ class ComicBookPage extends Component {
                 You can meet {characters.available} characters
               </h1>
             </AccordeonCharactersWithDataFetching>
-
-            <AccordeonCreatorsWithDataFetching
+            <AccordeonSection
               number={creators.available}
               state={secondContent}
               location={location}
+              pathname={'/creators'}
               slider={false}
               content={renderCreators}
-              contentClassName='default_content_block'
+              contentClassName='creators_content_block'
               callBack={url => fetchCreatorsData(url)}>
               <h1 className='available_items_title' onClick={() => this.handleChange('secondContent')}>
                 {creators.available} creators
               </h1>
-            </AccordeonCreatorsWithDataFetching>
+            </AccordeonSection>
             <AccordeonEventsWithDataFetching
               number={events.available}
               state={thirdContent}
@@ -106,12 +105,10 @@ class ComicBookPage extends Component {
 
 ComicBookPage.propTypes = {
   charactersData: PropTypes.array,
-  creatorsData: PropTypes.array,
   eventsData: PropTypes.array,
   comicBookData: PropTypes.object,
   seriesData: PropTypes.array,
   fetchCharacterData: PropTypes.func,
-  fetchCreatorsData: PropTypes.func,
   fetchEventsData: PropTypes.func,
   fetchComicsData: PropTypes.func,
   fetchSeriesData: PropTypes.func,
@@ -123,7 +120,6 @@ ComicBookPage.propTypes = {
 const mapStateToProps = state => {
   return {
     charactersData: state.charactersData.charactersList,
-    creatorsData: state.creatorsData.creatorsList,
     eventsData: state.eventsData.eventsList,
     comicBookData: state.comicsData.comicBook,
     isFetching: state.comicsData.isFetching,
@@ -134,9 +130,6 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchCharacterData: url => {
       dispatch(fetchCharacters(url));
-    },
-    fetchCreatorsData: url => {
-      dispatch(fetchCreators(url));
     },
     fetchEventsData: url => {
       dispatch(fetchEvents(url));

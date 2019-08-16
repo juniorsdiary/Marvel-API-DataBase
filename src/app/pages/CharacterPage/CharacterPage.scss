@@ -1,11 +1,8 @@
-.character_page_block {
-  background: red;
-}
 .character_data_wrapper {
   @include size(8);
   @include size-md(10);
-  @include size-sm(11);
-  margin: 2em auto;
+  @include size-sm(10);
+  margin: 2em 0;
   display: flex;
   flex-wrap: wrap;
   padding: 1em 0;
@@ -16,7 +13,7 @@
 
 .character_image_wrapper {
   position: relative;
-  padding-top: 30%;
+  padding-top: 35%;
   @include size(4);
   @include col-offsets(margin);
   @include size-md(4);
