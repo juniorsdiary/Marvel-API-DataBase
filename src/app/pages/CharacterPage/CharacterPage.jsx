@@ -13,7 +13,7 @@ import Loader from '../../modules/Loader/Loader.jsx';
 import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
 import AccordeonSection from '../../modules/AccordeonSections/AccordeonSection.jsx';
 import DetailsSection from '../../modules/DetailsSection/DetailsSection.jsx';
-import ComicBookPreview from '../../modules/ComicBookPreview/ComicBookPreview.jsx';
+import SearchCard from '../../modules/SearchCard/SearchCard.jsx';
 import withDataFetching from '../../HOCfolder/withDataFetching.jsx';
 
 const AccordeonEventsWithDataFetching = withDataFetching('/events')(AccordeonSection);
@@ -46,14 +46,14 @@ class CharacterPage extends Component {
     const src = thumbnail ? `${thumbnail.path}.${thumbnail.extension}` : '';
 
     const lastModified = convertToLocale(modified);
-    let renderComics = comicsData.map(item => <ComicBookPreview key={item.id} {...item} />);
-    let renderSeries = seriesData.map(item => <ComicBookPreview key={item.id} {...item} />);
-    let renderEvents = eventsData.map(item => <ComicBookPreview key={item.id} {...item} />);
+    let renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} />);
+    let renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} />);
+    let renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} />);
     return (
       <div className='page_content default_page_content'>
         {!isFetching ? (
           <div className='items_data_wrapper'>
-            <ImageAvatar className='character_image_wrapper' baseSrc={baseSrc} src={src} />
+            <ImageAvatar wrapper={true} className='character_page_image' baseSrc={baseSrc} src={src} />
             <DetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
             <AccordeonComicsWithDataFetching
               number={comics.available}

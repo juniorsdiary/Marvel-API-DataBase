@@ -6,11 +6,9 @@ import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
 const SearchCard = ({ id, title, thumbnail }) => {
   const { path, extension } = thumbnail;
   return (
-    <ImageAvatar className='search_card_block' baseSrc={`${path}/portrait_small.${extension}`} src={`${path}.${extension}`}>
-      <Link to={`/comics/${id}`} className='comic_book_link'>
-        {title}
-      </Link>
-    </ImageAvatar>
+    <Link to={`/comics/${id}`} className='search_link'>
+      <ImageAvatar baseSrc={`${path}/portrait_small.${extension}`} src={`${path}.${extension}`} />
+    </Link>
   );
 };
 

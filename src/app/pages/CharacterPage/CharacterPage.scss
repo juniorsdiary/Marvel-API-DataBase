@@ -1,10 +1,10 @@
-.character_image_wrapper {
+.character_page_image {
   position: relative;
   padding-top: 50%;
-  margin: 0 .5em;
   @include size(5);
-  @include size-md(4);
-  @include md-block {
+  @include size-xs(4);
+  @include xs-block {
     padding-top: 40%;
   };
+  margin: 0 .5em;
 }

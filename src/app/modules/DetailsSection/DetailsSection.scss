@@ -27,7 +27,6 @@
   display: flex;
   text-align: center;
   flex-direction: column;
-  @include col-offsets(margin);
   @include size(6);
   @include size-md(7);
 }

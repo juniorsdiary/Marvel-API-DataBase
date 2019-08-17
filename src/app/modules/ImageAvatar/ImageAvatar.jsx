@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const ImageAvatar = ({ className, src, children, baseSrc }) => {
+const ImageAvatar = ({ src, baseSrc, className, wrapper }) => {
   const imageRef = useRef();
   useEffect(() => {
     const fullImage = new Image();
@@ -16,18 +16,23 @@ const ImageAvatar = ({ className, src, children, baseSrc }) => {
     };
   }, [src]);
   return (
-    <div className={className}>
-      {children}
-      <img className='character_image' src={baseSrc} alt='image_avatar' ref={imageRef} />
-    </div>
+    <>
+      {wrapper ? (
+        <div className={className}>
+          <img className='character_image' src={baseSrc} alt='image_avatar' ref={imageRef} />
+        </div>
+      ) : (
+        <img className='character_image' src={baseSrc} alt='image_avatar' ref={imageRef} />
+      )}
+    </>
   );
 };
 
 ImageAvatar.propTypes = {
-  className: PropTypes.string,
   src: PropTypes.string,
-  children: PropTypes.node,
   baseSrc: PropTypes.string,
+  className: PropTypes.string,
+  wrapper: PropTypes.bool,
 };
 
 export default ImageAvatar;

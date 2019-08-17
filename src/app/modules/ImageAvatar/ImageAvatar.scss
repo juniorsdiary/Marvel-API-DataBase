@@ -3,23 +3,3 @@
   top: 0;
   @include simple-size(100%);
 }
-
-// .loading {
-//   position: absolute;
-//   top: 0;
-//   display: block;
-//   @include simple-size(100%);
-//   overflow: hidden;
-//   &:before {
-//     content: "";
-//     position: absolute;
-//     top: -50%;
-//     left: -50%;
-//     @include simple-size(200%);
-//     background: url('../assets/images/loading_bg.jpg') no-repeat;
-//     background-size: 75%;
-//     background-position: center;
-//     animation: rotation_clock_wise 1s linear infinite;
-//     z-index: 11;
-//   }
-// }

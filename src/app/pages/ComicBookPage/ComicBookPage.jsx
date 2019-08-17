@@ -55,7 +55,7 @@ class ComicBookPage extends Component {
       <div className='page_content default_page_content'>
         {!isFetching ? (
           <div className='items_data_wrapper'>
-            <ImageAvatar className='cover_book_image' baseSrc={baseSrc} src={src} />
+            <ImageAvatar wrapper={true} className='cover_book_image' baseSrc={baseSrc} src={src} />
             <DetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
             <AccordeonCharactersWithDataFetching
               number={characters.available}
