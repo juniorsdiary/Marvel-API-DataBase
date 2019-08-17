@@ -46,13 +46,44 @@
   overflow: auto;
 }
 
+.cover_book_image {
+  position: relative;
+  margin: 0 .5em;
+  @include simple-size(150px, 300px);
+  @include md-block {
+    @include simple-size(175px, 350px);
+  };
+  @include lg-block {
+    @include simple-size(200px, 400px);
+  };
+}
+
+.items_data_wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-content: flex-start;
+  flex-wrap: wrap;
+  flex: 1 1;
+  margin: 0;
+  padding: 1.5em 0;
+  background: white;
+  color: black;
+  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+  @include size(12);
+  @include size-sm(10);
+  @include size-lg(8);
+  @include sm-block {
+    flex: 0 0;
+    margin: 2em 0;
+  };
+}
+
 .slick-slide {
     & > div {
       display: flex;
       justify-content: center;
   }
 }
-
 
 ::-webkit-scrollbar {
   width: 10px;

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import { fetchSingleCharacter } from '../../store/actions/characters';
 import { fetchEvents } from '../../store/actions/events';
 import { fetchSeries } from '../../store/actions/series';
@@ -53,7 +52,7 @@ class CharacterPage extends Component {
     return (
       <div className='page_content default_page_content'>
         {!isFetching ? (
-          <div className='character_data_wrapper'>
+          <div className='items_data_wrapper'>
             <ImageAvatar className='character_image_wrapper' baseSrc={baseSrc} src={src} />
             <DetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
             <AccordeonComicsWithDataFetching

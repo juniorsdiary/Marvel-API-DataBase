@@ -7,7 +7,7 @@ const ComicBookPreview = ({ id, thumbnail }) => {
   const baseSrc = `${thumbnail.path}/portrait_small.${thumbnail.extension}`;
   const fullSrc = `${thumbnail.path}.${thumbnail.extension}`;
   return (
-    <ImageAvatar className='comic_book_preview_image' baseSrc={baseSrc} src={fullSrc}>
+    <ImageAvatar className='cover_book_image' baseSrc={baseSrc} src={fullSrc}>
       <Link to={`/comics/${id}`} className='comic_book_link'></Link>
     </ImageAvatar>
   );

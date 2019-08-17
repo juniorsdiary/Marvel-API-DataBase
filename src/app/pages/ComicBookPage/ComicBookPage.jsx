@@ -52,10 +52,10 @@ class ComicBookPage extends Component {
     const renderCreators = creators.items.map((item, index) => <PreviewItem key={index} {...item} />);
     const renderEvents = eventsData.map(item => <ComicBookPreview key={item.id} {...item} />);
     return (
-      <div className='page_content comic_book_page_block'>
+      <div className='page_content default_page_content'>
         {!isFetching ? (
-          <div className='comic_book_data_wrapper'>
-            <ImageAvatar className='comic_book_image_wrapper' baseSrc={baseSrc} src={src} />
+          <div className='items_data_wrapper'>
+            <ImageAvatar className='cover_book_image' baseSrc={baseSrc} src={src} />
             <DetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
             <AccordeonCharactersWithDataFetching
               number={characters.available}
@@ -107,11 +107,9 @@ ComicBookPage.propTypes = {
   charactersData: PropTypes.array,
   eventsData: PropTypes.array,
   comicBookData: PropTypes.object,
-  seriesData: PropTypes.array,
   fetchCharacterData: PropTypes.func,
   fetchEventsData: PropTypes.func,
   fetchComicsData: PropTypes.func,
-  fetchSeriesData: PropTypes.func,
   setFetchingState: PropTypes.func,
   isFetching: PropTypes.bool,
   location: PropTypes.object,

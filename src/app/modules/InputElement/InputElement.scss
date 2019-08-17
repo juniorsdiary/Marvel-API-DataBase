@@ -13,9 +13,6 @@
 }
 .input_default:focus {
   outline: none;
-  ~ .label_default {
-      left: -40%;
-  }
 }
 .error_input {
 
