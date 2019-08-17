@@ -62,7 +62,7 @@ class CharachtersList extends Component {
     const { charactersList, isFetching, totalResults, offset, searchValue } = this.props;
 
     return (
-      <div className='page_content'>
+      <div className='page_content default_page_content'>
         <SearchComponent>
           <FormGroup requestData={this.requestData}>
             <InputElement

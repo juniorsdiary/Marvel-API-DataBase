@@ -24,8 +24,6 @@
   text-align: center;
   flex-direction: column;
   @include col-offsets(margin);
-  @include size(8);
-  @include size-md(8);
-  @include size-sm(7);
-  @include size-xs(6);
+  @include size(6);
+  @include size-md(7);
 }

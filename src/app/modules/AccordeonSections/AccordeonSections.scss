@@ -4,6 +4,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  
   margin: auto;
   overflow: hidden;
   transition: max-height 0.2s linear;
@@ -23,7 +24,8 @@
   font-size: 1em;
   font-weight: bold;
   font-family: 'kidkosmic-italic';
-  flex: 1 1 100%;
+  @include size(12);
+  align-self: flex-start;
   margin: 0 auto;
   padding: 1em;
   background: black;

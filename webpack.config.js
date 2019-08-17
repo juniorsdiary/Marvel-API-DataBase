@@ -7,7 +7,6 @@ module.exports = {
       'react-dom': '@hot-loader/react-dom',
     },
   },
-  plugins: [new CopyPlugin([{ from: 'src/assets/images', to: 'images' }])],
   module: {
     rules: [
       {

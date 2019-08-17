@@ -6,12 +6,15 @@
   background-image: url('../assets/images/bg_home_page.jpg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 110%;
-  clip-path: polygon(16% 0, 100% 0%, 83% 100%, 0% 100%);
+  background-size: 192%;
+  clip-path: none;
   padding: 1em;
-  @include sm-block() {
-    clip-path: none;
+  @include sm-block {
     background-size: 158%;
+  }
+  @include md-block {
+    clip-path: polygon(10% 0, 100% 0%, 90% 100%, 0% 100%);
+    background-size: 110%;
   }
 }
 .home_page_block:after {

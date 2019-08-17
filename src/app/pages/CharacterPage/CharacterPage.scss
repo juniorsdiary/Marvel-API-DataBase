@@ -1,22 +1,31 @@
 .character_data_wrapper {
-  @include size(8);
-  @include size-md(10);
-  @include size-sm(10);
-  margin: 2em 0;
+
   display: flex;
+  justify-content: space-around;
+  align-content: flex-start;
   flex-wrap: wrap;
-  padding: 1em 0;
+  flex: 1 1;
+  margin: 0;
+  padding: 1.5em 0;
   background: white;
   color: black;
   box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+  @include size(12);
+  @include size-sm(10);
+  @include size-lg(8);
+  @include sm-block {
+    flex: 0 0;
+    margin: 2em 0;
+  };
 }
 
 .character_image_wrapper {
   position: relative;
-  padding-top: 35%;
-  @include size(4);
-  @include col-offsets(margin);
+  padding-top: 50%;
+  margin: 0 .5em;
+  @include size(5);
   @include size-md(4);
-  @include size-sm(5);
-  @include size-xs(6);
+  @include md-block {
+    padding-top: 40%;
+  };
 }

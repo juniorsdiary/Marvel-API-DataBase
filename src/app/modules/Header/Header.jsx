@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Header = () => (
   <header className='header_block'>
     <Link to='/'>
-      <img src='../images/marvel_logo_200.png' alt='marvel_logo' />
+      <img src={require('../../../assets/images/marvel_logo.png')} alt='marvel_logo' />
     </Link>
     <Navigation />
   </header>

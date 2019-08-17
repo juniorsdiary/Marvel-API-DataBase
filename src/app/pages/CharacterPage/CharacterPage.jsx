@@ -51,7 +51,7 @@ class CharacterPage extends Component {
     let renderSeries = seriesData.map(item => <ComicBookPreview key={item.id} {...item} />);
     let renderEvents = eventsData.map(item => <ComicBookPreview key={item.id} {...item} />);
     return (
-      <div className='page_content'>
+      <div className='page_content default_page_content'>
         {!isFetching ? (
           <div className='character_data_wrapper'>
             <ImageAvatar className='character_image_wrapper' baseSrc={baseSrc} src={src} />
