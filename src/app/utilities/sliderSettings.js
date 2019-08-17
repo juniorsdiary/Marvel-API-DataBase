@@ -1,21 +1,23 @@
 module.exports = {
   dots: true,
-  infinite: true,
   speed: 500,
   arrows: false,
   slidesToShow: 4,
   slidesToScroll: 4,
+  infinite: true,
+  rows: 1,
   draggable: true,
+  slide: 'span',
   responsive: [
     {
-      breakpoint: 600,
+      breakpoint: 1100,
       settings: {
-        slidesToShow: 2,
-        slidesToScroll: 2,
+        slidesToShow: 3,
+        slidesToScroll: 3,
       },
     },
     {
-      breakpoint: 480,
+      breakpoint: 560,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 2,
@@ -23,3 +25,8 @@ module.exports = {
     },
   ],
 };
+
+// $break_lg: 1100px;
+// $break_md: 960px;
+// $break_sm: 780px;
+// $break_xs: 560px;

@@ -2,9 +2,10 @@
 @import "animation";
 @import "default";
 @import 'utilities';
-@import '../app/main';
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
+@import '../app/main';
+
 html, body {
   font-family: "Robotocondensed", sans-serif;
   font-weight: bold;

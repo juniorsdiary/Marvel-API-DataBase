@@ -43,6 +43,14 @@
   overflow: auto;
 }
 
+.slick-slide {
+    & > div {
+      display: flex;
+      justify-content: center;
+  }
+}
+
+
 ::-webkit-scrollbar {
   width: 10px;
 }
