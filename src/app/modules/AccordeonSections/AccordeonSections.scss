@@ -53,4 +53,7 @@
   &:hover {
     transform: scale(1.2);
   }
+  &:active {
+    transform: scale(1);
+  }
 }

@@ -8,34 +8,6 @@
   transition: transform 0.2s linear;
   z-index: 13;
 }
-
-.character_link {
-  position: relative;
-  display: block;
-  margin: 0.5em;
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-  @include simple-size(100px);
-  animation: opacity 0.5s linear;
-  transition: all 0.2s linear;
-  z-index: 10;
-  @include lg-block {
-    @include simple-size(150px);
-    &:hover {
-      transform: scale(1.1);
-      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-      .character_link__link_name {
-        background: rgba(0,0,0, 0.5);
-        z-index: 11;
-        &:after {
-          transform: scale(1);
-        }
-        &:before {
-          transform: scale(1);
-        }
-      }
-    }
-  }
-}
 .character_link__link_name {
   position: absolute;
   display: flex;
@@ -62,5 +34,33 @@
     @extend %pseudo_border_default;
     @include border_hover(left, right, 2px, white, scaleY(0));
     z-index: 12;
+  }
+}
+
+.character_link {
+  position: relative;
+  display: block;
+  margin: 0.5em;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  @include simple-size(100px);
+  animation: opacity 0.5s linear;
+  transition: all 0.2s linear;
+  z-index: 10;
+  @include lg-block {
+    @include simple-size(150px);
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+      .character_link__link_name {
+        background: rgba(0,0,0, 0.5);
+        z-index: 11;
+        &:after {
+          transform: scale(1);
+        }
+        &:before {
+          transform: scale(1);
+        }
+      }
+    }
   }
 }

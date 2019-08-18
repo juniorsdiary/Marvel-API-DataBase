@@ -89,32 +89,3 @@
     justify-content: center;
   }
 }
-
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: white;
-}
-
-::-webkit-scrollbar-thumb {
-  background: black;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}
-
-.icon-custom-class {
-  font-size: 50px;
-  cursor: pointer;
-  transition: transform 0.2s linear;
-  border-radius: 50%;
-  &:hover {
-    transform: scale(1.2);
-  }
-  &:active {
-    transform: scale(1);
-  }
-}

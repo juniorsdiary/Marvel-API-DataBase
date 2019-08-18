@@ -2,7 +2,6 @@ const path = require('path');
 
 module.exports = {
   plugins: [
-    require('autoprefixer'),
     require('css-mqpacker')({
       sort: true,
     }),
@@ -23,5 +22,6 @@ module.exports = {
       failOnError: false,
       quiet: false,
     }),
+    require('autoprefixer'),
   ],
 };
