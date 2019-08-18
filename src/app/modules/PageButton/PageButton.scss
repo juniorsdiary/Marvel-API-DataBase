@@ -3,9 +3,7 @@
   background: white;
   color: black;
   font-size: rem(12);
-  @include lg-block {
-
-  };
+  transition: all 0.2s linear;
 }
 .pagination_block__page_item:not(.inactive_page_item) {
   cursor: pointer;
@@ -13,7 +11,6 @@
 .pagination_block__page_item:not(.inactive_page_item):hover  {
   background: black;
   color: white;
-  transition: all 0.2s linear;
 }
 .active_page_item {
   background: black;
