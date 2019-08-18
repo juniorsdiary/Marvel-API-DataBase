@@ -1,22 +1,24 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import settings from '../../utilities/sliderSettings';
-import Button from '../Button/Button.jsx';
 
-const AccordeonSection = ({ content, state, number, pathname, location, children, slider, contentClassName }) => {
+const AccordeonSection = ({ content, number, pathname, location, children, slider, contentClassName, title }) => {
   const elemRef = useRef();
+  const [active, setActive] = useState(false);
   useLayoutEffect(() => {
-    elemRef.current.style.maxHeight = `${state ? 0 : elemRef.current.scrollHeight}px`;
-  }, [state]);
+    elemRef.current.style.maxHeight = `${active ? elemRef.current.scrollHeight : 0}px`;
+  }, [active]);
   const search = location.pathname
     .split('/')
     .join('=')
     .replace(/=/, '?');
   return (
     <>
-      {children}
+      <span className={active ? 'available_items_title active_tab' : 'available_items_title'} onClick={() => setActive(!active)}>
+        {title}
+      </span>
       <div className='accordeon_section' ref={elemRef}>
         {content.length >= 5 && slider ? (
           <Slider {...settings} className={contentClassName}>
@@ -26,11 +28,9 @@ const AccordeonSection = ({ content, state, number, pathname, location, children
           <div className={contentClassName}>{content}</div>
         )}
         {number > 15 && (
-          <Button className='show_more_items_btn'>
-            <Link to={{ pathname, search }} className='show_more_link'>
-              Show More
-            </Link>
-          </Button>
+          <Link to={{ pathname, search }} className='show_more_link'>
+            Show More
+          </Link>
         )}
       </div>
     </>
@@ -46,6 +46,8 @@ AccordeonSection.propTypes = {
   number: PropTypes.number,
   slider: PropTypes.bool,
   contentClassName: PropTypes.string,
+  onClick: PropTypes.func,
+  title: PropTypes.string,
 };
 
 export default AccordeonSection;

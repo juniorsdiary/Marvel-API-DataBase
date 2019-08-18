@@ -2,7 +2,10 @@
   padding: 0.7em;
   background: white;
   color: black;
-  font-size: 0.7em;
+  font-size: rem(12);
+  @include lg-block {
+
+  };
 }
 .pagination_block__page_item:not(.inactive_page_item) {
   cursor: pointer;

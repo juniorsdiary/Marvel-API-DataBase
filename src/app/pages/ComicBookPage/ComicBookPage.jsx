@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
 import { fetchSingleComicBook } from '../../store/actions/comics';
 import { fetchCharacters } from '../../store/actions/characters';
-import { fetchCreators } from '../../store/actions/creators';
 import { fetchEvents } from '../../store/actions/events';
 import * as types from '../../store/types';
 import { convertToLocale } from '../../utilities/lib';
@@ -14,7 +12,7 @@ import Loader from '../../modules/Loader/Loader.jsx';
 import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
 import AccordeonSection from '../../modules/AccordeonSections/AccordeonSection.jsx';
 import DetailsSection from '../../modules/DetailsSection/DetailsSection.jsx';
-import ComicBookPreview from '../../modules/ComicBookPreview/ComicBookPreview.jsx';
+import SearchCard from '../../modules/SearchCard/SearchCard.jsx';
 import PreviewItem from '../../modules/PreviewItem/PreviewItem.jsx';
 import CharacterCard from '../../modules/CharacterCard/CharacterCard.jsx';
 import withDataFetching from '../../HOCfolder/withDataFetching.jsx';
@@ -23,11 +21,6 @@ const AccordeonCharactersWithDataFetching = withDataFetching('/characters')(Acco
 const AccordeonEventsWithDataFetching = withDataFetching('/events')(AccordeonSection);
 
 class ComicBookPage extends Component {
-  state = {
-    firstContent: true,
-    secondContent: true,
-    thirdContent: true,
-  };
   componentDidMount() {
     const { location, setFetchingState, fetchComicsData } = this.props;
     const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
@@ -35,22 +28,21 @@ class ComicBookPage extends Component {
     setFetchingState(true);
     fetchComicsData(apiStr);
   }
-  handleChange = name => {
-    this.setState(prevState => ({ [name]: !prevState[name] }));
-  };
   render() {
     const { isFetching, location } = this.props;
     const { charactersData, comicBookData, eventsData } = this.props;
-    const { fetchCharacterData, fetchCreatorsData, fetchEventsData } = this.props;
-    const { firstContent, secondContent, thirdContent } = this.state;
+    const { fetchCharacterData, fetchEventsData } = this.props;
     const { title, description, modified, thumbnail, urls, characters, creators, events } = comicBookData;
 
     const baseSrc = thumbnail ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
     const src = thumbnail ? `${thumbnail.path}.${thumbnail.extension}` : '';
+
     const lastModified = convertToLocale(modified);
+
     const renderCharacters = charactersData.map(item => <CharacterCard key={item.id} {...item} />);
     const renderCreators = creators.items.map((item, index) => <PreviewItem key={index} {...item} />);
-    const renderEvents = eventsData.map(item => <ComicBookPreview key={item.id} {...item} />);
+    const renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} />);
+
     return (
       <div className='page_content default_page_content'>
         {!isFetching ? (
@@ -59,41 +51,31 @@ class ComicBookPage extends Component {
             <DetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
             <AccordeonCharactersWithDataFetching
               number={characters.available}
-              state={firstContent}
               location={location}
-              slider={true}
               content={renderCharacters}
+              slider={true}
               contentClassName='default_slider_block'
-              callBack={url => fetchCharacterData(url)}>
-              <h1 className='available_items_title' onClick={() => this.handleChange('firstContent')}>
-                You can meet {characters.available} characters
-              </h1>
-            </AccordeonCharactersWithDataFetching>
+              callBack={fetchCharacterData}
+              title={`You can meet ${characters.available} characters`}
+            />
             <AccordeonSection
               number={creators.available}
-              state={secondContent}
               location={location}
               pathname={'/creators'}
-              slider={false}
               content={renderCreators}
+              slider={false}
               contentClassName='creators_content_block'
-              callBack={url => fetchCreatorsData(url)}>
-              <h1 className='available_items_title' onClick={() => this.handleChange('secondContent')}>
-                {creators.available} creators
-              </h1>
-            </AccordeonSection>
+              title={`${creators.available} creators`}
+            />
             <AccordeonEventsWithDataFetching
               number={events.available}
-              state={thirdContent}
               location={location}
               slider={false}
               content={renderEvents}
               contentClassName='default_content_block'
-              callBack={url => fetchEventsData(url)}>
-              <h1 className='available_items_title' onClick={() => this.handleChange('thirdContent')}>
-                Part of {events.available} events
-              </h1>
-            </AccordeonEventsWithDataFetching>
+              callBack={fetchEventsData}
+              title={`Part of ${events.available} events`}
+            />
           </div>
         ) : (
           <Loader />

@@ -1,17 +1,35 @@
-module.exports = {
-  dots: true,
+import React from 'react';
+import { IoIosArrowDroprightCircle, IoIosArrowDropleftCircle } from 'react-icons/io';
+import arrowWithCustomWrapper from '../HOCfolder/arrowWithCustomWrapper.jsx';
+
+const CustomNextSlider = arrowWithCustomWrapper()(IoIosArrowDroprightCircle);
+const CustomPrevSlider = arrowWithCustomWrapper()(IoIosArrowDropleftCircle);
+
+const settings = {
+  dots: false,
   speed: 500,
-  arrows: false,
+  arrows: true,
+  draggable: false,
   slidesToShow: 4,
   slidesToScroll: 4,
   infinite: true,
-  rows: 1,
-  draggable: true,
-  slide: 'span',
+  nextArrow: <CustomNextSlider />,
+  prevArrow: <CustomPrevSlider />,
   responsive: [
     {
       breakpoint: 1100,
       settings: {
+        arrows: false,
+        draggable: true,
+        slidesToShow: 3,
+        slidesToScroll: 3,
+      },
+    },
+    {
+      breakpoint: 780,
+      settings: {
+        arrows: false,
+        draggable: true,
         slidesToShow: 3,
         slidesToScroll: 3,
       },
@@ -19,14 +37,12 @@ module.exports = {
     {
       breakpoint: 560,
       settings: {
+        arrows: false,
+        draggable: true,
         slidesToShow: 2,
         slidesToScroll: 2,
       },
     },
   ],
 };
-
-// $break_lg: 1100px;
-// $break_md: 960px;
-// $break_sm: 780px;
-// $break_xs: 560px;
+export default settings;

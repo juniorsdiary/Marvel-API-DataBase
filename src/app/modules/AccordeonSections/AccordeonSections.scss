@@ -4,36 +4,30 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  
   margin: auto;
   overflow: hidden;
   transition: max-height 0.2s linear;
 }
+
 .show_more_link {
+  display: flex;
+  text-align: center;
+  font-size: rem(18);
+  padding: 1em 2em;
+  margin: 2em auto;
   text-decoration: none;
   color: black;
-}
-
-.show_more_items_btn {
-  flex: 0 0 200px;
-  margin: 1em auto;
   clip-path: polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%);
-}
-
-.available_items_title {
-  font-size: 1em;
-  font-weight: bold;
-  font-family: 'kidkosmic-italic';
-  @include size(12);
-  align-self: flex-start;
-  margin: 0 auto;
-  padding: 1em;
-  background: black;
-  color: white;
-  cursor: pointer;
-  &:first-of-type {
-    margin-top: 1em;
-  }
+  background: red;
+  color: black;
+  transition: all 0.2s linear;
+  @include lg-block {
+    margin: 1em auto;
+    &:hover {
+      background: black;
+      color: white;
+    }
+  };
 }
 
 .default_slider_block {
@@ -51,4 +45,12 @@
   align-items: center;
   margin: 1em auto;
   @include size(11);
+}
+
+.custom_arrow {
+  cursor: pointer;
+  transition: transform 0.2s linear;
+  &:hover {
+    transform: scale(1.2);
+  }
 }

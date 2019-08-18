@@ -21,11 +21,6 @@ const AccordeonSeriesWithDataFetching = withDataFetching('/series')(AccordeonSec
 const AccordeonComicsWithDataFetching = withDataFetching('/comics')(AccordeonSection);
 
 class CharacterPage extends Component {
-  state = {
-    firstContent: true,
-    secondContent: true,
-    thirdContent: true,
-  };
   componentDidMount() {
     const { location, setFetchingState, fetchCharacterData } = this.props;
     const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
@@ -33,22 +28,20 @@ class CharacterPage extends Component {
     setFetchingState(true);
     fetchCharacterData(apiStr);
   }
-  handleChange = name => {
-    this.setState(prevState => ({ [name]: !prevState[name] }));
-  };
   render() {
     const { isFetching, location, fetchComicsData, fetchSeriesData, fetchEventsData } = this.props;
     const { characterData, comicsData, seriesData, eventsData } = this.props;
-    const { firstContent, secondContent, thirdContent } = this.state;
     const { name, description, modified, thumbnail, urls, comics, series, events } = characterData;
 
     const baseSrc = thumbnail.path ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
     const src = thumbnail ? `${thumbnail.path}.${thumbnail.extension}` : '';
 
     const lastModified = convertToLocale(modified);
+
     let renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} />);
     let renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} />);
     let renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} />);
+
     return (
       <div className='page_content default_page_content'>
         {!isFetching ? (
@@ -57,40 +50,31 @@ class CharacterPage extends Component {
             <DetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
             <AccordeonComicsWithDataFetching
               number={comics.available}
-              state={firstContent}
               location={location}
               content={renderComics}
               slider={true}
               contentClassName='default_slider_block'
-              callBack={url => fetchComicsData(url)}>
-              <h1 className='available_items_title' onClick={() => this.handleChange('firstContent')}>
-                Encountered in {comics.available} comics
-              </h1>
-            </AccordeonComicsWithDataFetching>
+              callBack={fetchComicsData}
+              title={`Encountered in ${comics.available} comics`}
+            />
             <AccordeonSeriesWithDataFetching
               number={series.available}
-              state={secondContent}
               location={location}
               content={renderSeries}
               slider={true}
               contentClassName='default_slider_block'
-              callBack={fetchSeriesData}>
-              <h1 className='available_items_title' onClick={() => this.handleChange('secondContent')}>
-                Encountered in {series.available} series
-              </h1>
-            </AccordeonSeriesWithDataFetching>
+              callBack={fetchSeriesData}
+              title={`Encountered in ${series.available} series`}
+            />
             <AccordeonEventsWithDataFetching
               number={events.available}
-              state={thirdContent}
               location={location}
               content={renderEvents}
               slider={true}
               contentClassName='default_slider_block'
-              callBack={fetchEventsData}>
-              <h1 className='available_items_title' onClick={() => this.handleChange('thirdContent')}>
-                Encountered in {events.available} events
-              </h1>
-            </AccordeonEventsWithDataFetching>
+              callBack={fetchEventsData}
+              title={`Encountered in ${events.available} events`}
+            />
           </div>
         ) : (
           <Loader />

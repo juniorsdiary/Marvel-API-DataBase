@@ -8,3 +8,32 @@
   };
   margin: 0 .5em;
 }
+
+.available_items_title {
+  font-size: rem(14);
+  font-weight: bold;
+  font-family: 'kidkosmic-italic';
+  @include size(12);
+  align-self: flex-start;
+  margin: 0 auto;
+  padding: 1em 1.5em;
+  background: black;
+  color: white;
+  border-bottom: 2px solid red;
+  cursor: pointer;
+  transition: all .2s linear;
+  &:first-of-type {
+    border-top: 2px solid red;
+    margin-top: 1em;
+  }
+  @include lg-block {
+    &:hover {
+      background-color: red;
+      color: black;
+    }
+  };
+}
+.active_tab {
+  background-color: red;
+  color: black;
+}
