@@ -48,7 +48,7 @@
 
 .cover_book_image {
   position: relative;
-  margin: 0 .5em;
+  margin: 0 .5em 1em .5em;
   @include simple-size(150px, 300px);
   @include md-block {
     @include simple-size(175px, 350px);
@@ -80,7 +80,6 @@
 
 .slick-list {
   padding: 1em;
-  margin: 1em;
 }
 
 .slick-slide {

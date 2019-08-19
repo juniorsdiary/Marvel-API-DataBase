@@ -7,7 +7,6 @@ import { fetchEvents } from '../../store/actions/events';
 import * as types from '../../store/types';
 import { convertToLocale } from '../../utilities/lib';
 import ApiFactory from '../../utilities/apiFactory';
-
 import Loader from '../../modules/Loader/Loader.jsx';
 import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
 import AccordeonSection from '../../modules/AccordeonSections/AccordeonSection.jsx';
@@ -25,13 +24,13 @@ class ComicBookPage extends Component {
     const { location, setFetchingState, fetchComicsData } = this.props;
     const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
     const apiStr = charactersAPI.createApiString();
-    setFetchingState(true);
+    setFetchingState(types.COMICS_FETCHING, true);
     fetchComicsData(apiStr);
   }
   render() {
-    const { isFetching, location } = this.props;
+    const { isFetching, charactersFetching, eventsFetching, location } = this.props;
     const { charactersData, comicBookData, eventsData } = this.props;
-    const { fetchCharacterData, fetchEventsData } = this.props;
+    const { fetchCharacterData, fetchEventsData, setFetchingState } = this.props;
     const { title, description, modified, thumbnail, urls, characters, creators, events } = comicBookData;
 
     const baseSrc = thumbnail ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
@@ -49,15 +48,6 @@ class ComicBookPage extends Component {
           <div className='items_data_wrapper'>
             <ImageAvatar wrapper={true} className='cover_book_image' baseSrc={baseSrc} src={src} />
             <DetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
-            <AccordeonCharactersWithDataFetching
-              number={characters.available}
-              location={location}
-              content={renderCharacters}
-              slider={true}
-              contentClassName='default_slider_block'
-              callBack={fetchCharacterData}
-              title={`You can meet ${characters.available} characters`}
-            />
             <AccordeonSection
               number={creators.available}
               location={location}
@@ -67,11 +57,24 @@ class ComicBookPage extends Component {
               contentClassName='creators_content_block'
               title={`${creators.available} creators`}
             />
+            <AccordeonCharactersWithDataFetching
+              fetchingCallBack={bool => setFetchingState(types.CHARACTERS_FETCHING, bool)}
+              loading={charactersFetching}
+              number={characters.available}
+              location={location}
+              content={renderCharacters}
+              slider={true}
+              contentClassName='default_slider_block'
+              callBack={fetchCharacterData}
+              title={`You can meet ${characters.available} characters`}
+            />
             <AccordeonEventsWithDataFetching
+              fetchingCallBack={bool => setFetchingState(types.EVENTS_FETCHING, bool)}
+              loading={eventsFetching}
               number={events.available}
               location={location}
-              slider={false}
               content={renderEvents}
+              slider={true}
               contentClassName='default_content_block'
               callBack={fetchEventsData}
               title={`Part of ${events.available} events`}
@@ -94,6 +97,8 @@ ComicBookPage.propTypes = {
   fetchComicsData: PropTypes.func,
   setFetchingState: PropTypes.func,
   isFetching: PropTypes.bool,
+  charactersFetching: PropTypes.bool,
+  eventsFetching: PropTypes.bool,
   location: PropTypes.object,
 };
 
@@ -102,6 +107,8 @@ const mapStateToProps = state => {
     charactersData: state.charactersData.charactersList,
     eventsData: state.eventsData.eventsList,
     comicBookData: state.comicsData.comicBook,
+    charactersFetching: state.charactersData.isFetching,
+    eventsFetching: state.eventsData.isFetching,
     isFetching: state.comicsData.isFetching,
   };
 };
@@ -117,8 +124,8 @@ const mapDispatchToProps = dispatch => {
     fetchComicsData: url => {
       dispatch(fetchSingleComicBook(url));
     },
-    setFetchingState: boolean => {
-      dispatch({ type: types.COMICS_FETCHING, payload: boolean });
+    setFetchingState: (type, boolean) => {
+      dispatch({ type: type, payload: boolean });
     },
   };
 };

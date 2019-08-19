@@ -9,9 +9,7 @@ import CharacterPage from './pages/CharacterPage/CharacterPage.jsx';
 import ComicsList from './pages/ComicsList/ComicsList.jsx';
 import EventsList from './pages/EventsList/EventsList.jsx';
 import SeriesList from './pages/SeriesList/SeriesList.jsx';
-
 import CreatorsList from './pages/CreatorsList/CreatorsList.jsx';
-
 import ComicBookPage from './pages/ComicBookPage/ComicBookPage.jsx';
 import Home from './pages/Home/Home.jsx';
 

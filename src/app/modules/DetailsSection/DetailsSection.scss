@@ -6,13 +6,13 @@
 .character_data_details_link {
   font-size: 0.8em;
   text-align: right;
-  margin: 0 0 auto 0;
+  margin: 1em 0;
 }
 
 .character_data_description {
   font-family: '44v2', sans-serif;
   font-size: 1em;
-  margin: 1em 0;
+  margin: 1em 0 auto 0;
   display: block;
   word-wrap: break-word;
 }
@@ -29,4 +29,5 @@
   flex-direction: column;
   @include size(6);
   @include size-md(7);
+  margin-bottom: 1em;
 }

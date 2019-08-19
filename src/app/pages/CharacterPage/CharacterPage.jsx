@@ -8,7 +8,6 @@ import { fetchComics } from '../../store/actions/comics';
 import * as types from '../../store/types';
 import { convertToLocale } from '../../utilities/lib';
 import ApiFactory from '../../utilities/apiFactory';
-
 import Loader from '../../modules/Loader/Loader.jsx';
 import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
 import AccordeonSection from '../../modules/AccordeonSections/AccordeonSection.jsx';
@@ -25,12 +24,13 @@ class CharacterPage extends Component {
     const { location, setFetchingState, fetchCharacterData } = this.props;
     const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
     const apiStr = charactersAPI.createApiString();
-    setFetchingState(true);
+    setFetchingState(types.CHARACTERS_FETCHING, true);
     fetchCharacterData(apiStr);
   }
   render() {
-    const { isFetching, location, fetchComicsData, fetchSeriesData, fetchEventsData } = this.props;
+    const { location, fetchComicsData, fetchSeriesData, fetchEventsData } = this.props;
     const { characterData, comicsData, seriesData, eventsData } = this.props;
+    const { isFetching, comicsFetching, seriesFetching, eventsFetching, setFetchingState } = this.props;
     const { name, description, modified, thumbnail, urls, comics, series, events } = characterData;
 
     const baseSrc = thumbnail.path ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
@@ -49,6 +49,8 @@ class CharacterPage extends Component {
             <ImageAvatar wrapper={true} className='character_page_image' baseSrc={baseSrc} src={src} />
             <DetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
             <AccordeonComicsWithDataFetching
+              fetchingCallBack={bool => setFetchingState(types.COMICS_FETCHING, bool)}
+              loading={comicsFetching}
               number={comics.available}
               location={location}
               content={renderComics}
@@ -58,6 +60,8 @@ class CharacterPage extends Component {
               title={`Encountered in ${comics.available} comics`}
             />
             <AccordeonSeriesWithDataFetching
+              fetchingCallBack={bool => setFetchingState(types.SERIES_FETCHING, bool)}
+              loading={seriesFetching}
               number={series.available}
               location={location}
               content={renderSeries}
@@ -67,6 +71,8 @@ class CharacterPage extends Component {
               title={`Encountered in ${series.available} series`}
             />
             <AccordeonEventsWithDataFetching
+              fetchingCallBack={bool => setFetchingState(types.EVENTS_FETCHING, bool)}
+              loading={eventsFetching}
               number={events.available}
               location={location}
               content={renderEvents}
@@ -95,6 +101,9 @@ CharacterPage.propTypes = {
   fetchSeriesData: PropTypes.func,
   setFetchingState: PropTypes.func,
   isFetching: PropTypes.bool,
+  comicsFetching: PropTypes.bool,
+  seriesFetching: PropTypes.bool,
+  eventsFetching: PropTypes.bool,
   location: PropTypes.object,
 };
 
@@ -104,6 +113,9 @@ const mapStateToProps = state => {
     eventsData: state.eventsData.eventsList,
     comicsData: state.comicsData.comicsList,
     seriesData: state.seriesData.seriesList,
+    comicsFetching: state.comicsData.isFetching,
+    seriesFetching: state.seriesData.isFetching,
+    eventsFetching: state.eventsData.isFetching,
     isFetching: state.charactersData.isFetching,
   };
 };
@@ -122,8 +134,8 @@ const mapDispatchToProps = dispatch => {
     fetchSeriesData: url => {
       dispatch(fetchSeries(url));
     },
-    setFetchingState: boolean => {
-      dispatch({ type: types.CHARACTERS_FETCHING, payload: boolean });
+    setFetchingState: (type, boolean) => {
+      dispatch({ type: type, payload: boolean });
     },
   };
 };
