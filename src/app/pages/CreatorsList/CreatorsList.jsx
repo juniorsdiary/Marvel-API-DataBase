@@ -58,7 +58,7 @@ class CreatorsList extends Component {
   };
   render() {
     const { inputValue } = this.state;
-    const { creatorsData, isFetching, totalResults, searchValue, offset } = this.props;
+    const { creatorsData, isFetching, totalResults, searchValue, offset, location } = this.props;
 
     return (
       <div className='page_content default_page_content'>
@@ -74,7 +74,12 @@ class CreatorsList extends Component {
             />
           </FormGroup>
         </SearchComponent>
-        <ContentComponentWithLoader loading={isFetching} renderData={creatorsData} PartialComponent={CreatorsSearchCard} />
+        <ContentComponentWithLoader
+          loading={isFetching}
+          renderData={creatorsData}
+          PartialComponent={CreatorsSearchCard}
+          pathname={location.pathname}
+        />
         {!isFetching && <Pagination searchValue={searchValue} requestData={this.requestData} totalResults={totalResults} offset={offset} />}
       </div>
     );

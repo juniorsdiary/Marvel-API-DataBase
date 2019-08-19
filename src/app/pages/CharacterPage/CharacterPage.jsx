@@ -38,9 +38,9 @@ class CharacterPage extends Component {
 
     const lastModified = convertToLocale(modified);
 
-    let renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} />);
-    let renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} />);
-    let renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} />);
+    let renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} pathname={'/comics'} />);
+    let renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} pathname={'/series'} />);
+    let renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
 
     return (
       <div className='page_content default_page_content'>

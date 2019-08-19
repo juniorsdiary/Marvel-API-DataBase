@@ -58,7 +58,7 @@ class SeriesList extends Component {
   };
   render() {
     const { inputValue } = this.state;
-    const { seriesData, isFetching, totalResults, searchValue, offset } = this.props;
+    const { seriesData, isFetching, totalResults, searchValue, offset, location } = this.props;
 
     return (
       <div className='page_content default_page_content'>
@@ -74,7 +74,7 @@ class SeriesList extends Component {
             />
           </FormGroup>
         </SearchComponent>
-        <ContentComponentWithLoader loading={isFetching} renderData={seriesData} PartialComponent={SearchCard} />
+        <ContentComponentWithLoader loading={isFetching} renderData={seriesData} PartialComponent={SearchCard} pathname={location.pathname} />
         {!isFetching && <Pagination searchValue={searchValue} requestData={this.requestData} totalResults={totalResults} offset={offset} />}
       </div>
     );

@@ -61,7 +61,7 @@ class EventsList extends Component {
 
   render() {
     const { inputValue } = this.state;
-    const { eventsList, isFetching, totalResults, searchValue, offset } = this.props;
+    const { eventsList, isFetching, totalResults, searchValue, offset, location } = this.props;
     return (
       <div className='page_content default_page_content'>
         <SearchComponent>
@@ -76,7 +76,7 @@ class EventsList extends Component {
             />
           </FormGroup>
         </SearchComponent>
-        <ContentComponentWithLoader loading={isFetching} renderData={eventsList} PartialComponent={SearchCard} />
+        <ContentComponentWithLoader loading={isFetching} renderData={eventsList} PartialComponent={SearchCard} pathname={location.pathname} />
         {!isFetching && <Pagination searchValue={searchValue} requestData={this.requestData} totalResults={totalResults} offset={offset} />}
       </div>
     );
