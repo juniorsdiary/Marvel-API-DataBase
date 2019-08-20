@@ -4,7 +4,21 @@ const initialState = {
   seriesList: [],
   totalResults: 0,
   offset: 0,
-  seriesBook: {},
+  seriesBook: {
+    title: '',
+    description: '',
+    modified: '',
+    thumbnail: {
+      path: '',
+      extension: '',
+    },
+    characters: [],
+    creators: {
+      items: [],
+    },
+    events: [],
+    comics: [],
+  },
   isFetching: false,
 };
 

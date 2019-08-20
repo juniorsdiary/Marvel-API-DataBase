@@ -11,6 +11,9 @@ import EventsList from './pages/EventsList/EventsList.jsx';
 import SeriesList from './pages/SeriesList/SeriesList.jsx';
 import CreatorsList from './pages/CreatorsList/CreatorsList.jsx';
 import ComicBookPage from './pages/ComicBookPage/ComicBookPage.jsx';
+import SingleSeriesPage from './pages/SingleSeriesPage/SingleSeriesPage.jsx';
+import EventPage from './pages/EventPage/EventPage.jsx';
+import CreatorPage from './pages/CreatorPage/CreatorPage.jsx';
 import Home from './pages/Home/Home.jsx';
 
 const App = () => (
@@ -26,6 +29,9 @@ const App = () => (
         <Route exact path='/creators' component={CreatorsList} />
         <Route exact path='/characters/:id' component={CharacterPage} />
         <Route exact path='/comics/:id' component={ComicBookPage} />
+        <Route exact path='/series/:id' component={SingleSeriesPage} />
+        <Route exact path='/events/:id' component={EventPage} />
+        <Route exact path='/creators/:id' component={CreatorPage} />
       </Switch>
     </Router>
     <Footer />
@@ -34,9 +40,7 @@ const App = () => (
 
 export default hot(App);
 
-// TODO: страница для серии
 // TODO: страница для создателя
-// TODO: страница для ивента
 // TODO: адаптивная навигация
 // TODO: переделать комнопннет поиска с кнопкной сброса фильтра и добавить еще фильтры
 // TODO: сделать выбор отображения результатов для List компонентов

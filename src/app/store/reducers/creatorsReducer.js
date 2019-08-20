@@ -4,7 +4,11 @@ const initialState = {
   creatorsList: [],
   totalResults: 0,
   offset: 0,
-  creator: {},
+  creator: {
+    comics: [],
+    events: [],
+    series: [],
+  },
   isFetching: true,
 };
 

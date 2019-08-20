@@ -70,7 +70,7 @@ class Series extends CommonAPISettings {
     let orderQuery = `orderBy=${this.order}`;
     let limitQuery = `limit=${this.limit}`;
     let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
-    this.query = `${this.search ? '&' : '?'}${concatedQuery}`;
+    this.query = /\/\d+\/?/.test(this.pathname) ? '' : `${this.search ? '&' : '?'}${concatedQuery}`;
   }
 }
 class Events extends CommonAPISettings {
@@ -85,7 +85,7 @@ class Events extends CommonAPISettings {
     let orderQuery = `orderBy=${this.order}`;
     let limitQuery = `limit=${this.limit}`;
     let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
-    this.query = `${this.search ? '&' : '?'}${concatedQuery}`;
+    this.query = /\/\d+\/?/.test(this.pathname) ? '' : `${this.search ? '&' : '?'}${concatedQuery}`;
   }
 }
 class Stories extends CommonAPISettings {
@@ -100,7 +100,7 @@ class Stories extends CommonAPISettings {
     let orderQuery = `orderBy=${this.order}`;
     let limitQuery = `limit=${this.limit}`;
     let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
-    this.query = `${this.search ? '&' : '?'}${concatedQuery}`;
+    this.query = /\/\d+\/?/.test(this.pathname) ? '' : `${this.search ? '&' : '?'}${concatedQuery}`;
   }
 }
 class Creators extends CommonAPISettings {
@@ -115,7 +115,7 @@ class Creators extends CommonAPISettings {
     let orderQuery = `orderBy=${this.order}`;
     let limitQuery = `limit=${this.limit}`;
     let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
-    this.query = `${this.search ? '&' : '?'}${concatedQuery}`;
+    this.query = /\/\d+\/?/.test(this.pathname) ? '' : `${this.search ? '&' : '?'}${concatedQuery}`;
   }
 }
 

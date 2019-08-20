@@ -4,7 +4,21 @@ const initialState = {
   eventsList: [],
   totalResults: 0,
   offset: 0,
-  eventItem: {},
+  eventItem: {
+    title: '',
+    description: '',
+    modified: '',
+    thumbnail: {
+      path: '',
+      extension: '',
+    },
+    characters: [],
+    creators: {
+      items: [],
+    },
+    series: [],
+    comics: [],
+  },
   isFetching: false,
 };
 
