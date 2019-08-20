@@ -61,7 +61,7 @@ class ComicsList extends Component {
     const { comicBooksData, isFetching, totalResults, searchValue, offset, location } = this.props;
 
     return (
-      <div className='page_content default_page_content'>
+      <div className='page_content'>
         <SearchComponent>
           <FormGroup requestData={this.requestData}>
             <InputElement

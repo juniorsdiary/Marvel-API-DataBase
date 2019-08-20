@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
 import { fetchSingleCreator } from '../../store/actions/creators';
 import { fetchComics } from '../../store/actions/comics';
 import { fetchEvents } from '../../store/actions/events';
 import { fetchSeries } from '../../store/actions/series';
 import * as types from '../../store/types';
 import ApiFactory from '../../utilities/apiFactory';
+
 import Loader from '../../modules/Loader/Loader.jsx';
 import AccordeonSection from '../../modules/AccordeonSections/AccordeonSection.jsx';
 import SearchCard from '../../modules/SearchCard/SearchCard.jsx';
@@ -34,7 +36,7 @@ class CreatorPage extends Component {
     let renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
     let renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} pathname={'/series'} />);
     return (
-      <div className='page_content default_page_content'>
+      <div className='page_content'>
         {!isFetching ? (
           <div className='items_data_wrapper'>
             <p className='creator_page_name'>{creatorData.fullName}</p>

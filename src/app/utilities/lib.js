@@ -6,7 +6,6 @@ import CryptoJS from 'crypto-js';
  */
 export const fetchFunction = async url => {
   const res = await fetch(url);
-  // console.log(res);
   return await res.json();
 };
 
@@ -36,7 +35,11 @@ export function definePagesIndex(pageNum, pages) {
   }
   return [firstPages, lastPages, middlePages];
 }
-
+/**
+ * [convertToLocale description]
+ * @param  {[type]} timeString [description]
+ * @return {[type]}            [description]
+ */
 export const convertToLocale = timeString => {
   let options = {
     day: 'numeric',

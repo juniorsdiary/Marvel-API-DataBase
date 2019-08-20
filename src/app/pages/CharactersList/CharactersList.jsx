@@ -12,6 +12,7 @@ import Pagination from '../../modules/Pagination/Pagination.jsx';
 import InputElement from '../../modules/InputElement/InputElement.jsx';
 import ContentComponent from '../../modules/ContentComponent/ContentComponent.jsx';
 import withLoader from '../../HOCfolder/withLoader.jsx';
+
 const ContentComponentWithLoader = withLoader()(ContentComponent);
 
 class CharachtersList extends Component {
@@ -62,7 +63,7 @@ class CharachtersList extends Component {
     const { charactersList, isFetching, totalResults, offset, searchValue } = this.props;
 
     return (
-      <div className='page_content default_page_content'>
+      <div className='page_content'>
         <SearchComponent>
           <FormGroup requestData={this.requestData}>
             <InputElement

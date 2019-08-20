@@ -31,7 +31,6 @@ class CommonAPISettings {
 class Characters extends CommonAPISettings {
   constructor(options) {
     super(options);
-    this.api = constants.CHARACTERS_API;
     this.order = constants.ORDER;
   }
   queryParametrs() {
@@ -46,7 +45,6 @@ class Characters extends CommonAPISettings {
 class Comics extends CommonAPISettings {
   constructor(options) {
     super(options);
-    this.api = constants.COMICS_API;
     this.order = constants.ORDER_TITLE;
   }
   queryParametrs() {
@@ -61,7 +59,6 @@ class Comics extends CommonAPISettings {
 class Series extends CommonAPISettings {
   constructor(options) {
     super(options);
-    this.api = constants.SERIES_API;
     this.order = constants.ORDER_TITLE;
   }
   queryParametrs() {
@@ -76,23 +73,7 @@ class Series extends CommonAPISettings {
 class Events extends CommonAPISettings {
   constructor(options) {
     super(options);
-    this.api = constants.EVENTS_API;
     this.order = constants.ORDER;
-  }
-  queryParametrs() {
-    let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
-    let offsetQuery = this.offset ? `offset=${this.offset}` : '';
-    let orderQuery = `orderBy=${this.order}`;
-    let limitQuery = `limit=${this.limit}`;
-    let concatedQuery = [startsWithQuery, orderQuery, limitQuery, offsetQuery].filter(item => item).join('&');
-    this.query = /\/\d+\/?/.test(this.pathname) ? '' : `${this.search ? '&' : '?'}${concatedQuery}`;
-  }
-}
-class Stories extends CommonAPISettings {
-  constructor(options) {
-    super(options);
-    this.api = constants.STORIES_API;
-    this.order = constants.ORDER_ID;
   }
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
@@ -106,7 +87,6 @@ class Stories extends CommonAPISettings {
 class Creators extends CommonAPISettings {
   constructor(options) {
     super(options);
-    this.api = constants.CREATORS_API;
     this.order = constants.ORDER_LAST_NAME;
   }
   queryParametrs() {
@@ -144,9 +124,6 @@ class ApiFactory {
         break;
       case 'series':
         this.setPrototype(Series);
-        break;
-      case 'stories':
-        this.setPrototype(Stories);
         break;
       default:
         break;

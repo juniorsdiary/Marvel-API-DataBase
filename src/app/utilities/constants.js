@@ -1,11 +1,4 @@
 export const API_BASE = 'http://gateway.marvel.com:80/v1/public';
-export const CHARACTERS_API = `${API_BASE}/characters`;
-export const COMICS_API = `${API_BASE}/comics`;
-export const CREATORS_API = `${API_BASE}/creators`;
-export const EVENTS_API = `${API_BASE}/events`;
-export const SERIES_API = `${API_BASE}/series`;
-export const STORIES_API = `${API_BASE}/stories`;
-
 export const PRIVATE_KEY = 'ee09ee808d5dfa6ce607f26f30ecfe628bb98110';
 export const PUBLIC_KEY = 'f6b85fcbee546941c9ddc08e20f60615';
 export const PER_PAGE_RESULTS = 39;

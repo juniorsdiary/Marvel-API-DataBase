@@ -7,7 +7,7 @@ export const fetchSeries = url => async dispatch => {
     type: types.FETCH_SERIES,
     payload: data.data,
   });
-  await dispatch({ type: types.SERIES_FETCHING, payload: false });
+  dispatch({ type: types.SERIES_FETCHING, payload: false });
 };
 
 export const fetchSingleSeries = url => async dispatch => {

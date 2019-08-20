@@ -47,7 +47,7 @@ class EventPage extends Component {
     const renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} pathname={'/comics'} />);
     const renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} pathname={'/series'} />);
     return (
-      <div className='page_content default_page_content'>
+      <div className='page_content'>
         {!isFetching ? (
           <div className='items_data_wrapper'>
             <ImageAvatar wrapper={true} className='cover_book_image' baseSrc={baseSrc} src={src} />

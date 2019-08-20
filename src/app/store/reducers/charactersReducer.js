@@ -15,7 +15,6 @@ const initialState = {
     comics: [],
     series: [],
     events: [],
-    stories: [],
   },
   isFetching: true,
 };
