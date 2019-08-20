@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { fetchSingleCreator } from '../../store/actions/creators';
-import { fetchComics } from '../../store/actions/comics';
-import { fetchEvents } from '../../store/actions/events';
-import { fetchSeries } from '../../store/actions/series';
-import * as types from '../../store/types';
-import ApiFactory from '../../utilities/apiFactory';
+import { fetchSingleCreator } from 'Store/actions/creators';
+import { fetchComics } from 'Store/actions/comics';
+import { fetchEvents } from 'Store/actions/events';
+import { fetchSeries } from 'Store/actions/series';
+import * as types from 'Store/types';
+import ApiFactory from 'Utilities/apiFactory';
 
-import Loader from '../../modules/Loader/Loader.jsx';
-import AccordeonSection from '../../modules/AccordeonSections/AccordeonSection.jsx';
-import SearchCard from '../../modules/SearchCard/SearchCard.jsx';
+import Loader from 'Modules/Loader/Loader.jsx';
+import AccordeonSection from 'Modules/AccordeonSections/AccordeonSection.jsx';
+import SearchCard from 'Modules/SearchCard/SearchCard.jsx';
 import withDataFetching from '../../HOCfolder/withDataFetching.jsx';
 
 const AccordeonComicsWithDataFetching = withDataFetching('/comics')(AccordeonSection);

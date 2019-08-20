@@ -1,8 +1,12 @@
 .header_block {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background: #202020;
   flex: 0 0 auto;
+  @include xs-block {
+
+  };
 }

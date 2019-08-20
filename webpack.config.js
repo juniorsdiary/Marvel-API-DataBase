@@ -1,9 +1,13 @@
-const CopyPlugin = require('copy-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: ['@babel/polyfill', './src/index.js'],
   resolve: {
     alias: {
+      Modules: path.resolve('./src/app/', 'modules'),
+      Pages: path.resolve('./src/app/', 'pages'),
+      Utilities: path.resolve('./src/app/', 'utilities'),
+      Store: path.resolve('./src/app/', 'store'),
       'react-dom': '@hot-loader/react-dom',
     },
   },

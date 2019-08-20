@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { fetchSingleSeries } from '../../store/actions/series';
-import { fetchCharacters } from '../../store/actions/characters';
-import { fetchEvents } from '../../store/actions/events';
-import { fetchComics } from '../../store/actions/comics';
-import * as types from '../../store/types';
-import { convertToLocale } from '../../utilities/lib';
-import ApiFactory from '../../utilities/apiFactory';
+import { fetchSingleSeries } from 'Store/actions/series';
+import { fetchCharacters } from 'Store/actions/characters';
+import { fetchEvents } from 'Store/actions/events';
+import { fetchComics } from 'Store/actions/comics';
+import * as types from 'Store/types';
+import { convertToLocale } from 'Utilities/lib';
+import ApiFactory from 'Utilities/apiFactory';
 
-import Loader from '../../modules/Loader/Loader.jsx';
-import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
-import AccordeonSection from '../../modules/AccordeonSections/AccordeonSection.jsx';
-import DetailsSection from '../../modules/DetailsSection/DetailsSection.jsx';
-import SearchCard from '../../modules/SearchCard/SearchCard.jsx';
-import PreviewItem from '../../modules/PreviewItem/PreviewItem.jsx';
-import CharacterCard from '../../modules/CharacterCard/CharacterCard.jsx';
+import Loader from 'Modules/Loader/Loader.jsx';
+import ImageAvatar from 'Modules/ImageAvatar/ImageAvatar.jsx';
+import AccordeonSection from 'Modules/AccordeonSections/AccordeonSection.jsx';
+import DetailsSection from 'Modules/DetailsSection/DetailsSection.jsx';
+import SearchCard from 'Modules/SearchCard/SearchCard.jsx';
+import PreviewItem from 'Modules/PreviewItem/PreviewItem.jsx';
+import CharacterCard from 'Modules/CharacterCard/CharacterCard.jsx';
 import withDataFetching from '../../HOCfolder/withDataFetching.jsx';
 
 const AccordeonCharactersWithDataFetching = withDataFetching('/characters')(AccordeonSection);
@@ -37,8 +37,8 @@ class SingleSeriesPage extends Component {
     const { fetchCharacterData, fetchEventsData, fetchComicsData, setFetchingState } = this.props;
     const { title, description, modified, thumbnail, urls, comics, creators, characters, events } = seriesItemData;
 
-    const baseSrc = thumbnail ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
-    const src = thumbnail ? `${thumbnail.path}.${thumbnail.extension}` : '';
+    const baseSrc = thumbnail.path ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
+    const src = thumbnail.path ? `${thumbnail.path}.${thumbnail.extension}` : '';
 
     const lastModified = convertToLocale(modified);
     // console.log(seriesItemData.next);

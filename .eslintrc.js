@@ -4,7 +4,7 @@ module.exports = {
     es6: true,
     node: true,
   },
-  extends: ['react-app', 'plugin:react/recommended', 'prettier', 'plugin:jsx-a11y/recommended'],
+  extends: ['react-app', 'plugin:react/recommended', 'prettier', 'prettier/react', 'plugin:jsx-a11y/recommended'],
   parserOptions: {
     ecmaFeatures: {
       jsx: true,
@@ -15,5 +15,18 @@ module.exports = {
   plugins: ['jsx-a11y', 'react', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
+    'react/jsx-filename-extension': [
+      1,
+      {
+        extensions: ['.js', 'jsx'],
+      },
+    ],
+  },
+  settings: {
+    'import/resolver': {
+      webpack: {
+        config: './config/webpack-common-config.js',
+      },
+    },
   },
 };

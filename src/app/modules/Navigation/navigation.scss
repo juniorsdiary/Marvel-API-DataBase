@@ -1,8 +1,21 @@
-.navigation_block {
-  display: flex;
+.navigation_links {
+  position: fixed;
+  display: none;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  @include simple-size(100%, 700px);
+  font-size: rem(28px);
+  top: 0;
+  right: 0;
+  background: rgba(0,0,0,1);
+  z-index: 20;
+  @include xs-block() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  };
 }
 
 .navigation_block__link_item {
@@ -12,14 +25,16 @@
   text-decoration: none;
   margin: 0.5em;
   padding: 0.5em;
+  @include xs-block() {
+  };
 }
+
 .navigation_block__link_item:focus,
 .navigation_block__link_item:hover {
   border-bottom: 2px solid rgb(255,0,0);
   transition: border-color 0.5s linear;
   outline: none;
 }
-
 .active_nav_link {
   border-bottom: 2px solid rgb(255,0,0);
 }

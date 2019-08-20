@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { PER_PAGE_RESULTS } from '../../utilities/constants';
-import { definePagesIndex } from '../../utilities/lib';
+import { PER_PAGE_RESULTS } from 'Utilities/constants';
+import { definePagesIndex } from 'Utilities/lib';
 import PageButton from '../PageButton/PageButton.jsx';
 
 const Pagination = ({ requestData, totalResults, offset, searchValue }) => {

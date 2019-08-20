@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useToogleSearch } from '../../utilities/customHooks';
+import { useToogleSearch } from 'Utilities/customHooks';
 
 const SearchComponent = ({ children }) => {
   const ref = useRef(null);

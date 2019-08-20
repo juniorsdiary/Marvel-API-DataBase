@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Navigation = () => (
-  <nav className='navigation_block'>
+  <nav className='navigation_links'>
     <NavLink exact to='/' className='navigation_block__link_item' activeClassName='active_nav_link'>
       Home
     </NavLink>

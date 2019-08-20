@@ -2,19 +2,19 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { hot } from 'react-hot-loader/root';
 
-import Header from './modules/Header/Header.jsx';
-import Footer from './modules/Footer/Footer.jsx';
-import CharactersList from './pages/CharactersList/CharactersList.jsx';
-import CharacterPage from './pages/CharacterPage/CharacterPage.jsx';
-import ComicsList from './pages/ComicsList/ComicsList.jsx';
-import EventsList from './pages/EventsList/EventsList.jsx';
-import SeriesList from './pages/SeriesList/SeriesList.jsx';
-import CreatorsList from './pages/CreatorsList/CreatorsList.jsx';
-import ComicBookPage from './pages/ComicBookPage/ComicBookPage.jsx';
-import SingleSeriesPage from './pages/SingleSeriesPage/SingleSeriesPage.jsx';
-import EventPage from './pages/EventPage/EventPage.jsx';
-import CreatorPage from './pages/CreatorPage/CreatorPage.jsx';
-import Home from './pages/Home/Home.jsx';
+import Header from 'Modules/Header/Header.jsx';
+import Footer from 'Modules/Footer/Footer.jsx';
+import CharactersList from 'Pages/CharactersList/CharactersList.jsx';
+import CharacterPage from 'Pages/CharacterPage/CharacterPage.jsx';
+import ComicsList from 'Pages/ComicsList/ComicsList.jsx';
+import EventsList from 'Pages/EventsList/EventsList.jsx';
+import SeriesList from 'Pages/SeriesList/SeriesList.jsx';
+import CreatorsList from 'Pages/CreatorsList/CreatorsList.jsx';
+import ComicBookPage from 'Pages/ComicBookPage/ComicBookPage.jsx';
+import SingleSeriesPage from 'Pages/SingleSeriesPage/SingleSeriesPage.jsx';
+import EventPage from 'Pages/EventPage/EventPage.jsx';
+import CreatorPage from 'Pages/CreatorPage/CreatorPage.jsx';
+import Home from 'Pages/Home/Home.jsx';
 
 const App = () => (
   <>

@@ -57,6 +57,7 @@
     "css-mqpacker": "^7.0.0",
     "cssnano": "^4.1.10",
     "eslint": "^5.16.0",
+    "eslint-import-resolver-webpack": "^0.11.1",
     "eslint-config-prettier": "^6.0.0",
     "eslint-config-react-app": "^4.0.1",
     "eslint-plugin-flowtype": "^2.50.3",

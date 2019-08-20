@@ -2,19 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import * as types from '../../store/types';
-import { fetchSingleCharacter } from '../../store/actions/characters';
-import { fetchEvents } from '../../store/actions/events';
-import { fetchSeries } from '../../store/actions/series';
-import { fetchComics } from '../../store/actions/comics';
-import { convertToLocale } from '../../utilities/lib';
-import ApiFactory from '../../utilities/apiFactory';
+import * as types from 'Store/types';
+import { fetchSingleCharacter } from 'Store/actions/characters';
+import { fetchEvents } from 'Store/actions/events';
+import { fetchSeries } from 'Store/actions/series';
+import { fetchComics } from 'Store/actions/comics';
+import { convertToLocale } from 'Utilities/lib';
+import ApiFactory from 'Utilities/apiFactory';
 
-import Loader from '../../modules/Loader/Loader.jsx';
-import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
-import AccordeonSection from '../../modules/AccordeonSections/AccordeonSection.jsx';
-import DetailsSection from '../../modules/DetailsSection/DetailsSection.jsx';
-import SearchCard from '../../modules/SearchCard/SearchCard.jsx';
+import Loader from 'Modules/Loader/Loader.jsx';
+import ImageAvatar from 'Modules/ImageAvatar/ImageAvatar.jsx';
+import AccordeonSection from 'Modules/AccordeonSections/AccordeonSection.jsx';
+import DetailsSection from 'Modules/DetailsSection/DetailsSection.jsx';
+import SearchCard from 'Modules/SearchCard/SearchCard.jsx';
 import withDataFetching from '../../HOCfolder/withDataFetching.jsx';
 
 const AccordeonEventsWithDataFetching = withDataFetching('/events')(AccordeonSection);

@@ -1,0 +1,25 @@
+#toogle_navigation {
+  display: none;
+}
+#toogle_navigation:checked {
+  ~ .navigation_toggle_block .navigation_close {
+    display: block;
+  }
+  ~ .navigation_toggle_block .navigation_humb {
+    display: none;
+  }
+  ~ .navigation_links {
+    display: flex;
+  }
+}
+.navigation_toggle_block {
+  position: absolute;
+  right: 0;
+  color: white;
+  z-index: 21;
+}
+.navigation_humb {
+}
+.navigation_close {
+  display: none;
+}

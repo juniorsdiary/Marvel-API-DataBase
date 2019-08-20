@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
+import ImageAvatar from 'Modules/ImageAvatar/ImageAvatar.jsx';
 
 const CharacterCard = ({ id, name, thumbnail }) => {
   const { path, extension } = thumbnail;

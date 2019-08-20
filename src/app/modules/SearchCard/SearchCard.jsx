@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import ImageAvatar from '../../modules/ImageAvatar/ImageAvatar.jsx';
+import ImageAvatar from '../ImageAvatar/ImageAvatar.jsx';
 
 const SearchCard = ({ id, title, thumbnail, pathname }) => {
   const { path, extension } = thumbnail;
