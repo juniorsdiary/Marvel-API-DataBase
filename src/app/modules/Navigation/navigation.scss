@@ -1,20 +1,36 @@
 .navigation_links {
   position: fixed;
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @include simple-size(100%, 700px);
+  @include simple-size(100%);
   font-size: rem(28px);
   top: 0;
   right: 0;
-  background: rgba(0,0,0,1);
   z-index: 20;
+  transition: all 0.5s ease-in;
   @include xs-block() {
+    position: relative;
+    font-size: rem(20px);
     display: flex;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    width: 100%;
+  };
+}
+.opened {
+  background: rgba(0,0,0,1);
+  clip-path: circle(880px at 100% 0%);
+  @include xs-block() {
+    clip-path: none;
+  };
+}
+.closed {
+  background: rgba(0,0,0,0);
+  clip-path: circle(0px at 100% 0%);
+  @include xs-block() {
+    clip-path: none;
   };
 }
 
@@ -25,8 +41,6 @@
   text-decoration: none;
   margin: 0.5em;
   padding: 0.5em;
-  @include xs-block() {
-  };
 }
 
 .navigation_block__link_item:focus,
