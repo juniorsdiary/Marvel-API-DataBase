@@ -11,7 +11,8 @@ import FormGroup from 'Modules/FormGroup/FormGroup.jsx';
 import Pagination from 'Modules/Pagination/Pagination.jsx';
 import InputElement from 'Modules/InputElement/InputElement.jsx';
 import ContentComponent from 'Modules/ContentComponent/ContentComponent.jsx';
-import withLoader from '../../HOCfolder/withLoader.jsx';
+import { withLoader } from 'Utilities/hocs.jsx';
+
 const ContentComponentWithLoader = withLoader()(ContentComponent);
 
 class EventsList extends Component {

@@ -4,16 +4,16 @@ import { hot } from 'react-hot-loader/root';
 
 import Header from 'Modules/Header/Header.jsx';
 import Footer from 'Modules/Footer/Footer.jsx';
-import CharactersList from 'Pages/CharactersList/CharactersList.jsx';
-import CharacterPage from 'Pages/CharacterPage/CharacterPage.jsx';
-import ComicsList from 'Pages/ComicsList/ComicsList.jsx';
-import EventsList from 'Pages/EventsList/EventsList.jsx';
-import SeriesList from 'Pages/SeriesList/SeriesList.jsx';
-import CreatorsList from 'Pages/CreatorsList/CreatorsList.jsx';
-import ComicBookPage from 'Pages/ComicBookPage/ComicBookPage.jsx';
-import SingleSeriesPage from 'Pages/SingleSeriesPage/SingleSeriesPage.jsx';
-import EventPage from 'Pages/EventPage/EventPage.jsx';
-import CreatorPage from 'Pages/CreatorPage/CreatorPage.jsx';
+import CharactersList from 'Pages/Characters/CharactersList.jsx';
+import CharacterPage from 'Pages/Characters/CharacterPage.jsx';
+import ComicsList from 'Pages/Comics/ComicsList.jsx';
+import ComicBookPage from 'Pages/Comics/ComicBookPage.jsx';
+import EventsList from 'Pages/Events/EventsList.jsx';
+import EventPage from 'Pages/Events/EventPage.jsx';
+import SeriesList from 'Pages/Series/SeriesList.jsx';
+import SingleSeriesPage from 'Pages/Series/SingleSeriesPage.jsx';
+import CreatorPage from 'Pages/Creators/CreatorPage.jsx';
+import CreatorsList from 'Pages/Creators/CreatorsList.jsx';
 import Home from 'Pages/Home/Home.jsx';
 
 const App = () => (
@@ -40,7 +40,6 @@ const App = () => (
 
 export default hot(App);
 
-// TODO: адаптивная навигация
 // TODO: переделать комнопннет поиска с кнопкной сброса фильтра и добавить еще фильтры
 // TODO: сделать выбор отображения результатов для List компонентов
 // TODO: погинацию в ContentComponent

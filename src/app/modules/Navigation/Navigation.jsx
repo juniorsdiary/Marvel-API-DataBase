@@ -1,29 +1,25 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { customNavLink } from 'Utilities/hocs.jsx';
 
-const Navigation = ({ className }) => {
+const MyNavLink = customNavLink();
+
+const Navigation = ({ onClick, className }) => {
   return (
     <nav className={`navigation_links ${className}`}>
-      <NavLink exact to='/' className='navigation_block__link_item' activeClassName='active_nav_link'>
-        Home
-      </NavLink>
-      <NavLink to='/characters' className='navigation_block__link_item' activeClassName='active_nav_link'>
-        Characters
-      </NavLink>
-      <NavLink to='/comics' className='navigation_block__link_item' activeClassName='active_nav_link'>
-        Comics
-      </NavLink>
-      <NavLink to='/events' className='navigation_block__link_item' activeClassName='active_nav_link'>
-        Events
-      </NavLink>
-      <NavLink to='/series' className='navigation_block__link_item' activeClassName='active_nav_link'>
-        Series
-      </NavLink>
-      <NavLink to='/creators' className='navigation_block__link_item' activeClassName='active_nav_link'>
-        Creators
-      </NavLink>
+      <MyNavLink to='/' text={'Home'} onClick={onClick} />
+      <MyNavLink to='/characters' text={'Characters'} onClick={onClick} />
+      <MyNavLink to='/comics' text={'Comics'} onClick={onClick} />
+      <MyNavLink to='/events' text={'Events'} onClick={onClick} />
+      <MyNavLink to='/series' text={'Series'} onClick={onClick} />
+      <MyNavLink to='/creators' text={'Creators'} onClick={onClick} />
     </nav>
   );
+};
+
+Navigation.propTypes = {
+  onClick: PropTypes.func,
+  className: PropTypes.string,
 };
 
 export default Navigation;

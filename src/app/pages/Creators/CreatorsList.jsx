@@ -1,30 +1,30 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchComics } from 'Store/actions/comics';
+import { fetchCreators } from 'Store/actions/creators';
 import * as types from 'Store/types';
 import ApiFactory from 'Utilities/apiFactory';
 
-import SearchCard from 'Modules/SearchCard/SearchCard.jsx';
+import CreatorsSearchCard from 'Modules/CreatorsSearchCard/CreatorsSearchCard.jsx';
 import SearchComponent from 'Modules/SearchComponent/SearchComponent.jsx';
 import FormGroup from 'Modules/FormGroup/FormGroup.jsx';
 import Pagination from 'Modules/Pagination/Pagination.jsx';
 import InputElement from 'Modules/InputElement/InputElement.jsx';
 import ContentComponent from 'Modules/ContentComponent/ContentComponent.jsx';
-import withLoader from '../../HOCfolder/withLoader.jsx';
+import { withLoader } from 'Utilities/hocs.jsx';
 
 const ContentComponentWithLoader = withLoader()(ContentComponent);
 
-class ComicsList extends Component {
+class CreatorsList extends Component {
   state = {
     inputValue: '',
   };
   loadData() {
-    const { fetchComicsData, setFetchingState, location } = this.props;
+    const { fetchCreatorsData, setFetchingState, location } = this.props;
     setFetchingState(true);
     const apiHandler = ApiFactory.createApiHandler({ pathname: location.pathname, search: location.search });
     const apiStr = apiHandler.createApiString();
-    fetchComicsData(apiStr);
+    fetchCreatorsData(apiStr);
   }
   componentDidMount() {
     const { location } = this.props;
@@ -45,7 +45,7 @@ class ComicsList extends Component {
   };
 
   requestData = (searchValue, offset) => {
-    const { fetchComicsData, setSearchValue, setFetchingState, location } = this.props;
+    const { fetchCreatorsData, setSearchValue, setFetchingState, location } = this.props;
     const { inputValue } = this.state;
 
     const startsWith = searchValue ? searchValue : inputValue;
@@ -54,11 +54,11 @@ class ComicsList extends Component {
 
     setSearchValue(startsWith);
     setFetchingState(true);
-    fetchComicsData(apiStr);
+    fetchCreatorsData(apiStr);
   };
   render() {
     const { inputValue } = this.state;
-    const { comicBooksData, isFetching, totalResults, searchValue, offset, location } = this.props;
+    const { creatorsData, isFetching, totalResults, searchValue, offset, location } = this.props;
 
     return (
       <div className='page_content'>
@@ -74,32 +74,36 @@ class ComicsList extends Component {
             />
           </FormGroup>
         </SearchComponent>
-        <ContentComponentWithLoader loading={isFetching} renderData={comicBooksData} PartialComponent={SearchCard} pathname={location.pathname} />
+        <ContentComponentWithLoader
+          loading={isFetching}
+          renderData={creatorsData}
+          PartialComponent={CreatorsSearchCard}
+          pathname={location.pathname}
+        />
         {!isFetching && <Pagination searchValue={searchValue} requestData={this.requestData} totalResults={totalResults} offset={offset} />}
       </div>
     );
   }
 }
 
-ComicsList.propTypes = {
-  fetchComicsData: PropTypes.func,
+CreatorsList.propTypes = {
+  fetchCreatorsData: PropTypes.func,
   setSearchValue: PropTypes.func,
   setFetchingState: PropTypes.func,
-  comicBooksData: PropTypes.array,
+  creatorsData: PropTypes.array,
   isFetching: PropTypes.bool,
   totalResults: PropTypes.number,
   offset: PropTypes.number,
   searchValue: PropTypes.string,
-  match: PropTypes.object,
   location: PropTypes.object,
 };
 
 const mapStateToProps = state => {
   return {
-    comicBooksData: state.comicsData.comicsList,
-    totalResults: state.comicsData.totalResults,
-    offset: state.comicsData.offset,
-    isFetching: state.comicsData.isFetching,
+    creatorsData: state.creatorsData.creatorsList,
+    totalResults: state.creatorsData.totalResults,
+    offset: state.creatorsData.offset,
+    isFetching: state.creatorsData.isFetching,
     searchValue: state.searchValue,
     router: state.router,
   };
@@ -107,14 +111,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchComicsData: url => {
-      dispatch(fetchComics(url));
+    fetchCreatorsData: url => {
+      dispatch(fetchCreators(url));
     },
     setSearchValue: value => {
       dispatch({ type: types.SET_SEARCH_VALUE, payload: value });
     },
     setFetchingState: boolean => {
-      dispatch({ type: types.COMICS_FETCHING, payload: boolean });
+      dispatch({ type: types.CREATORS_FETCHING, payload: boolean });
     },
   };
 };
@@ -122,4 +126,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ComicsList);
+)(CreatorsList);

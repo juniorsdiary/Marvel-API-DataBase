@@ -12,7 +12,7 @@ import ApiFactory from 'Utilities/apiFactory';
 import Loader from 'Modules/Loader/Loader.jsx';
 import AccordeonSection from 'Modules/AccordeonSections/AccordeonSection.jsx';
 import SearchCard from 'Modules/SearchCard/SearchCard.jsx';
-import withDataFetching from '../../HOCfolder/withDataFetching.jsx';
+import { withDataFetching } from 'Utilities/hocs.jsx';
 
 const AccordeonComicsWithDataFetching = withDataFetching('/comics')(AccordeonSection);
 const AccordeonEventsWithDataFetching = withDataFetching('/events')(AccordeonSection);

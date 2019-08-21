@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchSeries } from 'Store/actions/series';
+import { fetchComics } from 'Store/actions/comics';
 import * as types from 'Store/types';
 import ApiFactory from 'Utilities/apiFactory';
 
@@ -11,20 +11,20 @@ import FormGroup from 'Modules/FormGroup/FormGroup.jsx';
 import Pagination from 'Modules/Pagination/Pagination.jsx';
 import InputElement from 'Modules/InputElement/InputElement.jsx';
 import ContentComponent from 'Modules/ContentComponent/ContentComponent.jsx';
-import withLoader from '../../HOCfolder/withLoader.jsx';
+import { withLoader } from 'Utilities/hocs.jsx';
 
 const ContentComponentWithLoader = withLoader()(ContentComponent);
 
-class SeriesList extends Component {
+class ComicsList extends Component {
   state = {
     inputValue: '',
   };
   loadData() {
-    const { fetchSeriesData, setFetchingState, location } = this.props;
+    const { fetchComicsData, setFetchingState, location } = this.props;
     setFetchingState(true);
     const apiHandler = ApiFactory.createApiHandler({ pathname: location.pathname, search: location.search });
     const apiStr = apiHandler.createApiString();
-    fetchSeriesData(apiStr);
+    fetchComicsData(apiStr);
   }
   componentDidMount() {
     const { location } = this.props;
@@ -45,7 +45,7 @@ class SeriesList extends Component {
   };
 
   requestData = (searchValue, offset) => {
-    const { fetchSeriesData, setSearchValue, setFetchingState, location } = this.props;
+    const { fetchComicsData, setSearchValue, setFetchingState, location } = this.props;
     const { inputValue } = this.state;
 
     const startsWith = searchValue ? searchValue : inputValue;
@@ -54,11 +54,11 @@ class SeriesList extends Component {
 
     setSearchValue(startsWith);
     setFetchingState(true);
-    fetchSeriesData(apiStr);
+    fetchComicsData(apiStr);
   };
   render() {
     const { inputValue } = this.state;
-    const { seriesData, isFetching, totalResults, searchValue, offset, location } = this.props;
+    const { comicBooksData, isFetching, totalResults, searchValue, offset, location } = this.props;
 
     return (
       <div className='page_content'>
@@ -74,18 +74,18 @@ class SeriesList extends Component {
             />
           </FormGroup>
         </SearchComponent>
-        <ContentComponentWithLoader loading={isFetching} renderData={seriesData} PartialComponent={SearchCard} pathname={location.pathname} />
+        <ContentComponentWithLoader loading={isFetching} renderData={comicBooksData} PartialComponent={SearchCard} pathname={location.pathname} />
         {!isFetching && <Pagination searchValue={searchValue} requestData={this.requestData} totalResults={totalResults} offset={offset} />}
       </div>
     );
   }
 }
 
-SeriesList.propTypes = {
-  fetchSeriesData: PropTypes.func,
+ComicsList.propTypes = {
+  fetchComicsData: PropTypes.func,
   setSearchValue: PropTypes.func,
   setFetchingState: PropTypes.func,
-  seriesData: PropTypes.array,
+  comicBooksData: PropTypes.array,
   isFetching: PropTypes.bool,
   totalResults: PropTypes.number,
   offset: PropTypes.number,
@@ -96,10 +96,10 @@ SeriesList.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    seriesData: state.seriesData.seriesList,
-    totalResults: state.seriesData.totalResults,
-    offset: state.seriesData.offset,
-    isFetching: state.seriesData.isFetching,
+    comicBooksData: state.comicsData.comicsList,
+    totalResults: state.comicsData.totalResults,
+    offset: state.comicsData.offset,
+    isFetching: state.comicsData.isFetching,
     searchValue: state.searchValue,
     router: state.router,
   };
@@ -107,14 +107,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchSeriesData: url => {
-      dispatch(fetchSeries(url));
+    fetchComicsData: url => {
+      dispatch(fetchComics(url));
     },
     setSearchValue: value => {
       dispatch({ type: types.SET_SEARCH_VALUE, payload: value });
     },
     setFetchingState: boolean => {
-      dispatch({ type: types.SERIES_FETCHING, payload: boolean });
+      dispatch({ type: types.COMICS_FETCHING, payload: boolean });
     },
   };
 };
@@ -122,4 +122,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SeriesList);
+)(ComicsList);

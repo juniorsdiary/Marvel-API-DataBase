@@ -1,6 +1,6 @@
 import React from 'react';
 import { IoIosArrowDroprightCircle, IoIosArrowDropleftCircle } from 'react-icons/io';
-import arrowWithCustomWrapper from '../HOCfolder/arrowWithCustomWrapper.jsx';
+import { arrowWithCustomWrapper } from './hocs.jsx';
 
 const CustomNextSlider = arrowWithCustomWrapper()(IoIosArrowDroprightCircle);
 const CustomPrevSlider = arrowWithCustomWrapper()(IoIosArrowDropleftCircle);

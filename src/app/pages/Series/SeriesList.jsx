@@ -1,34 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
-import { fetchCharacters } from 'Store/actions/characters';
+import { fetchSeries } from 'Store/actions/series';
 import * as types from 'Store/types';
 import ApiFactory from 'Utilities/apiFactory';
 
-import CharacterCard from 'Modules/CharacterCard/CharacterCard.jsx';
+import SearchCard from 'Modules/SearchCard/SearchCard.jsx';
 import SearchComponent from 'Modules/SearchComponent/SearchComponent.jsx';
 import FormGroup from 'Modules/FormGroup/FormGroup.jsx';
 import Pagination from 'Modules/Pagination/Pagination.jsx';
 import InputElement from 'Modules/InputElement/InputElement.jsx';
 import ContentComponent from 'Modules/ContentComponent/ContentComponent.jsx';
-import withLoader from '../../HOCfolder/withLoader.jsx';
+import { withLoader } from 'Utilities/hocs.jsx';
 
 const ContentComponentWithLoader = withLoader()(ContentComponent);
 
-class CharachtersList extends Component {
+class SeriesList extends Component {
   state = {
     inputValue: '',
   };
-
   loadData() {
-    const { fetchHeroes, setFetchingState, location } = this.props;
+    const { fetchSeriesData, setFetchingState, location } = this.props;
     setFetchingState(true);
     const apiHandler = ApiFactory.createApiHandler({ pathname: location.pathname, search: location.search });
     const apiStr = apiHandler.createApiString();
-    fetchHeroes(apiStr);
+    fetchSeriesData(apiStr);
   }
-
   componentDidMount() {
     const { location } = this.props;
     const apiCheck = ApiFactory.apiHash.filter(item => item.pathname === location.pathname).length;
@@ -48,20 +45,20 @@ class CharachtersList extends Component {
   };
 
   requestData = (searchValue, offset) => {
-    const { fetchHeroes, setSearchValue, setFetchingState, location } = this.props;
+    const { fetchSeriesData, setSearchValue, setFetchingState, location } = this.props;
     const { inputValue } = this.state;
 
     const startsWith = searchValue ? searchValue : inputValue;
     const apiHandler = ApiFactory.createApiHandler({ pathname: location.pathname, startsWith, offset, search: location.search });
     const apiStr = apiHandler.createApiString();
+
     setSearchValue(startsWith);
     setFetchingState(true);
-    fetchHeroes(apiStr);
+    fetchSeriesData(apiStr);
   };
-
   render() {
     const { inputValue } = this.state;
-    const { charactersList, isFetching, totalResults, offset, searchValue } = this.props;
+    const { seriesData, isFetching, totalResults, searchValue, offset, location } = this.props;
 
     return (
       <div className='page_content'>
@@ -71,37 +68,38 @@ class CharachtersList extends Component {
               id='startsWith'
               className='parametrs_list__startsWith_input'
               type='text'
-              label='name starts with'
+              label='title starts with'
               onChange={this.setStateValue}
               value={inputValue}
             />
           </FormGroup>
         </SearchComponent>
-        <ContentComponentWithLoader loading={isFetching} renderData={charactersList} PartialComponent={CharacterCard} />
+        <ContentComponentWithLoader loading={isFetching} renderData={seriesData} PartialComponent={SearchCard} pathname={location.pathname} />
         {!isFetching && <Pagination searchValue={searchValue} requestData={this.requestData} totalResults={totalResults} offset={offset} />}
       </div>
     );
   }
 }
 
-CharachtersList.propTypes = {
-  fetchHeroes: PropTypes.func,
+SeriesList.propTypes = {
+  fetchSeriesData: PropTypes.func,
   setSearchValue: PropTypes.func,
   setFetchingState: PropTypes.func,
-  charactersList: PropTypes.array,
+  seriesData: PropTypes.array,
   isFetching: PropTypes.bool,
   totalResults: PropTypes.number,
   offset: PropTypes.number,
   searchValue: PropTypes.string,
+  match: PropTypes.object,
   location: PropTypes.object,
 };
 
 const mapStateToProps = state => {
   return {
-    charactersList: state.charactersData.charactersList,
-    totalResults: state.charactersData.totalResults,
-    offset: state.charactersData.offset,
-    isFetching: state.charactersData.isFetching,
+    seriesData: state.seriesData.seriesList,
+    totalResults: state.seriesData.totalResults,
+    offset: state.seriesData.offset,
+    isFetching: state.seriesData.isFetching,
     searchValue: state.searchValue,
     router: state.router,
   };
@@ -109,14 +107,14 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchHeroes: url => {
-      dispatch(fetchCharacters(url));
+    fetchSeriesData: url => {
+      dispatch(fetchSeries(url));
     },
     setSearchValue: value => {
       dispatch({ type: types.SET_SEARCH_VALUE, payload: value });
     },
     setFetchingState: boolean => {
-      dispatch({ type: types.CHARACTERS_FETCHING, payload: boolean });
+      dispatch({ type: types.SERIES_FETCHING, payload: boolean });
     },
   };
 };
@@ -124,4 +122,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CharachtersList);
+)(SeriesList);

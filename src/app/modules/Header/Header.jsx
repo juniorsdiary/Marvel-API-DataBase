@@ -15,7 +15,7 @@ const Header = () => {
         <img src={require('../../../assets/images/marvel_logo.png')} alt='marvel_logo' />
       </Link>
       <HumburgerButton onClick={toggleHumb} active={active} />
-      <Navigation className={active ? 'opened' : 'closed'} />
+      <Navigation onClick={toggleHumb} className={active ? 'opened' : 'closed'} />
     </header>
   );
 };

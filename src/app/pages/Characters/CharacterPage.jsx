@@ -15,7 +15,7 @@ import ImageAvatar from 'Modules/ImageAvatar/ImageAvatar.jsx';
 import AccordeonSection from 'Modules/AccordeonSections/AccordeonSection.jsx';
 import DetailsSection from 'Modules/DetailsSection/DetailsSection.jsx';
 import SearchCard from 'Modules/SearchCard/SearchCard.jsx';
-import withDataFetching from '../../HOCfolder/withDataFetching.jsx';
+import { withDataFetching } from 'Utilities/hocs.jsx';
 
 const AccordeonEventsWithDataFetching = withDataFetching('/events')(AccordeonSection);
 const AccordeonSeriesWithDataFetching = withDataFetching('/series')(AccordeonSection);
