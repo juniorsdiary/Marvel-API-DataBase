@@ -30,7 +30,7 @@ module.exports = merge(common, {
         use: [
           'style-loader',
           'css-loader',
-          { loader: 'postcss-loader', options: { sourceMap: true, config: { path: './postcss.config.js' } } },
+          { loader: 'postcss-loader', options: { sourceMap: true, config: { path: path.join(__dirname, '/postcss.config.js') } } },
           'sass-loader',
         ],
       },
