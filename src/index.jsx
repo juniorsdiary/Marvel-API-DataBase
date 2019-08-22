@@ -3,19 +3,13 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
 import store, { history } from 'Store/store';
-// import { hot } from 'react-hot-loader/root';
-
+import App from './App.jsx';
 import './styles/styles.scss';
-import Routes from './routes.jsx';
-import Header from 'Modules/Header/Header.jsx';
-import Footer from 'Modules/Footer/Footer.jsx';
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <Header />
-      <Routes />
-      <Footer />
+      <App />
     </ConnectedRouter>
   </Provider>,
   document.getElementById('container')

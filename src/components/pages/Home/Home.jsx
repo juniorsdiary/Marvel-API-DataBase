@@ -1,5 +1,5 @@
 import React from 'react';
-const Home = () => (
+const Home = props => (
   <div className='home_page_block'>
     <h1 className='home_page_block_title'>Hello, MCU and Marvel Fan!</h1>
     <p className='home_page_block_description'>Here you can look for some comics, characters, events or series that Marvel has in their data base.</p>
