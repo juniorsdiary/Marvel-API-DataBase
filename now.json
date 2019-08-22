@@ -1,0 +1,9 @@
+{
+  "routes": [
+    { "src": "/characters", "dest": "/index.html" },
+    { "src": "/comics", "dest": "/index.html" },
+    { "src": "/events", "dest": "/index.html" },
+    { "src": "/series", "dest": "/index.html" },
+    { "src": "/creators", "dest": "/index.html" }
+  ]
+}

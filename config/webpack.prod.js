@@ -1,4 +1,4 @@
-const path = require('path');
+const paths = require('./paths');
 const merge = require('webpack-merge');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -10,7 +10,7 @@ const common = require('./webpack.config.js');
 module.exports = merge(common, {
   mode: 'production',
   output: {
-    path: path.join(__dirname, 'public'),
+    path: paths.appPublic,
     filename: '[name].[hash].js',
   },
   optimization: {
@@ -20,7 +20,7 @@ module.exports = merge(common, {
     new CleanWebpackPlugin(),
     new MiniCssPlugin({ filename: '[name].[hash].css' }),
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: paths.appHtml,
       minify: {
         removeAttributeQuotes: true,
         collapseWhitespace: true,
@@ -35,7 +35,15 @@ module.exports = merge(common, {
         use: [
           MiniCssPlugin.loader,
           { loader: 'css-loader', options: { sourceMap: true } },
-          { loader: 'postcss-loader', options: { sourceMap: true, config: { path: './postcss.config.js' } } },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              config: {
+                path: `${paths.appConfig}/postcss.config.js`,
+              },
+            },
+          },
           { loader: 'sass-loader', options: { sourceMap: true } },
         ],
       },

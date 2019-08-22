@@ -1,13 +1,14 @@
-const path = require('path');
-
+const paths = require('./paths');
 module.exports = {
-  entry: ['@babel/polyfill', './src/index.js'],
+  entry: ['@babel/polyfill', paths.appIndex],
   resolve: {
     alias: {
-      Modules: path.resolve('./src/app/', 'modules'),
-      Pages: path.resolve('./src/app/', 'pages'),
-      Utilities: path.resolve('./src/app/', 'utilities'),
-      Store: path.resolve('./src/app/', 'store'),
+      Components: `${paths.appComponents}`,
+      Modules: `${paths.appComponents}/modules`,
+      Pages: `${paths.appComponents}/pages`,
+      Utilities: `${paths.appUtilities}`,
+      Store: `${paths.appStore}`,
+      Assets: `${paths.appAssets}`,
       'react-dom': '@hot-loader/react-dom',
     },
   },

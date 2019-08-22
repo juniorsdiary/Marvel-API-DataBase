@@ -2,7 +2,7 @@
   "name": "Marvel-API-DataBase",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.js",
+  "main": "src/index.jsx",
   "browserslist": [
     "> 1%",
     "ie >= 8",
@@ -11,8 +11,7 @@
   "scripts": {
     "start": "webpack-dev-server --color --config config/webpack.dev.js",
     "build": "webpack --color --config config/webpack.prod.js",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "now",
     "lint": "eslint src/**/*.js --fix"
   },
   "author": "",

@@ -1,5 +1,4 @@
-const path = require('path');
-
+const paths = require('./paths');
 module.exports = {
   plugins: [
     require('css-mqpacker')({
@@ -16,8 +15,8 @@ module.exports = {
       ],
     }),
     require('stylelint')({
-      configFile: path.resolve(__dirname, 'stylelint.config.js'),
-      context: path.resolve(__dirname, '/src'),
+      configFile: `${paths.appConfig}/stylelint.config.js`,
+      context: paths.appSrc,
       files: '**/*.css',
       failOnError: false,
       quiet: false,

@@ -1,4 +1,4 @@
-const path = require('path');
+const paths = require('./paths');
 const merge = require('webpack-merge');
 const common = require('./webpack.config.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -7,7 +7,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = merge(common, {
   mode: 'development',
   output: {
-    path: path.join(__dirname, '/public'),
+    path: paths.appPublic,
     filename: '[name].js',
   },
   devServer: {
@@ -17,7 +17,7 @@ module.exports = merge(common, {
     overlay: true,
     hot: true,
     watchContentBase: true,
-    contentBase: './src/index.html',
+    contentBase: paths.appHtml,
     historyApiFallback: true,
     noInfo: true,
     open: true,
@@ -30,11 +30,19 @@ module.exports = merge(common, {
         use: [
           'style-loader',
           'css-loader',
-          { loader: 'postcss-loader', options: { sourceMap: true, config: { path: path.join(__dirname, '/postcss.config.js') } } },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
+              config: {
+                path: `${paths.appConfig}/postcss.config.js`,
+              },
+            },
+          },
           'sass-loader',
         ],
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: './src/index.html' }), new CleanWebpackPlugin()],
+  plugins: [new HtmlWebpackPlugin({ template: paths.appHtml }), new CleanWebpackPlugin()],
 });
