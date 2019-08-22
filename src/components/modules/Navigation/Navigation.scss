@@ -6,7 +6,7 @@
   align-items: center;
   @include simple-size(100%);
   font-size: rem(28px);
-  background: #202020;
+  background: rgb(34,34,34);
   top: 0;
   right: 0;
   z-index: 20;
@@ -21,14 +21,14 @@
   };
 }
 .opened {
-  opacity: 1;
+  background: rgba(34,34,34, 1);
   clip-path: circle(880px at 100% 0%);
   @include xs-block() {
     clip-path: none;
   };
 }
 .closed {
-  opacity: 0;
+  background: rgba(34,34,34, 0);
   clip-path: circle(0px at 100% 0%);
   @include xs-block() {
     clip-path: none;
