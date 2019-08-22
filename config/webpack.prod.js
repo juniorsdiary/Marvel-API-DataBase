@@ -10,8 +10,8 @@ const common = require('./webpack.config.js');
 module.exports = merge(common, {
   mode: 'production',
   output: {
-    path: path.join(__dirname, '/build'),
-    filename: 'js/[name].[hash].js',
+    path: path.join(__dirname, 'public'),
+    filename: '[name].[hash].js',
   },
   optimization: {
     minimizer: [new OptimizeCssAssetsPlugin(), new TerserPlugin()],

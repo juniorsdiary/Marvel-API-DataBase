@@ -4,12 +4,8 @@
 }
 .inputFieldWrapper {
   display: flex;
-  position: relative;
 }
 .label_default {
-  position: absolute;
-  left: 0;
-  transition: left 0.2s linear;
 }
 .input_default:focus {
   outline: none;

@@ -7,9 +7,8 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = merge(common, {
   mode: 'development',
   output: {
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, '/public'),
     filename: '[name].js',
-    publicPath: '/',
   },
   devServer: {
     port: 1302,
@@ -31,7 +30,7 @@ module.exports = merge(common, {
         use: [
           'style-loader',
           'css-loader',
-          // { loader: 'postcss-loader', options: { sourceMap: true, config: { path: './postcss.config.js' } } },
+          { loader: 'postcss-loader', options: { sourceMap: true, config: { path: './postcss.config.js' } } },
           'sass-loader',
         ],
       },

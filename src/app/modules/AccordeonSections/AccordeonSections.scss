@@ -16,7 +16,6 @@
   padding: 1em 2em;
   margin: 1em 0;
   text-decoration: none;
-  color: black;
   clip-path: polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%);
   background: red;
   color: white;
@@ -88,8 +87,6 @@
   &:before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
     border: 3px solid transparent;
     border-radius: 50%;
     @include center_absolute_pos(25);
@@ -100,8 +97,6 @@
   &:after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
     border: 2px solid transparent;
     border-radius: 50%;
     @include center_absolute_pos(25);
