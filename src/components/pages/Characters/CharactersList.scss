@@ -1,22 +1,32 @@
 .characters_filter_form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgb(255,255,255);
+  color: rgb(0,0,0);
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
   align-items: center;
-  margin-top: 1em;
+  padding-top: 1em;
+  font-size: rem(28px);
+  z-index: 20;
+  overflow: hidden;
+  transition: all 0.3s linear;
 }
-
 .parametrs_startsWith_wrapper {
   margin: 0.5em 0;
   display: flex;
   flex-direction: column;
   text-align: center;
 }
-
-.startsWith_input {
-  width: 50%;
-  font-size: rem(28px) !important;
+.parametrs_list__startsWith_input {
+  margin: 1em 0;
+  padding: 0.3em;
 }
 
 .parametrs_order_wrapper {
-  padding: 0.5em;
+  margin: 0.5em;
   display: flex;
   align-items: center;
 }
@@ -44,6 +54,26 @@
   background: red;
   color: white;
 }
-.submit_input {
-  margin: auto 0 0 0;
+.search_btn {
+  background: red;
+  color: white;
+  font-weight: bold;
+  padding: 1em 2em;
+  clip-path: polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%);
+  margin: auto 0 1em 0;
+}
+.filter_icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: rgb(255,255,255);
+}
+.close_icon {
+  color: black;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+.hidden_block {
+  left: -100%;
 }

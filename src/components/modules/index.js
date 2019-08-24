@@ -13,6 +13,7 @@ import InputElement from './InputElement/InputElement.jsx';
 import CreatorsSearchCard from './CreatorsSearchCard/CreatorsSearchCard.jsx';
 import Header from './Header/Header.jsx';
 import Footer from './Footer/Footer.jsx';
+import Button from './Button/Button.jsx';
 
 export {
   AccordeonSection,
@@ -30,4 +31,5 @@ export {
   CreatorsSearchCard,
   Header,
   Footer,
+  Button,
 };

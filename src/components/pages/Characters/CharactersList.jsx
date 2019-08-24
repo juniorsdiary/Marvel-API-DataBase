@@ -1,32 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import { IoIosFunnel, IoIosCloseCircleOutline } from 'react-icons/io';
 import { fetchCharacters, types } from 'Store';
 import { ApiFactory } from 'Utilities';
-import { CharacterCard, SearchComponent, Pagination, ContentComponent } from 'Modules';
+import { CharacterCard, Pagination, ContentComponent, InputElement, FormGroup, Button } from 'Modules';
 import { withLoader } from 'Components/hocs.jsx';
-
-import { FormGroup } from '@material-ui/core';
-import { Input } from '@material-ui/core';
 
 const ContentComponentWithLoader = withLoader()(ContentComponent);
 
 class CharachtersList extends Component {
   state = {
-    inputValue: '',
-    order: '',
+    startsWith: '',
+    order: 'name',
+    offset: 0,
+    hiddenState: true,
   };
-
-  loadData() {
-    const { fetchHeroes, setFetchingState, location, setFilters } = this.props;
-    setFetchingState(true);
-    const apiHandler = ApiFactory.createApiHandler({ pathname: location.pathname, search: location.search });
-    const apiStr = apiHandler.createApiString();
-    this.setState({ order: 'name' });
-    setFilters({ startsWith: '', order: 'name' });
-    fetchHeroes(apiStr);
-  }
 
   componentDidMount() {
     const { location } = this.props;
@@ -41,9 +30,28 @@ class CharachtersList extends Component {
     }
   }
 
+  loadData = () => {
+    const { fetchHeroes, setFetchingState, location } = this.props;
+    const { startsWith, order, offset } = this.state;
+    const apiHandler = ApiFactory.createApiHandler({ pathname: location.pathname, search: location.search, startsWith, offset, order });
+    const apiStr = apiHandler.createApiString();
+    setFetchingState(true);
+    fetchHeroes(apiStr);
+  };
+
+  setOffsetValue = offset => {
+    this.setState({ offset }, () => {
+      this.loadData();
+    });
+  };
+
+  setHiddenState = hiddenState => {
+    this.setState({ hiddenState });
+  };
+
   setStateValue = e => {
-    let inputValue = e.target.value;
-    this.setState({ inputValue });
+    let startsWith = e.target.value;
+    this.setState({ startsWith });
   };
 
   setOrderValue = e => {
@@ -51,37 +59,58 @@ class CharachtersList extends Component {
     this.setState({ order });
   };
 
-  requestData = (searchValue, offset) => {
-    const { fetchHeroes, setFilters, setFetchingState, location } = this.props;
-    const { inputValue, order } = this.state;
-
-    const startsWith = searchValue ? searchValue : inputValue;
-    const apiHandler = ApiFactory.createApiHandler({ pathname: location.pathname, search: location.search, startsWith, offset, order });
-    const apiStr = apiHandler.createApiString();
-    setFilters({ startsWith, order });
-    setFetchingState(true);
-    fetchHeroes(apiStr);
+  handleSubmit = e => {
+    e.preventDefault();
+    this.loadData();
   };
 
   render() {
-    const { inputValue } = this.state;
-    const { charactersList, isFetching, totalResults, offset, searchValue } = this.props;
+    const { startsWith, order, offset, hiddenState } = this.state;
+    const { charactersList, isFetching, totalResults } = this.props;
 
     return (
       <div className='page_content'>
-        <SearchComponent>
-          <FormGroup className='characters_filter_form'>
-            <Input
-              id='startsWith'
-              name='startsWith'
-              className='startsWith_input'
-              onChange={this.setStateValue}
-              value={inputValue}
-              autoComplete={'false'}
+        <IoIosFunnel size='25' onClick={() => this.setHiddenState(false)} className='filter_icon' />
+        <FormGroup className={`characters_filter_form ${hiddenState ? 'hidden_block' : ''}`}>
+          <IoIosCloseCircleOutline size='25' onClick={() => this.setHiddenState(true)} className='close_icon' />
+          <InputElement
+            id='startsWith'
+            inputClass='parametrs_list__startsWith_input'
+            wrapperClass='parametrs_startsWith_wrapper'
+            label='name starts with'
+            onChange={this.setStateValue}
+            value={startsWith}
+          />
+          <div className='parametrs_order_wrapper'>
+            <p className='parametrs_order_title'>Order:</p>
+            <InputElement
+              id='order_asc'
+              name='name'
+              inputClass='parametrs_list__order_input'
+              wrapperClass='asc_order_input_wrapper'
+              activeClass={order === 'name' ? 'checked' : ''}
+              type='radio'
+              label='A-Z'
+              onChange={this.setOrderValue}
+              value='name'
             />
-          </FormGroup>
-        </SearchComponent>
-        {!isFetching && <Pagination searchValue={searchValue} requestData={this.requestData} totalResults={totalResults} offset={offset} />}
+            <InputElement
+              id='order_desc'
+              name='name'
+              inputClass='parametrs_list__order_input'
+              wrapperClass='desc_order_input_wrapper'
+              activeClass={order === '-name' ? 'checked' : ''}
+              type='radio'
+              label='Z-A'
+              onChange={this.setOrderValue}
+              value='-name'
+            />
+          </div>
+          <Button className='search_btn' type='submit' onClick={() => this.handleSubmit()}>
+            Search
+          </Button>
+        </FormGroup>
+        {!isFetching && <Pagination setOffset={this.setOffsetValue} totalResults={totalResults} offset={offset} />}
         <ContentComponentWithLoader loading={isFetching} renderData={charactersList} PartialComponent={CharacterCard} />
       </div>
     );
@@ -90,13 +119,11 @@ class CharachtersList extends Component {
 
 CharachtersList.propTypes = {
   fetchHeroes: PropTypes.func,
-  setFilters: PropTypes.func,
   setFetchingState: PropTypes.func,
   charactersList: PropTypes.array,
   isFetching: PropTypes.bool,
   totalResults: PropTypes.number,
   offset: PropTypes.number,
-  searchValue: PropTypes.string,
   location: PropTypes.object,
 };
 
@@ -106,7 +133,6 @@ const mapStateToProps = state => {
     totalResults: state.charactersData.totalResults,
     offset: state.charactersData.offset,
     isFetching: state.charactersData.isFetching,
-    searchValue: state.searchValue,
     router: state.router,
   };
 };
@@ -115,9 +141,6 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchHeroes: url => {
       dispatch(fetchCharacters(url));
-    },
-    setFilters: params => {
-      dispatch({ type: types.SET_FILTERS, payload: params });
     },
     setFetchingState: boolean => {
       dispatch({ type: types.CHARACTERS_FETCHING, payload: boolean });
