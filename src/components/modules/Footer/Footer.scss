@@ -1,5 +1,7 @@
 .footer_block {
+  position: relative;
   height: 75px;
   background: #202020;
   flex: 0 0 auto;
+  z-index: 30;
 }

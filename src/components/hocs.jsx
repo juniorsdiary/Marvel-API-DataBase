@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import Loader from 'Modules/Loader/Loader.jsx';
+import { Loader } from 'Modules';
 import { NavLink } from 'react-router-dom';
-import ApiFactory from 'Utilities/apiFactory';
-import * as constants from 'Utilities/constants';
-
+import { ApiFactory, constants } from 'Utilities';
+/* eslint-disable react/prop-types */
 export const arrowWithCustomWrapper = () => WrappedComponent => {
   return class WrappedArrow extends Component {
     render() {
@@ -55,3 +54,4 @@ export const withLoader = () => WrappedComponent => {
     }
   };
 };
+/* eslint-enable react/prop-types */

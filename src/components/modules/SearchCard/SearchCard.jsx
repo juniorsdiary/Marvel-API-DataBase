@@ -19,6 +19,7 @@ SearchCard.propTypes = {
     path: PropTypes.string,
     extension: PropTypes.string,
   }),
+  pathname: PropTypes.string,
 };
 
 export default SearchCard;

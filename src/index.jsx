@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'connected-react-router';
-import store, { history } from 'Store/store';
+import { store, history } from 'Store';
 import App from './App.jsx';
 import './styles/styles.scss';
 

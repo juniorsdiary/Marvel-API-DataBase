@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchSeries } from 'Store/actions/series';
-import * as types from 'Store/types';
-import ApiFactory from 'Utilities/apiFactory';
 
-import SearchCard from 'Modules/SearchCard/SearchCard.jsx';
-import SearchComponent from 'Modules/SearchComponent/SearchComponent.jsx';
-import FormGroup from 'Modules/FormGroup/FormGroup.jsx';
-import Pagination from 'Modules/Pagination/Pagination.jsx';
-import InputElement from 'Modules/InputElement/InputElement.jsx';
-import ContentComponent from 'Modules/ContentComponent/ContentComponent.jsx';
+import { fetchSeries, types } from 'Store';
+import { ApiFactory } from 'Utilities';
+import { SearchCard, SearchComponent, FormGroup, Pagination, InputElement, ContentComponent } from 'Modules';
+
 import { withLoader } from 'Components/hocs.jsx';
 
 const ContentComponentWithLoader = withLoader()(ContentComponent);

@@ -1,0 +1,49 @@
+.characters_filter_form {
+  align-items: center;
+  margin-top: 1em;
+}
+
+.parametrs_startsWith_wrapper {
+  margin: 0.5em 0;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.startsWith_input {
+  width: 50%;
+  font-size: rem(28px) !important;
+}
+
+.parametrs_order_wrapper {
+  padding: 0.5em;
+  display: flex;
+  align-items: center;
+}
+.parametrs_order_title {
+  margin-right: 0.5em;
+}
+.parametrs_list__order_input {
+  display: none;
+}
+.asc_order_input_wrapper {
+  padding: 0.2em 0.5em;
+  border: 2px solid black;
+  border-right: none;
+  border-radius: 5px 0 0 5px;
+  transition: all 0.5s linear;
+}
+.desc_order_input_wrapper {
+  padding: 0.2em 0.5em;
+  border: 2px solid black;
+  border-left: none;
+  border-radius: 0 5px 5px 0;
+  transition: all 0.5s linear;
+}
+.checked {
+  background: red;
+  color: white;
+}
+.submit_input {
+  margin: auto 0 0 0;
+}

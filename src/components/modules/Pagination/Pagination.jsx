@@ -80,6 +80,7 @@ Pagination.propTypes = {
   changePage: PropTypes.func,
   totalResults: PropTypes.number,
   offset: PropTypes.number,
+  searchValue: PropTypes.string,
 };
 
 Pagination.defaultProps = {

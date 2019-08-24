@@ -1,31 +1,27 @@
-.search__title {
-  position: relative;
-  background: rgb(0,0,0);
-  color: rgb(255, 255, 255);
-  border-top: 2px solid rgb(255,0,0);
-  width: 100%;
-  height: 25px;
-  cursor: pointer;
-  order: 2;
-  p {
-    width: 100%;
-    text-align: center;
-  }
-}
 .filter_parametrs_block {
   position: absolute;
+  top: 0;
+  left: 0;
   background: rgb(255,255,255);
   color: rgb(0,0,0);
-  top: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  height: 100%;
   width: 100%;
-  height: 60px;
-  z-index: 11;
-  transition: top 0.2s linear;
+  z-index: 20;
+  overflow: hidden;
+  transition: all 0.3s linear;
 }
-
+.filter_icon {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: rgb(255,255,255);
+}
+.close_icon {
+  color: black;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
 .hidden_block {
-  top: -35px;
+  left: -100%;
 }

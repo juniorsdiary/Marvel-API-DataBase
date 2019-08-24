@@ -1,5 +1,5 @@
 import * as types from '../types';
-import { fetchFunction } from 'Utilities/lib';
+import { fetchFunction } from 'Utilities';
 
 export const fetchCreators = url => async dispatch => {
   const data = await fetchFunction(url);

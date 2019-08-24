@@ -9,6 +9,10 @@ const PageButton = ({ className, pageInd, requestData, baseOffset, textContent, 
     <span
       className={commonClass}
       role='button'
+      tabIndex='-1'
+      onKeyPress={() => {
+        requestData(searchValue, (pageInd - 1) * baseOffset);
+      }}
       onClick={() => {
         requestData(searchValue, (pageInd - 1) * baseOffset);
       }}>
@@ -24,6 +28,7 @@ PageButton.propTypes = {
   baseOffset: PropTypes.number,
   textContent: PropTypes.any,
   isFetching: PropTypes.bool,
+  searchValue: PropTypes.string,
 };
 const mapStateToProps = state => {
   return {

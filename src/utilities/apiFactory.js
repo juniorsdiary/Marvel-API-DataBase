@@ -31,7 +31,7 @@ class CommonAPISettings {
 class Characters extends CommonAPISettings {
   constructor(options) {
     super(options);
-    this.order = constants.ORDER;
+    this.order = options.order || constants.ORDER;
   }
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
@@ -45,7 +45,7 @@ class Characters extends CommonAPISettings {
 class Comics extends CommonAPISettings {
   constructor(options) {
     super(options);
-    this.order = constants.ORDER_TITLE;
+    this.order = options.order || constants.ORDER_TITLE;
   }
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `titleStartsWith=${this.startsWith}` : '';
@@ -59,7 +59,7 @@ class Comics extends CommonAPISettings {
 class Series extends CommonAPISettings {
   constructor(options) {
     super(options);
-    this.order = constants.ORDER_TITLE;
+    this.order = options.order || constants.ORDER_TITLE;
   }
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `titleStartsWith=${this.startsWith}` : '';
@@ -73,7 +73,7 @@ class Series extends CommonAPISettings {
 class Events extends CommonAPISettings {
   constructor(options) {
     super(options);
-    this.order = constants.ORDER;
+    this.order = options.order || constants.ORDER;
   }
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
@@ -87,7 +87,7 @@ class Events extends CommonAPISettings {
 class Creators extends CommonAPISettings {
   constructor(options) {
     super(options);
-    this.order = constants.ORDER_LAST_NAME;
+    this.order = options.order || constants.ORDER_LAST_NAME;
   }
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';

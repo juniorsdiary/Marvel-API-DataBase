@@ -7,8 +7,8 @@ import seriesData from './seriesReducer';
 import eventsData from './eventsReducer';
 import creatorsData from './creatorsReducer';
 
-function searchValue(state = '', action) {
-  if (action.type === types.SET_SEARCH_VALUE) {
+function filters(state = '', action) {
+  if (action.type === types.SET_FILTERS) {
     return action.payload;
   }
   return state;
@@ -21,7 +21,7 @@ const rootReducer = history =>
     seriesData,
     comicsData,
     charactersData,
-    searchValue,
+    filters,
     router: connectRouter(history),
   });
 

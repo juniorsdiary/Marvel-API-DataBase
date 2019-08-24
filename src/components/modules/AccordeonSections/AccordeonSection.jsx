@@ -10,7 +10,7 @@ const AccordeonSection = ({ content, number, pathname, location, children, slide
   const [active, setActive] = useState(false);
   useLayoutEffect(() => {
     elemRef.current.style.height = `${active ? elemRef.current.scrollHeight : 0}px`;
-  }, [active, number]);
+  }, [active]);
   const search = location.pathname
     .split('/')
     .join('=')

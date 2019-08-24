@@ -11,7 +11,7 @@ export const history = createBrowserHistory();
 const md = [routerMiddleware(history), thunk];
 
 if (process.env.NODE_ENV === `development`) {
-  // md.push(logger);
+  md.push(logger);
 }
 
 const store = createStore(rootReducer(history), composeWithDevTools(applyMiddleware(...md)));

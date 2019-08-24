@@ -1,8 +1,8 @@
 import React from 'react';
 import { hot } from 'react-hot-loader/root';
 import Routes from './routes.jsx';
-import Header from 'Modules/Header/Header.jsx';
-import Footer from 'Modules/Footer/Footer.jsx';
+import { Header, Footer } from 'Modules';
+
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const App = () => (
