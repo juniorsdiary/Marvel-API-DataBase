@@ -11,6 +11,7 @@ import PreviewItem from './PreviewItem/PreviewItem.jsx';
 import FormGroup from './FormGroup/FormGroup.jsx';
 import InputElement from './InputElement/InputElement.jsx';
 import CreatorsSearchCard from './CreatorsSearchCard/CreatorsSearchCard.jsx';
+import FilterComponent from './FilterComponent/FilterComponent.jsx';
 import Header from './Header/Header.jsx';
 import Footer from './Footer/Footer.jsx';
 import Button from './Button/Button.jsx';
@@ -32,4 +33,5 @@ export {
   Header,
   Footer,
   Button,
+  FilterComponent,
 };
