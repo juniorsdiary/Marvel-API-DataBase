@@ -4,8 +4,8 @@ import { InputElement, Button } from 'Modules';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import classNames from 'classnames';
 
-const FilterComponent = ({ className, setStateValue, setHiddenState, startsWith, order, setOrderValue, handleSubmit }) => {
-  const commonClass = classNames('default_form', className);
+const FilterComponent = ({ hiddenState, setStateValue, setHiddenState, startsWith, order, setOrderValue, handleSubmit }) => {
+  const commonClass = classNames('default_form', `characters_filter_form ${hiddenState ? 'hidden_block' : ''}`);
   return (
     <>
       <form className={commonClass} onSubmit={handleSubmit}>
@@ -50,7 +50,7 @@ const FilterComponent = ({ className, setStateValue, setHiddenState, startsWith,
 };
 
 FilterComponent.propTypes = {
-  className: PropTypes.string,
+  hiddenState: PropTypes.bool,
   setStateValue: PropTypes.func,
   setHiddenState: PropTypes.func,
   startsWith: PropTypes.string,

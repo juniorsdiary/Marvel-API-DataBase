@@ -15,6 +15,8 @@ import FilterComponent from './FilterComponent/FilterComponent.jsx';
 import Header from './Header/Header.jsx';
 import Footer from './Footer/Footer.jsx';
 import Button from './Button/Button.jsx';
+import ListItem from './ListItem/ListItem.jsx';
+import SettingsIcons from './SettingsIcons/SettingsIcons.jsx';
 
 export {
   AccordeonSection,
@@ -34,4 +36,6 @@ export {
   Footer,
   Button,
   FilterComponent,
+  ListItem,
+  SettingsIcons,
 };

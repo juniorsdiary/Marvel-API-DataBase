@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchCharacters, types } from 'Store';
 import { ApiFactory } from 'Utilities';
-import { CharacterCard, Pagination, ContentComponent, FilterComponent } from 'Modules';
+import { CharacterCard, ContentComponent, FilterComponent, ListItem, Pagination, SettingsIcons } from 'Modules';
 import { withLoader } from 'Components/hocs.jsx';
-import { IoIosFunnel } from 'react-icons/io';
 
 const ContentComponentWithLoader = withLoader()(ContentComponent);
 
@@ -15,6 +14,7 @@ class CharachtersList extends Component {
     order: true,
     offset: 0,
     hiddenState: true,
+    componentType: 'cards',
   };
 
   componentDidMount() {
@@ -58,6 +58,10 @@ class CharachtersList extends Component {
     this.setState({ order });
   };
 
+  setComponentType = componentType => {
+    this.setState({ componentType });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
     this.loadData();
@@ -65,24 +69,31 @@ class CharachtersList extends Component {
   };
 
   render() {
-    const { startsWith, order, offset, hiddenState } = this.state;
+    const { startsWith, order, offset, hiddenState, componentType } = this.state;
     const { charactersList, isFetching, totalResults, location } = this.props;
-
     return (
       <div className='page_content'>
-        {!isFetching && <IoIosFunnel size='25' onClick={() => this.setHiddenState(false)} className='filter_icon' />}
+        {!isFetching && (
+          <>
+            <SettingsIcons showFilterBlock={this.setHiddenState} componentType={componentType} changeComponentType={this.setComponentType} />
+            <Pagination setOffset={this.setOffsetValue} totalResults={totalResults} offset={offset} />
+          </>
+        )}
         <FilterComponent
-          className={`characters_filter_form ${hiddenState ? 'hidden_block' : ''}`}
+          hiddenState={hiddenState}
           setStateValue={this.setStateValue}
           setHiddenState={this.setHiddenState}
-          hiddenState={hiddenState}
           startsWith={startsWith}
           order={order}
           setOrderValue={this.setOrderValue}
           handleSubmit={this.handleSubmit}
         />
-        {!isFetching && <Pagination setOffset={this.setOffsetValue} totalResults={totalResults} offset={offset} />}
-        <ContentComponentWithLoader loading={isFetching} renderData={charactersList} PartialComponent={CharacterCard} pathname={location.pathname} />
+        <ContentComponentWithLoader
+          loading={isFetching}
+          renderData={charactersList}
+          Component={componentType === 'cards' ? CharacterCard : ListItem}
+          pathname={location.pathname}
+        />
       </div>
     );
   }

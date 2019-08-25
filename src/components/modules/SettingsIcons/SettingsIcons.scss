@@ -1,0 +1,22 @@
+.settings_icons_block {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+.filter_icon {
+  color: rgb(255,255,255);
+  margin: 1em auto 0 1em;
+}
+.toggle_component_list {
+  margin: 1em 0;
+  color: rgb(255,255,255);
+  transition: color 0.2s linear;
+}
+.toggle_component_cards {
+  color: rgb(255,255,255);
+  margin: 1em 0.2em;
+  transition: color 0.2s linear;
+}
+.active_component_type {
+  color: rgb(0,0,0);
+}
