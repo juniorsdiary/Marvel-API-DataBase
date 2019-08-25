@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { fetchCharacters, types } from 'Store';
 import { ApiFactory } from 'Utilities';
 import { CharacterCard, ContentComponent, FilterComponent, ListItem, Pagination, SettingsIcons } from 'Modules';
-import { withLoader } from 'Components/hocs.jsx';
+import { withLoader } from 'Components/hocs';
 
 const ContentComponentWithLoader = withLoader()(ContentComponent);
 

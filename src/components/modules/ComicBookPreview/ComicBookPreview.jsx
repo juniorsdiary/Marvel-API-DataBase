@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ImageAvatar from '../ImageAvatar/ImageAvatar.jsx';
+import { ImageAvatar } from 'Modules';
 import { Link } from 'react-router-dom';
 
 const ComicBookPreview = ({ id, thumbnail }) => {

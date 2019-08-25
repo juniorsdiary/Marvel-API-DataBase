@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import settings from 'Utilities/sliderSettings';
+import { settings } from 'Utilities';
 import { IoIosArrowDown } from 'react-icons/io';
 
 const AccordeonSection = ({ content, number, pathname, location, children, slider, contentClassName, title, loading }) => {

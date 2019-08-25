@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { customNavLink } from 'Components/hocs.jsx';
+import { customNavLink } from 'Components/hocs';
 
 const MyNavLink = customNavLink();
 

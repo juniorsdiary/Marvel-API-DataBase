@@ -6,7 +6,7 @@ import { fetchSeries, fetchCharacters, fetchSingleEvent, fetchComics, types } fr
 import { convertToLocale, ApiFactory } from 'Utilities';
 import { Loader, ImageAvatar, AccordeonSection, DetailsSection, SearchCard, PreviewItem, CharacterCard } from 'Modules';
 
-import { withDataFetching } from 'Components/hocs.jsx';
+import { withDataFetching } from 'Components/hocs';
 
 const AccordeonCharactersWithDataFetching = withDataFetching('/characters')(AccordeonSection);
 const AccordeonComicsWithDataFetching = withDataFetching('/comics')(AccordeonSection);

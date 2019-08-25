@@ -5,7 +5,6 @@ import { fetchComics, fetchSingleComicBook } from './actions/comics';
 import { fetchCreators, fetchSingleCreator } from './actions/creators';
 import { fetchEvents, fetchSingleEvent } from './actions/events';
 import { fetchSeries, fetchSingleSeries } from './actions/series';
-
 export {
   store,
   history,

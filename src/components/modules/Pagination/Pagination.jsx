@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { constants, definePagesIndex } from 'Utilities';
-import PageButton from '../PageButton/PageButton.jsx';
+import { PageButton } from 'Modules';
 
 const Pagination = ({ totalResults, offset, setOffset }) => {
   let pages = Math.ceil(totalResults / constants.PER_PAGE_RESULTS);
+
   let pageNum = offset / constants.PER_PAGE_RESULTS + 1;
+
   const [firstPages, lastPages, middlePages] = definePagesIndex(pageNum, pages);
 
   const renderFirstPages = firstPages.map(pageInd => (
@@ -37,6 +39,7 @@ const Pagination = ({ totalResults, offset, setOffset }) => {
       baseOffset={constants.PER_PAGE_RESULTS}
     />
   ));
+
   return (
     <div className='pagination'>
       <p className='total_results'>Total results: {totalResults}</p>

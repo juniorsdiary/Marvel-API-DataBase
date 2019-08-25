@@ -8,7 +8,6 @@ import SearchComponent from './SearchComponent/SearchComponent.jsx';
 import Pagination from './Pagination/Pagination.jsx';
 import ContentComponent from './ContentComponent/ContentComponent.jsx';
 import PreviewItem from './PreviewItem/PreviewItem.jsx';
-import FormGroup from './FormGroup/FormGroup.jsx';
 import InputElement from './InputElement/InputElement.jsx';
 import CreatorsSearchCard from './CreatorsSearchCard/CreatorsSearchCard.jsx';
 import FilterComponent from './FilterComponent/FilterComponent.jsx';
@@ -17,6 +16,9 @@ import Footer from './Footer/Footer.jsx';
 import Button from './Button/Button.jsx';
 import ListItem from './ListItem/ListItem.jsx';
 import SettingsIcons from './SettingsIcons/SettingsIcons.jsx';
+import HumburgerButton from './HumburgerButton/HumburgerButton.jsx';
+import Navigation from './Navigation/Navigation.jsx';
+import PageButton from './PageButton/PageButton.jsx';
 
 export {
   AccordeonSection,
@@ -29,7 +31,6 @@ export {
   Pagination,
   ContentComponent,
   PreviewItem,
-  FormGroup,
   InputElement,
   CreatorsSearchCard,
   Header,
@@ -38,4 +39,7 @@ export {
   FilterComponent,
   ListItem,
   SettingsIcons,
+  HumburgerButton,
+  Navigation,
+  PageButton,
 };

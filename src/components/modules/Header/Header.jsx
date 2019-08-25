@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import Navigation from 'Modules/Navigation/Navigation.jsx';
-import HumburgerButton from 'Modules/HumburgerButton/HumburgerButton.jsx';
-
+import { Navigation, HumburgerButton } from 'Modules';
 import { Link } from 'react-router-dom';
 
 const Header = () => {

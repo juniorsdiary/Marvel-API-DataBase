@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { types, fetchSingleCharacter, fetchEvents, fetchSeries, fetchComics } from 'Store';
 import { ApiFactory, convertToLocale } from 'Utilities';
 import { Loader, ImageAvatar, AccordeonSection, DetailsSection, SearchCard } from 'Modules';
-import { withDataFetching } from 'Components/hocs.jsx';
+import { withDataFetching } from 'Components/hocs';
 
 const AccordeonEventsWithDataFetching = withDataFetching('/events')(AccordeonSection);
 const AccordeonSeriesWithDataFetching = withDataFetching('/series')(AccordeonSection);

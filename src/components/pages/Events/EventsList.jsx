@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { fetchEvents, types } from 'Store';
 import { ApiFactory } from 'Utilities';
 import { SearchCard, SearchComponent, FormGroup, Pagination, InputElement, ContentComponent } from 'Modules';
-import { withLoader } from 'Components/hocs.jsx';
+import { withLoader } from 'Components/hocs';
 
 const ContentComponentWithLoader = withLoader()(ContentComponent);
 

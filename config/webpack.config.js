@@ -3,10 +3,10 @@ module.exports = {
   entry: ['@babel/polyfill', paths.appIndex],
   resolve: {
     alias: {
-      Components: `${paths.appComponents}`,
       Modules: `${paths.appComponents}/modules`,
-      Pages: `${paths.appComponents}/pages`,
+      Components: `${paths.appComponents}`,
       Utilities: `${paths.appUtilities}`,
+      Pages: `${paths.appComponents}/pages`,
       Store: `${paths.appStore}`,
       Assets: `${paths.appAssets}`,
       'react-dom': '@hot-loader/react-dom',
