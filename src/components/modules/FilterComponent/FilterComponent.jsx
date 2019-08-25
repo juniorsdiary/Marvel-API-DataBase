@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { InputElement, Button } from 'Modules';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
-import classNames from 'classNames';
+import classNames from 'classnames';
 
 const FilterComponent = ({ className, setStateValue, setHiddenState, startsWith, order, setOrderValue, handleSubmit }) => {
   const commonClass = classNames('default_form', className);
