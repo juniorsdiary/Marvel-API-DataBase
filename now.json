@@ -1,0 +1,14 @@
+{
+  "routes": [
+    { "src": "/comics", "dest": "/" },
+    { "src": "/comics/(\d)", "dest": "/" },
+    { "src": "/characters", "dest": "/" },
+    { "src": "/characters/(\d)", "dest": "/" },
+    { "src": "/events", "dest": "/" },
+    { "src": "/events/(\d)", "dest": "/" },
+    { "src": "/creators", "dest": "/" },
+    { "src": "/creators/(\d)", "dest": "/" },
+    { "src": "/series", "dest": "/" },
+    { "src": "/series/(\d)", "dest": "/" }
+  ]
+}
