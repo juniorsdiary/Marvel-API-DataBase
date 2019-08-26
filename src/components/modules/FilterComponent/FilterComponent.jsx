@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { InputElement, Button } from 'Modules';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
-import classNames from 'classnames';
 
 const FilterComponent = ({ hiddenState, setStateValue, setHiddenState, startsWith, order, setOrderValue, handleSubmit }) => {
-  const commonClass = classNames('default_form', `characters_filter_form ${hiddenState ? 'hidden_block' : ''}`);
   return (
     <>
-      <form className={commonClass} onSubmit={handleSubmit}>
+      <form className={`characters_filter_form ${hiddenState ? 'hidden_block' : ''}`} onSubmit={handleSubmit}>
         <IoIosCloseCircleOutline size='25' onClick={() => setHiddenState(true)} className='close_icon' />
         <InputElement
           id='startsWith'

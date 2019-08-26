@@ -1,15 +1,16 @@
 .pagination {
+  width: 100%;
   font-family: 'kidkosmic', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0.5em;
+  margin: 0.5em;
   border-radius: 50%  50% 0% 0%;
   animation: opacity 0.5s linear;
   z-index: 15;
 }
 .total_results {
-  margin: 0 0 0.7em 0;
+  margin: 1em 0;
   font-size: rem(16);
 }
 .toogle_pages_block {
@@ -17,7 +18,3 @@
   box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
   font-size: rem(12);
 }
-
-// 44v2
-// 10CESRG
-// kidkosmic
