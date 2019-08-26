@@ -1,122 +1,104 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { types, fetchSingleCharacter, fetchEvents, fetchSeries, fetchComics } from 'Store';
-import { ApiFactory, convertToLocale } from 'Utilities';
-import { Loader, ImageAvatar, AccordeonSection, DetailsSection, SearchCard } from 'Modules';
+import { types, fetchEvents, fetchSeries, fetchComics } from 'Store';
+import { convertToLocale } from 'Utilities';
+import { ImageAvatar, AccordeonSection, DetailsSection, SearchCard } from 'Modules';
 import { withDataFetching } from 'Components/hocs';
 
 const AccordeonEventsWithDataFetching = withDataFetching('/events')(AccordeonSection);
 const AccordeonSeriesWithDataFetching = withDataFetching('/series')(AccordeonSection);
 const AccordeonComicsWithDataFetching = withDataFetching('/comics')(AccordeonSection);
 
-class CharacterPage extends Component {
-  componentDidMount() {
-    const { location, setFetchingState, fetchCharacterData } = this.props;
-    const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
-    const apiStr = charactersAPI.createApiString();
-    setFetchingState(types.CHARACTERS_FETCHING, true);
-    fetchCharacterData(apiStr);
-  }
-  render() {
-    const { location, fetchComicsData, fetchSeriesData, fetchEventsData } = this.props;
-    const { characterData, comicsData, seriesData, eventsData } = this.props;
-    const { isFetching, comicsFetching, seriesFetching, eventsFetching, setFetchingState } = this.props;
-    const { name, description, modified, thumbnail, urls, comics, series, events } = characterData;
+const CharacterPage = props => {
+  const { location, fetchComicsData, fetchSeriesData, fetchEventsData } = props;
+  const { characterData, comicsData, seriesData, eventsData } = props;
+  const { comicsFetching, seriesFetching, eventsFetching, setFetchingState } = props;
+  const { name, description, modified, thumbnail, urls, comics, series, events } = characterData;
 
-    const baseSrc = thumbnail.path ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
-    const src = thumbnail ? `${thumbnail.path}.${thumbnail.extension}` : '';
+  const baseSrc = thumbnail.path ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
+  const src = thumbnail ? `${thumbnail.path}.${thumbnail.extension}` : '';
 
-    const lastModified = convertToLocale(modified);
+  const lastModified = convertToLocale(modified);
 
-    let renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} pathname={'/comics'} />);
-    let renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} pathname={'/series'} />);
-    let renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
+  let renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} pathname={'/comics'} />);
+  let renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} pathname={'/series'} />);
+  let renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
 
-    return (
-      <div className='page_content'>
-        {!isFetching ? (
-          <div className='items_data_wrapper'>
-            <ImageAvatar wrapper={true} className='character_page_image' baseSrc={baseSrc} src={src} />
-            <DetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
-            <AccordeonComicsWithDataFetching
-              fetchingCallBack={bool => setFetchingState(types.COMICS_FETCHING, bool)}
-              loading={comicsFetching}
-              number={comics.available}
-              location={location}
-              content={renderComics}
-              slider={true}
-              contentClassName='default_slider_block'
-              callBack={fetchComicsData}
-              title={`Encountered in ${comics.available} comics`}
-            />
-            <AccordeonSeriesWithDataFetching
-              fetchingCallBack={bool => setFetchingState(types.SERIES_FETCHING, bool)}
-              loading={seriesFetching}
-              number={series.available}
-              location={location}
-              content={renderSeries}
-              slider={true}
-              contentClassName='default_slider_block'
-              callBack={fetchSeriesData}
-              title={`Encountered in ${series.available} series`}
-            />
-            <AccordeonEventsWithDataFetching
-              fetchingCallBack={bool => setFetchingState(types.EVENTS_FETCHING, bool)}
-              loading={eventsFetching}
-              number={events.available}
-              location={location}
-              content={renderEvents}
-              slider={true}
-              contentClassName='default_slider_block'
-              callBack={fetchEventsData}
-              title={`Encountered in ${events.available} events`}
-            />
-          </div>
-        ) : (
-          <Loader />
-        )}
+  return (
+    <div className='page_content'>
+      <div className='items_data_wrapper'>
+        <ImageAvatar wrapper={true} className='character_page_image' baseSrc={baseSrc} src={src} />
+        <DetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
+        <AccordeonComicsWithDataFetching
+          fetchingCallBack={bool => setFetchingState(types.COMICS_FETCHING, bool)}
+          loading={comicsFetching}
+          number={comics.available}
+          location={location}
+          content={renderComics}
+          slider={true}
+          contentClassName='default_slider_block'
+          callBack={fetchComicsData}
+          title={`Encountered in ${comics.available} comics`}
+        />
+        <AccordeonSeriesWithDataFetching
+          fetchingCallBack={bool => setFetchingState(types.SERIES_FETCHING, bool)}
+          loading={seriesFetching}
+          number={series.available}
+          location={location}
+          content={renderSeries}
+          slider={true}
+          contentClassName='default_slider_block'
+          callBack={fetchSeriesData}
+          title={`Encountered in ${series.available} series`}
+        />
+        <AccordeonEventsWithDataFetching
+          fetchingCallBack={bool => setFetchingState(types.EVENTS_FETCHING, bool)}
+          loading={eventsFetching}
+          number={events.available}
+          location={location}
+          content={renderEvents}
+          slider={true}
+          contentClassName='default_slider_block'
+          callBack={fetchEventsData}
+          title={`Encountered in ${events.available} events`}
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 CharacterPage.propTypes = {
   characterData: PropTypes.object,
   eventsData: PropTypes.array,
   comicsData: PropTypes.array,
   seriesData: PropTypes.array,
-  fetchCharacterData: PropTypes.func,
   fetchEventsData: PropTypes.func,
   fetchComicsData: PropTypes.func,
   fetchSeriesData: PropTypes.func,
   setFetchingState: PropTypes.func,
-  isFetching: PropTypes.bool,
   comicsFetching: PropTypes.bool,
   seriesFetching: PropTypes.bool,
   eventsFetching: PropTypes.bool,
   location: PropTypes.object,
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
+  const id = Number(ownProps.match.params.id);
   return {
-    characterData: state.charactersData.singleCharacter,
+    characterData: state.charactersData.charactersList.filter(item => item.id === id)[0],
     eventsData: state.eventsData.eventsList,
     comicsData: state.comicsData.comicsList,
     seriesData: state.seriesData.seriesList,
     comicsFetching: state.comicsData.isFetching,
     seriesFetching: state.seriesData.isFetching,
     eventsFetching: state.eventsData.isFetching,
-    isFetching: state.charactersData.isFetching,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCharacterData: url => {
-      dispatch(fetchSingleCharacter(url));
-    },
     fetchEventsData: url => {
       dispatch(fetchEvents(url));
     },

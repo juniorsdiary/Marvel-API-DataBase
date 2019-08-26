@@ -19,6 +19,7 @@ import SettingsIcons from './SettingsIcons/SettingsIcons.jsx';
 import HumburgerButton from './HumburgerButton/HumburgerButton.jsx';
 import Navigation from './Navigation/Navigation.jsx';
 import PageButton from './PageButton/PageButton.jsx';
+import SinglePageModule from './SinglePageModule/SinglePageModule.jsx';
 
 export {
   AccordeonSection,
@@ -42,4 +43,5 @@ export {
   HumburgerButton,
   Navigation,
   PageButton,
+  SinglePageModule,
 };

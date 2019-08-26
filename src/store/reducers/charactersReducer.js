@@ -4,18 +4,6 @@ const initialState = {
   charactersList: [],
   totalResults: 0,
   offset: 0,
-  singleCharacter: {
-    name: '',
-    description: '',
-    modified: '',
-    thumbnail: {
-      path: '',
-      extension: '',
-    },
-    comics: [],
-    series: [],
-    events: [],
-  },
   isFetching: true,
 };
 
