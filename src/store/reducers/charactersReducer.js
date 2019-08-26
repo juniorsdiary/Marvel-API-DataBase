@@ -21,11 +21,6 @@ export default function charactersData(state = initialState, action) {
         ...state,
         isFetching: action.payload,
       };
-    case types.FETCH_SINGLE_CHARACTERS:
-      return {
-        ...state,
-        singleCharacter: action.payload.results[0],
-      };
     default:
       return state;
   }

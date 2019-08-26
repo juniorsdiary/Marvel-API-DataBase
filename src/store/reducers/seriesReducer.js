@@ -4,21 +4,6 @@ const initialState = {
   seriesList: [],
   totalResults: 0,
   offset: 0,
-  seriesBook: {
-    title: '',
-    description: '',
-    modified: '',
-    thumbnail: {
-      path: '',
-      extension: '',
-    },
-    characters: [],
-    creators: {
-      items: [],
-    },
-    events: [],
-    comics: [],
-  },
   isFetching: false,
 };
 
@@ -35,11 +20,6 @@ export default function seriesData(state = initialState, action) {
       return {
         ...state,
         isFetching: action.payload,
-      };
-    case types.FETCH_SINGLE_SERIES:
-      return {
-        ...state,
-        seriesBook: action.payload.results[0],
       };
     default:
       return state;

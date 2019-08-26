@@ -17,7 +17,7 @@ module.exports = merge(common, {
     overlay: true,
     hot: true,
     watchContentBase: true,
-    contentBase: paths.appHtml,
+    contentBase: paths.appAssets,
     historyApiFallback: true,
     noInfo: true,
     open: true,
