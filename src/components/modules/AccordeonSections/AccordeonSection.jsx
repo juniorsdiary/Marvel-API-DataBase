@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
-import { settings } from 'Utilities';
+import { sliderSettings } from 'Utilities';
 import { IoIosArrowDown } from 'react-icons/io';
 
 const AccordeonSection = ({ content, number, pathname, location, children, slider, contentClassName, title, loading }) => {
@@ -32,7 +32,7 @@ const AccordeonSection = ({ content, number, pathname, location, children, slide
       </div>
       <div className='accordeon_section' ref={elemRef}>
         {content.length >= 5 && slider ? (
-          <Slider {...settings} className={contentClassName}>
+          <Slider {...sliderSettings} className={contentClassName}>
             {content}
           </Slider>
         ) : (
