@@ -86,12 +86,12 @@ class SinglePageModule extends Component {
           setOrderValue={this.setOrderValue}
           handleSubmit={this.handleSubmit}
         />
-        {/* <ContentComponentWithLoader
+        <ContentComponentWithLoader
           loading={isFetching}
           renderData={data}
           Component={componentType === 'cards' ? ItemComponent : ListItem}
           pathname={location.pathname}
-        /> */}
+        />
       </div>
     );
   }
