@@ -2,6 +2,7 @@
   "routes": [
     { "src": "/comics", "dest": "/" },
     { "src": "/characters", "dest": "/" },
+    {"src": "/characters/(?<id>)", "dest": "/"},
     { "src": "/events", "dest": "/" },
     { "src": "/creators", "dest": "/" },
     { "src": "/series", "dest": "/" }
