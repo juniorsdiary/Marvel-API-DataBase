@@ -20,7 +20,7 @@ $cover_height: $cover_width/ 3 * 4;
   flex-direction: column;
   align-items: center;
   color: rgb(255,255,255);
-  flex-grow: 1;
+  flex: 1 1 100%;
 }
 
 .cover_book_image {
