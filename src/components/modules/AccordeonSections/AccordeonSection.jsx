@@ -46,7 +46,7 @@ const AccordeonSection = ({ content, number, pathname, location, children, slide
             Show More
           </Link>
         )}
-        <span>{h.current}</span>
+        {/* <span>{h.current}</span> */}
       </div>
     </>
   );

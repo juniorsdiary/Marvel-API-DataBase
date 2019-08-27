@@ -39,8 +39,8 @@ const CharacterPage = props => {
         <Loader />
       ) : (
         <div className='items_data_wrapper'>
-          <ImageAvatar wrapper={true} className='character_page_image' baseSrc={baseSrc} src={src} />
-          <DetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
+          {/* <ImageAvatar wrapper={true} className='character_page_image' baseSrc={baseSrc} src={src} />
+          <DetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} /> */}
           <AccordeonComicsWithDataFetching
             fetchingCallBack={bool => setFetchingState(types.COMICS_FETCHING, bool)}
             loading={comicsFetching}
