@@ -4,7 +4,19 @@ const initialState = {
   charactersList: [],
   totalResults: 0,
   offset: 0,
-  isFetching: true,
+  singleCharacter: {
+    name: '',
+    description: '',
+    modified: '',
+    thumbnail: {
+      path: '',
+      extension: '',
+    },
+    comics: [],
+    series: [],
+    events: [],
+  },
+  isFetching: false,
 };
 
 export default function charactersData(state = initialState, action) {
@@ -20,6 +32,11 @@ export default function charactersData(state = initialState, action) {
       return {
         ...state,
         isFetching: action.payload,
+      };
+    case types.FETCH_SINGLE_CHARACTERS:
+      return {
+        ...state,
+        singleCharacter: action.payload.results[0],
       };
     default:
       return state;

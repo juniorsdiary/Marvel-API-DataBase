@@ -9,6 +9,7 @@ module.exports = merge(common, {
   output: {
     path: paths.appPublic,
     filename: '[name].js',
+    publicPath: '/',
   },
   devServer: {
     port: 1302,

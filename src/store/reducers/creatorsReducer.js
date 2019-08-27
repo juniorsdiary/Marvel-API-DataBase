@@ -4,7 +4,12 @@ const initialState = {
   creatorsList: [],
   totalResults: 0,
   offset: 0,
-  isFetching: true,
+  creator: {
+    comics: [],
+    events: [],
+    series: [],
+  },
+  isFetching: false,
 };
 
 export default function creatorsData(state = initialState, action) {
@@ -15,6 +20,11 @@ export default function creatorsData(state = initialState, action) {
         creatorsList: action.payload.results,
         totalResults: action.payload.total,
         offset: action.payload.offset,
+      };
+    case types.FETCH_SINGLE_CREATOR:
+      return {
+        ...state,
+        creator: action.payload.results[0],
       };
     case types.CREATORS_FETCHING:
       return {

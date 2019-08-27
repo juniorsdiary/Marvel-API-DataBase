@@ -4,6 +4,21 @@ const initialState = {
   eventsList: [],
   totalResults: 0,
   offset: 0,
+  eventItem: {
+    title: '',
+    description: '',
+    modified: '',
+    thumbnail: {
+      path: '',
+      extension: '',
+    },
+    characters: [],
+    creators: {
+      items: [],
+    },
+    series: [],
+    comics: [],
+  },
   isFetching: false,
 };
 
@@ -20,6 +35,11 @@ export default function eventsData(state = initialState, action) {
       return {
         ...state,
         isFetching: action.payload,
+      };
+    case types.FETCH_SINGLE_EVENT:
+      return {
+        ...state,
+        eventItem: action.payload.results[0],
       };
     default:
       return state;

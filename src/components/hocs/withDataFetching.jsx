@@ -9,7 +9,7 @@ const withDataFetching = pathname => WrappedComponent => {
         .split('/')
         .join('=')
         .replace(/=/, '?');
-      const apiHandler = ApiFactory.createApiHandler({ pathname, limit: 15, search });
+      const apiHandler = ApiFactory.createApiHandler({ pathname, limit: 15, search, order: true });
       let secondPart = apiHandler.asSecondType();
       fetchingCallBack(true);
       callBack(`${constants.API_BASE}${secondPart}`);
