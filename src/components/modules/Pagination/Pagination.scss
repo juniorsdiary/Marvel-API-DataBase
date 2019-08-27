@@ -1,11 +1,11 @@
 .pagination {
   width: 100%;
+  background: black;
   font-family: 'kidkosmic', sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0.5em;
-  border-radius: 50%  50% 0% 0%;
   animation: opacity 0.5s linear;
   z-index: 15;
 }
