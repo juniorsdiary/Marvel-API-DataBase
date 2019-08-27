@@ -11,10 +11,10 @@ $cover_height: $cover_width/ 3 * 4;
 #container {
   display: flex;
   flex-direction: column;
-  // height: 100%;
+  height: 100%;
 }
 .page_content {
-  // position: relative;
+  position: relative;
   background: red;
   display: flex;
   flex-direction: column;
