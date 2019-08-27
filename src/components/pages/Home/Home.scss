@@ -8,7 +8,7 @@
   background-image: url('../assets/images/bg_home_page.jpg');
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 235%;
+  background-size: cover;
   clip-path: none;
   padding: 1em;
   @include sm-block {
