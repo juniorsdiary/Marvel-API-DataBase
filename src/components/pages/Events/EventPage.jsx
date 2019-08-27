@@ -32,7 +32,7 @@ const EventPage = props => {
   // console.log(eventItemData);
   // console.log(eventItemData.next);
   // console.log(eventItemData.previous);
-  const renderCharacters = charactersData.map(item => <CharacterCard key={item.id} {...item} />);
+  const renderCharacters = charactersData.map(item => <CharacterCard key={item.id} {...item} pathname={'/characters'} />);
   const renderCreators = creators.items.map((item, index) => <PreviewItem key={index} {...item} />);
   const renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} pathname={'/comics'} />);
   const renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} pathname={'/series'} />);

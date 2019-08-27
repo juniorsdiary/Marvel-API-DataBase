@@ -29,7 +29,7 @@ const ComicBookPage = props => {
 
   const lastModified = convertToLocale(modified);
 
-  const renderCharacters = charactersData.map(item => <CharacterCard key={item.id} {...item} />);
+  const renderCharacters = charactersData.map(item => <CharacterCard key={item.id} {...item} pathname={'/characters'} />);
   const renderCreators = creators.items.map((item, index) => <PreviewItem key={index} {...item} />);
   const renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
 

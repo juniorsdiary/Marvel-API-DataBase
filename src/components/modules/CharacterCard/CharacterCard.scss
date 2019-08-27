@@ -40,7 +40,7 @@
   display: block;
   margin: 0.5em;
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-  @include simple-size(100px);
+  @include simple-size(70px);
   animation: opacity 0.5s linear;
   transition: all 0.2s linear;
   z-index: 10;

@@ -3,10 +3,10 @@
   display: block;
   margin: 0.5em;
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-  @include simple-size(140px, 280px);
+  @include simple-size(100px, 200px);
   animation: opacity 0.2s linear;
   transition: all 0.2s linear;
-  @include lg-block {
+  @include xs-block {
     &:hover {
       transform: scale(1.1);
       box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);

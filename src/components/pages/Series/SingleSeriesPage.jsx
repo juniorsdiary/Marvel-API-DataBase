@@ -29,9 +29,6 @@ const SingleSeriesPage = props => {
   const src = thumbnail.path ? `${thumbnail.path}.${thumbnail.extension}` : '';
 
   const lastModified = convertToLocale(modified);
-  // console.log(eventItemData);
-  // console.log(seriesItemData.next);
-  // console.log(seriesItemData.previous);
   const renderCharacters = charactersData.map(item => <CharacterCard key={item.id} {...item} pathname={'/characters'} />);
   const renderCreators = creators.items.map((item, index) => <PreviewItem key={index} {...item} />);
   const renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
