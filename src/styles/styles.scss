@@ -6,7 +6,8 @@
 @import "~slick-carousel/slick/slick-theme.css";
 @import 'Modules';
 @import 'Pages';
-
+$cover_width: 140px;
+$cover_height: $cover_width/ 3 * 4;
 #container {
   display: flex;
   flex-direction: column;
@@ -25,7 +26,7 @@
 .cover_book_image {
   position: relative;
   margin: 0 .5em 1em .5em;
-  @include simple-size(150px, 300px);
+  @include simple-size($cover_width, $cover_height);
   @include md-block {
     @include simple-size(175px, 350px);
   };
