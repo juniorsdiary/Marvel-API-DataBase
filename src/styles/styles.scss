@@ -22,6 +22,10 @@ $cover_height: $cover_width/ 3 * 4;
   color: rgb(255,255,255);
   flex: 1 1 100%;
 }
+.single_item_page {
+  background: red;
+  color: rgb(255,255,255);
+}
 
 .cover_book_image {
   position: relative;
