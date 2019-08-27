@@ -6,7 +6,6 @@
   justify-content: center;
   margin: auto;
   overflow: hidden;
-  height: 0;
   transition: max-height 0.2s linear;
 }
 
@@ -114,9 +113,4 @@
 .close_dropdown {
   transform: rotate(-90deg);
   transition: all 0.2s linear;
-}
-
-.active_content {
-  height: auto;
-  overflow: visible;
 }
