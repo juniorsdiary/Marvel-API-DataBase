@@ -10,8 +10,8 @@ const AccordeonSection = ({ content, number, pathname, location, children, slide
   const h = useRef(0);
   const [active, setActive] = useState(false);
   useLayoutEffect(() => {
-    elemRef.current.style.maxHeight = `${active ? elemRef.current.scrollHeight : 0}px`;
-    h.current = active ? elemRef.current.scrollHeight : 0;
+    // elemRef.current.style.maxHeight = `${active ? elemRef.current.scrollHeight : 0}px`;
+    // h.current = active ? elemRef.current.scrollHeight : 0;
   }, [active]);
   h.current = active ? elemRef.current.scrollHeight : 0;
   const search = location.pathname
@@ -33,7 +33,7 @@ const AccordeonSection = ({ content, number, pathname, location, children, slide
           <IoIosArrowDown size='25' className={`${active ? 'open' : 'close'}_dropdown`} />
         )}
       </div>
-      <div className={`accordeon_section`} ref={elemRef}>
+      <div className={`accordeon_section ${active && 'active_section'}`} ref={elemRef}>
         {content.length >= 5 && slider ? (
           <Slider {...sliderSettings} className={contentClassName}>
             {content}
@@ -46,7 +46,6 @@ const AccordeonSection = ({ content, number, pathname, location, children, slide
             Show More
           </Link>
         )}
-        {/* <span>{h.current}</span> */}
       </div>
     </>
   );
