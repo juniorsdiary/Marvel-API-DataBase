@@ -7,11 +7,10 @@ import { IoIosArrowDown } from 'react-icons/io';
 
 const AccordeonSection = ({ content, number, pathname, location, children, slider, contentClassName, title, loading }) => {
   const elemRef = useRef();
-  const h = useRef(0);
   const [active, setActive] = useState(false);
   useLayoutEffect(() => {
-    elemRef.current.style.height = `${active ? elemRef.current.scrollHeight : 0}px`;
-    h.current = elemRef.current.style.height;
+    console.log(elemRef.current.getBoundingClientRect());
+    elemRef.current.style.maxHeight = `${active ? elemRef.current.scrollHeight : 0}px`;
   }, [active]);
   const search = location.pathname
     .split('/')
@@ -32,7 +31,7 @@ const AccordeonSection = ({ content, number, pathname, location, children, slide
           <IoIosArrowDown size='25' className={active ? 'open_dropdown' : 'close_dropdown'} />
         )}
       </div>
-      <div className='accordeon_section' ref={elemRef}>
+      <div className={`accordeon_section ${active && 'active_content'}`} ref={elemRef}>
         {content.length >= 5 && slider ? (
           <Slider {...sliderSettings} className={contentClassName}>
             {content}
@@ -45,7 +44,6 @@ const AccordeonSection = ({ content, number, pathname, location, children, slide
             Show More
           </Link>
         )}
-        <span>{h.current}</span>
       </div>
     </>
   );
