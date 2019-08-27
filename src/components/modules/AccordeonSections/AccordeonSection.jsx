@@ -7,9 +7,11 @@ import { IoIosArrowDown } from 'react-icons/io';
 
 const AccordeonSection = ({ content, number, pathname, location, children, slider, contentClassName, title, loading }) => {
   const elemRef = useRef();
+  const h = useRef(0);
   const [active, setActive] = useState(false);
   useLayoutEffect(() => {
     elemRef.current.style.height = `${active ? elemRef.current.scrollHeight : 0}px`;
+    h.current = elemRef.current.style.height;
   }, [active]);
   const search = location.pathname
     .split('/')
@@ -43,6 +45,7 @@ const AccordeonSection = ({ content, number, pathname, location, children, slide
             Show More
           </Link>
         )}
+        <span>{h.current}</span>
       </div>
     </>
   );
