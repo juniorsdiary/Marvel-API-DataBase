@@ -17,14 +17,11 @@ $cover_height: $cover_width/ 3 * 4;
   position: relative;
   background: red;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-content: flex-start;
   color: rgb(255,255,255);
   flex: 1 1 100%;
-}
-.single_item_page {
-  background: red;
-  color: rgb(255,255,255);
 }
 
 .cover_book_image {
@@ -40,11 +37,11 @@ $cover_height: $cover_width/ 3 * 4;
 }
 
 .items_data_wrapper {
+  height: 100%;
   display: flex;
   justify-content: space-around;
   align-content: flex-start;
   flex-wrap: wrap;
-  flex: 1 1;
   margin: 0;
   padding: 1.5em 0;
   background: white;
@@ -72,6 +69,5 @@ $cover_height: $cover_width/ 3 * 4;
 html, body {
   font-family: "Robotocondensed", sans-serif;
   font-weight: bold;
-  height: 100%;
   background-color: red;
 }

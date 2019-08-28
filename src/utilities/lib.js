@@ -1,15 +1,5 @@
 import CryptoJS from 'crypto-js';
 /**
- * [fetchFunction description]
- * @param  {[type]}  url [description]
- * @return {Promise}     [description]
- */
-export const fetchFunction = async url => {
-  const res = await fetch(url);
-  return await res.json();
-};
-
-/**
  * [getHash get a timestamp of the current api call]
  * @param  {[number]} ts [timestamp of the call]
  * @return {[string]}    [retrun string of converted hash of ts api publick and private keys]

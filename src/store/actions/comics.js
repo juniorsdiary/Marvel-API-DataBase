@@ -1,20 +1,41 @@
 import * as types from '../types';
-import { fetchFunction } from 'Utilities';
 
 export const fetchComics = url => async dispatch => {
-  const data = await fetchFunction(url);
-  dispatch({
-    type: types.FETCH_COMICS,
-    payload: data.data,
-  });
-  dispatch({ type: types.COMICS_FETCHING, payload: false });
+  try {
+    const res = await fetch(url);
+    if (res.status !== 200) {
+      throw new Error(res.statusText);
+    } else {
+      const data = await res.json();
+      dispatch({
+        type: types.FETCH_COMICS,
+        payload: data.data,
+      });
+      dispatch({ type: types.COMICS_FETCH_SUCCEEDED, payload: res.statusText });
+    }
+  } catch (e) {
+    dispatch({ type: types.COMICS_FETCH_FAILED, payload: e.message });
+  } finally {
+    dispatch({ type: types.COMICS_FETCHING, payload: false });
+  }
 };
 
 export const fetchSingleComicBook = url => async dispatch => {
-  const data = await fetchFunction(url);
-  dispatch({
-    type: types.FETCH_SINGLE_COMIC_BOOK,
-    payload: data.data,
-  });
-  dispatch({ type: types.COMICS_FETCHING, payload: false });
+  try {
+    const res = await fetch(url);
+    if (res.status !== 200) {
+      throw new Error(res.statusText);
+    } else {
+      const data = await res.json();
+      dispatch({
+        type: types.FETCH_SINGLE_COMIC_BOOK,
+        payload: data.data,
+      });
+      dispatch({ type: types.COMICS_FETCH_SUCCEEDED, payload: res.statusText });
+    }
+  } catch (e) {
+    dispatch({ type: types.COMICS_FETCH_FAILED, payload: e.message });
+  } finally {
+    dispatch({ type: types.COMICS_FETCHING, payload: false });
+  }
 };

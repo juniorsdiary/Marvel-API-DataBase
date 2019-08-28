@@ -5,16 +5,18 @@ import { types, fetchComics, fetchEvents, fetchSeries, fetchSingleCreator } from
 import { Loader, AccordeonSection, SearchCard } from 'Modules';
 import { withDataFetching } from 'Components/hocs';
 import { ApiFactory } from 'Utilities';
-const AccordeonComicsWithDataFetching = withDataFetching('/comics')(AccordeonSection);
-const AccordeonEventsWithDataFetching = withDataFetching('/events')(AccordeonSection);
-const AccordeonSeriesWithDataFetching = withDataFetching('/series')(AccordeonSection);
+
+const ComicsAccordeon = withDataFetching('/comics')(AccordeonSection);
+const EventsAccordeon = withDataFetching('/events')(AccordeonSection);
+const SeriesAccordeon = withDataFetching('/series')(AccordeonSection);
 
 const CreatorPage = props => {
-  const { isFetching, comicsFetching, eventsFetching, seriesFetching, location } = props;
+  const { location, setFetchingState } = props;
   const { fetchComicsData, fetchEventsData, fetchSeriesData, fetchCreatorData } = props;
   const { fetchedData, comicsData, eventsData, seriesData } = props;
-  const { setFetchingState } = props;
+  const { fetchStatus, eventsFetchStatus, comicsFetchStatus, seriesFetchStatus } = props;
   const { comics, events, series } = fetchedData;
+  const { isFetching } = fetchStatus;
 
   useEffect(() => {
     const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
@@ -33,9 +35,9 @@ const CreatorPage = props => {
       ) : (
         <div className='items_data_wrapper'>
           <p className='creator_page_name'>{fetchedData.fullName}</p>
-          <AccordeonComicsWithDataFetching
+          <ComicsAccordeon
             fetchingCallBack={bool => setFetchingState(types.COMICS_FETCHING, bool)}
-            loading={comicsFetching}
+            fetchStatus={comicsFetchStatus}
             number={comics.available}
             location={location}
             content={renderComics}
@@ -44,9 +46,9 @@ const CreatorPage = props => {
             callBack={fetchComicsData}
             title={`Took part in ${comics.available} comics`}
           />
-          <AccordeonEventsWithDataFetching
+          <EventsAccordeon
             fetchingCallBack={bool => setFetchingState(types.EVENTS_FETCHING, bool)}
-            loading={eventsFetching}
+            fetchStatus={eventsFetchStatus}
             number={events.available}
             location={location}
             content={renderEvents}
@@ -55,9 +57,9 @@ const CreatorPage = props => {
             callBack={fetchEventsData}
             title={`Created ${events.available} events`}
           />
-          <AccordeonSeriesWithDataFetching
+          <SeriesAccordeon
             fetchingCallBack={bool => setFetchingState(types.SERIES_FETCHING, bool)}
-            loading={seriesFetching}
+            fetchStatus={seriesFetchStatus}
             number={series.available}
             location={location}
             content={renderSeries}
@@ -74,31 +76,31 @@ const CreatorPage = props => {
 
 CreatorPage.propTypes = {
   fetchedData: PropTypes.object,
-  comicsData: PropTypes.array,
+  fetchCreatorData: PropTypes.func,
+  fetchStatus: PropTypes.object,
   eventsData: PropTypes.array,
+  fetchEventsData: PropTypes.func,
+  eventsFetchStatus: PropTypes.object,
+  comicsData: PropTypes.array,
+  fetchComicsData: PropTypes.func,
+  comicsFetchStatus: PropTypes.object,
   seriesData: PropTypes.array,
   fetchSeriesData: PropTypes.func,
-  fetchComicsData: PropTypes.func,
-  fetchEventsData: PropTypes.func,
-  fetchCreatorData: PropTypes.func,
+  seriesFetchStatus: PropTypes.object,
   setFetchingState: PropTypes.func,
-  comicsFetching: PropTypes.bool,
-  seriesFetching: PropTypes.bool,
-  eventsFetching: PropTypes.bool,
-  isFetching: PropTypes.bool,
   location: PropTypes.object,
 };
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    eventsData: state.eventsData.eventsList,
-    comicsData: state.comicsData.comicsList,
     fetchedData: state.creatorsData.creator,
-    isFetching: state.creatorsData.isFetching,
+    fetchStatus: state.creatorsData.fetchStatus,
+    eventsData: state.eventsData.eventsList,
+    eventsFetchStatus: state.eventsData.fetchStatus,
+    comicsData: state.comicsData.comicsList,
+    comicsFetchStatus: state.comicsData.fetchStatus,
     seriesData: state.seriesData.seriesList,
-    comicsFetching: state.comicsData.isFetching,
-    eventsFetching: state.eventsData.isFetching,
-    seriesFetching: state.seriesData.isFetching,
+    seriesFetchStatus: state.seriesData.fetchStatus,
   };
 };
 

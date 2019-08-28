@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
-import { Loader } from 'Modules';
+import { Loader, ErrorHandler, Reload } from 'Modules';
 /* eslint-disable react/prop-types */
 const withLoader = () => WrappedComponent => {
   return class LoadingHOC extends Component {
     render() {
-      return this.props.loading ? <Loader /> : <WrappedComponent {...this.props} />;
+      const { fetchStatus, loadData } = this.props;
+      const { isFetching, status, message } = fetchStatus;
+      return isFetching ? (
+        <Loader />
+      ) : status ? (
+        <WrappedComponent {...this.props} />
+      ) : (
+        <>
+          <ErrorHandler msg={message} />
+          <Reload size={'35'} loadData={loadData} />
+        </>
+      );
     }
   };
 };

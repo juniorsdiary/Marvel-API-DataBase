@@ -1,19 +1,15 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import { sliderSettings } from 'Utilities';
+import { Reload } from 'Modules';
 import { IoIosArrowDown } from 'react-icons/io';
 
-const AccordeonSection = ({ content, number, pathname, location, children, slider, contentClassName, title, loading }) => {
-  const elemRef = useRef();
-  const h = useRef(0);
+const AccordeonSection = ({ content, number, pathname, location, children, slider, contentClassName, title, loadData, fetchStatus }) => {
+  const { status, isFetching } = fetchStatus;
   const [active, setActive] = useState(false);
-  useLayoutEffect(() => {
-    // elemRef.current.style.maxHeight = `${active ? elemRef.current.scrollHeight : 0}px`;
-    // h.current = active ? elemRef.current.scrollHeight : 0;
-  }, [active]);
-  h.current = active ? elemRef.current.scrollHeight : 0;
+  const toggleContent = !status || isFetching || number === 0 ? () => {} : () => setActive(!active);
   const search = location.pathname
     .split('/')
     .join('=')
@@ -24,16 +20,18 @@ const AccordeonSection = ({ content, number, pathname, location, children, slide
         tabIndex='-1'
         role='button'
         className={`available_items_title ${active && 'active_tab'}`}
-        onClick={loading || number === 0 ? () => {} : () => setActive(!active)}
-        onKeyPress={loading || number === 0 ? () => {} : () => setActive(!active)}>
+        onClick={toggleContent}
+        onKeyPress={toggleContent}>
         <span>{title}</span>
-        {loading ? (
+        {isFetching ? (
           <span className='accordeon_loading_spinner'></span>
-        ) : (
+        ) : status ? (
           <IoIosArrowDown size='25' className={`${active ? 'open' : 'close'}_dropdown`} />
+        ) : (
+          <Reload size={'25'} loadData={loadData} />
         )}
       </div>
-      <div className={`accordeon_section ${active && 'active_section'}`} ref={elemRef}>
+      <div className={`accordeon_section ${active && 'active_section'}`}>
         {content.length >= 5 && slider ? (
           <Slider {...sliderSettings} className={contentClassName}>
             {content}
@@ -63,5 +61,8 @@ AccordeonSection.propTypes = {
   onClick: PropTypes.func,
   title: PropTypes.string,
   loading: PropTypes.bool,
+  fetchStatus: PropTypes.object,
+  loadData: PropTypes.func,
 };
+
 export default AccordeonSection;

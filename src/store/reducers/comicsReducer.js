@@ -18,27 +18,53 @@ const initialState = {
     },
     events: [],
   },
-  isFetching: false,
+  fetchStatus: {
+    status: false,
+    message: '',
+    isFetching: false,
+  },
 };
 
 export default function comicsData(state = initialState, action) {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case types.FETCH_COMICS:
       return {
         ...state,
-        comicsList: action.payload.results,
-        totalResults: action.payload.total,
-        offset: action.payload.offset,
+        comicsList: payload.results,
+        totalResults: payload.total,
+        offset: payload.offset,
       };
     case types.COMICS_FETCHING:
       return {
         ...state,
-        isFetching: action.payload,
+        fetchStatus: {
+          ...state.fetchStatus,
+          isFetching: payload,
+        },
       };
     case types.FETCH_SINGLE_COMIC_BOOK:
       return {
         ...state,
-        comicBook: action.payload.results[0],
+        comicBook: payload.results[0],
+      };
+    case types.COMICS_FETCH_SUCCEEDED:
+      return {
+        ...state,
+        fetchStatus: {
+          ...state.fetchStatus,
+          message: payload,
+          status: true,
+        },
+      };
+    case types.COMICS_FETCH_FAILED:
+      return {
+        ...state,
+        fetchStatus: {
+          ...state.fetchStatus,
+          message: payload,
+          status: false,
+        },
       };
     default:
       return state;

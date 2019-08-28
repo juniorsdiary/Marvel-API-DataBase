@@ -9,27 +9,53 @@ const initialState = {
     events: [],
     series: [],
   },
-  isFetching: false,
+  fetchStatus: {
+    status: false,
+    message: '',
+    isFetching: false,
+  },
 };
 
 export default function creatorsData(state = initialState, action) {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case types.FETCH_CREATORS:
       return {
         ...state,
-        creatorsList: action.payload.results,
-        totalResults: action.payload.total,
-        offset: action.payload.offset,
+        creatorsList: payload.results,
+        totalResults: payload.total,
+        offset: payload.offset,
       };
     case types.FETCH_SINGLE_CREATOR:
       return {
         ...state,
-        creator: action.payload.results[0],
+        creator: payload.results[0],
       };
     case types.CREATORS_FETCHING:
       return {
         ...state,
-        isFetching: action.payload,
+        fetchStatus: {
+          ...state.fetchStatus,
+          isFetching: payload,
+        },
+      };
+    case types.CREATORS_FETCH_SUCCEEDED:
+      return {
+        ...state,
+        fetchStatus: {
+          ...state.fetchStatus,
+          message: payload,
+          status: true,
+        },
+      };
+    case types.CREATORS_FETCH_FAILED:
+      return {
+        ...state,
+        fetchStatus: {
+          ...state.fetchStatus,
+          message: payload,
+          status: false,
+        },
       };
     default:
       return state;

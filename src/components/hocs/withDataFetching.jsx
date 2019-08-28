@@ -3,7 +3,7 @@ import { ApiFactory, constants } from 'Utilities';
 /* eslint-disable react/prop-types */
 const withDataFetching = pathname => WrappedComponent => {
   return class FetchingHOC extends Component {
-    componentDidMount() {
+    loadData = () => {
       const { callBack, location, fetchingCallBack } = this.props;
       const search = location.pathname
         .split('/')
@@ -13,9 +13,12 @@ const withDataFetching = pathname => WrappedComponent => {
       let secondPart = apiHandler.asSecondType();
       fetchingCallBack(true);
       callBack(`${constants.API_BASE}${secondPart}`);
+    };
+    componentDidMount() {
+      this.loadData();
     }
     render() {
-      return <WrappedComponent pathname={pathname} {...this.props} />;
+      return <WrappedComponent pathname={pathname} {...this.props} loadData={this.loadData} />;
     }
   };
 };

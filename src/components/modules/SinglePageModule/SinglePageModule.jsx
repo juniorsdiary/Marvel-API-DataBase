@@ -68,7 +68,8 @@ class SinglePageModule extends Component {
 
   render() {
     const { startsWith, order, offset, hiddenState, componentType } = this.state;
-    const { data, isFetching, totalResults, location, ItemComponent } = this.props;
+    const { data, totalResults, location, ItemComponent, fetchStatus } = this.props;
+    const { isFetching } = fetchStatus;
     return (
       <div className='page_content'>
         {!isFetching && (
@@ -87,7 +88,8 @@ class SinglePageModule extends Component {
           handleSubmit={this.handleSubmit}
         />
         <ContentComponentWithLoader
-          loading={isFetching}
+          loadData={this.loadData}
+          fetchStatus={fetchStatus}
           renderData={data}
           Component={componentType === 'cards' ? ItemComponent : ListItem}
           pathname={location.pathname}
@@ -106,6 +108,7 @@ SinglePageModule.propTypes = {
   offset: PropTypes.number,
   location: PropTypes.object,
   ItemComponent: PropTypes.any,
+  fetchStatus: PropTypes.object,
 };
 
 export default SinglePageModule;

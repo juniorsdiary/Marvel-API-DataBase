@@ -8,6 +8,7 @@ const mapStateToProps = state => {
     offset: state.creatorsData.offset,
     isFetching: state.creatorsData.isFetching,
     ItemComponent: CreatorsSearchCard,
+    fetchStatus: state.creatorsData.fetchStatus,
   };
 };
 const mapDispatchToProps = dispatch => {

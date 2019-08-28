@@ -16,27 +16,53 @@ const initialState = {
     series: [],
     events: [],
   },
-  isFetching: false,
+  fetchStatus: {
+    status: false,
+    message: '',
+    isFetching: false,
+  },
 };
 
 export default function charactersData(state = initialState, action) {
-  switch (action.type) {
+  const { type, payload } = action;
+  switch (type) {
     case types.FETCH_CHARACTERS:
       return {
         ...state,
-        charactersList: action.payload.results,
-        totalResults: action.payload.total,
-        offset: action.payload.offset,
+        charactersList: payload.results,
+        totalResults: payload.total,
+        offset: payload.offset,
       };
     case types.CHARACTERS_FETCHING:
       return {
         ...state,
-        isFetching: action.payload,
+        fetchStatus: {
+          ...state.fetchStatus,
+          isFetching: payload,
+        },
       };
     case types.FETCH_SINGLE_CHARACTERS:
       return {
         ...state,
-        singleCharacter: action.payload.results[0],
+        singleCharacter: payload.results[0],
+      };
+    case types.CHARACTERS_FETCH_SUCCEEDED:
+      return {
+        ...state,
+        fetchStatus: {
+          ...state.fetchStatus,
+          message: payload,
+          status: true,
+        },
+      };
+    case types.CHARACTERS_FETCH_FAILED:
+      return {
+        ...state,
+        fetchStatus: {
+          ...state.fetchStatus,
+          message: payload,
+          status: false,
+        },
       };
     default:
       return state;

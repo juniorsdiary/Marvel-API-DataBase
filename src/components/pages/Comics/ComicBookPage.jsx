@@ -6,14 +6,15 @@ import { convertToLocale, ApiFactory } from 'Utilities';
 import { Loader, ImageAvatar, AccordeonSection, DetailsSection, SearchCard, PreviewItem, CharacterCard } from 'Modules';
 import { withDataFetching } from 'Components/hocs';
 
-const AccordeonCharactersWithDataFetching = withDataFetching('/characters')(AccordeonSection);
-const AccordeonEventsWithDataFetching = withDataFetching('/events')(AccordeonSection);
+const CharactersAccordeon = withDataFetching('/characters')(AccordeonSection);
+const EventsAccordeon = withDataFetching('/events')(AccordeonSection);
 
 const ComicBookPage = props => {
-  const { isFetching, charactersFetching, eventsFetching, location } = props;
+  const { location, charactersFetchStatus, eventsFetchStatus, fetchStatus } = props;
   const { fetchedData, storeData, charactersData, eventsData } = props;
   const { fetchComicsData, fetchCharacterData, fetchEventsData, setFetchingState } = props;
   const { title, description, modified, thumbnail, urls, characters, creators, events } = storeData || fetchedData;
+  const { isFetching } = fetchStatus;
 
   useEffect(() => {
     const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
@@ -32,7 +33,7 @@ const ComicBookPage = props => {
   const renderCharacters = charactersData.map(item => <CharacterCard key={item.id} {...item} pathname={'/characters'} />);
   const renderCreators = creators.items.map((item, index) => <PreviewItem key={index} {...item} />);
   const renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
-
+  console.log(renderCreators);
   return (
     <div className='page_content'>
       {isFetching ? (
@@ -41,7 +42,7 @@ const ComicBookPage = props => {
         <div className='items_data_wrapper'>
           <ImageAvatar wrapper={true} className='cover_book_image' baseSrc={baseSrc} src={src} />
           <DetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
-          <AccordeonSection
+          {/* <AccordeonSection
             number={creators.available}
             location={location}
             pathname={'/creators'}
@@ -49,10 +50,10 @@ const ComicBookPage = props => {
             slider={false}
             contentClassName='creators_content_block'
             title={`${creators.available} creators`}
-          />
-          <AccordeonCharactersWithDataFetching
+          /> */}
+          <CharactersAccordeon
             fetchingCallBack={bool => setFetchingState(types.CHARACTERS_FETCHING, bool)}
-            loading={charactersFetching}
+            fetchStatus={charactersFetchStatus}
             number={characters.available}
             location={location}
             content={renderCharacters}
@@ -61,9 +62,9 @@ const ComicBookPage = props => {
             callBack={fetchCharacterData}
             title={`You can meet ${characters.available} characters`}
           />
-          <AccordeonEventsWithDataFetching
+          <EventsAccordeon
             fetchingCallBack={bool => setFetchingState(types.EVENTS_FETCHING, bool)}
-            loading={eventsFetching}
+            fetchStatus={eventsFetchStatus}
             number={events.available}
             location={location}
             content={renderEvents}
@@ -81,16 +82,15 @@ const ComicBookPage = props => {
 ComicBookPage.propTypes = {
   storeData: PropTypes.object,
   fetchedData: PropTypes.object,
-  charactersData: PropTypes.array,
-  eventsData: PropTypes.array,
-  comicBookData: PropTypes.object,
-  fetchCharacterData: PropTypes.func,
-  fetchEventsData: PropTypes.func,
   fetchComicsData: PropTypes.func,
+  fetchStatus: PropTypes.object,
+  charactersData: PropTypes.array,
+  fetchCharacterData: PropTypes.func,
+  charactersFetchStatus: PropTypes.object,
+  eventsData: PropTypes.array,
+  fetchEventsData: PropTypes.func,
+  eventsFetchStatus: PropTypes.object,
   setFetchingState: PropTypes.func,
-  charactersFetching: PropTypes.bool,
-  eventsFetching: PropTypes.bool,
-  isFetching: PropTypes.bool,
   location: PropTypes.object,
 };
 
@@ -99,11 +99,11 @@ const mapStateToProps = (state, ownProps) => {
   return {
     storeData: state.comicsData.comicsList.filter(item => item.id === id)[0],
     fetchedData: state.comicsData.comicBook,
+    fetchStatus: state.comicsData.fetchStatus,
     charactersData: state.charactersData.charactersList,
+    charactersFetchStatus: state.charactersData.fetchStatus,
     eventsData: state.eventsData.eventsList,
-    charactersFetching: state.charactersData.isFetching,
-    eventsFetching: state.eventsData.isFetching,
-    isFetching: state.comicsData.isFetching,
+    eventsFetchStatus: state.eventsData.fetchStatus,
   };
 };
 

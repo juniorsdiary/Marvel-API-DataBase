@@ -20,6 +20,8 @@ import HumburgerButton from './HumburgerButton/HumburgerButton.jsx';
 import Navigation from './Navigation/Navigation.jsx';
 import PageButton from './PageButton/PageButton.jsx';
 import SinglePageModule from './SinglePageModule/SinglePageModule.jsx';
+import ErrorHandler from './ErrorHandler/ErrorHandler.jsx';
+import Reload from './Reload/Reload.jsx';
 
 export {
   AccordeonSection,
@@ -43,5 +45,7 @@ export {
   HumburgerButton,
   Navigation,
   PageButton,
+  ErrorHandler,
   SinglePageModule,
+  Reload,
 };

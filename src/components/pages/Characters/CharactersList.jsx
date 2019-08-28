@@ -9,6 +9,7 @@ const mapStateToProps = state => {
     offset: state.charactersData.offset,
     isFetching: state.charactersData.isFetching,
     ItemComponent: CharacterCard,
+    fetchStatus: state.charactersData.fetchStatus,
   };
 };
 
