@@ -34,7 +34,7 @@ const CharacterPage = props => {
   let renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
 
   return (
-    <div className='single_item_page'>
+    <div className='page_content'>
       {isFetching ? (
         <Loader />
       ) : (
