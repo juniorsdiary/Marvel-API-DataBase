@@ -11,6 +11,12 @@ const SeriesAccordeon = withDataFetching('/series')(AccordeonSection);
 const ComicsAccordeon = withDataFetching('/comics')(AccordeonSection);
 
 class CharacterPage extends Component {
+  componentDidMount() {
+    const { storeData } = this.props;
+    if (!storeData) {
+      this.loadPrimaryData();
+    }
+  }
   loadPrimaryData = () => {
     const { fetchCharacterData, location, setFetchingState } = this.props;
     const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
@@ -18,12 +24,6 @@ class CharacterPage extends Component {
     setFetchingState(types.CHARACTERS_FETCHING, true);
     fetchCharacterData(apiStr);
   };
-  componentDidMount() {
-    const { storeData } = this.props;
-    if (!storeData) {
-      this.loadPrimaryData();
-    }
-  }
   render() {
     const { fetchComicsData, fetchSeriesData, fetchEventsData } = this.props;
     const { fetchedData, storeData, comicsData, seriesData, eventsData } = this.props;
@@ -40,6 +40,7 @@ class CharacterPage extends Component {
     let renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} pathname={'/comics'} />);
     let renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} pathname={'/series'} />);
     let renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
+
     return (
       <div className='page_content'>
         {isFetching ? (

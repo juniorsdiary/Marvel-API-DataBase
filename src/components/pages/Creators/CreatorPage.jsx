@@ -1,78 +1,85 @@
-import React, { useEffect } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { types, fetchComics, fetchEvents, fetchSeries, fetchSingleCreator } from 'Store';
-import { Loader, AccordeonSection, SearchCard } from 'Modules';
+import { ErrorHandler, Loader, AccordeonSection, SearchCard } from 'Modules';
 import { withDataFetching } from 'Components/hocs';
 import { ApiFactory } from 'Utilities';
 
 const ComicsAccordeon = withDataFetching('/comics')(AccordeonSection);
 const EventsAccordeon = withDataFetching('/events')(AccordeonSection);
 const SeriesAccordeon = withDataFetching('/series')(AccordeonSection);
-
-const CreatorPage = props => {
-  const { location, setFetchingState } = props;
-  const { fetchComicsData, fetchEventsData, fetchSeriesData, fetchCreatorData } = props;
-  const { fetchedData, comicsData, eventsData, seriesData } = props;
-  const { fetchStatus, eventsFetchStatus, comicsFetchStatus, seriesFetchStatus } = props;
-  const { comics, events, series } = fetchedData;
-  const { isFetching } = fetchStatus;
-
-  useEffect(() => {
+class CreatorPage extends Component {
+  componentDidMount() {
+    this.loadPrimaryData();
+  }
+  loadPrimaryData = () => {
+    const { fetchCreatorData, location, setFetchingState } = this.props;
     const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
     const apiStr = charactersAPI.createApiString();
     setFetchingState(types.CREATORS_FETCHING, true);
     fetchCreatorData(apiStr);
-  }, [fetchCreatorData, location, setFetchingState]);
+  };
+  render() {
+    const { location, setFetchingState } = this.props;
+    const { fetchComicsData, fetchEventsData, fetchSeriesData } = this.props;
+    const { fetchedData, comicsData, eventsData, seriesData } = this.props;
+    const { fetchStatus, eventsFetchStatus, comicsFetchStatus, seriesFetchStatus } = this.props;
+    const { comics, events, series } = fetchedData;
+    const { isFetching, status, message } = fetchStatus;
 
-  let renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} pathname={'/comics'} />);
-  let renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
-  let renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} pathname={'/series'} />);
-  return (
-    <div className='page_content'>
-      {isFetching ? (
-        <Loader />
-      ) : (
-        <div className='items_data_wrapper'>
-          <p className='creator_page_name'>{fetchedData.fullName}</p>
-          <ComicsAccordeon
-            fetchingCallBack={bool => setFetchingState(types.COMICS_FETCHING, bool)}
-            fetchStatus={comicsFetchStatus}
-            number={comics.available}
-            location={location}
-            content={renderComics}
-            slider={true}
-            contentClassName='default_slider_block'
-            callBack={fetchComicsData}
-            title={`Took part in ${comics.available} comics`}
-          />
-          <EventsAccordeon
-            fetchingCallBack={bool => setFetchingState(types.EVENTS_FETCHING, bool)}
-            fetchStatus={eventsFetchStatus}
-            number={events.available}
-            location={location}
-            content={renderEvents}
-            slider={true}
-            contentClassName='default_slider_block'
-            callBack={fetchEventsData}
-            title={`Created ${events.available} events`}
-          />
-          <SeriesAccordeon
-            fetchingCallBack={bool => setFetchingState(types.SERIES_FETCHING, bool)}
-            fetchStatus={seriesFetchStatus}
-            number={series.available}
-            location={location}
-            content={renderSeries}
-            slider={true}
-            contentClassName='default_slider_block'
-            callBack={fetchSeriesData}
-            title={`Creator of ${series.available} series`}
-          />
-        </div>
-      )}
-    </div>
-  );
-};
+    let renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} pathname={'/comics'} />);
+    let renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
+    let renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} pathname={'/series'} />);
+
+    return (
+      <div className='page_content'>
+        {isFetching ? (
+          <Loader />
+        ) : !status ? (
+          <ErrorHandler msg={message} size={'35'} loadData={() => this.loadPrimaryData()} />
+        ) : (
+          <div className='items_data_wrapper'>
+            <p className='creator_page_name'>{fetchedData.fullName}</p>
+            <ComicsAccordeon
+              fetchingCallBack={bool => setFetchingState(types.COMICS_FETCHING, bool)}
+              fetchStatus={comicsFetchStatus}
+              number={comics.available}
+              location={location}
+              content={renderComics}
+              slider={true}
+              contentClassName='default_slider_block'
+              callBack={fetchComicsData}
+              title={`Took part in ${comics.available} comics`}
+            />
+            <EventsAccordeon
+              fetchingCallBack={bool => setFetchingState(types.EVENTS_FETCHING, bool)}
+              fetchStatus={eventsFetchStatus}
+              number={events.available}
+              location={location}
+              content={renderEvents}
+              slider={true}
+              contentClassName='default_slider_block'
+              callBack={fetchEventsData}
+              title={`Created ${events.available} events`}
+            />
+            <SeriesAccordeon
+              fetchingCallBack={bool => setFetchingState(types.SERIES_FETCHING, bool)}
+              fetchStatus={seriesFetchStatus}
+              number={series.available}
+              location={location}
+              content={renderSeries}
+              slider={true}
+              contentClassName='default_slider_block'
+              callBack={fetchSeriesData}
+              title={`Creator of ${series.available} series`}
+            />
+          </div>
+        )}
+      </div>
+    );
+  }
+}
 
 CreatorPage.propTypes = {
   fetchedData: PropTypes.object,

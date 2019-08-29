@@ -6,8 +6,9 @@ const PreviewItem = ({ name, resourceURI, role, pathname }) => {
   const id = resourceURI.split('/').slice(-1)[0];
   return (
     <Link to={`/creators/${id}`} className='creator_name'>
-      <span>{name}</span>
-      <span>{role}</span>
+      <span>
+        {name} - {role}
+      </span>
     </Link>
   );
 };

@@ -1,83 +1,93 @@
-import React, { useEffect } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { types, fetchCharacters, fetchEvents, fetchSingleComicBook } from 'Store';
 import { convertToLocale, ApiFactory } from 'Utilities';
-import { Loader, ImageAvatar, AccordeonSection, DetailsSection, SearchCard, PreviewItem, CharacterCard } from 'Modules';
+import {
+  CreatorsComponent,
+  ErrorHandler,
+  Loader,
+  ImageAvatar,
+  AccordeonSection,
+  DetailsSection,
+  SearchCard,
+  PreviewItem,
+  CharacterCard,
+} from 'Modules';
 import { withDataFetching } from 'Components/hocs';
 
 const CharactersAccordeon = withDataFetching('/characters')(AccordeonSection);
 const EventsAccordeon = withDataFetching('/events')(AccordeonSection);
 
-const ComicBookPage = props => {
-  const { location, charactersFetchStatus, eventsFetchStatus, fetchStatus } = props;
-  const { fetchedData, storeData, charactersData, eventsData } = props;
-  const { fetchComicsData, fetchCharacterData, fetchEventsData, setFetchingState } = props;
-  const { title, description, modified, thumbnail, urls, characters, creators, events } = storeData || fetchedData;
-  const { isFetching } = fetchStatus;
-
-  useEffect(() => {
+class ComicBookPage extends Component {
+  componentDidMount() {
+    const { storeData } = this.props;
+    if (!storeData) {
+      this.loadPrimaryData();
+    }
+  }
+  loadPrimaryData = () => {
+    const { fetchComicsData, location, setFetchingState } = this.props;
     const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
     const apiStr = charactersAPI.createApiString();
-    if (!storeData) {
-      setFetchingState(types.COMICS_FETCHING, true);
-      fetchComicsData(apiStr);
-    }
-  }, [fetchComicsData, location, setFetchingState, storeData]);
+    setFetchingState(types.COMICS_FETCHING, true);
+    fetchComicsData(apiStr);
+  };
+  render() {
+    const { location, charactersFetchStatus, eventsFetchStatus, fetchStatus } = this.props;
+    const { fetchedData, storeData, charactersData, eventsData } = this.props;
+    const { fetchCharacterData, fetchEventsData, setFetchingState } = this.props;
+    const { title, description, modified, thumbnail, urls, characters, creators, events } = storeData || fetchedData;
+    const { isFetching, status, message } = fetchStatus;
 
-  const baseSrc = thumbnail.path ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
-  const src = thumbnail.path ? `${thumbnail.path}.${thumbnail.extension}` : '';
+    const baseSrc = thumbnail.path ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
+    const src = thumbnail.path ? `${thumbnail.path}.${thumbnail.extension}` : '';
 
-  const lastModified = convertToLocale(modified);
+    const lastModified = convertToLocale(modified);
 
-  const renderCharacters = charactersData.map(item => <CharacterCard key={item.id} {...item} pathname={'/characters'} />);
-  const renderCreators = creators.items.map((item, index) => <PreviewItem key={index} {...item} />);
-  const renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
-  console.log(renderCreators);
-  return (
-    <div className='page_content'>
-      {isFetching ? (
-        <Loader />
-      ) : (
-        <div className='items_data_wrapper'>
-          <ImageAvatar wrapper={true} className='cover_book_image' baseSrc={baseSrc} src={src} />
-          <DetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
-          {/* <AccordeonSection
-            number={creators.available}
-            location={location}
-            pathname={'/creators'}
-            content={renderCreators}
-            slider={false}
-            contentClassName='creators_content_block'
-            title={`${creators.available} creators`}
-          /> */}
-          <CharactersAccordeon
-            fetchingCallBack={bool => setFetchingState(types.CHARACTERS_FETCHING, bool)}
-            fetchStatus={charactersFetchStatus}
-            number={characters.available}
-            location={location}
-            content={renderCharacters}
-            slider={true}
-            contentClassName='default_slider_block'
-            callBack={fetchCharacterData}
-            title={`You can meet ${characters.available} characters`}
-          />
-          <EventsAccordeon
-            fetchingCallBack={bool => setFetchingState(types.EVENTS_FETCHING, bool)}
-            fetchStatus={eventsFetchStatus}
-            number={events.available}
-            location={location}
-            content={renderEvents}
-            slider={true}
-            contentClassName='default_content_block'
-            callBack={fetchEventsData}
-            title={`Part of ${events.available} events`}
-          />
-        </div>
-      )}
-    </div>
-  );
-};
+    const renderCharacters = charactersData.map(item => <CharacterCard key={item.id} {...item} pathname={'/characters'} />);
+    const renderCreators = creators.items.map((item, index) => <PreviewItem key={index} {...item} />);
+    const renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
+
+    return (
+      <div className='page_content'>
+        {isFetching ? (
+          <Loader />
+        ) : !status ? (
+          <ErrorHandler msg={message} size={'35'} loadData={() => this.loadPrimaryData()} />
+        ) : (
+          <div className='items_data_wrapper'>
+            <ImageAvatar wrapper={true} className='cover_book_image' baseSrc={baseSrc} src={src} />
+            <DetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
+            <CharactersAccordeon
+              fetchingCallBack={bool => setFetchingState(types.CHARACTERS_FETCHING, bool)}
+              fetchStatus={charactersFetchStatus}
+              number={characters.available}
+              location={location}
+              content={renderCharacters}
+              slider={true}
+              contentClassName='default_slider_block'
+              callBack={fetchCharacterData}
+              title={`You can meet ${characters.available} characters`}
+            />
+            <EventsAccordeon
+              fetchingCallBack={bool => setFetchingState(types.EVENTS_FETCHING, bool)}
+              fetchStatus={eventsFetchStatus}
+              number={events.available}
+              location={location}
+              content={renderEvents}
+              slider={true}
+              contentClassName='default_content_block'
+              callBack={fetchEventsData}
+              title={`Part of ${events.available} events`}
+            />
+            <CreatorsComponent content={renderCreators} number={creators.available} location={location} pathname={'/creators'} />
+          </div>
+        )}
+      </div>
+    );
+  }
+}
 
 ComicBookPage.propTypes = {
   storeData: PropTypes.object,

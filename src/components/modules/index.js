@@ -22,6 +22,7 @@ import PageButton from './PageButton/PageButton.jsx';
 import SinglePageModule from './SinglePageModule/SinglePageModule.jsx';
 import ErrorHandler from './ErrorHandler/ErrorHandler.jsx';
 import Reload from './Reload/Reload.jsx';
+import CreatorsComponent from './CreatorsComponent/CreatorsComponent.jsx';
 
 export {
   AccordeonSection,
@@ -48,4 +49,5 @@ export {
   ErrorHandler,
   SinglePageModule,
   Reload,
+  CreatorsComponent,
 };
