@@ -27,6 +27,7 @@
   display: flex;
   text-align: center;
   flex-direction: column;
+  padding: 0 1em;
   @include size(6);
   @include size-md(7);
   margin-bottom: 1em;

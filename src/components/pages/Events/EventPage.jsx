@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchSeries, fetchCharacters, fetchComics, types, fetchSingleEvent } from 'Store';
 import { convertToLocale, ApiFactory } from 'Utilities';
@@ -19,6 +20,7 @@ import { withDataFetching } from 'Components/hocs';
 const CharactersAccordeon = withDataFetching('/characters')(AccordeonSection);
 const ComicsAccordeon = withDataFetching('/comics')(AccordeonSection);
 const SeriesAccordeon = withDataFetching('/series')(AccordeonSection);
+
 class EventPage extends Component {
   componentDidMount() {
     const { storeData } = this.props;
@@ -33,24 +35,32 @@ class EventPage extends Component {
     setFetchingState(types.EVENTS_FETCHING, true);
     fetchEventData(apiStr);
   };
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.loadPrimaryData();
+    }
+  }
   render() {
     const { location, setFetchingState } = this.props;
     const { fetchStatus, charactersFetchStatus, comicsFetchStatus, seriesFetchStatus } = this.props;
     const { fetchedData, storeData, charactersData, comicsData, seriesData } = this.props;
     const { fetchCharacterData, fetchComicsData, fetchSeriesData } = this.props;
-    const { title, description, modified, thumbnail, urls, comics, creators, characters, series } = storeData || fetchedData;
+    const data = storeData || fetchedData;
+    const { title, description, modified, thumbnail, urls, comics, creators, characters, series, previous, next } = data;
     const { isFetching, status, message } = fetchStatus;
+
     const baseSrc = thumbnail.path ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
     const src = thumbnail.path ? `${thumbnail.path}.${thumbnail.extension}` : '';
+
     const lastModified = convertToLocale(modified);
-    // console.log(eventItemData);
-    // console.log(eventItemData.next);
-    // console.log(eventItemData.previous);
+
+    const prevLinkPath = previous.resourceURI && previous.resourceURI.match(/\w+\/\d+/)[0].split('/');
+    const nextLinkPath = next.resourceURI && next.resourceURI.match(/\w+\/\d+/)[0].split('/');
+
     const renderCharacters = charactersData.map(item => <CharacterCard key={item.id} {...item} pathname={'/characters'} />);
     const renderCreators = creators.items.map((item, index) => <PreviewItem key={index} {...item} />);
     const renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} pathname={'/comics'} />);
     const renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} pathname={'/series'} />);
-
     return (
       <div className='page_content'>
         {isFetching ? (
@@ -61,6 +71,12 @@ class EventPage extends Component {
           <div className='items_data_wrapper'>
             <ImageAvatar wrapper={true} className='cover_book_image' baseSrc={baseSrc} src={src} />
             <DetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
+            <Link to={`/${prevLinkPath[0]}/${prevLinkPath[1]}`} className='adjasent_item_link'>
+              Previous - {previous.name}
+            </Link>
+            <Link to={`/${nextLinkPath[0]}/${nextLinkPath[1]}`} className='adjasent_item_link'>
+              Next - {next.name}
+            </Link>
             <CharactersAccordeon
               fetchingCallBack={bool => setFetchingState(types.CHARACTERS_FETCHING, bool)}
               fetchStatus={charactersFetchStatus}

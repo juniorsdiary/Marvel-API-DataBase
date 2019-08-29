@@ -16,5 +16,4 @@ ReactDOM.render(
   document.getElementById('container')
 );
 
-// TODO: сделать для ивентов и серии след и пред компонент
 // TODO: not found page

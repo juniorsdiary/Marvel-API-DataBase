@@ -18,6 +18,14 @@ const initialState = {
     },
     events: [],
     comics: [],
+    previous: {
+      resourceURI: '',
+      name: '',
+    },
+    next: {
+      resourceURI: '',
+      name: '',
+    },
   },
   fetchStatus: {
     status: false,

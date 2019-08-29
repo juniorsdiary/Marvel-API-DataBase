@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { fetchCharacters, fetchEvents, fetchComics, types, fetchSingleSeries } from 'Store';
 import { convertToLocale, ApiFactory } from 'Utilities';
@@ -34,18 +35,26 @@ class SingleSeriesPage extends Component {
     setFetchingState(types.SERIES_FETCHING, true);
     fetchSeriesData(apiStr);
   };
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.loadPrimaryData();
+    }
+  }
   render() {
     const { location, setFetchingState } = this.props;
     const { fetchStatus, eventsFetchStatus, comicsFetchStatus, charactersFetchStatus } = this.props;
     const { fetchedData, storeData, charactersData, eventsData, comicsData } = this.props;
     const { fetchCharacterData, fetchEventsData, fetchComicsData } = this.props;
-    const { title, description, modified, thumbnail, urls, comics, creators, characters, events } = storeData || fetchedData;
+    const { title, description, modified, thumbnail, urls, comics, creators, characters, events, previous, next } = storeData || fetchedData;
     const { isFetching, status, message } = fetchStatus;
 
     const baseSrc = thumbnail.path ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
     const src = thumbnail.path ? `${thumbnail.path}.${thumbnail.extension}` : '';
 
     const lastModified = convertToLocale(modified);
+
+    const prevLinkPath = previous.resourceURI && previous.resourceURI.match(/\w+\/\d+/)[0].split('/');
+    const nextLinkPath = next.resourceURI && next.resourceURI.match(/\w+\/\d+/)[0].split('/');
 
     const renderCharacters = charactersData.map(item => <CharacterCard key={item.id} {...item} pathname={'/characters'} />);
     const renderCreators = creators.items.map((item, index) => <PreviewItem key={index} {...item} />);
@@ -62,6 +71,12 @@ class SingleSeriesPage extends Component {
           <div className='items_data_wrapper'>
             <ImageAvatar wrapper={true} className='cover_book_image' baseSrc={baseSrc} src={src} />
             <DetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
+            <Link to={`/${prevLinkPath[0]}/${prevLinkPath[1]}`} className='adjasent_item_link'>
+              Previous - {previous.name}
+            </Link>
+            <Link to={`/${nextLinkPath[0]}/${nextLinkPath[1]}`} className='adjasent_item_link'>
+              Next - {next.name}
+            </Link>
             <CharactersAccordeon
               fetchingCallBack={bool => setFetchingState(types.CHARACTERS_FETCHING, bool)}
               fetchStatus={charactersFetchStatus}
