@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import { sliderSettings } from 'Utilities';
 import { Reload } from 'Modules';
 import { IoIosArrowDown } from 'react-icons/io';
 
-const AccordeonSection = ({ content, number, pathname, location, children, slider, contentClassName, title, loadData, fetchStatus }) => {
+const AccordeonSection = ({ data, number, pathname, location, slider, contentClassName, title, loadData, fetchStatus, MappingComponent }) => {
   const { status, isFetching } = fetchStatus;
   const [active, setActive] = useState(false);
   const toggleContent = !status || isFetching || number === 0 ? () => {} : () => setActive(!active);
@@ -14,6 +14,7 @@ const AccordeonSection = ({ content, number, pathname, location, children, slide
     .split('/')
     .join('=')
     .replace(/=/, '?');
+  let content = data.map(item => <MappingComponent key={item.id} {...item} pathname={pathname} />);
   return (
     <>
       <div
@@ -50,19 +51,16 @@ const AccordeonSection = ({ content, number, pathname, location, children, slide
 };
 
 AccordeonSection.propTypes = {
-  content: PropTypes.array,
-  state: PropTypes.bool,
-  children: PropTypes.node,
+  data: PropTypes.array,
   pathname: PropTypes.string,
   location: PropTypes.object,
   number: PropTypes.number,
   slider: PropTypes.bool,
   contentClassName: PropTypes.string,
-  onClick: PropTypes.func,
   title: PropTypes.string,
-  loading: PropTypes.bool,
   fetchStatus: PropTypes.object,
   loadData: PropTypes.func,
+  MappingComponent: PropTypes.any,
 };
 
-export default AccordeonSection;
+export default withRouter(AccordeonSection);

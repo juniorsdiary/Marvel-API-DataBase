@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { types, fetchEvents, fetchSeries, fetchComics, fetchSingleCharacter } from 'Store';
+import { types, fetchSingleCharacter } from 'Store';
 import { convertToLocale, ApiFactory } from 'Utilities';
-import { ErrorHandler, Loader, ImageAvatar, AccordeonSection, DetailsSection, SearchCard } from 'Modules';
-import { withDataFetching } from 'Components/hocs';
-
-const EventsAccordeon = withDataFetching('/events')(AccordeonSection);
-const SeriesAccordeon = withDataFetching('/series')(AccordeonSection);
-const ComicsAccordeon = withDataFetching('/comics')(AccordeonSection);
+import { ErrorHandler, Loader, ImageAvatar, DetailsSection, SearchCard, ComicsAccordeon, SeriesAccordeon, EventsAccordeon } from 'Modules';
 
 class CharacterPage extends Component {
   componentDidMount() {
@@ -21,25 +16,18 @@ class CharacterPage extends Component {
     const { fetchCharacterData, location, setFetchingState } = this.props;
     const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
     const apiStr = charactersAPI.createApiString();
-    setFetchingState(types.CHARACTERS_FETCHING, true);
+    setFetchingState(true);
     fetchCharacterData(apiStr);
   };
   render() {
-    const { fetchComicsData, fetchSeriesData, fetchEventsData } = this.props;
-    const { fetchedData, storeData, comicsData, seriesData, eventsData } = this.props;
-    const { setFetchingState, location } = this.props;
-    const { fetchStatus, eventsFetchStatus, comicsFetchStatus, seriesFetchStatus } = this.props;
+    const { fetchedData, storeData, fetchStatus, location } = this.props;
     const { name, description, modified, thumbnail, urls, comics, series, events } = storeData || fetchedData;
     const { isFetching, status, message } = fetchStatus;
 
-    const baseSrc = thumbnail.path ? `${thumbnail.path}/portrait_small.${thumbnail.extension}` : '';
-    const src = thumbnail.path ? `${thumbnail.path}.${thumbnail.extension}` : '';
+    const baseSrc = thumbnail.path && `${thumbnail.path}/portrait_small.${thumbnail.extension}`;
+    const src = thumbnail.path && `${thumbnail.path}.${thumbnail.extension}`;
 
     const lastModified = convertToLocale(modified);
-
-    let renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} pathname={'/comics'} />);
-    let renderSeries = seriesData.map(item => <SearchCard key={item.id} {...item} pathname={'/series'} />);
-    let renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
 
     return (
       <div className='page_content'>
@@ -52,36 +40,27 @@ class CharacterPage extends Component {
             <ImageAvatar wrapper={true} className='character_page_image' baseSrc={baseSrc} src={src} />
             <DetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
             <ComicsAccordeon
-              fetchingCallBack={bool => setFetchingState(types.COMICS_FETCHING, bool)}
-              fetchStatus={comicsFetchStatus}
-              number={comics.available}
+              MappingComponent={SearchCard}
               location={location}
-              content={renderComics}
+              number={comics.available}
               slider={true}
               contentClassName='default_slider_block'
-              callBack={fetchComicsData}
               title={`Encountered in ${comics.available} comics`}
             />
             <SeriesAccordeon
-              fetchingCallBack={bool => setFetchingState(types.SERIES_FETCHING, bool)}
-              fetchStatus={seriesFetchStatus}
-              number={series.available}
+              MappingComponent={SearchCard}
               location={location}
-              content={renderSeries}
+              number={series.available}
               slider={true}
               contentClassName='default_slider_block'
-              callBack={fetchSeriesData}
               title={`Encountered in ${series.available} series`}
             />
             <EventsAccordeon
-              fetchingCallBack={bool => setFetchingState(types.EVENTS_FETCHING, bool)}
-              fetchStatus={eventsFetchStatus}
+              MappingComponent={SearchCard}
               number={events.available}
               location={location}
-              content={renderEvents}
               slider={true}
               contentClassName='default_slider_block'
-              callBack={fetchEventsData}
               title={`Encountered in ${events.available} events`}
             />
           </div>
@@ -96,15 +75,6 @@ CharacterPage.propTypes = {
   fetchedData: PropTypes.object,
   fetchStatus: PropTypes.object,
   fetchCharacterData: PropTypes.func,
-  eventsData: PropTypes.array,
-  fetchEventsData: PropTypes.func,
-  eventsFetchStatus: PropTypes.object,
-  comicsData: PropTypes.array,
-  fetchComicsData: PropTypes.func,
-  comicsFetchStatus: PropTypes.object,
-  seriesData: PropTypes.array,
-  fetchSeriesData: PropTypes.func,
-  seriesFetchStatus: PropTypes.object,
   setFetchingState: PropTypes.func,
   location: PropTypes.object,
 };
@@ -115,31 +85,16 @@ const mapStateToProps = (state, ownProps) => {
     storeData: state.charactersData.charactersList.filter(item => item.id === id)[0],
     fetchedData: state.charactersData.singleCharacter,
     fetchStatus: state.charactersData.fetchStatus,
-    eventsData: state.eventsData.eventsList,
-    eventsFetchStatus: state.eventsData.fetchStatus,
-    comicsData: state.comicsData.comicsList,
-    comicsFetchStatus: state.comicsData.fetchStatus,
-    seriesData: state.seriesData.seriesList,
-    seriesFetchStatus: state.seriesData.fetchStatus,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchEventsData: url => {
-      dispatch(fetchEvents(url));
-    },
-    fetchComicsData: url => {
-      dispatch(fetchComics(url));
-    },
-    fetchSeriesData: url => {
-      dispatch(fetchSeries(url));
-    },
     fetchCharacterData: url => {
       dispatch(fetchSingleCharacter(url));
     },
-    setFetchingState: (type, boolean) => {
-      dispatch({ type: type, payload: boolean });
+    setFetchingState: boolean => {
+      dispatch({ type: types.CHARACTERS_FETCHING, payload: boolean });
     },
   };
 };

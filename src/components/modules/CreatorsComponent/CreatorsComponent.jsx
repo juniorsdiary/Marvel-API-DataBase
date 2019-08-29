@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-const CreatorsComponent = ({ content, number, location, pathname }) => {
+import { PreviewItem } from 'Modules';
+
+const CreatorsComponent = ({ data, number, location, pathname }) => {
   const search = location.pathname
     .split('/')
     .join('=')
     .replace(/=/, '?');
+  const content = data.map((item, index) => <PreviewItem key={index} {...item} />);
   return (
     <div className='creators_content_block'>
       <p className='creators_content_title'>{`${number} creators`}</p>
@@ -20,7 +23,7 @@ const CreatorsComponent = ({ content, number, location, pathname }) => {
 };
 CreatorsComponent.propTypes = {
   number: PropTypes.number,
-  content: PropTypes.array,
+  data: PropTypes.array,
   location: PropTypes.object,
   pathname: PropTypes.string,
 };

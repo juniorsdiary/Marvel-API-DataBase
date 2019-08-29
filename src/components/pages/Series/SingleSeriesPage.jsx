@@ -2,24 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { fetchCharacters, fetchEvents, fetchComics, types, fetchSingleSeries } from 'Store';
+import { types, fetchSingleSeries } from 'Store';
 import { convertToLocale, ApiFactory } from 'Utilities';
 import {
   ErrorHandler,
   CreatorsComponent,
   Loader,
   ImageAvatar,
-  AccordeonSection,
   DetailsSection,
   SearchCard,
-  PreviewItem,
   CharacterCard,
+  CharactersAccordeon,
+  EventsAccordeon,
+  ComicsAccordeon,
 } from 'Modules';
-import { withDataFetching } from 'Components/hocs';
-
-const CharactersAccordeon = withDataFetching('/characters')(AccordeonSection);
-const EventsAccordeon = withDataFetching('/events')(AccordeonSection);
-const ComicsAccordeon = withDataFetching('/comics')(AccordeonSection);
 
 class SingleSeriesPage extends Component {
   componentDidMount() {
@@ -32,7 +28,7 @@ class SingleSeriesPage extends Component {
     const { fetchSeriesData, location, setFetchingState } = this.props;
     const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
     const apiStr = charactersAPI.createApiString();
-    setFetchingState(types.SERIES_FETCHING, true);
+    setFetchingState(true);
     fetchSeriesData(apiStr);
   };
   componentDidUpdate(prevProps) {
@@ -41,10 +37,7 @@ class SingleSeriesPage extends Component {
     }
   }
   render() {
-    const { location, setFetchingState } = this.props;
-    const { fetchStatus, eventsFetchStatus, comicsFetchStatus, charactersFetchStatus } = this.props;
-    const { fetchedData, storeData, charactersData, eventsData, comicsData } = this.props;
-    const { fetchCharacterData, fetchEventsData, fetchComicsData } = this.props;
+    const { location, fetchedData, storeData, fetchStatus } = this.props;
     const { title, description, modified, thumbnail, urls, comics, creators, characters, events, previous, next } = storeData || fetchedData;
     const { isFetching, status, message } = fetchStatus;
 
@@ -53,13 +46,8 @@ class SingleSeriesPage extends Component {
 
     const lastModified = convertToLocale(modified);
 
-    const prevLinkPath = previous.resourceURI && previous.resourceURI.match(/\w+\/\d+/)[0].split('/');
-    const nextLinkPath = next.resourceURI && next.resourceURI.match(/\w+\/\d+/)[0].split('/');
-
-    const renderCharacters = charactersData.map(item => <CharacterCard key={item.id} {...item} pathname={'/characters'} />);
-    const renderCreators = creators.items.map((item, index) => <PreviewItem key={index} {...item} />);
-    const renderEvents = eventsData.map(item => <SearchCard key={item.id} {...item} pathname={'/events'} />);
-    const renderComics = comicsData.map(item => <SearchCard key={item.id} {...item} pathname={'/comics'} />);
+    const prevLink = previous && previous.resourceURI.match(/\w+\/\d+/)[0];
+    const nextLink = next && next.resourceURI.match(/\w+\/\d+/)[0];
 
     return (
       <div className='page_content'>
@@ -71,46 +59,41 @@ class SingleSeriesPage extends Component {
           <div className='items_data_wrapper'>
             <ImageAvatar wrapper={true} className='cover_book_image' baseSrc={baseSrc} src={src} />
             <DetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
-            <Link to={`/${prevLinkPath[0]}/${prevLinkPath[1]}`} className='adjasent_item_link'>
-              Previous - {previous.name}
-            </Link>
-            <Link to={`/${nextLinkPath[0]}/${nextLinkPath[1]}`} className='adjasent_item_link'>
-              Next - {next.name}
-            </Link>
+            {previous && (
+              <Link to={`/${prevLink}`} className='adjasent_item_link'>
+                Previous - {previous.name}
+              </Link>
+            )}
+            {next && (
+              <Link to={`/${nextLink}`} className='adjasent_item_link'>
+                Next - {next.name}
+              </Link>
+            )}
             <CharactersAccordeon
-              fetchingCallBack={bool => setFetchingState(types.CHARACTERS_FETCHING, bool)}
-              fetchStatus={charactersFetchStatus}
+              MappingComponent={CharacterCard}
               number={characters.available}
               location={location}
-              content={renderCharacters}
               slider={true}
               contentClassName='default_slider_block'
-              callBack={fetchCharacterData}
               title={`You can meet ${characters.available} characters`}
             />
             <ComicsAccordeon
-              fetchingCallBack={bool => setFetchingState(types.COMICS_FETCHING, bool)}
-              fetchStatus={comicsFetchStatus}
+              MappingComponent={SearchCard}
               number={comics.available}
               location={location}
-              content={renderComics}
               slider={true}
               contentClassName='default_slider_block'
-              callBack={fetchComicsData}
               title={`Contains ${comics.available} comics`}
             />
             <EventsAccordeon
-              fetchingCallBack={bool => setFetchingState(types.EVENTS_FETCHING, bool)}
-              fetchStatus={eventsFetchStatus}
+              MappingComponent={SearchCard}
               number={events.available}
               location={location}
-              content={renderEvents}
               slider={true}
               contentClassName='default_content_block'
-              callBack={fetchEventsData}
               title={`Part of ${events.available} events`}
             />
-            <CreatorsComponent content={renderCreators} number={creators.available} location={location} pathname={'/creators'} />
+            <CreatorsComponent data={creators.items} number={creators.available} location={location} pathname={'/creators'} />
           </div>
         )}
       </div>
@@ -123,15 +106,6 @@ SingleSeriesPage.propTypes = {
   fetchedData: PropTypes.object,
   fetchSeriesData: PropTypes.func,
   fetchStatus: PropTypes.object,
-  charactersData: PropTypes.array,
-  fetchCharacterData: PropTypes.func,
-  charactersFetchStatus: PropTypes.object,
-  eventsData: PropTypes.array,
-  fetchEventsData: PropTypes.func,
-  eventsFetchStatus: PropTypes.object,
-  comicsData: PropTypes.array,
-  fetchComicsData: PropTypes.func,
-  comicsFetchStatus: PropTypes.object,
   setFetchingState: PropTypes.func,
   location: PropTypes.object,
 };
@@ -142,31 +116,16 @@ const mapStateToProps = (state, ownProps) => {
     storeData: state.seriesData.seriesList.filter(item => item.id === id)[0],
     fetchedData: state.seriesData.seriesBook,
     fetchStatus: state.seriesData.fetchStatus,
-    charactersData: state.charactersData.charactersList,
-    charactersFetchStatus: state.charactersData.fetchStatus,
-    eventsData: state.eventsData.eventsList,
-    eventsFetchStatus: state.eventsData.fetchStatus,
-    comicsData: state.comicsData.comicsList,
-    comicsFetchStatus: state.comicsData.fetchStatus,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCharacterData: url => {
-      dispatch(fetchCharacters(url));
-    },
-    fetchEventsData: url => {
-      dispatch(fetchEvents(url));
-    },
-    fetchComicsData: url => {
-      dispatch(fetchComics(url));
-    },
     fetchSeriesData: url => {
       dispatch(fetchSingleSeries(url));
     },
-    setFetchingState: (type, boolean) => {
-      dispatch({ type: type, payload: boolean });
+    setFetchingState: boolean => {
+      dispatch({ type: types.SERIES_FETCHING, payload: boolean });
     },
   };
 };
