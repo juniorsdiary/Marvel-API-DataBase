@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssPlugin = require('mini-css-extract-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const CopyWebPackPlugin = require('copy-webpack-plugin');
 const common = require('./webpack.config.js');
 
 module.exports = merge(common, {
@@ -21,6 +22,7 @@ module.exports = merge(common, {
     new MiniCssPlugin({ filename: '[name].[hash].css' }),
     new HtmlWebpackPlugin({
       template: paths.appHtml,
+      favicon: `${paths.appSrc}/favicon.ico`,
       minify: {
         removeAttributeQuotes: true,
         collapseWhitespace: true,

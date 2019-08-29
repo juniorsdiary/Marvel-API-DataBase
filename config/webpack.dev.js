@@ -45,5 +45,5 @@ module.exports = merge(common, {
       },
     ],
   },
-  plugins: [new HtmlWebpackPlugin({ template: paths.appHtml }), new CleanWebpackPlugin()],
+  plugins: [new HtmlWebpackPlugin({ template: paths.appHtml, favicon: `${paths.appSrc}/favicon.ico` }), new CleanWebpackPlugin()],
 });
