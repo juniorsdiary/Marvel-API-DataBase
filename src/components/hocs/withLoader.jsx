@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Loader, ErrorHandler, Reload } from 'Modules';
+import { Loader, ErrorHandler } from 'Modules';
 /* eslint-disable react/prop-types */
 const withLoader = () => WrappedComponent => {
   return class LoadingHOC extends Component {
@@ -12,8 +12,7 @@ const withLoader = () => WrappedComponent => {
         <WrappedComponent {...this.props} />
       ) : (
         <>
-          <ErrorHandler msg={message} />
-          <Reload size={'35'} loadData={loadData} />
+          <ErrorHandler size={'35'} msg={message} loadData={loadData} />
         </>
       );
     }
