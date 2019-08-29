@@ -12,6 +12,7 @@ import {
   CreatorPage,
   CreatorsList,
   Home,
+  NotFoundPage,
 } from 'Pages';
 
 const Routes = () => (
@@ -27,6 +28,7 @@ const Routes = () => (
     <Route exact path='/series/:id' component={SingleSeriesPage} />
     <Route exact path='/events/:id' component={EventPage} />
     <Route exact path='/creators/:id' component={CreatorPage} />
+    <Route exact path='/*' component={NotFoundPage} />
   </Switch>
 );
 
