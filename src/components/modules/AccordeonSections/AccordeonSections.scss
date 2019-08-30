@@ -31,16 +31,7 @@
 
 .default_slider_block {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 1em auto;
-  @include size(11);
-}
-
-.default_content_block {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   margin: 1em auto;
   @include size(11);

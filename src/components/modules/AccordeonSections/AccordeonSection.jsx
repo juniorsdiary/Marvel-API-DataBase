@@ -17,21 +17,23 @@ const AccordeonSection = ({ data, number, pathname, location, slider, contentCla
   let content = data.map(item => <MappingComponent key={item.id} {...item} pathname={pathname} />);
   return (
     <>
-      <div
-        tabIndex='-1'
-        role='button'
-        className={`available_items_title ${active && 'active_tab'}`}
-        onClick={toggleContent}
-        onKeyPress={toggleContent}>
-        <span>{title}</span>
-        {isFetching ? (
-          <span className='accordeon_loading_spinner'></span>
-        ) : status ? (
-          <IoIosArrowDown size='25' className={`${active ? 'open' : 'close'}_dropdown`} />
-        ) : (
-          <Reload size={'25'} loadData={loadData} />
-        )}
-      </div>
+      {number > 0 && (
+        <div
+          tabIndex='-1'
+          role='button'
+          className={`available_items_title ${active && 'active_tab'}`}
+          onClick={toggleContent}
+          onKeyPress={toggleContent}>
+          <span>{title}</span>
+          {isFetching ? (
+            <span className='accordeon_loading_spinner'></span>
+          ) : status ? (
+            <IoIosArrowDown size='25' className={`${active ? 'open' : 'close'}_dropdown`} />
+          ) : (
+            <Reload size={'25'} loadData={loadData} />
+          )}
+        </div>
+      )}
       <div className={`accordeon_section ${active && 'active_section'}`}>
         {content.length >= 3 && slider ? (
           <Slider {...sliderSettings} className={contentClassName}>

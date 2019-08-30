@@ -64,7 +64,7 @@ class ComicBookPage extends Component {
               number={events.available}
               location={location}
               slider={true}
-              contentClassName='default_content_block'
+              contentClassName='default_slider_block'
               title={`Part of ${events.available} events`}
             />
             <CreatorsComponent data={creators.items} number={creators.available} location={location} pathname={'/creators'} />

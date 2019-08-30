@@ -24,4 +24,8 @@ PageButton.propTypes = {
   setOffset: PropTypes.func,
 };
 
+PageButton.defaultProps = {
+  setOffset: () => {},
+};
+
 export default PageButton;

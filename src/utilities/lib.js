@@ -14,15 +14,13 @@ export function getHash(cipherValue) {
  * @return {[array]}         [2d array of page indexes]
  */
 export function definePagesIndex(pages, pageNum) {
-  // console.log(pageNum);
-  // console.log(pages);
   const indexArr = [...Array(pages + 1).keys()];
   if (pages < 6) {
     return indexArr.slice(1);
-  } else if (pageNum > 2) {
+  } else if (pageNum > 2 && pageNum <= pages - 2) {
     return [...indexArr.slice(pageNum - 2, pageNum), ...indexArr.slice(pageNum, pageNum + 3)];
   } else if (pageNum > pages - 2) {
-    return indexArr.splice(pages, -5);
+    return [...indexArr.splice(pages - 4)];
   }
   return indexArr.slice(1, 6);
 }
