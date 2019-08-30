@@ -31,6 +31,10 @@ html, body {
   flex: 1 1 100%;
 }
 
+.single_page_content {
+
+}
+
 .cover_book_image {
   position: relative;
   margin: 0.5em;
@@ -44,7 +48,6 @@ html, body {
 }
 
 .items_data_wrapper {
-  height: 100%;
   display: flex;
   justify-content: space-around;
   align-content: flex-start;
