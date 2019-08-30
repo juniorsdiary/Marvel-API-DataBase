@@ -1,49 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { constants } from 'Utilities';
+import { constants, definePagesIndex } from 'Utilities';
 import { PageButton } from 'Modules';
 
 const Pagination = ({ totalResults, offset, setOffset }) => {
   let pages = Math.ceil(totalResults / constants.PER_PAGE_RESULTS);
-
   let pageNum = offset / constants.PER_PAGE_RESULTS + 1;
-
-  const renderMiddlePages = [...Array(pages).keys()]
-    .splice(pageNum, 5)
-    .map(pageInd => (
-      <PageButton
-        key={pageInd}
-        className={pageInd === pageNum ? 'active_page_item' : ''}
-        pageInd={pageInd}
-        setOffset={setOffset}
-        baseOffset={constants.PER_PAGE_RESULTS}
-      />
-    ));
+  const pagesIndexes = definePagesIndex(pages, pageNum);
+  const renderPageButtons = pagesIndexes.map(pageInd => (
+    <PageButton
+      key={pageInd}
+      className={pageInd === pageNum ? 'active_page_item' : ''}
+      pageInd={pageInd}
+      setOffset={setOffset}
+      baseOffset={constants.PER_PAGE_RESULTS}
+    />
+  ));
 
   return (
     <div className='pagination'>
       <p className='total_results'>Total results: {totalResults}</p>
-      <div className='toogle_pages_block'>
-        {pages > 1 && (
-          <PageButton
-            className={pageNum === 1 ? 'inactive_page_item' : ''}
-            pageInd={pageNum - 1}
-            setOffset={pageNum > 1 ? setOffset : () => {}}
-            baseOffset={constants.PER_PAGE_RESULTS}
-            textContent='Previous'
-          />
-        )}
-        {renderMiddlePages}
-        {pages > 1 && (
-          <PageButton
-            className={pageNum === pages ? 'inactive_page_item' : ''}
-            pageInd={pageNum + 1}
-            setOffset={pageNum < pages ? setOffset : () => {}}
-            baseOffset={constants.PER_PAGE_RESULTS}
-            textContent='Next'
-          />
-        )}
-      </div>
+      <div className='toogle_pages_block'>{renderPageButtons}</div>
     </div>
   );
 };

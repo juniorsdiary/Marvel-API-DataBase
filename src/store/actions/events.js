@@ -1,6 +1,7 @@
 import * as types from '../types';
 
 export const fetchEvents = url => async dispatch => {
+  dispatch({ type: types.CLEAR_EVENTS });
   try {
     const res = await fetch(url);
     if (res.status !== 200) {

@@ -19,6 +19,11 @@ const initialState = {
 export default function creatorsData(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
+    case types.CLEAR_CREATORS:
+      return {
+        ...state,
+        totalResults: 0,
+      };
     case types.FETCH_CREATORS:
       return {
         ...state,

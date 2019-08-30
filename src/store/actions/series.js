@@ -1,6 +1,7 @@
 import * as types from '../types';
 
 export const fetchSeries = url => async dispatch => {
+  dispatch({ type: types.CLEAR_SERIES });
   try {
     const res = await fetch(url);
     if (res.status !== 200) {

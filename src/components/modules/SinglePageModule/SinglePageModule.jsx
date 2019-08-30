@@ -62,8 +62,9 @@ class SinglePageModule extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    this.loadData();
+    this.setOffsetValue(0);
     this.setHiddenState(true);
+    this.loadData();
   };
 
   render() {

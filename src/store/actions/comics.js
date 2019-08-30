@@ -1,6 +1,7 @@
 import * as types from '../types';
 
 export const fetchComics = url => async dispatch => {
+  dispatch({ type: types.CLEAR_COMICS });
   try {
     const res = await fetch(url);
     if (res.status !== 200) {

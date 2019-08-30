@@ -13,17 +13,18 @@ export function getHash(cipherValue) {
  * @param  {[number]} pages   [total pages of the fetched results]
  * @return {[array]}         [2d array of page indexes]
  */
-export function definePagesIndex(pageNum, pages) {
-  let firstPages = pages > 1 ? [1, 2] : [];
-  let lastPages = pages >= 5 ? [pages - 1, pages] : [];
-  let middlePages = [];
-  for (let pageInd = 3; pageInd <= (pages < 5 ? pages : pages - 2); pageInd++) {
-    if (pages < 9) middlePages.push(pageInd);
-    else if ((pageNum < 4 && pageInd <= 5) || (pageNum >= pages - 5 && pageInd >= pages - 4)) middlePages.push(pageInd);
-    else if (pageNum <= 6 && pageInd <= pageNum + 2) middlePages.push(pageInd);
-    else if (pageNum > 6 && pageInd <= pageNum + 2 && pageInd >= pageNum - 2) middlePages.push(pageInd);
+export function definePagesIndex(pages, pageNum) {
+  // console.log(pageNum);
+  // console.log(pages);
+  const indexArr = [...Array(pages + 1).keys()];
+  if (pages < 6) {
+    return indexArr.slice(1);
+  } else if (pageNum > 2) {
+    return [...indexArr.slice(pageNum - 2, pageNum), ...indexArr.slice(pageNum, pageNum + 3)];
+  } else if (pageNum > pages - 2) {
+    return indexArr.splice(pages, -5);
   }
-  return [firstPages, lastPages, middlePages];
+  return indexArr.slice(1, 6);
 }
 /**
  * [convertToLocale description]

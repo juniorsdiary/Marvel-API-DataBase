@@ -1,6 +1,7 @@
 import * as types from '../types';
 
 export const fetchCharacters = url => async dispatch => {
+  dispatch({ type: types.CLEAR_CHARACTERS });
   try {
     const res = await fetch(url);
     if (res.status !== 200) {
