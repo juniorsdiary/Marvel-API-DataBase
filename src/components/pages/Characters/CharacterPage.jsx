@@ -37,6 +37,7 @@ class CharacterPage extends Component {
           <ErrorHandler msg={message} size={'35'} loadData={() => this.loadPrimaryData()} />
         ) : (
           <div className='items_data_wrapper'>
+            <h1 className='data_title'>{name}</h1>
             <ImageAvatar wrapper={true} className='character_page_image' baseSrc={baseSrc} src={src} />
             <DetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
             <ComicsAccordeon

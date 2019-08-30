@@ -57,6 +57,7 @@ class SingleSeriesPage extends Component {
           <ErrorHandler msg={message} size={'35'} loadData={() => this.loadPrimaryData()} />
         ) : (
           <div className='items_data_wrapper'>
+            <h1 className='data_title'>{title}</h1>
             <ImageAvatar wrapper={true} className='cover_book_image' baseSrc={baseSrc} src={src} />
             <DetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
             {previous && (

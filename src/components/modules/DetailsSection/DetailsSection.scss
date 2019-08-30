@@ -1,34 +1,35 @@
-.character_data_last_modified {
+.data_last_modified {
   text-align: right;
   align-self: flex-end;
 }
 
-.character_data_details_link {
+.data_details_link {
   font-size: 0.8em;
   text-align: right;
   margin: 1em 0;
 }
 
-.character_data_description {
+.data_description {
   font-family: '44v2', sans-serif;
   font-size: 1em;
-  margin: 1em 0 auto 0;
   display: block;
   word-wrap: break-word;
 }
 
-.character_data_title {
+.data_title {
+  @include size(12);
   font-family: 'kidkosmic', sans-serif;
   font-size: 1.5em;
   display: block;
+  text-align: center;
+  margin: 0.5em;
 }
 
-.character_data_details {
+.data_details {
   display: flex;
   text-align: center;
   flex-direction: column;
-  padding: 0 1em;
+  padding: 0.5em;
   @include size(6);
   @include size-md(7);
-  margin-bottom: 1em;
 }

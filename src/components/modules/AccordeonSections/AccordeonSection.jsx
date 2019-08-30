@@ -33,7 +33,7 @@ const AccordeonSection = ({ data, number, pathname, location, slider, contentCla
         )}
       </div>
       <div className={`accordeon_section ${active && 'active_section'}`}>
-        {content.length >= 5 && slider ? (
+        {content.length >= 3 && slider ? (
           <Slider {...sliderSettings} className={contentClassName}>
             {content}
           </Slider>
