@@ -11,21 +11,16 @@
   cursor: pointer;
 }
 .toggle_component_list {
-  margin: 1em 0.5em;
+  margin: 1em 0.25em;
   color: rgb(134,134,134);
   transition: color 0.2s linear, box-shadow 0.2s linear;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 .toggle_component_cards {
   color: rgb(134,134,134);
-  margin: 1em 0.5em;
+  margin: 1em 0.25em;
   transition: color 0.2s linear;
-  border-radius: 5px;
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 }
 .active_component_type {
   color: rgb(0,0,0);
   box-shadow: none;
-  border: 1px solid rgb(148,148,148);
 }

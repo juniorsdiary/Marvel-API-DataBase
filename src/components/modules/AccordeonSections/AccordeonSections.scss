@@ -8,6 +8,7 @@
   overflow: hidden;
   max-height: 0;
   transition: max-height 0.2s linear;
+  background: inherit;
 }
 
 .show_more_link {
@@ -32,7 +33,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
+  margin: 1em auto;
   @include size(11);
 }
 

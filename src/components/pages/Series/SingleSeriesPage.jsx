@@ -62,12 +62,14 @@ class SingleSeriesPage extends Component {
             <DetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
             {previous && (
               <Link to={`/${prevLink}`} className='adjasent_item_link'>
-                Previous - {previous.name}
+                <span>Previous</span>
+                <span>{previous.name}</span>
               </Link>
             )}
             {next && (
               <Link to={`/${nextLink}`} className='adjasent_item_link'>
-                Next - {next.name}
+                <span>Next</span>
+                <span>{next.name}</span>
               </Link>
             )}
             <CharactersAccordeon

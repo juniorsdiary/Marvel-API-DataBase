@@ -31,10 +31,10 @@ export function definePagesIndex(pageNum, pages) {
  * @return {[type]}            [description]
  */
 export const convertToLocale = timeString => {
-  let options = {
-    day: 'numeric',
-    month: 'numeric',
-    year: 'numeric',
-  };
-  return new Date(timeString).toLocaleString('en-US', options);
+  // let options = {
+  //   day: 'numeric',
+  //   month: 'numeric',
+  //   year: 'numeric',
+  // };
+  return new Date(timeString).toLocaleString('en-US');
 };

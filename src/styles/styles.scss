@@ -61,10 +61,6 @@ html, body {
   };
 }
 
-.slick-list {
-  padding: 1em;
-}
-
 .slick-slide {
   > div {
     display: flex;
@@ -72,10 +68,17 @@ html, body {
   }
 }
 .adjasent_item_link {
+  width: 125px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 1em 0;
   padding: 1em 2em;
   background: rgb(255,0,0);
   text-decoration: none;
   color: rgb(255,255,255);
   cursor: pointer;
+  span {
+    margin: 0.25em 0;
+  }
 }
