@@ -76,10 +76,12 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin: 1em 0;
-  padding: 1em 2em;
+  padding: 0.5em 2em;
   background: rgb(255,0,0);
   text-decoration: none;
+  text-align: center;
   color: rgb(255,255,255);
   cursor: pointer;
   span {
