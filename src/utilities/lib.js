@@ -36,5 +36,5 @@ export const convertToLocale = timeString => {
   //   month: 'numeric',
   //   year: 'numeric',
   // };
-  return new Date(timeString).toLocaleString('en-US');
+  return new Date(timeString).toString();
 };
