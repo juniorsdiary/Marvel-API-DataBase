@@ -9,7 +9,7 @@ const Header = () => {
   };
   return (
     <header className='header_block'>
-      <Link to='/'>
+      <Link to='/' className='home_link_logo'>
         <img src={require('Assets/images/marvel_logo.png')} alt='marvel_logo' />
       </Link>
       <HumburgerButton onClick={toggleHumb} active={active} />

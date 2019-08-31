@@ -1,13 +1,11 @@
 @import "smart-grid";
 @import "animation";
-@import "default";
 @import 'utilities';
+@import "default";
 @import "~slick-carousel/slick/slick.css";
 @import "~slick-carousel/slick/slick-theme.css";
 @import 'Modules';
 @import 'Pages';
-$cover_width: 140px;
-$cover_height: $cover_width/ 3 * 4;
 
 html, body {
   font-family: "Robotocondensed", sans-serif;
@@ -20,39 +18,35 @@ html, body {
   flex-direction: column;
   height: 100vh;
 }
+
 .page_content {
-  position: relative;
-  background: red;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-content: flex-start;
-  align-items: flex-start;
-  color: rgb(255,255,255);
-  flex: 1 1 100%;
+  @extend %page_content_default;
+  @include sm-block {
+    justify-content: flex-end;
+  };
 }
 
 .single_page_content {
-
+  @extend %page_content_default;
 }
 
 .cover_book_image {
   position: relative;
   margin: 0.5em;
-  @include simple-size($cover_width, $cover_height);
+  @include simple-size($cover_width, caracter_height($cover_width));
   @include md-block {
-    @include simple-size(175px, 350px);
+    @include simple-size($md_cover_width, caracter_height($md_cover_width));
   };
   @include lg-block {
-    @include simple-size(200px, 400px);
+    @include simple-size($lg_cover_width, caracter_height($lg_cover_width));
   };
 }
 
 .items_data_wrapper {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-content: flex-start;
-  flex-wrap: wrap;
   background: white;
   color: black;
   box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
@@ -60,31 +54,29 @@ html, body {
   @include size-sm(10);
   @include size-lg(8);
   @include sm-block {
-    flex: 0 0;
-    margin: 2em 0;
+    margin: 1em 0;
   };
 }
 
-.slick-slide {
-  > div {
-    display: flex;
-    justify-content: center;
-  }
-}
-.adjasent_item_link {
-  width: 125px;
+.adjasent_item_link_block {
+  @include size(6);
+  margin: 0.5em 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin: 1em 0;
-  padding: 0.5em 2em;
-  background: rgb(255,0,0);
+  justify-content: space-around;
+}
+
+.adjasent_item_link {
   text-decoration: none;
-  text-align: center;
-  color: rgb(255,255,255);
+}
+
+.styled_btn {
+  background: red;
+  color: white;
+  font-weight: bold;
+  padding: 1em 2em;
+  clip-path: polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%);
+  margin: 1em 0;
   cursor: pointer;
-  span {
-    margin: 0.25em 0;
-  }
 }

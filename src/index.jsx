@@ -15,3 +15,7 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('container')
 );
+
+// TODO: adaptive for larger screens and changing design
+// TODO: refactor styles and clear useless selectors
+// TODO: refactor js code and optimize rendering components

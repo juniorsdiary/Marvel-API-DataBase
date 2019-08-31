@@ -2,9 +2,14 @@
   position: relative;
   padding-top: 50%;
   @include size(5);
-  @include size-xs(4);
+  @include size-xs(5);
+  @include size-sm(4);
+  @include size-lg(3);
   @include xs-block {
     padding-top: 40%;
+  };
+  @include sm-block {
+    padding-top: 30%;
   };
   margin: 0 0.5em 1em 0.5em;
 }

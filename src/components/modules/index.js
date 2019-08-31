@@ -23,7 +23,6 @@ import Pagination from './Pagination/Pagination.jsx';
 import PreviewItem from './PreviewItem/PreviewItem.jsx';
 import Reload from './Reload/Reload.jsx';
 import SearchCard from './SearchCard/SearchCard.jsx';
-import SearchComponent from './SearchComponent/SearchComponent.jsx';
 import SeriesAccordeon from './AccordeonSections/SeriesAccordeon.jsx';
 import SettingsIcons from './SettingsIcons/SettingsIcons.jsx';
 import SinglePageModule from './SinglePageModule/SinglePageModule.jsx';
@@ -54,7 +53,6 @@ export {
   PreviewItem,
   Reload,
   SearchCard,
-  SearchComponent,
   SeriesAccordeon,
   SettingsIcons,
   SinglePageModule,

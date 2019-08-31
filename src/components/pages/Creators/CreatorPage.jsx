@@ -20,9 +20,8 @@ class CreatorPage extends Component {
     const { location, fetchedData, fetchStatus } = this.props;
     const { comics, events, series } = fetchedData;
     const { isFetching, status, message } = fetchStatus;
-    console.log(fetchedData);
     return (
-      <div className='page_content'>
+      <div className='single_page_content'>
         {isFetching ? (
           <Loader />
         ) : !status ? (

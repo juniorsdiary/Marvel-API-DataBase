@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { ApiFactory } from 'Utilities';
-import { ContentComponent, FilterComponent, ListItem, Pagination, SettingsIcons } from 'Modules';
+import { ContentComponent, FilterComponent, ListItem, SettingsIcons } from 'Modules';
 import { withLoader } from 'Components/hocs';
 
 const ContentComponentWithLoader = withLoader()(ContentComponent);
@@ -70,32 +70,36 @@ class SinglePageModule extends Component {
   render() {
     const { startsWith, order, offset, hiddenState, componentType } = this.state;
     const { data, totalResults, location, ItemComponent, fetchStatus } = this.props;
-    const { isFetching } = fetchStatus;
     return (
-      <div className='page_content'>
-        {!isFetching && (
-          <>
-            <SettingsIcons showFilterBlock={this.setHiddenState} componentType={componentType} changeComponentType={this.setComponentType} />
-            <Pagination setOffset={this.setOffsetValue} totalResults={totalResults} offset={offset} />
-          </>
-        )}
-        <FilterComponent
+      <>
+        <SettingsIcons
           hiddenState={hiddenState}
-          setStateValue={this.setStateValue}
-          setHiddenState={this.setHiddenState}
-          startsWith={startsWith}
-          order={order}
-          setOrderValue={this.setOrderValue}
-          handleSubmit={this.handleSubmit}
+          showFilterBlock={this.setHiddenState}
+          componentType={componentType}
+          changeComponentType={this.setComponentType}
         />
-        <ContentComponentWithLoader
-          loadData={this.loadData}
-          fetchStatus={fetchStatus}
-          renderData={data}
-          Component={componentType === 'cards' ? ItemComponent : ListItem}
-          pathname={location.pathname}
-        />
-      </div>
+        <div className='page_content'>
+          <FilterComponent
+            hiddenState={hiddenState}
+            setStateValue={this.setStateValue}
+            setHiddenState={this.setHiddenState}
+            startsWith={startsWith}
+            order={order}
+            setOrderValue={this.setOrderValue}
+            handleSubmit={this.handleSubmit}
+          />
+          <ContentComponentWithLoader
+            loadData={this.loadData}
+            fetchStatus={fetchStatus}
+            renderData={data}
+            Component={componentType === 'cards' ? ItemComponent : ListItem}
+            pathname={location.pathname}
+            setOffsetValue={this.setOffsetValue}
+            offset={offset}
+            totalResults={totalResults}
+          />
+        </div>
+      </>
     );
   }
 }

@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ImageAvatar } from 'Modules';
 
 const CharacterCard = ({ id, name, thumbnail, pathname }) => {
   const { path, extension } = thumbnail;
+  const [loaded, setLoaded] = useState(false);
   return (
-    <Link to={`${pathname}/${id}`} className='character_link'>
-      <span className='character_link__link_name'>{name}</span>
-      <ImageAvatar className='character_link__link_image' baseSrc={`${path}/standard_small.${extension}`} src={`${path}.${extension}`} />
+    <Link to={`${pathname}/${id}`} className={`character_link ${!loaded ? 'loading_image' : ''}`}>
+      <span className='character_link__name'>{name}</span>
+      <ImageAvatar onLoad={setLoaded} src={`${path}.${extension}`} />
     </Link>
   );
 };

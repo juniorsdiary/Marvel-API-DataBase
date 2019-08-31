@@ -50,7 +50,7 @@ class SingleSeriesPage extends Component {
     const nextLink = next && next.resourceURI.match(/\w+\/\d+/)[0];
 
     return (
-      <div className='page_content'>
+      <div className='single_page_content'>
         {isFetching ? (
           <Loader />
         ) : !status ? (

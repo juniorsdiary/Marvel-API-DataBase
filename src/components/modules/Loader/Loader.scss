@@ -1,5 +1,22 @@
+.fetching_block {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  font-size: rem(28px);
+  text-align: center;
+  @include size(12);
+  @include size-sm(8);
+  @include size-md(9);
+  @include sm-block {
+    padding: 0 1em;
+  };
+}
 .loader_center {
-  @include center_absolute_pos(45);
+  @include simple-size(45px);
+  @include center_absolute_pos();
   border-radius: 50%;
   background: url('../assets/images/shield_loader.jpg') no-repeat;
   background-size: 147%;
@@ -7,24 +24,28 @@
 }
 
 .first_circle {
-  @include center_absolute_pos(90);
+  @include center_absolute_pos();
+  @include simple-size(90px);
   @include spinner_settings(5, white);
   animation: rotation_clock_wise 2s linear infinite;
 }
 .second_circle {
-  @include center_absolute_pos(80);
+  @include center_absolute_pos();
+  @include simple-size(80px);
   @include spinner_settings(5, black);
   animation: rotation_counter_clock_wise 2s linear infinite;
 }
 
 .third_circle {
-  @include center_absolute_pos(70);
+  @include center_absolute_pos();
+  @include simple-size(70px);
   @include spinner_settings(5, white);
   animation: rotation_counter_clock_wise 1s linear infinite;
 }
 
 .fourth_circle {
-  @include center_absolute_pos(60);
+  @include center_absolute_pos();
+  @include simple-size(60px);
   @include spinner_settings(5, black);
   animation: rotation_clock_wise 1s linear infinite;
 }

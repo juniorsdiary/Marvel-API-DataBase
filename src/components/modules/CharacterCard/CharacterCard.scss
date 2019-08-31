@@ -1,12 +1,32 @@
-%pseudo_border_default {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: transform 0.2s linear;
-  z-index: 13;
+.character_link {
+  position: relative;
+  display: block;
+  margin: 0.5em;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  @include simple-size(90px);
+  animation: opacity 0.5s linear;
+  transition: all 0.2s linear;
+  z-index: 10;
+  @include md-block {
+    @include simple-size(120px);
+    &:hover {
+      transform: scale(1.1);
+      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+      .character_link__name {
+        background: rgba(0,0,0, 0.5);
+        color: white;
+        z-index: 11;
+        &:after {
+          transform: scale(1);
+        }
+        &:before {
+          transform: scale(1);
+        }
+      }
+    }
+  }
 }
-.character_link__link_name {
+.character_link__name {
   position: absolute;
   display: flex;
   justify-content: center;
@@ -15,14 +35,10 @@
   text-decoration: none;
   font-size: rem(16);
   background: rgba(0,0,0, 0.5);
-  color: white;
+  color: transparent;
   @include simple-size(100%);
   transition: all 0.2s linear;
   z-index: 11;
-  @include lg-block {
-    background: rgba(0,0,0,0);
-    z-index: 0;
-  }
   &:after {
     @extend %pseudo_border_default;
     @include border_hover(top, bottom, 2px, white, scaleX(0));
@@ -34,31 +50,14 @@
     z-index: 12;
   }
 }
-
-.character_link {
-  position: relative;
-  display: block;
-  margin: 0.5em;
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-  @include simple-size(70px);
-  animation: opacity 0.5s linear;
-  transition: all 0.2s linear;
-  z-index: 10;
-  @include lg-block {
-    @include simple-size(150px);
-    &:hover {
-      transform: scale(1.1);
-      box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
-      .character_link__link_name {
-        background: rgba(0,0,0, 0.5);
-        z-index: 11;
-        &:after {
-          transform: scale(1);
-        }
-        &:before {
-          transform: scale(1);
-        }
-      }
-    }
+.loading_image {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    @include simple-size(100%);
+    background: red;
+    animation: background 1s linear infinite alternate;
+    z-index: 15;
   }
 }

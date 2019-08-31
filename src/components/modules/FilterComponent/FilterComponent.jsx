@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { InputElement, Button } from 'Modules';
-import { IoIosCloseCircleOutline } from 'react-icons/io';
 
 const FilterComponent = ({ hiddenState, setStateValue, setHiddenState, startsWith, order, setOrderValue, handleSubmit }) => {
   return (
     <>
       <form className={`characters_filter_form ${hiddenState ? 'hidden_block' : ''}`} onSubmit={handleSubmit}>
-        <IoIosCloseCircleOutline size='25' onClick={() => setHiddenState(true)} className='close_icon' />
         <InputElement
           id='startsWith'
           inputClass='parametrs_list__startsWith_input'
@@ -39,7 +37,7 @@ const FilterComponent = ({ hiddenState, setStateValue, setHiddenState, startsWit
             onChange={() => setOrderValue(false)}
           />
         </div>
-        <Button className='search_btn' type='submit' onClick={handleSubmit}>
+        <Button className='styled_btn' type='submit' onClick={handleSubmit}>
           Search
         </Button>
       </form>

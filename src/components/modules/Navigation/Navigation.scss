@@ -13,16 +13,19 @@
   transition: all 0.5s ease-in;
   @include xs-block() {
     position: relative;
-    font-size: rem(20px);
+    font-size: rem(22px);
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
   };
+  @include sm-block {
+    font-size: rem(18px);
+  };
 }
 .opened {
   background: rgba(34,34,34, 1);
-  clip-path: circle(880px at 100% 0%);
+  clip-path: circle(920px at 100% 0%);
   @include xs-block() {
     clip-path: none;
   };

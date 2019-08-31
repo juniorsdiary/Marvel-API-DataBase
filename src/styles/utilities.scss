@@ -1,6 +1,31 @@
-$mainFontSize: 18px;
-
 @include reset();
+$mainFontSize: 18px;
+$cover_width: 140px;
+$md_cover_width: 175px;
+$lg_cover_width: 200px;
+$comic_width: 120px;
+$comic_width_xs: 100px;
+
+%page_content_default {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-content: flex-start;
+  align-items: flex-start;
+  color: rgb(255,255,255);
+  overflow: auto;
+}
+
+%pseudo_border_default {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: transform 0.2s linear;
+  z-index: 13;
+}
 
 @font-face {
   font-family: "44v2";
@@ -54,17 +79,22 @@ $mainFontSize: 18px;
   transform: #{$axis};
 }
 
-@mixin center_absolute_pos($size) {
+@mixin center_absolute_pos() {
   position: absolute;
   top: 50%;
   left: 50%;
-  @include simple-size(#{$size}px);
-  margin-top: -#{$size/2}px;
-  margin-left: -#{$size/2}px;
+  transform: translate(-50%, -50%);
 }
 
 @mixin spinner_settings($width, $color) {
   border: #{$width}px solid transparent;
   border-radius: 50%;
   border-top-color: $color;
+}
+
+@function caracter_height($width) {
+  @return $width / 3 * 4;
+}
+@function comics_height($width) {
+  @return $width / 3 * 5;
 }

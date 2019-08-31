@@ -11,6 +11,9 @@
 .total_results {
   margin: 1em 0;
   font-size: rem(20);
+  @include sm-block {
+    font-size: rem(14);
+  };
 }
 .toogle_pages_block {
   display: flex;

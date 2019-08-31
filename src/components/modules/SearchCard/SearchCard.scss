@@ -1,17 +1,14 @@
-$width: 120px;
-$height: $width / 3 * 5;
-$width_xs: 100px;
-$height_xs: $width_xs / 3 * 5;
 .search_link {
   position: relative;
   display: block;
   margin: 0.5em;
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-  @include simple-size($width, $height);
+  @include simple-size($comic_width, comics_height($comic_width));
   animation: opacity 0.2s linear;
+  color: transparent;
   transition: all 0.2s linear;
   @include xs-block {
-    @include simple-size($width_xs, $height_xs);
+    @include simple-size($comic_width_xs, comics_height($comic_width_xs));
     &:hover {
       transform: scale(1.1);
       box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);

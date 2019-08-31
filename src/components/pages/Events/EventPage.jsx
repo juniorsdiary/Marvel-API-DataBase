@@ -51,7 +51,7 @@ class EventPage extends Component {
     const nextLink = next && next.resourceURI.match(/\w+\/\d+/)[0];
 
     return (
-      <div className='page_content'>
+      <div className='single_page_content'>
         {isFetching ? (
           <Loader />
         ) : !status ? (
@@ -62,16 +62,20 @@ class EventPage extends Component {
             <ImageAvatar wrapper={true} className='cover_book_image' baseSrc={baseSrc} src={src} />
             <DetailsSection name={title} description={description} url={urls && urls[0].url} lastModified={lastModified} />
             {previous && (
-              <Link to={`/${prevLink}`} className='adjasent_item_link'>
+              <div className='adjasent_item_link_block'>
                 <span>Previous</span>
-                <span>{previous.name}</span>
-              </Link>
+                <Link to={`/${prevLink}`} className='adjasent_item_link styled_btn'>
+                  {previous.name}
+                </Link>
+              </div>
             )}
             {next && (
-              <Link to={`/${nextLink}`} className='adjasent_item_link'>
+              <div className='adjasent_item_link_block'>
                 <span>Next</span>
-                <span>{next.name}</span>
-              </Link>
+                <Link to={`/${nextLink}`} className='adjasent_item_link styled_btn'>
+                  {next.name}
+                </Link>
+              </div>
             )}
             <CharactersAccordeon
               MappingComponent={CharacterCard}

@@ -41,7 +41,7 @@ class ComicBookPage extends Component {
     const lastModified = convertToLocale(modified);
 
     return (
-      <div className='page_content'>
+      <div className='single_page_content'>
         {isFetching ? (
           <Loader />
         ) : !status ? (

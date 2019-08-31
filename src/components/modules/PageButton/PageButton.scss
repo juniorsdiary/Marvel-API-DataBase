@@ -3,21 +3,19 @@
   background: white;
   color: black;
   font-size: rem(16);
+  @include sm-block {
+    font-size: rem(12);
+  };
   transition: all 0.2s linear;
 }
-.pagination_block__page_item:not(.inactive_page_item) {
+.pagination_block__page_item {
   cursor: pointer;
 }
-.pagination_block__page_item:not(.inactive_page_item):hover  {
+.pagination_block__page_item:hover  {
   background: black;
   color: white;
 }
 .active_page_item {
   background: black;
   color: white;
-}
-.inactive_page_item {
-  background: white;
-  color: rgb(208,208,208);
-  cursor: default;
 }

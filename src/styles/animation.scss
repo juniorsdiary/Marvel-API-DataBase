@@ -9,19 +9,19 @@
 
 @keyframes rotation_clock_wise {
   from {
-    transform: rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 
 @keyframes rotation_counter_clock_wise {
   0% {
-    transform: rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   100% {
-    transform: rotate(-360deg);
+    transform: translate(-50%, -50%) rotate(-360deg);
   }
 }
 
@@ -36,29 +36,37 @@
 
 @keyframes sequent_rotation_1 {
   0% {
-    transform: rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   33% {
-    transform: rotate(180deg);
+    transform: translate(-50%, -50%) rotate(180deg);
   }
   66% {
-    transform: rotate(180deg);
+    transform: translate(-50%, -50%) rotate(180deg);
   }
   100% {
-    transform: rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
   }
 }
 @keyframes sequent_rotation_2 {
   0% {
-    transform: rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   33% {
-    transform: rotate(0deg);
+    transform: translate(-50%, -50%) rotate(0deg);
   }
   66% {
-    transform: rotate(180deg);
+    transform: translate(-50%, -50%) rotate(180deg);
   }
   100% {
-    transform: rotate(360deg);
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes background {
+  0% {
+    box-shadow: 0 -120px 35px -120px red inset, inset 0 -120px 35px -100px #000;
+  }
+  100% {
+    box-shadow: 0 -220px 35px -120px red inset, inset 0 -220px 35px -100px #000;
   }
 }

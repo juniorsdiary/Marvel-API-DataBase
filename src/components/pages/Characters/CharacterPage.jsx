@@ -28,9 +28,8 @@ class CharacterPage extends Component {
     const src = thumbnail.path && `${thumbnail.path}.${thumbnail.extension}`;
 
     const lastModified = convertToLocale(modified);
-
     return (
-      <div className='page_content'>
+      <div className='single_page_content'>
         {isFetching ? (
           <Loader />
         ) : !status ? (

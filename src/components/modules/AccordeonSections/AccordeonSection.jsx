@@ -43,7 +43,7 @@ const AccordeonSection = ({ data, number, pathname, location, slider, contentCla
           <div className={contentClassName}>{content}</div>
         )}
         {number > 15 && (
-          <Link to={{ pathname, search }} className='show_more_link'>
+          <Link to={{ pathname, search }} className='show_more_link styled_btn'>
             Show More
           </Link>
         )}

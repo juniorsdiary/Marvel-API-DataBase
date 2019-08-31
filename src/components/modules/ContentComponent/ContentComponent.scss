@@ -1,11 +1,14 @@
 .search_results_wrapper {
   width: 100%;
-  margin: 1em;
-  padding: 0.5em;
+  padding: 0 1em;
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   align-content: flex-start;
   align-items: flex-start;
-  overflow: auto;
-  height: 66vh;
+  @include size-sm(8);
+  @include size-md(9);
+  @include sm-block {
+    padding: 0 1em;
+  };
 }
