@@ -1,0 +1,11 @@
+.adjasent_item_link_block {
+  @include size(6);
+  margin: .5em 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.adjasent_item_link {
+  text-decoration: none;
+}

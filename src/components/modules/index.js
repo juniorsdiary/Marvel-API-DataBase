@@ -25,7 +25,6 @@ import Reload from './Reload/Reload.jsx';
 import SearchCard from './SearchCard/SearchCard.jsx';
 import SeriesAccordeon from './AccordeonSections/SeriesAccordeon.jsx';
 import SettingsIcons from './SettingsIcons/SettingsIcons.jsx';
-import SinglePageModule from './SinglePageModule/SinglePageModule.jsx';
 
 export {
   AccordeonSection,
@@ -55,5 +54,4 @@ export {
   SearchCard,
   SeriesAccordeon,
   SettingsIcons,
-  SinglePageModule,
 };

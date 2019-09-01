@@ -14,7 +14,7 @@ const CreatorsComponent = ({ data, number, location, pathname }) => {
       <p className='creators_content_title'>{`${number} creators`}</p>
       {content}
       {number > 15 && (
-        <Link to={{ pathname, search }} className='show_more_link'>
+        <Link to={{ pathname, search }} className='show_more_link styled_btn'>
           Show More
         </Link>
       )}

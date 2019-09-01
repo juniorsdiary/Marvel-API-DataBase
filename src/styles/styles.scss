@@ -57,18 +57,6 @@ html, body {
     margin: 1em 0;
   };
 }
-
-.adjasent_item_link_block {
-  @include size(6);
-  margin: 0.5em 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-}
-.adjasent_item_link {
-  text-decoration: none;
-}
 .styled_btn {
   background: $primary_bg;
   color: $primary_text_color;

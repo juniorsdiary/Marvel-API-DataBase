@@ -10,7 +10,7 @@
   font-size: rem(28px);
   z-index: 20;
   overflow: hidden;
-  transition: all 0.3s linear;
+  transition: all .3s linear;
   @include size(12);
   @include size-sm(4);
   @include size-md(3);
@@ -32,9 +32,9 @@
   color: $primary_text_color;
 }
 .order_input_wrapper {
-  padding: 0.2em 0.5em;
+  padding: .2em .5em;
   border: 2px solid black;
-  transition: all 0.5s linear;
+  transition: all .5s linear;
 }
 .asc_order {
   border-right: none;
@@ -45,23 +45,23 @@
   border-radius: 0 5px 5px 0;
 }
 .parametrs_order_wrapper {
-  margin: 0.5em;
+  margin: .5em;
   display: flex;
   align-items: center;
 }
 .parametrs_order_title {
-  margin-right: 0.5em;
+  margin-right: .5em;
 }
 .parametrs_list__order_input {
   display: none;
 }
 .parametrs_startsWith_wrapper {
-  margin: 0.5em 0;
+  margin: .5em 0;
   display: flex;
   flex-direction: column;
   text-align: center;
 }
 .parametrs_list__startsWith_input {
   margin: 1em 0;
-  padding: 0.3em;
+  padding: .3em;
 }

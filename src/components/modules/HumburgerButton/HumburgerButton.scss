@@ -8,7 +8,7 @@
 .navigation_humb {
   position: relative;
   opacity: 1;
-  transition: all 0.5s ease-in;
+  transition: all .5s ease-in;
   @include xs-block {
     display: none;
   };
@@ -17,7 +17,7 @@
 .navigation_close {
   position: absolute;
   opacity: 1;
-  transition: all 0.5s ease-in;
+  transition: all .5s ease-in;
   @include xs-block {
     display: none;
   };

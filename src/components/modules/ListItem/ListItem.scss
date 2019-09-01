@@ -4,11 +4,11 @@
   flex: 1 1 100%;
   padding: 1em;
   box-shadow: $box_shadow;
-  margin: 0.5em 0;
+  margin: .5em 0;
   background: $secondary_bg;
   cursor: pointer;
-  animation: opacity 0.5s linear;
-  transition: transform 0.5s linear;
+  animation: opacity .5s linear;
+  transition: transform .5s linear;
   @include xs-block {
     &:hover {
       transform: scale(1.01);

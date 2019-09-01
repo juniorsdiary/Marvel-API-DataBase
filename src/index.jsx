@@ -15,5 +15,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('container')
 );
-
-// TODO: refactor js code and optimize rendering components

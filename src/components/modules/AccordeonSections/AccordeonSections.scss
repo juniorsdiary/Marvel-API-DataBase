@@ -8,13 +8,13 @@
   margin: auto;
   overflow: hidden;
   max-height: 0;
-  transition: max-height 0.2s linear;
+  transition: max-height .2s linear;
 }
 .show_more_link {
   text-align: center;
   font-size: rem(18);
   text-decoration: none;
-  transition: all 0.2s linear;
+  transition: all .2s linear;
   @include lg-block {
     &:hover {
       background: $alternative_bg;
@@ -25,11 +25,11 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  margin: 0 auto;
+  margin: .5em auto;
   @include size(11);
 }
 .slick-list {
-  padding: 1em 0;
+  padding: .5em 0;
   margin: 0 .5em;
 }
 .slick-slide {
@@ -40,7 +40,7 @@
 }
 .custom_arrow {
   cursor: pointer;
-  transition: transform 0.2s linear;
+  transition: transform .2s linear;
   outline: none;
   &:hover {
     transform: scale(1.2);
@@ -101,12 +101,12 @@
 }
 .open_dropdown {
   transform: rotate(0deg);
-  transition: all 0.2s linear;
+  transition: all .2s linear;
 }
 .close_dropdown {
   transform: rotate(-90deg);
-  transition: all 0.2s linear;
+  transition: all .2s linear;
 }
 .active_section {
-  max-height: 350px;
+  max-height: 400px;
 }

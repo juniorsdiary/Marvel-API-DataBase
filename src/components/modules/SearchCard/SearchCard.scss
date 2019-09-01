@@ -1,12 +1,12 @@
 .search_link {
   position: relative;
   display: block;
-  margin: 0.5em;
+  margin: .5em;
   box-shadow: $box_shadow;
   @include simple-size($comic_width, comics_height($comic_width));
-  animation: opacity 0.2s linear;
+  animation: opacity .2s linear;
   color: transparent;
-  transition: transform 0.2s linear;
+  transition: transform .2s linear;
   @include xs-block {
     @include simple-size($comic_width_xs, comics_height($comic_width_xs));
     &:hover {

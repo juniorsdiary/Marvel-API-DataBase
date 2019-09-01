@@ -1,18 +1,18 @@
 .character_link {
   position: relative;
   display: block;
-  margin: 0.5em;
+  margin: .5em;
   box-shadow: $box_shadow;
   @include simple-size(90px);
-  animation: opacity 0.5s linear;
-  transition: all 0.2s linear;
+  animation: opacity .5s linear;
+  transition: all .2s linear;
   z-index: 10;
   @include sm-block {
     @include simple-size(120px);
     &:hover {
       transform: scale(1.1);
       .character_link__name {
-        background: rgba(0,0,0, 0.5);
+        background: rgba(0,0,0, .5);
         color: $primary_text_color;
         z-index: 11;
         &:after {
@@ -33,10 +33,10 @@
   text-align: center;
   text-decoration: none;
   font-size: rem(16);
-  background: rgba(0,0,0, 0.5);
+  background: rgba(0,0,0, .5);
   color: $primary_text_color;
   @include simple-size(100%);
-  transition: all 0.2s linear;
+  transition: all .2s linear;
   z-index: 11;
   @include sm-block {
     z-index: 0;

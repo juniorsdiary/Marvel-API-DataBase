@@ -14,7 +14,7 @@
   margin: 1em auto 0 1em;
   cursor: pointer;
   opacity: 1;
-  transition: all 0.5s ease-in;
+  transition: all .5s ease-in;
   @include sm-block {
     display: none;
   }
@@ -23,15 +23,15 @@
   opacity: 0;
 }
 .toggle_component_list {
-  margin: 1em 0.25em;
+  margin: 1em .25em;
   color: rgb(134,134,134);
-  transition: color 0.2s linear, box-shadow 0.2s linear;
+  transition: color .2s linear, box-shadow .2s linear;
   cursor: pointer;
 }
 .toggle_component_cards {
   color: rgb(134,134,134);
-  margin: 1em 0.25em;
-  transition: color 0.2s linear;
+  margin: 1em .25em;
+  transition: color .2s linear;
   cursor: pointer;
 }
 .active_component_type {

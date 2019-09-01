@@ -1,15 +1,14 @@
+// $cover_width
+// $md_cover_width
+// $lg_cover_width
 .character_page_image {
   position: relative;
-  padding-top: 50%;
-  @include size(5);
-  @include size-xs(5);
-  @include size-sm(4);
-  @include size-lg(3);
-  @include xs-block {
-    padding-top: 40%;
+  @include simple-size($cover_width,caracter_height($cover_width));
+  @include md-block {
+    @include simple-size($md_cover_width,caracter_height($md_cover_width));
   };
-  @include sm-block {
-    padding-top: 30%;
+  @include lg-block {
+    @include simple-size($lg_cover_width,caracter_height($lg_cover_width));
   };
   margin: 0 0.5em 1em 0.5em;
 }
