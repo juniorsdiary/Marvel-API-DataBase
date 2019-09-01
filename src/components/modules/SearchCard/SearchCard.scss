@@ -13,4 +13,7 @@
       transform: scale(1.1);
     }
   }
+  @include md-block {
+    @include simple-size($comic_width_md, comics_height($comic_width_md));
+  };
 }

@@ -1,6 +1,3 @@
-// $cover_width
-// $md_cover_width
-// $lg_cover_width
 .character_page_image {
   position: relative;
   @include simple-size($cover_width,caracter_height($cover_width));
