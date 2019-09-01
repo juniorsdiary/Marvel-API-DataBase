@@ -1,17 +1,15 @@
 .home_page_block {
-  padding: auto;
   position: relative;
-  color: rgb(255,255,255);
-  flex: 1 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url('../assets/images/bg_home_page.jpg');
-  background-repeat: no-repeat;
+  height: 100%;
+  color: $primary_text_color;
+  padding-top: 2em;
+  background: url('../assets/images/bg_home_page.jpg'), no-repeat;
   background-position: center;
   background-size: cover;
   clip-path: none;
-  padding: 1em;
   @include sm-block {
     background-size: 158%;
   }
@@ -26,22 +24,22 @@
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0,0,0, 0.5);
+  background-color: $alternative_bg;
+  opacity: 0.5;
 }
 
 .home_page_block_title {
   position: relative;
-  font-family: "44v2", sans-serif;
+  font-family: $description_ff;
   font-weight: normal;
   font-size: rem(25px);
   z-index: 10;
 }
 
 .home_page_block_description {
-  width: 75%;
+  @include size(8);
   font-size: rem(20px);
   position: relative;
-  display: block;
   text-align: center;
   margin: 1em;
   z-index: 10;

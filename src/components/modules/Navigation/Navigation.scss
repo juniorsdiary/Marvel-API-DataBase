@@ -6,7 +6,7 @@
   align-items: center;
   @include simple-size(100%);
   font-size: rem(28px);
-  background: rgb(34,34,34);
+  background: $header_bg;
   top: 0;
   right: 0;
   z-index: 20;
@@ -24,14 +24,16 @@
   };
 }
 .opened {
-  background: rgba(34,34,34, 1);
+  background: $header_bg;
+  opacity: 1;
   clip-path: circle(920px at 100% 0%);
   @include xs-block() {
     clip-path: none;
   };
 }
 .closed {
-  background: rgba(34,34,34, 0);
+  background: $header_bg;
+  opacity: 0;
   clip-path: circle(0px at 100% 0%);
   @include xs-block() {
     clip-path: none;
@@ -42,7 +44,7 @@
 .navigation_block__link_item {
   display: block;
   height: 2em;
-  color: rgb(255,255,255);
+  color: $primary_text_color;
   text-decoration: none;
   margin: 0.5em;
   padding: 0.5em;

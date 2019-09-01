@@ -1,7 +1,7 @@
 .pagination_block__page_item {
   padding: 0.7em;
-  background: white;
-  color: black;
+  background: $secondary_bg;
+  color: $contrast_text_color;
   font-size: rem(16);
   @include sm-block {
     font-size: rem(12);
@@ -12,10 +12,10 @@
   cursor: pointer;
 }
 .pagination_block__page_item:hover  {
-  background: black;
-  color: white;
+  background: $alternative_bg;
+  color: $primary_text_color;
 }
 .active_page_item {
-  background: black;
-  color: white;
+  background: $alternative_bg;
+  color: $primary_text_color;
 }

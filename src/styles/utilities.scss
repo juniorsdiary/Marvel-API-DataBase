@@ -1,19 +1,32 @@
 @include reset();
+$primary_bg: rgb(255,0,0);
+$secondary_bg: rgb(255,255,255);
+$alternative_bg: rgb(0,0,0);
+$primary_text_color: rgb(255,255,255);
+$contrast_text_color: rgb(0,0,0);
+$header_bg: rgb(34,34,34);
 $mainFontSize: 18px;
 $cover_width: 140px;
 $md_cover_width: 175px;
 $lg_cover_width: 200px;
 $comic_width: 120px;
 $comic_width_xs: 100px;
+$box_shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+$primary_ff: "Robotocondensed", sans-serif;
+$primary_titles_ff:'kidkosmic', sans-serif;
+$titles_ff: 'kidkosmic-italic', sans-serif;
+$description_ff: "44v2", sans-serif;
 
 %page_content_default {
+  position: relative;
   height: 100%;
   display: flex;
   justify-content: center;
   align-content: flex-start;
   align-items: flex-start;
-  color: rgb(255,255,255);
+  color: $primary_text_color;
   overflow: auto;
+  z-index: 1;
 }
 
 %pseudo_border_default {

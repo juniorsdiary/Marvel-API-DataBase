@@ -1,5 +1,6 @@
 .accordeon_section {
   position: relative;
+  background: inherit;
   @include size(12);
   display: flex;
   flex-wrap: wrap;
@@ -8,9 +9,7 @@
   overflow: hidden;
   max-height: 0;
   transition: max-height 0.2s linear;
-  background: inherit;
 }
-
 .show_more_link {
   text-align: center;
   font-size: rem(18);
@@ -18,11 +17,10 @@
   transition: all 0.2s linear;
   @include lg-block {
     &:hover {
-      background: black;
+      background: $alternative_bg;
     }
   };
 }
-
 .default_slider_block {
   display: flex;
   justify-content: space-around;
@@ -30,9 +28,9 @@
   margin: 0 auto;
   @include size(11);
 }
-
 .slick-list {
   padding: 1em 0;
+  margin: 0 .5em;
 }
 .slick-slide {
   > div {
@@ -40,10 +38,10 @@
     justify-content: center;
   }
 }
-
 .custom_arrow {
   cursor: pointer;
   transition: transform 0.2s linear;
+  outline: none;
   &:hover {
     transform: scale(1.2);
   }
@@ -51,7 +49,6 @@
     transform: scale(1);
   }
 }
-
 .available_items_title {
   display: flex;
   justify-content: space-between;
@@ -59,25 +56,23 @@
   align-self: flex-start;
   font-size: rem(14);
   font-weight: bold;
-  font-family: 'kidkosmic-italic', sans-serif;
+  font-family: $titles_ff;
   @include size(12);
   padding: 1em 1.5em;
-  background: black;
-  color: white;
-  border-bottom: 2px solid red;
+  background: $alternative_bg;
+  color: $primary_text_color;
+  border-bottom: 2px solid rgb(255,0,0);
   cursor: pointer;
   transition: all .2s linear;
   @include lg-block {
     &:hover {
-      background-color: red;
+      background-color: $primary_bg;
     }
   }
 }
-
 .active_tab {
-  background-color: red;
+  background-color: $primary_bg;
 }
-
 .accordeon_loading_spinner {
   position: relative;
   @include simple-size(25px);
@@ -104,7 +99,6 @@
     animation: sequent_rotation_2 2s linear infinite;
   }
 }
-
 .open_dropdown {
   transform: rotate(0deg);
   transition: all 0.2s linear;
@@ -113,7 +107,6 @@
   transform: rotate(-90deg);
   transition: all 0.2s linear;
 }
-
 .active_section {
   max-height: 350px;
 }

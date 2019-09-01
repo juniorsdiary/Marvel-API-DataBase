@@ -8,9 +8,9 @@
 @import 'Pages';
 
 html, body {
-  font-family: "Robotocondensed", sans-serif;
+  font-family: $primary_ff;
   font-weight: bold;
-  background-color: red;
+  background-color: $primary_bg;
 }
 
 #container {
@@ -47,9 +47,9 @@ html, body {
   flex-wrap: wrap;
   justify-content: space-around;
   align-content: flex-start;
-  background: white;
-  color: black;
-  box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.75);
+  background: $secondary_bg;
+  color: $contrast_text_color;
+  box-shadow: $box_shadow;
   @include size(12);
   @include size-sm(10);
   @include size-lg(8);
@@ -66,14 +66,12 @@ html, body {
   align-items: center;
   justify-content: space-around;
 }
-
 .adjasent_item_link {
   text-decoration: none;
 }
-
 .styled_btn {
-  background: red;
-  color: white;
+  background: $primary_bg;
+  color: $primary_text_color;
   font-weight: bold;
   padding: 1em 2em;
   clip-path: polygon(15% 0, 100% 0, 100% 70%, 85% 100%, 0 100%, 0 30%);

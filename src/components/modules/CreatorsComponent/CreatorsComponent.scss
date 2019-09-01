@@ -9,17 +9,7 @@
 .creators_content_title {
   @include size(12);
   font-size: rem(28px);
-  font-family: 'kidkosmic-italic', sans-serif;
+  font-family: $titles_ff;
   text-align: center;
   margin: 1em;
-}
-.creator_name {
-  font-family: 'kidkosmic', sans-serif;
-  @include size(6);
-  display: flex;
-  justify-content: center;
-  font-size: rem(12px);
-  text-decoration: none;
-  color: black;
-  margin: 0.5em 0;
 }

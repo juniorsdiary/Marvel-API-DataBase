@@ -10,18 +10,15 @@
 }
 
 .data_description {
-  font-family: '44v2', sans-serif;
+  font-family: $description_ff;
   font-size: rem(14px);
-  display: block;
-  word-wrap: break-word;
-  margin: 1em 0 auto 0
+  margin: 1em 0 auto 0;
 }
 
 .data_title {
   @include size(12);
-  font-family: 'kidkosmic', sans-serif;
+  font-family: $primary_titles_ff;
   font-size: 1.5em;
-  display: block;
   text-align: center;
   margin: 0.5em;
 }

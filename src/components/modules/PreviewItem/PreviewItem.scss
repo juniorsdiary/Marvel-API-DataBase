@@ -1,0 +1,10 @@
+.creator_name {
+  font-family: $titles_ff;
+  @include size(6);
+  display: flex;
+  justify-content: center;
+  font-size: rem(12px);
+  text-decoration: none;
+  color: $contrast_text_color;
+  margin: 0.5em 0;
+}

@@ -1,13 +1,15 @@
 .settings_icons_block {
   position: relative;
-  width: 100%;
+  @include size(12);
   display: flex;
   justify-content: flex-end;
-  background: white;
+  background: $secondary_bg;
+  border-bottom: 2px solid black;
+  z-index: 10;
 }
 .filter_icon {
   position: absolute;
-  color: rgb(0,0,0);
+  color: $contrast_text_color;
   left: 0;
   margin: 1em auto 0 1em;
   cursor: pointer;
@@ -33,6 +35,6 @@
   cursor: pointer;
 }
 .active_component_type {
-  color: rgb(0,0,0);
+  color: $contrast_text_color;
   box-shadow: none;
 }

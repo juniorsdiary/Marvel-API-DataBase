@@ -1,11 +1,11 @@
 .results_list_item {
   text-decoration: none;
-  color: black;
+  color: $contrast_text_color;
   flex: 1 1 100%;
   padding: 1em;
-  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  box-shadow: $box_shadow;
   margin: 0.5em 0;
-  background: rgb(255,255,255);
+  background: $secondary_bg;
   cursor: pointer;
   animation: opacity 0.5s linear;
   transition: transform 0.5s linear;
@@ -16,6 +16,6 @@
   }
 }
 .results_list_item:nth-child(2n) {
-  color: white;
-  background: rgb(0,0,0);
+  color: $primary_text_color;
+  background: $alternative_bg;
 }

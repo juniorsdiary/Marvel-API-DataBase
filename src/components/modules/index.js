@@ -10,7 +10,6 @@ import DetailsSection from './DetailsSection/DetailsSection.jsx';
 import ErrorHandler from './ErrorHandler/ErrorHandler.jsx';
 import EventsAccordeon from './AccordeonSections/EventsAccordeon.jsx';
 import FilterComponent from './FilterComponent/FilterComponent.jsx';
-import Footer from './Footer/Footer.jsx';
 import Header from './Header/Header.jsx';
 import HumburgerButton from './HumburgerButton/HumburgerButton.jsx';
 import ImageAvatar from './ImageAvatar/ImageAvatar.jsx';
@@ -40,7 +39,6 @@ export {
   ErrorHandler,
   EventsAccordeon,
   FilterComponent,
-  Footer,
   Header,
   HumburgerButton,
   ImageAvatar,

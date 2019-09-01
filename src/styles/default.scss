@@ -2,10 +2,10 @@
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: white;
+  background: $primary_bg;
 }
 ::-webkit-scrollbar-thumb {
-  background: black;
+  background: $alternative_bg;
 }
 :root {
   font-size: calc(0.5em + 0.8vw);
