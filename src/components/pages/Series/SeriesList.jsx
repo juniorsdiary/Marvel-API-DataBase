@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import { fetchSeries, types } from 'Store';
-import { SinglePageModule, SearchCard } from 'Modules';
+import { SearchCard } from 'Modules';
+import ListModule from 'Pages/templates/ListModule.jsx';
+
 const mapStateToProps = state => {
   return {
     data: state.seriesData.seriesList,
@@ -11,6 +13,7 @@ const mapStateToProps = state => {
     fetchStatus: state.seriesData.fetchStatus,
   };
 };
+
 const mapDispatchToProps = dispatch => {
   return {
     fetchData: url => {
@@ -21,9 +24,10 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
+
 const SeriesList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(SinglePageModule);
+)(ListModule);
 
 export default SeriesList;

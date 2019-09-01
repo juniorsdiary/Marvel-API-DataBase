@@ -12,16 +12,31 @@ class CommonAPISettings {
     this.query = '';
     this.authentication = '';
   }
+  /**
+   * [createAuthentication description]
+   * creates authentication string required by api data base settings
+   * @return {[string]}
+   */
   createAuthentication() {
     const ts = new Date().getTime();
     const hash = getHash(ts + constants.PRIVATE_KEY + constants.PUBLIC_KEY);
     this.authentication = `${/\/\d+\/?/.test(this.pathname) ? '?' : '&'}ts=${ts}&apikey=${constants.PUBLIC_KEY}&hash=${hash}`;
   }
+  /**
+   * [asSecondType description]
+   * when certain type of data presented as second type, contructs only query part with auth data
+   * @return {[string]}
+   */
   asSecondType() {
     this.queryParametrs();
     this.createAuthentication();
     return `${this.pathname}${this.search}${this.query}${this.authentication}`;
   }
+  /**
+   * [createApiString description]
+   * creates full url string for fetchin function
+   * @return {[string]} [full url string]
+   */
   createApiString() {
     this.queryParametrs();
     this.createAuthentication();
@@ -33,6 +48,11 @@ class Characters extends CommonAPISettings {
     super(options);
     this.order = options.order ? constants.NAME_ASC : constants.NAME_DESC;
   }
+  /**
+   * [queryParametrs description]
+   * creates query string based on the provided data of the current search filters
+   * @return {[string]} [fetch url query parametrs]
+   */
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
     let offsetQuery = this.offset ? `offset=${this.offset}` : '';
@@ -47,6 +67,11 @@ class Comics extends CommonAPISettings {
     super(options);
     this.order = options.order ? constants.TITLE_ASC : constants.TITLE_DESC;
   }
+  /**
+   * [queryParametrs description]
+   * creates query string based on the provided data of the current search filters
+   * @return {[string]} [fetch url query parametrs]
+   */
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `titleStartsWith=${this.startsWith}` : '';
     let offsetQuery = this.offset ? `offset=${this.offset}` : '';
@@ -61,6 +86,11 @@ class Series extends CommonAPISettings {
     super(options);
     this.order = options.order ? constants.TITLE_ASC : constants.TITLE_DESC;
   }
+  /**
+   * [queryParametrs description]
+   * creates query string based on the provided data of the current search filters
+   * @return {[string]} [fetch url query parametrs]
+   */
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `titleStartsWith=${this.startsWith}` : '';
     let offsetQuery = this.offset ? `offset=${this.offset}` : '';
@@ -75,6 +105,11 @@ class Events extends CommonAPISettings {
     super(options);
     this.order = options.order ? constants.NAME_ASC : constants.NAME_DESC;
   }
+  /**
+   * [queryParametrs description]
+   * creates query string based on the provided data of the current search filters
+   * @return {[string]} [fetch url query parametrs]
+   */
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
     let offsetQuery = this.offset ? `offset=${this.offset}` : '';
@@ -89,6 +124,11 @@ class Creators extends CommonAPISettings {
     super(options);
     this.order = options.order ? constants.LAST_NAME_ASC : constants.LAST_NAME_DESC;
   }
+  /**
+   * [queryParametrs description]
+   * creates query string based on the provided data of the current search filters
+   * @return {[string]} [fetch url query parametrs]
+   */
   queryParametrs() {
     let startsWithQuery = this.startsWith ? `nameStartsWith=${this.startsWith}` : '';
     let offsetQuery = this.offset ? `offset=${this.offset}` : '';
@@ -107,6 +147,12 @@ class ApiFactory {
   setPrototype(itemClass) {
     this.elementClass = itemClass;
   }
+  /**
+   * [createApiHandler description]
+   * create api handler object based on the path input and saves in hash array
+   * @param  {[object]} options [provided data for api handler]
+   * @return {[object]}         [api handler for creating url strings to fetch data based on the options parametrs]
+   */
   createApiHandler(options) {
     let type = options.pathname.match(/\w+/)[0];
     switch (type) {

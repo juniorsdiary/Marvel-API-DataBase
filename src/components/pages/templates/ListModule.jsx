@@ -6,7 +6,7 @@ import { withLoader } from 'Components/hocs';
 
 const ContentComponentWithLoader = withLoader()(ContentComponent);
 
-class SinglePageModule extends PureComponent {
+class ListModule extends PureComponent {
   state = {
     startsWith: '',
     order: true,
@@ -104,7 +104,7 @@ class SinglePageModule extends PureComponent {
   }
 }
 
-SinglePageModule.propTypes = {
+ListModule.propTypes = {
   fetchData: PropTypes.func,
   setFetchingState: PropTypes.func,
   data: PropTypes.array,
@@ -116,4 +116,4 @@ SinglePageModule.propTypes = {
   fetchStatus: PropTypes.object,
 };
 
-export default SinglePageModule;
+export default ListModule;

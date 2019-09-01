@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import { fetchCreators, types } from 'Store';
-import { CreatorsSearchCard, SinglePageModule } from 'Modules';
+import { CreatorsSearchCard } from 'Modules';
+import ListModule from 'Pages/templates/ListModule.jsx';
+
 const mapStateToProps = state => {
   return {
     data: state.creatorsData.creatorsList,
@@ -11,6 +13,7 @@ const mapStateToProps = state => {
     fetchStatus: state.creatorsData.fetchStatus,
   };
 };
+
 const mapDispatchToProps = dispatch => {
   return {
     fetchData: url => {
@@ -21,9 +24,10 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
+
 const CreatorsList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(SinglePageModule);
+)(ListModule);
 
 export default CreatorsList;

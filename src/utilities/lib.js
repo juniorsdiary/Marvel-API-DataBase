@@ -11,7 +11,7 @@ export function getHash(cipherValue) {
  * [definePagesIndex defines page indexex dependes on the current page number]
  * @param  {[number]} pageNum [current page number]
  * @param  {[number]} pages   [total pages of the fetched results]
- * @return {[array]}         [2d array of page indexes]
+ * @return {[array]}         [array of page indexes]
  */
 export function definePagesIndex(pages, pageNum) {
   const indexArr = [...Array(pages + 1).keys()];
@@ -26,8 +26,9 @@ export function definePagesIndex(pages, pageNum) {
 }
 /**
  * [convertToLocale description]
- * @param  {[type]} timeString [description]
- * @return {[type]}            [description]
+ * converted time string from fetched data to readable type
+ * @param  {[string]} timeString [time]
+ * @return {[string]}            [time]
  */
 export const convertToLocale = timeString => {
   let time = timeString && new Date(timeString.match(/(.+)T/)[1]);

@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { fetchCharacters, types } from 'Store';
-import { SinglePageModule, CharacterCard } from 'Modules';
+import { CharacterCard } from 'Modules';
+import ListModule from 'Pages/templates/ListModule.jsx';
 
 const mapStateToProps = state => {
   return {
@@ -27,6 +28,6 @@ const mapDispatchToProps = dispatch => {
 const CharactersList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(SinglePageModule);
+)(ListModule);
 
 export default CharactersList;

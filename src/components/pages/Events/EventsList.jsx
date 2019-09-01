@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 import { fetchEvents, types } from 'Store';
-import { SearchCard, SinglePageModule } from 'Modules';
+import { SearchCard } from 'Modules';
+import ListModule from 'Pages/templates/ListModule.jsx';
 const mapStateToProps = state => {
   return {
     data: state.eventsData.eventsList,
@@ -24,6 +25,6 @@ const mapDispatchToProps = dispatch => {
 const EventsList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(SinglePageModule);
+)(ListModule);
 
 export default EventsList;

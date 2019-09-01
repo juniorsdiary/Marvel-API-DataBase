@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { ImageAvatar } from 'Modules';
 
 const CharacterCard = ({ id, name, thumbnail, pathname }) => {
   const { path, extension } = thumbnail;
-  const [loaded, setLoaded] = useState(false);
   return (
-    <Link to={`${pathname}/${id}`} className={`character_link ${!loaded ? 'loading_image' : ''}`}>
+    <ImageAvatar WrapperComponent={Link} to={`${pathname}/${id}`} className='character_link' src={`${path}.${extension}`}>
       <span className='character_link__name'>{name}</span>
-      <ImageAvatar onLoad={setLoaded} src={`${path}.${extension}`} />
-    </Link>
+    </ImageAvatar>
   );
 };
 
@@ -24,4 +22,4 @@ CharacterCard.propTypes = {
   pathname: PropTypes.string,
 };
 
-export default CharacterCard;
+export default React.memo(CharacterCard);

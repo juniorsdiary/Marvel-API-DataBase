@@ -16,11 +16,11 @@ const ContentComponent = ({ renderData, Component, pathname, setOffsetValue, tot
 
 ContentComponent.propTypes = {
   renderData: PropTypes.array,
-  Component: PropTypes.func,
+  Component: PropTypes.elementType,
   pathname: PropTypes.string,
   setOffsetValue: PropTypes.func,
   totalResults: PropTypes.number,
   offset: PropTypes.number,
 };
 
-export default ContentComponent;
+export default React.memo(ContentComponent);

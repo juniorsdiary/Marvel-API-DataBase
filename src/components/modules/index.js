@@ -1,4 +1,5 @@
 import AccordeonSection from './AccordeonSections/AccordeonSection.jsx';
+import AdjacentItemLink from './AdjacentItemLink/AdjacentItemLink.jsx';
 import Button from './Button/Button.jsx';
 import CharacterCard from './CharacterCard/CharacterCard.jsx';
 import CharactersAccordeon from './AccordeonSections/CharactersAccordeon.jsx';
@@ -28,6 +29,7 @@ import SinglePageModule from './SinglePageModule/SinglePageModule.jsx';
 
 export {
   AccordeonSection,
+  AdjacentItemLink,
   Button,
   CharacterCard,
   CharactersAccordeon,
