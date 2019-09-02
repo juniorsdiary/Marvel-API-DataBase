@@ -10,7 +10,7 @@
   animation: opacity .5s linear;
   transition: transform .2s linear;
   @include xs-block {
-    &:hover {
+    &:hover, &:focus {
       transform: scale(1.01);
     }
   }

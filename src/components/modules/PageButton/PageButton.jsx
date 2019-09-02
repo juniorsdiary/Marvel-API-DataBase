@@ -8,7 +8,7 @@ const PageButton = ({ className, pageInd, baseOffset, textContent, setOffset }) 
     <span
       className={commonClass}
       role='button'
-      tabIndex='-1'
+      tabIndex='0'
       onKeyPress={() => setOffset((pageInd - 1) * baseOffset)}
       onClick={() => setOffset((pageInd - 1) * baseOffset)}>
       {textContent ? textContent : pageInd}

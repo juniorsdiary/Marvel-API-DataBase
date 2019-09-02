@@ -20,9 +20,9 @@ const AccordeonSection = ({ data, number, pathname, slider, contentClassName, ti
       {number > 0 && (
         <>
           <div
-            tabIndex='-1'
+            tabIndex='0'
             role='button'
-            className={`available_items_title ${active && 'active_tab'}`}
+            className={`available_items_title${active ? ' active_tab' : ''}`}
             onClick={toggleContent}
             onKeyPress={toggleContent}>
             <span>{title}</span>
@@ -34,7 +34,7 @@ const AccordeonSection = ({ data, number, pathname, slider, contentClassName, ti
               <Reload size={'25'} loadData={loadData} />
             )}
           </div>
-          <div className={`accordeon_section ${active && 'active_section'}`}>
+          <div className={`accordeon_section${active ? ' active_section' : ''}`}>
             {content.length >= 3 ? (
               <Slider {...sliderSettings} className={contentClassName}>
                 {content}
@@ -43,7 +43,7 @@ const AccordeonSection = ({ data, number, pathname, slider, contentClassName, ti
               <div className={contentClassName}>{content}</div>
             )}
             {number > 15 && (
-              <Link to={{ pathname, search }} className='show_more_link styled_btn'>
+              <Link tabIndex='0' to={{ pathname, search }} className='show_more_link styled_btn'>
                 Show More
               </Link>
             )}

@@ -32,6 +32,7 @@ export default function comicsData(state = initialState, action) {
       return {
         ...state,
         totalResults: 0,
+        comicsList: [],
       };
     case types.FETCH_COMICS:
       return {

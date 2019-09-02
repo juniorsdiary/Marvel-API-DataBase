@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const Button = ({ children, className, active, disabled, onClick, ...props }) => {
   const commonClass = classNames(className, 'default_btn', { active });
   return (
-    <button className={commonClass} disabled={disabled} onClick={onClick}>
+    <button tabIndex='0' className={commonClass} disabled={disabled} onClick={onClick}>
       {children}
     </button>
   );

@@ -6,8 +6,8 @@ import PropTypes from 'prop-types';
 const singlePageModule = Content => {
   class SinglePageModule extends Component {
     componentDidMount() {
-      const { storeData } = this.props;
-      if (!storeData) {
+      const { storeData, fetchStatus } = this.props;
+      if (!storeData || fetchStatus.message !== 'OK') {
         this.loadPrimaryData();
       }
     }

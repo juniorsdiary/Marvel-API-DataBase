@@ -1,13 +1,14 @@
 .creator_name {
   font-family: $titles_ff;
-  @include size(6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   font-size: rem(12px);
-  text-decoration: none;
   text-align: center;
   color: $contrast_text_color;
+  padding: 0.5em;
   margin: .5em 0;
   cursor: pointer;
+  transition: all 0.2s linear;
+  &:focus, &:hover {
+    color: $alternative_text_color;
+    transform: scale(1.03);
+  }
 }

@@ -30,6 +30,7 @@ export default function charactersData(state = initialState, action) {
       return {
         ...state,
         totalResults: 0,
+        charactersList: [],
       };
     case types.FETCH_CHARACTERS:
       return {

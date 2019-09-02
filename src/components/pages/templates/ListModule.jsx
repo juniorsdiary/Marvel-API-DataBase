@@ -11,7 +11,6 @@ class ListModule extends PureComponent {
   state = {
     startsWith: '',
     order: true,
-    offset: 0,
     hiddenState: true,
     componentType: 'cards',
   };
@@ -34,14 +33,14 @@ class ListModule extends PureComponent {
     if (this.source) this.source.cancel();
   }
 
-  loadData = () => {
+  loadData = changedOffset => {
     const { fetchData, setFetchingState, history } = this.props;
-    const { startsWith, order, offset } = this.state;
+    const { startsWith, order } = this.state;
     const apiHandler = ApiFactory.createApiHandler({
       pathname: history.location.pathname,
       search: history.location.search,
       startsWith,
-      offset,
+      offset: changedOffset,
       order,
     });
     const apiStr = apiHandler.createApiString();
@@ -51,14 +50,10 @@ class ListModule extends PureComponent {
     fetchData(apiStr, this.source.token);
   };
 
-  setOffsetValue = offset => {
-    this.setState({ offset }, () => {
-      this.loadData();
-    });
-  };
-
-  setHiddenState = hiddenState => {
-    this.setState({ hiddenState });
+  handleSubmit = e => {
+    e.preventDefault();
+    this.setHiddenState(true);
+    this.loadData(0);
   };
 
   setStateValue = e => {
@@ -66,24 +61,15 @@ class ListModule extends PureComponent {
     this.setState({ startsWith });
   };
 
-  setOrderValue = order => {
-    this.setState({ order });
-  };
+  setOrderValue = order => this.setState({ order });
 
-  setComponentType = componentType => {
-    this.setState({ componentType });
-  };
+  setComponentType = componentType => this.setState({ componentType });
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.setOffsetValue(0);
-    this.setHiddenState(true);
-    this.loadData();
-  };
+  setHiddenState = hiddenState => this.setState({ hiddenState });
 
   render() {
-    const { startsWith, order, offset, hiddenState, componentType } = this.state;
-    const { data, totalResults, ItemComponent, fetchStatus } = this.props;
+    const { startsWith, order, hiddenState, componentType } = this.state;
+    const { data, totalResults, ItemComponent, fetchStatus, offset } = this.props;
     return (
       <>
         <SettingsIcons
@@ -107,7 +93,7 @@ class ListModule extends PureComponent {
             fetchStatus={fetchStatus}
             renderData={data}
             Component={componentType === 'cards' ? ItemComponent : ListItem}
-            setOffsetValue={this.setOffsetValue}
+            setOffsetValue={this.loadData}
             offset={offset}
             totalResults={totalResults}
           />

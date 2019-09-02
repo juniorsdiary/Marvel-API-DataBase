@@ -33,6 +33,7 @@ export default function eventsData(state = initialState, action) {
       return {
         ...state,
         totalResults: 0,
+        eventsList: [],
       };
     case types.FETCH_EVENTS:
       return {

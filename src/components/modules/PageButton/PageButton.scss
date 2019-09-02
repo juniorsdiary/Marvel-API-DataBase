@@ -3,16 +3,14 @@
   background: $secondary_bg;
   color: $contrast_text_color;
   font-size: rem(16);
+  cursor: pointer;
   @include sm-block {
     font-size: rem(12);
   };
   transition: all 0.2s linear;
-}
-.pagination_block__page_item {
-  cursor: pointer;
-}
-.pagination_block__page_item:hover  {
-  filter: invert(100%);
+  &:hover, &:focus  {
+    filter: invert(100%);
+  }
 }
 .active_page_item {
   filter: invert(100%);

@@ -2,9 +2,9 @@
   display: flex;
   text-align: center;
   flex-direction: column;
-  padding: .5em;
+  padding: 0 .5em 1em;
   @include size(7);
-  @include size-xs(8);
+  @include size-xs(7);
 }
 .data_last_modified {
   text-align: right;
@@ -20,13 +20,13 @@
 .data_description {
   font-family: $description_ff;
   font-size: rem(18px);
-  margin: 1em 0 auto 0;
+  margin: 0 0 auto 0;
 }
 
 .data_title {
   @include size(12);
   font-family: $primary_titles_ff;
-  font-size: 1.5em;
+  font-size: rem(16px);
   text-align: center;
-  margin: .5em;
+  margin: 1em;
 }

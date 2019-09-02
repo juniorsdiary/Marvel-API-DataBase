@@ -33,6 +33,7 @@ export default function seriesData(state = initialState, action) {
       return {
         ...state,
         totalResults: 0,
+        seriesList: [],
       };
     case types.FETCH_SERIES:
       return {

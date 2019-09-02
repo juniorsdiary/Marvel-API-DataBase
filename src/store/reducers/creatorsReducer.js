@@ -23,6 +23,7 @@ export default function creatorsData(state = initialState, action) {
       return {
         ...state,
         totalResults: 0,
+        creatorsList: [],
       };
     case types.FETCH_CREATORS:
       return {

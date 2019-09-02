@@ -54,7 +54,7 @@
   justify-content: space-between;
   align-items: center;
   align-self: flex-start;
-  font-size: rem(14);
+  font-size: rem(10);
   font-weight: bold;
   font-family: $titles_ff;
   @include size(12);
@@ -64,8 +64,8 @@
   border-bottom: 2px solid rgb(255,0,0);
   cursor: pointer;
   transition: all .2s linear;
-  @include lg-block {
-    &:hover {
+  @include xs-block {
+    &:hover, &:focus {
       background-color: $primary_bg;
     }
   }

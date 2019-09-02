@@ -21,10 +21,12 @@ const CreatorsComponent = ({ data, number, history, pathname }) => {
     </div>
   );
 };
+
 CreatorsComponent.propTypes = {
   number: PropTypes.number,
   data: PropTypes.array,
   history: PropTypes.object,
   pathname: PropTypes.string,
 };
+
 export default withRouter(CreatorsComponent);
