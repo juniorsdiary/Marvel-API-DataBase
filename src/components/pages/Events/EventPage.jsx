@@ -4,7 +4,7 @@ import EventContent from './EventContent.jsx';
 import singlePageModule from 'Pages/templates/SinglePageModule.jsx';
 import { withLoader } from 'Components/hocs';
 
-const ContentWithLoader = withLoader()(EventContent);
+const ContentWithLoader = withLoader(EventContent);
 const EventsItemPage = singlePageModule(ContentWithLoader);
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchFunction: url => dispatch(fetchSingleEvent(url)),
+    fetchFunction: (url, token) => dispatch(fetchSingleEvent(url, token)),
     setFetchingState: boolean => {
       dispatch({ type: types.EVENTS_FETCHING, payload: boolean });
     },

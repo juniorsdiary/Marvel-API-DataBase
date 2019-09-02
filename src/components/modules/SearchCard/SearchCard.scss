@@ -4,7 +4,6 @@
   margin: .5em;
   box-shadow: $box_shadow;
   @include computed-size('comics', $comic_width);
-  animation: opacity .2s linear;
   color: transparent;
   transition: transform .2s linear;
   @include xs-block {

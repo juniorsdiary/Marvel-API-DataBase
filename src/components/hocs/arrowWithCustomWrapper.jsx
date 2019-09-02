@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
-const arrowWithCustomWrapper = () => DefaultArrow => {
+const arrowWithCustomWrapper = DefaultArrow => {
   class WrappedArrow extends Component {
     render() {
       return (

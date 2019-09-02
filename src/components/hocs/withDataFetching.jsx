@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { ApiFactory, constants } from 'Utilities';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
 const withDataFetching = pathname => WrappedComponent => {
   class FetchingHOC extends Component {
     loadData = () => {
-      const { fetchFunction, location, setFetchingState } = this.props;
-      const search = location.pathname
+      const { fetchFunction, history, setFetchingState } = this.props;
+      const search = history.location.pathname
         .split('/')
         .join('=')
         .replace(/=/, '?');
@@ -30,9 +31,9 @@ const withDataFetching = pathname => WrappedComponent => {
   }
   FetchingHOC.propTypes = {
     fetchFunction: PropTypes.func,
-    location: PropTypes.object,
+    history: PropTypes.object,
     setFetchingState: PropTypes.func,
   };
-  return FetchingHOC;
+  return withRouter(FetchingHOC);
 };
 export default withDataFetching;

@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { fetchEvents, types } from 'Store';
 import { SearchCard } from 'Modules';
 import ListModule from 'Pages/templates/ListModule.jsx';
+
 const mapStateToProps = state => {
   return {
     data: state.eventsData.eventsList,
@@ -12,6 +13,7 @@ const mapStateToProps = state => {
     fetchStatus: state.eventsData.fetchStatus,
   };
 };
+
 const mapDispatchToProps = dispatch => {
   return {
     fetchData: (url, token) => dispatch(fetchEvents(url, token)),
@@ -20,6 +22,7 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
+
 const EventsList = connect(
   mapStateToProps,
   mapDispatchToProps

@@ -4,7 +4,7 @@ import ComicsPageContent from './ComicsPageContent.jsx';
 import singlePageModule from 'Pages/templates/SinglePageModule.jsx';
 import { withLoader } from 'Components/hocs';
 
-const ContentWithLoader = withLoader()(ComicsPageContent);
+const ContentWithLoader = withLoader(ComicsPageContent);
 const ComicsItemPage = singlePageModule(ContentWithLoader);
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchFunction: url => dispatch(fetchSingleComicBook(url)),
+    fetchFunction: (url, token) => dispatch(fetchSingleComicBook(url, token)),
     setFetchingState: boolean => {
       dispatch({ type: types.COMICS_FETCHING, payload: boolean });
     },

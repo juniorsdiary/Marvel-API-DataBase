@@ -6,7 +6,9 @@ import { PageButton } from 'Modules';
 const Pagination = ({ totalResults, offset, setOffset }) => {
   let pages = Math.ceil(totalResults / constants.PER_PAGE_RESULTS);
   let pageNum = offset / constants.PER_PAGE_RESULTS + 1;
+
   const pagesIndexes = pages > 1 ? definePagesIndex(pages, pageNum) : [];
+
   const renderPageButtons = pagesIndexes.map(pageInd => (
     <PageButton
       key={pageInd}

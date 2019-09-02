@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { PreviewItem } from 'Modules';
 
-const CreatorsComponent = ({ data, number, location, pathname }) => {
-  const search = location.pathname
+const CreatorsComponent = ({ data, number, history, pathname }) => {
+  const search = history.location.pathname
     .split('/')
     .join('=')
     .replace(/=/, '?');
@@ -24,7 +24,7 @@ const CreatorsComponent = ({ data, number, location, pathname }) => {
 CreatorsComponent.propTypes = {
   number: PropTypes.number,
   data: PropTypes.array,
-  location: PropTypes.object,
+  history: PropTypes.object,
   pathname: PropTypes.string,
 };
-export default CreatorsComponent;
+export default withRouter(CreatorsComponent);

@@ -3,8 +3,11 @@
   @include size(6);
   display: flex;
   justify-content: center;
+  align-items: center;
   font-size: rem(12px);
   text-decoration: none;
+  text-align: center;
   color: $contrast_text_color;
   margin: .5em 0;
+  cursor: pointer;
 }

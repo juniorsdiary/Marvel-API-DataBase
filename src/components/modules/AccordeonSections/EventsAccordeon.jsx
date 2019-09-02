@@ -7,10 +7,10 @@ const EventsAccordeon = connect(
   state => ({
     data: state.eventsData.eventsList,
     fetchStatus: state.eventsData.fetchStatus,
-    location: state.router.location,
+    history: state.router,
   }),
   dispatch => ({
-    fetchFunction: url => dispatch(fetchEvents(url)),
+    fetchFunction: (url, token) => dispatch(fetchEvents(url, token)),
     setFetchingState: boolean => {
       dispatch({ type: types.EVENTS_FETCHING, payload: boolean });
     },

@@ -10,21 +10,18 @@ function ComicsPageContent({ data }) {
       <ComicsAccordeon
         MappingComponent={SearchCard}
         number={comics.available}
-        slider={true}
         contentClassName='default_slider_block'
         title={`Took part in ${comics.available} comics`}
       />
       <EventsAccordeon
         MappingComponent={SearchCard}
         number={events.available}
-        slider={true}
         contentClassName='default_slider_block'
         title={`Created ${events.available} events`}
       />
       <SeriesAccordeon
         MappingComponent={SearchCard}
         number={series.available}
-        slider={true}
         contentClassName='default_slider_block'
         title={`Creator of ${series.available} series`}
       />

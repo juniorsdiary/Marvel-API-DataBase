@@ -4,7 +4,7 @@ import SingleSeriesContent from './SingleSeriesContent.jsx';
 import singlePageModule from 'Pages/templates/SinglePageModule.jsx';
 import { withLoader } from 'Components/hocs';
 
-const ContentWithLoader = withLoader()(SingleSeriesContent);
+const ContentWithLoader = withLoader(SingleSeriesContent);
 const SeriesItemPage = singlePageModule(ContentWithLoader);
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchFunction: url => dispatch(fetchSingleSeries(url)),
+    fetchFunction: (url, token) => dispatch(fetchSingleSeries(url, token)),
     setFetchingState: boolean => {
       dispatch({ type: types.SERIES_FETCHING, payload: boolean });
     },

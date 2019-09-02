@@ -10,6 +10,7 @@
   background-position: center;
   background-size: cover;
   clip-path: none;
+  animation: opacity .5s linear;
   @include sm-block {
     background-size: 158%;
   }

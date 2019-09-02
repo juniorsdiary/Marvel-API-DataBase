@@ -7,10 +7,10 @@ const SeriesAccordeon = connect(
   state => ({
     data: state.seriesData.seriesList,
     fetchStatus: state.seriesData.fetchStatus,
-    location: state.router.location,
+    history: state.router,
   }),
   dispatch => ({
-    fetchFunction: url => dispatch(fetchSeries(url)),
+    fetchFunction: (url, token) => dispatch(fetchSeries(url, token)),
     setFetchingState: boolean => {
       dispatch({ type: types.SERIES_FETCHING, payload: boolean });
     },

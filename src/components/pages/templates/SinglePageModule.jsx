@@ -15,8 +15,8 @@ const singlePageModule = Content => {
       if (this.source) this.source.cancel();
     }
     loadPrimaryData = () => {
-      const { fetchFunction, location, setFetchingState } = this.props;
-      const charactersAPI = ApiFactory.createApiHandler({ pathname: location.pathname });
+      const { fetchFunction, history, setFetchingState } = this.props;
+      const charactersAPI = ApiFactory.createApiHandler({ pathname: history.location.pathname });
       const apiStr = charactersAPI.createApiString();
       setFetchingState(true);
       const CancelToken = axios.CancelToken;
@@ -29,18 +29,19 @@ const singlePageModule = Content => {
       }
     }
     render() {
-      const { location, fetchedData, storeData, fetchStatus } = this.props;
+      const { fetchedData, storeData, fetchStatus } = this.props;
       const data = storeData || fetchedData;
 
       return (
         <div className='single_page_content'>
-          <Content fetchStatus={fetchStatus} size={'35'} data={data} location={location} loadData={this.loadPrimaryData} />
+          <Content fetchStatus={fetchStatus} size={'35'} data={data} loadData={this.loadPrimaryData} />
         </div>
       );
     }
   }
   SinglePageModule.propTypes = {
     fetchFunction: PropTypes.func,
+    history: PropTypes.object,
     location: PropTypes.object,
     setFetchingState: PropTypes.func,
     fetchedData: PropTypes.object,

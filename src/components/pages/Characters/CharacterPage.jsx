@@ -4,7 +4,7 @@ import CharactersPageContent from './CharactersPageContent.jsx';
 import singlePageModule from 'Pages/templates/SinglePageModule.jsx';
 import { withLoader } from 'Components/hocs';
 
-const ContentWithLoader = withLoader()(CharactersPageContent);
+const ContentWithLoader = withLoader(CharactersPageContent);
 const CharactersItemPage = singlePageModule(ContentWithLoader);
 
 const mapStateToProps = (state, ownProps) => {
@@ -18,7 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchFunction: url => dispatch(fetchSingleCharacter(url)),
+    fetchFunction: (url, token) => dispatch(fetchSingleCharacter(url, token)),
     setFetchingState: boolean => {
       dispatch({ type: types.CHARACTERS_FETCHING, payload: boolean });
     },

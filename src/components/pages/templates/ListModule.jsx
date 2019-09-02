@@ -5,24 +5,21 @@ import { ContentComponent, FilterComponent, ListItem, SettingsIcons } from 'Modu
 import { withLoader } from 'Components/hocs';
 import axios from 'axios';
 
-const ContentComponentWithLoader = withLoader()(ContentComponent);
+const ContentComponentWithLoader = withLoader(ContentComponent);
 
 class ListModule extends PureComponent {
-  constructor() {
-    super();
-    this.state = {
-      startsWith: '',
-      order: true,
-      offset: 0,
-      hiddenState: true,
-      componentType: 'cards',
-    };
-  }
+  state = {
+    startsWith: '',
+    order: true,
+    offset: 0,
+    hiddenState: true,
+    componentType: 'cards',
+  };
 
   componentDidMount() {
-    const { location, fetchStatus } = this.props;
-    const apiCheck = ApiFactory.apiHash.filter(item => item.pathname === location.pathname).length;
-    const lastApicall = ApiFactory.apiHash.filter(item => item.pathname === location.pathname).slice(-1)[0];
+    const { history, fetchStatus } = this.props;
+    const apiCheck = ApiFactory.apiHash.filter(item => item.pathname === history.location.pathname).length;
+    const lastApicall = ApiFactory.apiHash.filter(item => item.pathname === history.location.pathname).slice(-1)[0];
 
     if (fetchStatus.message !== 'OK') {
       this.loadData();
@@ -38,9 +35,15 @@ class ListModule extends PureComponent {
   }
 
   loadData = () => {
-    const { fetchData, setFetchingState, location } = this.props;
+    const { fetchData, setFetchingState, history } = this.props;
     const { startsWith, order, offset } = this.state;
-    const apiHandler = ApiFactory.createApiHandler({ pathname: location.pathname, search: location.search, startsWith, offset, order });
+    const apiHandler = ApiFactory.createApiHandler({
+      pathname: history.location.pathname,
+      search: history.location.search,
+      startsWith,
+      offset,
+      order,
+    });
     const apiStr = apiHandler.createApiString();
     setFetchingState(true);
     const CancelToken = axios.CancelToken;
@@ -121,7 +124,7 @@ ListModule.propTypes = {
   isFetching: PropTypes.bool,
   totalResults: PropTypes.number,
   offset: PropTypes.number,
-  location: PropTypes.object,
+  history: PropTypes.object,
   ItemComponent: PropTypes.any,
   fetchStatus: PropTypes.object,
 };

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Loader, ErrorHandler } from 'Modules';
 import PropTypes from 'prop-types';
 
-const withLoader = () => WrappedComponent => {
+const withLoader = WrappedComponent => {
   class LoadingHOC extends Component {
     render() {
       const { fetchStatus, loadData } = this.props;

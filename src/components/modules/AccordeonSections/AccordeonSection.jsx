@@ -6,11 +6,11 @@ import { sliderSettings } from 'Utilities';
 import { Reload } from 'Modules';
 import { IoIosArrowDown } from 'react-icons/io';
 
-const AccordeonSection = ({ data, number, pathname, location, slider, contentClassName, title, loadData, fetchStatus, MappingComponent }) => {
+const AccordeonSection = ({ data, number, pathname, slider, contentClassName, title, loadData, fetchStatus, MappingComponent, history }) => {
   const { status, isFetching } = fetchStatus;
   const [active, setActive] = useState(false);
   const toggleContent = !status || isFetching || number === 0 ? () => {} : () => setActive(!active);
-  const search = location.pathname
+  const search = history.location.pathname
     .split('/')
     .join('=')
     .replace(/=/, '?');
@@ -18,36 +18,38 @@ const AccordeonSection = ({ data, number, pathname, location, slider, contentCla
   return (
     <>
       {number > 0 && (
-        <div
-          tabIndex='-1'
-          role='button'
-          className={`available_items_title ${active && 'active_tab'}`}
-          onClick={toggleContent}
-          onKeyPress={toggleContent}>
-          <span>{title}</span>
-          {isFetching ? (
-            <span className='accordeon_loading_spinner'></span>
-          ) : status ? (
-            <IoIosArrowDown size='25' className={`${active ? 'open' : 'close'}_dropdown`} />
-          ) : (
-            <Reload size={'25'} loadData={loadData} />
-          )}
-        </div>
+        <>
+          <div
+            tabIndex='-1'
+            role='button'
+            className={`available_items_title ${active && 'active_tab'}`}
+            onClick={toggleContent}
+            onKeyPress={toggleContent}>
+            <span>{title}</span>
+            {isFetching ? (
+              <span className='accordeon_loading_spinner'></span>
+            ) : status ? (
+              <IoIosArrowDown size='25' className={`${active ? 'open' : 'close'}_dropdown`} />
+            ) : (
+              <Reload size={'25'} loadData={loadData} />
+            )}
+          </div>
+          <div className={`accordeon_section ${active && 'active_section'}`}>
+            {content.length >= 3 ? (
+              <Slider {...sliderSettings} className={contentClassName}>
+                {content}
+              </Slider>
+            ) : (
+              <div className={contentClassName}>{content}</div>
+            )}
+            {number > 15 && (
+              <Link to={{ pathname, search }} className='show_more_link styled_btn'>
+                Show More
+              </Link>
+            )}
+          </div>
+        </>
       )}
-      <div className={`accordeon_section ${active && 'active_section'}`}>
-        {content.length >= 3 && slider ? (
-          <Slider {...sliderSettings} className={contentClassName}>
-            {content}
-          </Slider>
-        ) : (
-          <div className={contentClassName}>{content}</div>
-        )}
-        {number > 15 && (
-          <Link to={{ pathname, search }} className='show_more_link styled_btn'>
-            Show More
-          </Link>
-        )}
-      </div>
     </>
   );
 };
@@ -55,7 +57,7 @@ const AccordeonSection = ({ data, number, pathname, location, slider, contentCla
 AccordeonSection.propTypes = {
   data: PropTypes.array,
   pathname: PropTypes.string,
-  location: PropTypes.object,
+  history: PropTypes.object,
   number: PropTypes.number,
   slider: PropTypes.bool,
   contentClassName: PropTypes.string,

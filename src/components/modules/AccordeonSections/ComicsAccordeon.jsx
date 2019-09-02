@@ -4,15 +4,13 @@ import { withDataFetching } from 'Components/hocs';
 import AccordeonSection from './AccordeonSection.jsx';
 
 const ComicsAccordeon = connect(
-  state => {
-    return {
-      data: state.comicsData.comicsList,
-      fetchStatus: state.comicsData.fetchStatus,
-      location: state.router.location,
-    };
-  },
+  state => ({
+    data: state.comicsData.comicsList,
+    fetchStatus: state.comicsData.fetchStatus,
+    history: state.router,
+  }),
   dispatch => ({
-    fetchFunction: url => dispatch(fetchComics(url)),
+    fetchFunction: (url, token) => dispatch(fetchComics(url, token)),
     setFetchingState: boolean => {
       dispatch({ type: types.COMICS_FETCHING, payload: boolean });
     },

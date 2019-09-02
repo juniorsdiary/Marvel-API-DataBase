@@ -1,6 +1,6 @@
 .creator_item {
   @include simple-size(90px, 45px);
-  font-size: rem(26px);
+  font-size: rem(20px);
   margin: .4em;
   color: $contrast_text_color;
   background: $secondary_bg;
@@ -11,8 +11,12 @@
   text-align: center;
   box-shadow: $box_shadow;
   cursor: pointer;
+  transition: all .2s linear;
   @include sm-block {
     @include simple-size(110px, 55px);
     font-size: rem(16px);
+    &:hover {
+      filter: invert(100%);
+    }
   };
 }

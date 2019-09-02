@@ -27,25 +27,22 @@ function SingleSeriesContent({ data }) {
       <CharactersAccordeon
         MappingComponent={CharacterCard}
         number={characters.available}
-        slider={true}
         contentClassName='default_slider_block'
         title={`You can meet ${characters.available} characters`}
       />
       <ComicsAccordeon
         MappingComponent={SearchCard}
         number={comics.available}
-        slider={true}
         contentClassName='default_slider_block'
         title={`Contains ${comics.available} comics`}
       />
       <EventsAccordeon
         MappingComponent={SearchCard}
         number={events.available}
-        slider={true}
         contentClassName='default_slider_block'
         title={`Part of ${events.available} events`}
       />
-      <CreatorsComponent data={creators.items} number={creators.available} location={location} pathname={'/creators'} />
+      <CreatorsComponent data={creators.items} number={creators.available} pathname={'/creators'} />
     </div>
   );
 }

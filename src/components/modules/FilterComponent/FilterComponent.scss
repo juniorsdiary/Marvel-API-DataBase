@@ -32,9 +32,11 @@
   color: $primary_text_color;
 }
 .order_input_wrapper {
-  padding: .2em .5em;
   border: 2px solid black;
   transition: all .5s linear;
+  label {
+    cursor: pointer;
+  }
 }
 .asc_order {
   border-right: none;

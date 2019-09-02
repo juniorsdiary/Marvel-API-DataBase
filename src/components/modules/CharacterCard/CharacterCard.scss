@@ -4,7 +4,6 @@
   margin: .5em;
   box-shadow: $box_shadow;
   @include computed-size('character', $character_width);
-  animation: opacity .5s linear;
   transition: all .2s linear;
   z-index: 10;
   @include sm-block {

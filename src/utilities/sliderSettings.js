@@ -2,8 +2,8 @@ import React from 'react';
 import { IoIosArrowDroprightCircle, IoIosArrowDropleftCircle } from 'react-icons/io';
 import { arrowWithCustomWrapper } from 'Components/hocs';
 
-const CustomNextSlider = arrowWithCustomWrapper()(IoIosArrowDroprightCircle);
-const CustomPrevSlider = arrowWithCustomWrapper()(IoIosArrowDropleftCircle);
+const CustomNextSlider = arrowWithCustomWrapper(IoIosArrowDroprightCircle);
+const CustomPrevSlider = arrowWithCustomWrapper(IoIosArrowDropleftCircle);
 
 const settings = {
   dots: false,

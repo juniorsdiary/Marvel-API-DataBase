@@ -50,6 +50,7 @@ html, body {
   background: $secondary_bg;
   color: $contrast_text_color;
   box-shadow: $box_shadow;
+  animation: opacity .5s linear;
   @include size(12);
   @include size-sm(10);
   @include size-lg(8);

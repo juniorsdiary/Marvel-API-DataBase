@@ -12,10 +12,8 @@
   cursor: pointer;
 }
 .pagination_block__page_item:hover  {
-  background: $alternative_bg;
-  color: $primary_text_color;
+  filter: invert(100%);
 }
 .active_page_item {
-  background: $alternative_bg;
-  color: $primary_text_color;
+  filter: invert(100%);
 }
