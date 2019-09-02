@@ -9,9 +9,7 @@ const EventsAccordeon = connect(
     fetchStatus: state.eventsData.fetchStatus,
   }),
   dispatch => ({
-    fetchFunction: url => {
-      dispatch(fetchEvents(url));
-    },
+    fetchFunction: url => dispatch(fetchEvents(url)),
     setFetchingState: boolean => {
       dispatch({ type: types.EVENTS_FETCHING, payload: boolean });
     },

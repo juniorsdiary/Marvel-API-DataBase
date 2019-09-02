@@ -18,9 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchFunction: url => {
-      dispatch(fetchSingleCharacter(url));
-    },
+    fetchFunction: url => dispatch(fetchSingleCharacter(url)),
     setFetchingState: boolean => {
       dispatch({ type: types.CHARACTERS_FETCHING, payload: boolean });
     },

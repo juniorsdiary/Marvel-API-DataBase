@@ -17,6 +17,7 @@ const withDataFetching = pathname => WrappedComponent => {
     componentDidMount() {
       this.loadData();
     }
+    componentWillUnmount() {}
     render() {
       return <WrappedComponent pathname={pathname} loadData={this.loadData} {...this.props} />;
     }

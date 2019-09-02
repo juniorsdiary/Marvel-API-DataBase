@@ -16,9 +16,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchData: url => {
-      dispatch(fetchCreators(url));
-    },
+    fetchData: (url, token) => dispatch(fetchCreators(url, token)),
     setFetchingState: boolean => {
       dispatch({ type: types.CREATORS_FETCHING, payload: boolean });
     },

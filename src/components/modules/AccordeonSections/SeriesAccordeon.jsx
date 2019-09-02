@@ -9,9 +9,7 @@ const SeriesAccordeon = connect(
     fetchStatus: state.seriesData.fetchStatus,
   }),
   dispatch => ({
-    fetchFunction: url => {
-      dispatch(fetchSeries(url));
-    },
+    fetchFunction: url => dispatch(fetchSeries(url)),
     setFetchingState: boolean => {
       dispatch({ type: types.SERIES_FETCHING, payload: boolean });
     },

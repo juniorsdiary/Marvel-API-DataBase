@@ -1,42 +1,32 @@
 import * as types from '../types';
+import axios from 'axios';
 
-export const fetchCharacters = url => async dispatch => {
+export const fetchCharacters = (url, cancelToken) => async dispatch => {
   dispatch({ type: types.CLEAR_CHARACTERS });
-  try {
-    const res = await fetch(url);
-    if (res.status !== 200) {
-      throw new Error(res.statusText);
-    } else {
-      const data = await res.json();
+  return axios
+    .get(url, { cancelToken })
+    .then(({ statusText, data }) => {
       dispatch({
         type: types.FETCH_CHARACTERS,
         payload: data.data,
       });
-      dispatch({ type: types.CHARACTERS_FETCH_SUCCEEDED, payload: res.statusText });
-    }
-  } catch (e) {
-    dispatch({ type: types.CHARACTERS_FETCH_FAILED, payload: e.message });
-  } finally {
-    dispatch({ type: types.CHARACTERS_FETCHING, payload: false });
-  }
+      dispatch({ type: types.CHARACTERS_FETCH_SUCCEEDED, payload: statusText });
+    })
+    .catch(e => dispatch({ type: types.CHARACTERS_FETCH_FAILED, payload: e.message }))
+    .then(() => dispatch({ type: types.CHARACTERS_FETCHING, payload: false }));
 };
 
-export const fetchSingleCharacter = url => async dispatch => {
-  try {
-    const res = await fetch(url);
-    if (res.status !== 200) {
-      throw new Error(res.statusText);
-    } else {
-      const data = await res.json();
+export const fetchSingleCharacter = (url, cancelToken) => async dispatch => {
+  dispatch({ type: types.CLEAR_CHARACTERS });
+  return axios
+    .get(url, { cancelToken })
+    .then(({ statusText, data }) => {
       dispatch({
         type: types.FETCH_SINGLE_CHARACTERS,
         payload: data.data,
       });
-      dispatch({ type: types.CHARACTERS_FETCH_SUCCEEDED, payload: res.statusText });
-    }
-  } catch (e) {
-    dispatch({ type: types.CHARACTERS_FETCH_FAILED, payload: e.message });
-  } finally {
-    dispatch({ type: types.CHARACTERS_FETCHING, payload: false });
-  }
+      dispatch({ type: types.CHARACTERS_FETCH_SUCCEEDED, payload: statusText });
+    })
+    .catch(e => dispatch({ type: types.CHARACTERS_FETCH_FAILED, payload: e.message }))
+    .then(() => dispatch({ type: types.CHARACTERS_FETCHING, payload: false }));
 };

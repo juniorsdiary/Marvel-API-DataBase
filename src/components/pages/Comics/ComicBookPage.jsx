@@ -18,9 +18,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchFunction: url => {
-      dispatch(fetchSingleComicBook(url));
-    },
+    fetchFunction: url => dispatch(fetchSingleComicBook(url)),
     setFetchingState: boolean => {
       dispatch({ type: types.COMICS_FETCHING, payload: boolean });
     },

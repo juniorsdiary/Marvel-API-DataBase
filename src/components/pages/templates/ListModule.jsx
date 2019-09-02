@@ -3,29 +3,38 @@ import PropTypes from 'prop-types';
 import { ApiFactory } from 'Utilities';
 import { ContentComponent, FilterComponent, ListItem, SettingsIcons } from 'Modules';
 import { withLoader } from 'Components/hocs';
+import axios from 'axios';
 
 const ContentComponentWithLoader = withLoader()(ContentComponent);
 
 class ListModule extends PureComponent {
-  state = {
-    startsWith: '',
-    order: true,
-    offset: 0,
-    hiddenState: true,
-    componentType: 'cards',
-  };
+  constructor() {
+    super();
+    this.state = {
+      startsWith: '',
+      order: true,
+      offset: 0,
+      hiddenState: true,
+      componentType: 'cards',
+    };
+  }
 
   componentDidMount() {
-    const { location } = this.props;
+    const { location, fetchStatus } = this.props;
     const apiCheck = ApiFactory.apiHash.filter(item => item.pathname === location.pathname).length;
     const lastApicall = ApiFactory.apiHash.filter(item => item.pathname === location.pathname).slice(-1)[0];
+
+    if (fetchStatus.message !== 'OK') {
+      this.loadData();
+    }
     if (!apiCheck) {
       this.loadData();
-    } else {
-      if (lastApicall.search) {
-        this.loadData();
-      }
+    } else if (lastApicall.search) {
+      this.loadData();
     }
+  }
+  componentWillUnmount() {
+    if (this.source) this.source.cancel();
   }
 
   loadData = () => {
@@ -34,7 +43,9 @@ class ListModule extends PureComponent {
     const apiHandler = ApiFactory.createApiHandler({ pathname: location.pathname, search: location.search, startsWith, offset, order });
     const apiStr = apiHandler.createApiString();
     setFetchingState(true);
-    fetchData(apiStr);
+    const CancelToken = axios.CancelToken;
+    this.source = CancelToken.source();
+    fetchData(apiStr, this.source.token);
   };
 
   setOffsetValue = offset => {

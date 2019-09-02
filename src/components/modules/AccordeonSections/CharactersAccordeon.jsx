@@ -9,9 +9,7 @@ const CharactersAccordeon = connect(
     fetchStatus: state.charactersData.fetchStatus,
   }),
   dispatch => ({
-    fetchFunction: url => {
-      dispatch(fetchCharacters(url));
-    },
+    fetchFunction: url => dispatch(fetchCharacters(url)),
     setFetchingState: boolean => {
       dispatch({ type: types.CHARACTERS_FETCHING, payload: boolean });
     },

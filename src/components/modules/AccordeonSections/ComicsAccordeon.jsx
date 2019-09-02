@@ -9,9 +9,7 @@ const ComicsAccordeon = connect(
     fetchStatus: state.comicsData.fetchStatus,
   }),
   dispatch => ({
-    fetchFunction: url => {
-      dispatch(fetchComics(url));
-    },
+    fetchFunction: url => dispatch(fetchComics(url)),
     setFetchingState: boolean => {
       dispatch({ type: types.COMICS_FETCHING, payload: boolean });
     },
