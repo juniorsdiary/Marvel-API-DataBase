@@ -27,6 +27,7 @@
   background: $header_bg;
   opacity: 1;
   clip-path: circle(920px at 100% 0%);
+  visibility: visible;
   @include xs-block() {
     clip-path: none;
   };
@@ -35,9 +36,11 @@
   background: $header_bg;
   opacity: 0;
   clip-path: circle(0px at 100% 0%);
+  visibility: hidden;
   @include xs-block() {
     clip-path: none;
     opacity: 1;
+    visibility: visible;
   };
 }
 
