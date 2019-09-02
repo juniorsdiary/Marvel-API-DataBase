@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { convertToLocale } from 'Utilities';
 import { ImageAvatar, DetailsSection, SearchCard, EventsAccordeon, ComicsAccordeon, SeriesAccordeon } from 'Modules';
 
-function CharactersPageContent({ data, location }) {
+function CharactersPageContent({ data }) {
   const { name, description, modified, thumbnail, urls, comics, series, events } = data;
   const src = thumbnail.path ? `${thumbnail.path}.${thumbnail.extension}` : '';
   const lastModified = convertToLocale(modified);
@@ -14,7 +14,6 @@ function CharactersPageContent({ data, location }) {
       <DetailsSection name={name} description={description} url={urls && urls[0].url} lastModified={lastModified} />
       <ComicsAccordeon
         MappingComponent={SearchCard}
-        location={location}
         number={comics.available}
         slider={true}
         contentClassName='default_slider_block'
@@ -22,7 +21,6 @@ function CharactersPageContent({ data, location }) {
       />
       <SeriesAccordeon
         MappingComponent={SearchCard}
-        location={location}
         number={series.available}
         slider={true}
         contentClassName='default_slider_block'
@@ -31,7 +29,6 @@ function CharactersPageContent({ data, location }) {
       <EventsAccordeon
         MappingComponent={SearchCard}
         number={events.available}
-        location={location}
         slider={true}
         contentClassName='default_slider_block'
         title={`Encountered in ${events.available} events`}
@@ -42,7 +39,6 @@ function CharactersPageContent({ data, location }) {
 
 CharactersPageContent.propTypes = {
   data: PropTypes.object,
-  location: PropTypes.object,
 };
 
 export default CharactersPageContent;

@@ -13,7 +13,7 @@ import {
   AdjacentItemLink,
 } from 'Modules';
 
-function SingleSeriesContent({ data, location }) {
+function SingleSeriesContent({ data }) {
   const { title, description, modified, thumbnail, urls, comics, creators, characters, events, previous, next } = data;
   const src = thumbnail.path ? `${thumbnail.path}.${thumbnail.extension}` : '';
   const lastModified = convertToLocale(modified);
@@ -27,7 +27,6 @@ function SingleSeriesContent({ data, location }) {
       <CharactersAccordeon
         MappingComponent={CharacterCard}
         number={characters.available}
-        location={location}
         slider={true}
         contentClassName='default_slider_block'
         title={`You can meet ${characters.available} characters`}
@@ -35,7 +34,6 @@ function SingleSeriesContent({ data, location }) {
       <ComicsAccordeon
         MappingComponent={SearchCard}
         number={comics.available}
-        location={location}
         slider={true}
         contentClassName='default_slider_block'
         title={`Contains ${comics.available} comics`}
@@ -43,7 +41,6 @@ function SingleSeriesContent({ data, location }) {
       <EventsAccordeon
         MappingComponent={SearchCard}
         number={events.available}
-        location={location}
         slider={true}
         contentClassName='default_slider_block'
         title={`Part of ${events.available} events`}
@@ -55,7 +52,6 @@ function SingleSeriesContent({ data, location }) {
 
 SingleSeriesContent.propTypes = {
   data: PropTypes.object,
-  location: PropTypes.object,
 };
 
 export default SingleSeriesContent;

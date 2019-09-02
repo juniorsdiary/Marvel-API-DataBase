@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Pagination } from 'Modules';
+import { withRouter } from 'react-router-dom';
 
-const ContentComponent = ({ renderData, Component, pathname, setOffsetValue, totalResults, offset }) => {
-  const renderElements = renderData.map(item => <Component key={item.id} {...item} pathname={pathname} />);
+const ContentComponent = ({ renderData, Component, setOffsetValue, totalResults, offset, location }) => {
+  const renderElements = renderData.map(item => <Component key={item.id} {...item} pathname={location.pathname} />);
   return (
     <>
       <div className='search_results_wrapper'>
@@ -17,10 +18,10 @@ const ContentComponent = ({ renderData, Component, pathname, setOffsetValue, tot
 ContentComponent.propTypes = {
   renderData: PropTypes.array,
   Component: PropTypes.elementType,
-  pathname: PropTypes.string,
+  location: PropTypes.object,
   setOffsetValue: PropTypes.func,
   totalResults: PropTypes.number,
   offset: PropTypes.number,
 };
 
-export default React.memo(ContentComponent);
+export default React.memo(withRouter(ContentComponent));

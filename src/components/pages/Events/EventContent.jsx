@@ -15,7 +15,7 @@ import {
 
 import { withLoader } from 'Components/hocs';
 
-function EventContent({ data, location }) {
+function EventContent({ data }) {
   const { title, description, modified, thumbnail, urls, comics, creators, characters, series, previous, next } = data;
   const src = thumbnail.path ? `${thumbnail.path}.${thumbnail.extension}` : '';
   const lastModified = convertToLocale(modified);
@@ -29,7 +29,6 @@ function EventContent({ data, location }) {
       <CharactersAccordeon
         MappingComponent={CharacterCard}
         number={characters.available}
-        location={location}
         slider={true}
         contentClassName='default_slider_block'
         title={`You can meet ${characters.available} characters`}
@@ -37,7 +36,6 @@ function EventContent({ data, location }) {
       <ComicsAccordeon
         MappingComponent={SearchCard}
         number={comics.available}
-        location={location}
         slider={true}
         contentClassName='default_slider_block'
         title={`Contains ${comics.available} comics`}
@@ -45,7 +43,6 @@ function EventContent({ data, location }) {
       <SeriesAccordeon
         MappingComponent={SearchCard}
         number={series.available}
-        location={location}
         slider={true}
         contentClassName='default_slider_block'
         title={`Contains ${series.available} series`}
@@ -57,7 +54,6 @@ function EventContent({ data, location }) {
 
 EventContent.propTypes = {
   data: PropTypes.object,
-  location: PropTypes.object,
 };
 
 const ContentWithLoader = withLoader()(EventContent);

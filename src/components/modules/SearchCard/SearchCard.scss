@@ -3,17 +3,17 @@
   display: block;
   margin: .5em;
   box-shadow: $box_shadow;
-  @include simple-size($comic_width, comics_height($comic_width));
+  @include computed-size('comics', $comic_width);
   animation: opacity .2s linear;
   color: transparent;
   transition: transform .2s linear;
   @include xs-block {
-    @include simple-size($comic_width_xs, comics_height($comic_width_xs));
+    @include computed-size('comics', $comic_width_xs);
     &:hover {
       transform: scale(1.1);
     }
   }
   @include md-block {
-    @include simple-size($comic_width_md, comics_height($comic_width_md));
+    @include computed-size('comics', $comic_width_md);
   };
 }

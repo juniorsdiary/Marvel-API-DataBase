@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
+
 const arrowWithCustomWrapper = () => DefaultArrow => {
-  return class WrappedArrow extends Component {
+  class WrappedArrow extends Component {
     render() {
       return (
         <div tabIndex='-1' role='button' className='custom_arrow slick-arrow' onClick={this.props.onClick} onKeyUp={this.props.onClick}>
@@ -9,7 +10,11 @@ const arrowWithCustomWrapper = () => DefaultArrow => {
         </div>
       );
     }
+  }
+  WrappedArrow.propTypes = {
+    onClick: PropTypes.func,
   };
+  return WrappedArrow;
 };
-/* eslint-enable react/prop-types */
+
 export default arrowWithCustomWrapper;

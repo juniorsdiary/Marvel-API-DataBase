@@ -3,12 +3,12 @@
   display: block;
   margin: .5em;
   box-shadow: $box_shadow;
-  @include simple-size(90px);
+  @include computed-size('character', $character_width);
   animation: opacity .5s linear;
   transition: all .2s linear;
   z-index: 10;
   @include sm-block {
-    @include simple-size(120px);
+    @include computed-size('character', $sm_character_width);
     &:hover {
       transform: scale(1.1);
       .character_link__name {
@@ -51,16 +51,5 @@
     @extend %pseudo_border_default;
     @include border_hover(left, right, 2px, white, scaleY(0));
     z-index: 12;
-  }
-}
-.loading_image {
-  &:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    @include simple-size(100%);
-    background: $primary_bg;
-    animation: background 1s linear infinite alternate;
-    z-index: 15;
   }
 }

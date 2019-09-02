@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
+
 export default function customNavLink(path) {
-  return class MyNavLink extends Component {
+  class MyNavLink extends Component {
     render() {
       const { to, text, ...props } = this.props;
       return (
@@ -11,6 +12,10 @@ export default function customNavLink(path) {
         </NavLink>
       );
     }
+  }
+  MyNavLink.propTypes = {
+    to: PropTypes.string,
+    text: PropTypes.string,
   };
+  return MyNavLink;
 }
-/* eslint-enable react/prop-types */

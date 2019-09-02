@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { SearchCard, EventsAccordeon, ComicsAccordeon, SeriesAccordeon } from 'Modules';
 
-function ComicsPageContent({ data, location }) {
+function ComicsPageContent({ data }) {
   const { comics, events, series, fullName } = data;
   return (
     <div className='items_data_wrapper'>
@@ -10,7 +10,6 @@ function ComicsPageContent({ data, location }) {
       <ComicsAccordeon
         MappingComponent={SearchCard}
         number={comics.available}
-        location={location}
         slider={true}
         contentClassName='default_slider_block'
         title={`Took part in ${comics.available} comics`}
@@ -18,7 +17,6 @@ function ComicsPageContent({ data, location }) {
       <EventsAccordeon
         MappingComponent={SearchCard}
         number={events.available}
-        location={location}
         slider={true}
         contentClassName='default_slider_block'
         title={`Created ${events.available} events`}
@@ -26,7 +24,6 @@ function ComicsPageContent({ data, location }) {
       <SeriesAccordeon
         MappingComponent={SearchCard}
         number={series.available}
-        location={location}
         slider={true}
         contentClassName='default_slider_block'
         title={`Creator of ${series.available} series`}
@@ -37,7 +34,6 @@ function ComicsPageContent({ data, location }) {
 
 ComicsPageContent.propTypes = {
   data: PropTypes.object,
-  location: PropTypes.object,
 };
 
 export default ComicsPageContent;

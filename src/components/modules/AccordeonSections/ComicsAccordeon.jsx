@@ -4,10 +4,13 @@ import { withDataFetching } from 'Components/hocs';
 import AccordeonSection from './AccordeonSection.jsx';
 
 const ComicsAccordeon = connect(
-  state => ({
-    data: state.comicsData.comicsList,
-    fetchStatus: state.comicsData.fetchStatus,
-  }),
+  state => {
+    return {
+      data: state.comicsData.comicsList,
+      fetchStatus: state.comicsData.fetchStatus,
+      location: state.router.location,
+    };
+  },
   dispatch => ({
     fetchFunction: url => dispatch(fetchComics(url)),
     setFetchingState: boolean => {

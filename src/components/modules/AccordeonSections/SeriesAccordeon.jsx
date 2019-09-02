@@ -7,6 +7,7 @@ const SeriesAccordeon = connect(
   state => ({
     data: state.seriesData.seriesList,
     fetchStatus: state.seriesData.fetchStatus,
+    location: state.router.location,
   }),
   dispatch => ({
     fetchFunction: url => dispatch(fetchSeries(url)),

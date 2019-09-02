@@ -80,7 +80,7 @@ class ListModule extends PureComponent {
 
   render() {
     const { startsWith, order, offset, hiddenState, componentType } = this.state;
-    const { data, totalResults, location, ItemComponent, fetchStatus } = this.props;
+    const { data, totalResults, ItemComponent, fetchStatus } = this.props;
     return (
       <>
         <SettingsIcons
@@ -104,7 +104,6 @@ class ListModule extends PureComponent {
             fetchStatus={fetchStatus}
             renderData={data}
             Component={componentType === 'cards' ? ItemComponent : ListItem}
-            pathname={location.pathname}
             setOffsetValue={this.setOffsetValue}
             offset={offset}
             totalResults={totalResults}

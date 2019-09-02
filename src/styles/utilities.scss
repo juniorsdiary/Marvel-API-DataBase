@@ -1,18 +1,24 @@
 @include reset();
+// colors
 $primary_bg: rgb(255,0,0);
 $secondary_bg: rgb(255,255,255);
 $alternative_bg: rgb(0,0,0);
 $primary_text_color: rgb(255,255,255);
 $contrast_text_color: rgb(0,0,0);
 $header_bg: rgb(34,34,34);
+// sizes
 $mainFontSize: 18px;
+$character_width: 90px;
+$sm_character_width: 120px;
 $cover_width: 140px;
 $md_cover_width: 175px;
 $lg_cover_width: 200px;
 $comic_width: 100px;
 $comic_width_xs: 120px;
 $comic_width_md: 140px;
+// shadow
 $box_shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+// fonts
 $primary_ff: "Robotocondensed", sans-serif;
 $primary_titles_ff:'kidkosmic', sans-serif;
 $titles_ff: 'kidkosmic-italic', sans-serif;
@@ -104,6 +110,16 @@ $description_ff: "44v2", sans-serif;
   border: #{$width}px solid transparent;
   border-radius: 50%;
   border-top-color: $color;
+}
+
+@mixin computed-size($type, $size) {
+  width: $size;
+  @if ($type == 'character') {
+    height: caracter_height($size);
+  }
+  @if ($type == 'comics') {
+    height: comics_height($size);
+  }
 }
 
 @function caracter_height($width) {

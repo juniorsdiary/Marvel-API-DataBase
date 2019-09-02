@@ -7,6 +7,7 @@ const CharactersAccordeon = connect(
   state => ({
     data: state.charactersData.charactersList,
     fetchStatus: state.charactersData.fetchStatus,
+    location: state.router.location,
   }),
   dispatch => ({
     fetchFunction: url => dispatch(fetchCharacters(url)),

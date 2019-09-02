@@ -63,11 +63,11 @@
     transform: translate(-50%, -50%) rotate(360deg);
   }
 }
-@keyframes background {
+@keyframes loading {
   0% {
-    box-shadow: 0 -120px 35px -120px red inset, inset 0 -120px 35px -100px #000;
+    top: -20%;
   }
   100% {
-    box-shadow: 0 -220px 35px -120px red inset, inset 0 -220px 35px -100px #000;
+    top: 120%;
   }
 }

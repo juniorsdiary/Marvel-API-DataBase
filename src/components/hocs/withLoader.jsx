@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Loader, ErrorHandler } from 'Modules';
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
+
 const withLoader = () => WrappedComponent => {
-  return class LoadingHOC extends Component {
+  class LoadingHOC extends Component {
     render() {
       const { fetchStatus, loadData } = this.props;
       const { isFetching, status, message } = fetchStatus;
@@ -16,7 +17,12 @@ const withLoader = () => WrappedComponent => {
         </>
       );
     }
+  }
+  LoadingHOC.propTypes = {
+    fetchStatus: PropTypes.object,
+    loadData: PropTypes.func,
   };
+  return LoadingHOC;
 };
-/* eslint-enable react/prop-types */
+
 export default withLoader;

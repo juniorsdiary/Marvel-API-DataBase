@@ -3,3 +3,21 @@
   top: 0;
   @include simple-size(100%);
 }
+.loading_image {
+  overflow: hidden;
+  &:before {
+    content: '';
+    position: absolute;
+    background: $primary_bg;
+    @include simple-size(100%);
+    z-index: 15;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    @include simple-size(100%, 0);
+    box-shadow: 1px 1px 35px 10px #000;
+    animation: loading 1.5s linear infinite;
+    z-index: 16;
+  }
+}

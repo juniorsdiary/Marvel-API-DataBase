@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Slider from 'react-slick';
 import { sliderSettings } from 'Utilities';
@@ -65,4 +65,4 @@ AccordeonSection.propTypes = {
   MappingComponent: PropTypes.any,
 };
 
-export default withRouter(AccordeonSection);
+export default AccordeonSection;

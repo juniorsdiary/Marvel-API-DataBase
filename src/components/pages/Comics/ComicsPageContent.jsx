@@ -15,7 +15,6 @@ function ComicsPageContent({ data, location }) {
       <CharactersAccordeon
         MappingComponent={CharacterCard}
         number={characters.available}
-        location={location}
         slider={true}
         contentClassName='default_slider_block'
         title={`You can meet ${characters.available} characters`}
@@ -23,7 +22,6 @@ function ComicsPageContent({ data, location }) {
       <EventsAccordeon
         MappingComponent={SearchCard}
         number={events.available}
-        location={location}
         slider={true}
         contentClassName='default_slider_block'
         title={`Part of ${events.available} events`}

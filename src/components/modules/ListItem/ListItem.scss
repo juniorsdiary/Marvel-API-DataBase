@@ -8,7 +8,7 @@
   background: $secondary_bg;
   cursor: pointer;
   animation: opacity .5s linear;
-  transition: transform .5s linear;
+  transition: transform .2s linear;
   @include xs-block {
     &:hover {
       transform: scale(1.01);
